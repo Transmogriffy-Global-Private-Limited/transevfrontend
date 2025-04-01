@@ -38,8 +38,10 @@ function SolutionsPage() {
 
   return (
     <>
+    
       {/* Navbar Component */}
       <Navbar />
+      <div className="absolute top-0 w-full border-b-6 border-yellow-300 z-10"></div> 
 
       {/* Main Content Section */}
       <section className="text-center mt-[100px] px-[50px]">
@@ -196,7 +198,7 @@ function SolutionsPage() {
               <div className="w-2/3 flex justify-between space-x-12 mt-10">
                 {/* Navigation Section */}
                 <div>
-                  <h5 className="text-lg font-semibold text-color-black">Navigation</h5>
+                  <h5 className="text-lg font-semibold text-color-black mb-5">Navigation</h5>
                   <ul className="space-y-2">
                     <li><a href="/solutions" className="text-gray hover:underline text-lg">Solutions</a></li>
                     <li><a href="/contact" className="text-gray hover:underline text-lg">Contact</a></li>
@@ -207,7 +209,7 @@ function SolutionsPage() {
 
                 {/* Follow Us Section */}
                 <div>
-                  <h5 className="text-lg font-semibold">Follow us</h5>
+                  <h5 className="text-lg font-semibold mb-5">Follow us</h5>
                   <ul className="space-y-2">
                     <li><a href="/linkedin" className="text-gray hover:underline text-lg">LinkedIn</a></li>
                     <li><a href="/instagram" className="text-gray hover:underline text-lg">Instagram</a></li>
@@ -217,7 +219,7 @@ function SolutionsPage() {
 
                 {/* Legal Section */}
                 <div>
-                  <h5 className="text-lg font-semibold">Legal</h5>
+                  <h5 className="text-lg font-semibold mb-5">Legal</h5>
                   <ul className="space-y-2">
                     <li><a href="/terms-conditions" className="text-gray hover:underline text-lg">Terms & Conditions</a></li>
                     <li><a href="/privacy-policy" className="text-gray hover:underline text-lg">Privacy Policy</a></li>

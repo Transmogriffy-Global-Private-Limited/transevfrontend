@@ -88,7 +88,18 @@ function HomePage() {
    const handlePopupClose = () => {
      setPopupOpen(false);
    };
- 
+   const handleContactClick = () => {
+    // Get the button element by id
+    const button = document.getElementById('contact-btn');
+    
+    // Add background color change on button click
+    button.classList.add('bg-yellow-500'); // Add a background color
+
+    // After a small delay (for animation), navigate to the contact page
+    setTimeout(() => {
+      navigate('/contact');  // Navigate to the Contact page
+    }, 500); // Delay to allow animation to complete
+  };
    const handleArrowClick = (direction) => {
      const container = document.getElementById('box-container');
      const scrollAmount = direction === 'left' ? -350 : 350;
@@ -716,7 +727,7 @@ function HomePage() {
 
   <button
     id="contact-btn"
-    onClick={handleButtonClick}
+    onClick={handleContactClick}
     className="flex items-center justify-center px-12 py-4 bg-white text-black font-semibold rounded-full transition-all duration-300 hover:bg-black hover:text-white w-auto h-auto mr-330 mt-20"
   >
    
@@ -835,7 +846,7 @@ function HomePage() {
               <div className="w-2/3 flex justify-between space-x-12 mt-10">
                 {/* Navigation Section */}
                 <div>
-                  <h5 className="text-lg font-semibold text-color-black">Navigation</h5>
+                  <h5 className="text-lg font-semibold text-color-black mb-5">Navigation</h5>
                   <ul className="space-y-2">
                     <li><a href="/solutions" className="text-gray hover:underline text-lg">Solutions</a></li>
                     <li><a href="/contact" className="text-gray hover:underline text-lg">Contact</a></li>
@@ -846,7 +857,7 @@ function HomePage() {
 
                 {/* Follow Us Section */}
                 <div>
-                  <h5 className="text-lg font-semibold">Follow us</h5>
+                  <h5 className="text-lg font-semibold mb-5">Follow us</h5>
                   <ul className="space-y-2">
                     <li><a href="/linkedin" className="text-gray hover:underline text-lg">LinkedIn</a></li>
                     <li><a href="/instagram" className="text-gray hover:underline text-lg">Instagram</a></li>
@@ -856,7 +867,7 @@ function HomePage() {
 
                 {/* Legal Section */}
                 <div>
-                  <h5 className="text-lg font-semibold">Legal</h5>
+                  <h5 className="text-lg font-semibold mb-5">Legal</h5>
                   <ul className="space-y-2">
                     <li><a href="/terms-conditions" className="text-gray hover:underline text-lg">Terms & Conditions</a></li>
                     <li><a href="/privacy-policy" className="text-gray hover:underline text-lg">Privacy Policy</a></li>
@@ -904,6 +915,5 @@ function HomePage() {
 };
 
 export default HomePage;
-
 
 
