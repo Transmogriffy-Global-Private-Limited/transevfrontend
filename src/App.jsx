@@ -6,7 +6,10 @@ import AboutPage from './components/About';
 import NewsPage from './components/News';
 import Solution from './components/Solution';
 import Contact  from './components/Contact';
-
+import ApartmentBuildings from './components/Apartmentbuildings';
+import Holiday from './components/Holiday';
+import Hotels from './components/Hotels';
+import Workplace from './components/Workplace';
 function App() {
   return (
     <Router>
@@ -16,6 +19,10 @@ function App() {
         <Route path="/news" element={<NewsPage />} />
         <Route path="/solution" element={<Solution />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/solutions/apartment-buildings" element={<ApartmentBuildings />} />
+        <Route path="/solutions/holiday-parks" element={<Holiday />} />
+        <Route path="/solutions/hotels" element={<Hotels />} />
+        <Route path="/solutions/workplace" element={<Workplace />} />
       </Routes>
     </Router>
   );
