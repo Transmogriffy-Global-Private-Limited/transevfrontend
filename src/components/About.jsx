@@ -26,6 +26,7 @@ function AboutUs() {
    <>
       {/* Include Navbar here */}
       <Navbar />
+      <div className="absolute top-0 w-full border-b-6 border-yellow-300 z-10"></div> 
       <section className="text-center mt-[100px] px-[50px]">
         {/* Charging Solutions Title */}
         <h1 
@@ -70,7 +71,7 @@ function AboutUs() {
       <span>for everyone.</span>
     </h2>
     <p className="text-xl mb-20 text-gray-500">
-  At Energy Park, we believe EV ownership should be an option for<br/> everyone, regardless of where you live.
+  At TransEv, we believe EV ownership should be an option for<br/> everyone, regardless of where you live.
 </p>
 <p className="text-xl mb-20 text-gray-500">
   But today, due to the challenges of getting EV charging infrastructure<br/> into communal car parks, residents of apartment buildings often have<br/> no access to EV charging facilities at home, or they’re paying higher<br/> public charging rates.
