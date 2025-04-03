@@ -1,334 +1,655 @@
-import React, { useState } from 'react';
+import React, { useState,useRef} from 'react';
 import Navbar from './Navbar';  
-import logo from '../assets/transev logo.png';  
+import logo from '../assets/transev logo.png'; // Use appropriate path for logo image
+import background from '../assets/apartmnet.jpg';
+import yourImage from '../assets/new.jpg';
+import { useInView } from 'react-intersection-observer';
 
-const ContactPage = () => {
+import charger1 from '../assets/charger7.png';
+import charger2 from '../assets/charger2.png';
+import charger3 from '../assets/charger1.png';
+
+import { FaPlus, FaMinus } from "react-icons/fa"; 
+import image from '../assets/imagee2.jpg';
+
+import holiday from '../assets/holiday.jpg';
+import charger from '../assets/charge.jpg';
+import residental from '../assets/residental.jpg';
+import bg from '../assets/charger3.jpg';
+const Holiday = () => {
   const [isChecked, setIsChecked] = useState(false);
-  const [selectedOption, setSelectedOption] = useState('');
-  const [formErrors, setFormErrors] = useState({});
+  const [hovered, setHovered] = useState(null);
+  const [popupOpen, setPopupOpen] = useState(false);
   
-  const handleOptionChange = (event) => {
-    setSelectedOption(event.target.value);
+  const [underlineWidth, setUnderlineWidth] = useState(0);
+  const [underlineColor, setUnderlineColor] = useState('gray');
+  const [activeIndex, setActiveIndex] = useState(null);
+  const handleContactClick = () => {
+    // Get the button element by id
+    const button = document.getElementById('contact-btn');
+    
+    // Add background color change on button click
+    button.classList.add('bg-yellow-500'); // Add a background color
+
+    // After a small delay (for animation), navigate to the contact page
+    setTimeout(() => {
+      navigate('/contact');  // Navigate to the Contact page
+    }, 500); // Delay to allow animation to complete
+  };
+  // FAQ data
+  const faqs = [
+    {
+      question: "Can you recommend which charge point to use?",
+      answer:
+        "Yes, once we’ve received your survey response and spoken to you via our video consultation, we’ll recommend the best charge point to suit your needs..",
+    },
+    {
+      question: "How can I get a quote from you?",
+      answer:
+        "To get started, fill out our form on our contact page here. We’ll send you an online survey to fill in so we can understand more about your property, and then we’ll be in touch to arrange a video consultation to give you more detail on our pricing and installation process..",
+    },
+    
+  ];
+
+  const [popupContent, setPopupContent] = useState({
+    image: '',
+    description: '',
+    features: ''
+  });
+
+  const handlePopupOpen = (image, description, features) => {
+    setPopupContent({ image, description, features });
+    setPopupOpen(true);
   };
 
-  const handleCheckboxChange = () => {
-    setIsChecked(!isChecked);
+  const handlePopupClose = () => {
+    setPopupOpen(false);
   };
 
-  // Form validation handler
-  const handleSubmit = (event) => {
-    event.preventDefault(); // Prevent the default form submission
+  const handleBuyNowClick = () => {
+    // Handle login or any other logic for "Buy Now"
+    // Redirecting to login page for now (you can change this logic based on your app)
+    window.location.href = '/login'; // Redirect to login page
+  };
+  const containerRef = useRef(null); // Ref to handle scrolling
 
-    // Validate the form
-    const errors = {};
-    const formElements = event.target.elements;
-
-    // Check if all required fields are filled
-    if (!formElements['first-name'].value) errors['first-name'] = 'First name is required';
-    if (!formElements['last-name'].value) errors['last-name'] = 'Last name is required';
-    if (!formElements['postcode'].value) errors['postcode'] = 'Postcode is required';
-    if (!formElements['email'].value) errors['email'] = 'Email is required';
-    if (!formElements['message'].value) errors['message'] = 'Message is required';
-    if (!isChecked) errors['privacy'] = 'You must agree with the privacy statement';
-
-    setFormErrors(errors);
-
-    // If there are no errors, submit the form (for now, just log the success message)
-    if (Object.keys(errors).length === 0) {
-      console.log('Form submitted successfully!');
+  const handleArrowClick = (direction) => {
+    const container = containerRef.current;
+    if (direction === 'left') {
+      container.scrollBy({ left: -container.offsetWidth, behavior: 'smooth' });
+    } else if (direction === 'right') {
+      container.scrollBy({ left: container.offsetWidth, behavior: 'smooth' });
     }
   };
 
+  const handleScroll = () => {
+    const container = containerRef.current;
+    const scrollPosition = container.scrollLeft;
+    const containerWidth = container.offsetWidth;
+    const totalWidth = container.scrollWidth;
+
+    // Update the underline width based on scroll position
+    const scrollProgress = (scrollPosition / (totalWidth - containerWidth)) * 100;
+    setUnderlineWidth(scrollProgress);
+  };
+
+    const { ref: sectionRef, inView } = useInView({
+      triggerOnce: true,
+      threshold: 0.5,
+    });
+  
   return (
     <div className="min-h-screen bg-white-50">
       {/* Navbar Section */}
       <Navbar />
+      <div className="absolute top-0 w-full border-b-6 border-yellow-300 z-10"></div> 
+      {/* Funded Solutions Section */}
+      <section className="text-center py-20 bg-white-100">
+        <h2 className="text-9xl font-aeonik text-black-800 mt-20 mr-180">
+        <span className="mr-75 font-bold text-9xl "> Holiday park </span> <br/> <span className=" font-bold text-9xl ">charging solutions</span>
+       
+        </h2>
+        
+       <div className="relative">
+  <button className="relative inline-flex items-center justify-center px-10 py-4 bg-yellow-300 text-white font-semibold rounded-full group transition-all duration-300 ease-in-out mt-20 mr-190">
+    
+    {/* "Contact us" text */}
+    <span className="opacity-100 translate-x-0 transition-all duration-300 ease-in-out">
+      Contact us
+    </span>
+    
+    {/* Right arrow inside the circle */}
+    <div className="ml-4 w-12 h-12 bg-yellow-300 rounded-full flex items-center justify-center transition-all duration-300 ease-in-out group-hover:w-20 group-hover:ml-8">
+      <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-6 text-white group-hover:opacity-0 group-hover:translate-x-10 transition-all duration-300 ease-in-out" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+      </svg>
+    </div>
+  </button>
+</div>
 
-      {/* Get in Touch Section */}
-      <div className="flex items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-9xl font-aeonik text-gray-900 animate__animated animate__fadeIn animate__delay-1s mt-50 mr-250 whitespace-nowrap">
-            Get in touch
-          </h2>
-        </div>
-      </div>
 
-      <section className="px-4 md:px-16 py-10 mt-50">
-        <div className="flex flex-col md:flex-row gap-10">
-          {/* Left Section: If you have any questions and Contact Details */}
-          <div className="md:w-1/2 flex flex-col justify-start items-start mb-10">
-            <p className="text-5xl font-semibold text-gray-700 space-y-4 mb-10">
-              <span>If you have any questions or you'd</span>
-              <br />
-              <span>like to find out more about our</span>
-              <br />
-              <span>services, please get in touch.</span>
-            </p>
-
-            <div className="text-xl mb-6">
-              <h4 className="font-semibold text-xl mb-4 mt-15">Contact Details:</h4>
-              <p className="font-semibold text-xl mb-4 text-gray-500">Office address:</p>
-              <p className="font-semibold text-xl mb-4 text-gray-500">MANI CASADONA, UNIT - 10 ES06,IIF/04,STREET NO.372,ACTION AREA-11F NEWTOWN,RAJARHAT,KOLKATA - 700156, WEST BENGAL,INDIA</p>
-              <p className="font-semibold text-xl mb-4 text-gray-500">Landmark address:</p>
-              <p className="font-semibold text-xl mb-4 text-gray-500">OPPOSITE ECOSPACE BUSINESS PARK</p>
-             
-              <p className="font-semibold text-xl mb-4 text-gray-500 mt-15 inline-block border-b-2 border-gray-500">
-                Tel: 033-4601 5366/ +91 79080 03488
-              </p><br/>
-              <p className="font-semibold text-xl mb-2 text-gray-500 mt-2 inline-block border-b-2 border-gray-500">
-                Email: tgwbin@gimail.com
-              </p>
-            </div>
-          </div>
-
-          {/* Right Section: Contact Form */}
-          <div className="md:w-1/2 bg-white p-6 rounded-lg shadow-lg">
-            <form onSubmit={handleSubmit}>
-              {/* First Name */}
-              <div className="mb-10">
-                <label htmlFor="first-name" className="block text-black text-xl mb-5">First name*</label>
-                <input
-                  type="text"
-                  id="first-name"
-                  className={`w-full p-7 border ${formErrors['first-name'] ? 'border-red-500' : 'border-gray-300'} rounded-md`}
-                  required
-                />
-                {formErrors['first-name'] && <span className="text-red-500 text-sm">{formErrors['first-name']}</span>}
-              </div>
-
-              {/* Last Name */}
-              <div className="mb-10">
-                <label htmlFor="last-name" className="block text-black text-xl mb-5">Last name*</label>
-                <input
-                  type="text"
-                  id="last-name"
-                  className={`w-full p-7 border ${formErrors['last-name'] ? 'border-red-500' : 'border-gray-300'} rounded-md`}
-                  required
-                />
-                {formErrors['last-name'] && <span className="text-red-500 text-sm">{formErrors['last-name']}</span>}
-              </div>
-
-              {/* Company */}
-              <div className="mb-10">
-                <label htmlFor="company" className="block text-black text-xl mb-5">Company</label>
-                <input
-                  type="text"
-                  id="company"
-                  className="w-full p-7 border border-gray-300 rounded-md"
-                />
-              </div>
-
-              {/* Dropdown Menu */}
-              <div className="mb-10">
-                <label htmlFor="dropdown" className="block text-black text-xl mb-5">Your site*</label>
-                <select
-                  id="dropdown"
-                  value={selectedOption}
-                  onChange={handleOptionChange}
-                  className="w-full p-7 border border-gray-300 rounded-md"
-                >
-                  <option value="residential-apartment">Residential Apartment</option>
-                  <option value="hotel-leisure">Hotel & Leisure</option>
-                  <option value="holiday-park">Holiday Park</option>
-                  <option value="workplace">Workplace</option>
-                </select>
-              </div>
-
-              {/* Address */}
-              <div className="mb-10">
-                <label htmlFor="address" className="block text-black text-xl mb-5">Address</label>
-                <input
-                  type="text"
-                  id="address"
-                  className="w-full p-7 border border-gray-300 rounded-md"
-                />
-              </div>
-
-              {/* City */}
-              <div className="mb-10">
-                <label htmlFor="city" className="block text-black text-xl mb-5">City</label>
-                <input
-                  type="text"
-                  id="city"
-                  className="w-full p-7 border border-gray-300 rounded-md"
-                />
-              </div>
-
-              {/* Postcode */}
-              <div className="mb-10">
-                <label htmlFor="postcode" className="block text-black text-xl mb-5">Postcode*</label>
-                <input
-                  type="text"
-                  id="postcode"
-                  className={`w-full p-7 border ${formErrors['postcode'] ? 'border-red-500' : 'border-gray-300'} rounded-md`}
-                  required
-                />
-                {formErrors['postcode'] && <span className="text-red-500 text-sm">{formErrors['postcode']}</span>}
-              </div>
-
-              {/* Email */}
-              <div className="mb-10">
-                <label htmlFor="email" className="block text-black text-xl mb-5">Email*</label>
-                <input
-                  type="email"
-                  id="email"
-                  className={`w-full p-7 border ${formErrors['email'] ? 'border-red-500' : 'border-gray-300'} rounded-md`}
-                  required
-                />
-                {formErrors['email'] && <span className="text-red-500 text-sm">{formErrors['email']}</span>}
-              </div>
-
-              {/* Telephone */}
-              <div className="mb-10">
-                <label htmlFor="telephone" className="block text-black text-xl mb-5">Telephone</label>
-                <input
-                  type="text"
-                  id="telephone"
-                  className="w-full p-7 border border-gray-300 rounded-md"
-                />
-              </div>
-
-              {/* Message */}
-              <div className="mb-10">
-                <label htmlFor="message" className="block text-black text-xl mb-5">Please tell us a bit about your site</label>
-                <textarea
-                  id="message"
-                  className={`w-full p-15 border ${formErrors['message'] ? 'border-red-500' : 'border-gray-300'} rounded-md`}
-                  rows="4"
-                  required
-                ></textarea>
-                {formErrors['message'] && <span className="text-red-500 text-sm">{formErrors['message']}</span>}
-              </div>
-
-              {/* Privacy Agreement */}
-              <div className="flex items-center mb-10">
-                <input
-                  type="checkbox"
-                  id="privacy"
-                  checked={isChecked}
-                  onChange={handleCheckboxChange}
-                  className="h-5 w-5 border-gray-300 rounded-md"
-                />
-                <label htmlFor="privacy" className="ml-4 text-black text-xl mb-2">
-                  I agree with the privacy statement
-                </label>
-                {formErrors['privacy'] && <span className="text-red-500 text-sm">{formErrors['privacy']}</span>}
-              </div>
-
-              {/* Send Message Button */}
-              <button
-                type="submit"
-                className="relative flex items-center justify-center w-35 h-12 bg-yellow-500 text-white rounded-full font-semibold group transition-all duration-300 ease-in-out overflow-hidden ml-100"
-              >
-                {/* Right Arrow Icon */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-6 h-6 text-white group-hover:opacity-0 group-hover:translate-x-10 transition-all duration-300 ease-in-out"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M13 7l5 5m0 0l-5 5m5-5H6"
-                  />
-                </svg>
-
-                {/* Expanded Button Text */}
-                <span className="absolute left-0 w-0 group-hover:w-full group-hover:left-4 group-hover:opacity-100 opacity-0 transition-all duration-300 ease-in-out text-white text-sm text-center">
-                  Send Message
-                </span>
-              </button>
-            </form>
-          </div>
-        </div>
       </section>
 
-      {/* Footer Section */}
-      <div className="mt-20 border-t-2 border-gray-300 mx-8 "></div>
-      <div className="bg-white py-16 mt-10">
+      {/* Future-Proof Your Sites Section */}
+      <section className="px-16 py-20 bg-white-100 flex items-center justify-between mb-50  ">
+        <div className="w-1/2">
+          <h3 className="text-5xl font-semibold text-gray-800 ">
+          Attract more holidaymakers <br/> with charge point facilities. <br/> 
+          </h3>
+        </div>
+        <div className="w-1/2 text-right mt-20">
+  <a href="#explore" className="text-2xl font-semibold text-black-500 hover:underline inline-flex items-center">
+    Explore
+    {/* Down Arrow Icon */}
+    <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-black-500 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </a>
+</div>
+
+      </section>
+
+      {/* Background Image Section */}
+      <section
+      className="relative py-120 bg-cover bg-center rounded-lg mx-8"
+      style={{
+        backgroundImage: `url(${holiday})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+      }}
+    >
+      {/* Add additional content here */}
+    </section>
+    <section className="flex py-20 px-8 mt-30">
+      {/* Left Side */}
+      <div className="w-1/2 pr-10">
+        {/* Cost-free Installation and Management */}
+        <h2 className="text-7xl font-semibold text-black mb-5 ml-10">
+        Fast and reliable <br/>charging at your <br/>holiday park. 
+        </h2>
+
+        {/* Ready to get started? Contact us */}
+        <p className="text-xl font-semibold text-gray-700 mb-5 ml-10">
+  <a
+    href="/contact" // Link to your Contact Us page
+    className="text-black-600 hover:underline hover:text-blue-800 mt-50"
+  >
+    Ready to get started?Contact Us
+  </a>
+</p>
+
+    {/* Meet Growing Tenant Demand */}
+        <div className="text-gray-400 ml-10 mt-140">
+        
+
+          <h3 className="text-xl font-semibold mt-5 text-black">Cater for your guests' EV needs</h3>
+          <p className="text-xl font-semibold mt-10">
+          With the uptake of electric vehicles on the rise, increasing numbers of <br/> holidaymakers are going to require charge point facilities at their holiday <br/> home. Providing this facility is a great way to stand out from the <br/> competition and secure more bookings.
+          </p>
+
+         
+        
+
+        </div>
+      </div>
+      
+
+      {/* Right Side (Image) */}
+      <div className="w-1/2">
+        <img
+          src={charger} // Replace with your actual image path
+          alt="EV Charging"
+          className="w-full h-270 rounded-lg object-cover"
+        />
+      </div>
+    </section>
+    <section className="flex py-20 px-8 mt-30">
+  {/* Left Side: Image with padding and rounded corners */}
+  <div className="w-1/2 pr-10 p-4 rounded-lg overflow-hidden">  {/* Added padding (p-4) and rounded corners */}
+    <img 
+      src={residental} // Adjust the image source path
+      alt="EV Charging Solution"
+      className="w-full h-full object-cover rounded-lg" // Added rounded corners to the image
+    />
+  </div>
+
+  {/* Right Side: Text Content */}
+  <div className="w-1/2 pl-10 flex flex-col justify-between mt-20">
+    {/* Cost-free Installation and Management */}
+    <h2 className="text-7xl font-semibold text-black mb-5">
+    Charge points  <br /> for holiday parks
+    </h2>
+
+    
+
+    {/* Meet Growing Tenant Demand */}
+    <div className="text-gray-400 mb-20">
+    
+
+      <h3 className="text-xl font-semibold mt-5 text-black">How it works</h3>
+      <p className="text-xl font-semibold mt-10">
+      When we manage your charge point installation, we can take care of <br/> everything on your behalf, from helping you choose the correct charge <br/>point for your needs, right through to installation and ongoing <br/> management.
+      </p>
+      <p className="text-xl font-semibold mt-10">
+      As part of our service via our online management platform, we can set <br/> tariff rates for your guests which could also generate additional income <br/> for you, while covering your electricity costs.
+      </p>
+     
+    </div>
+  </div>
+</section>
+
+<section className="py-20 bg-white-100 mx-8 rounded-lg">
+  <div className="container mx-auto flex flex-col lg:flex-row justify-between items-center gap-10">
+    {/* Left Side */}
+    <div className="lg:w-1/2 text-center lg:text-left ">
+      <h2 className="text-xl font-semibold mb-4 w-1000 mr-40">
+      We offer a range of charge points suitable for  <br /> holiday parks
+      </h2>
+    </div>
+
+    {/* Right Side */}
+    <h2 className="text-7xl font-semibold mb-1 ml-[-30] max-w-[80%] mt-25">
+      <span className="block w-1200 ">Choose a Charger that fits </span>
+      <span className="block w-full"> the needs of your holiday </span>
+      <span className="block w-full"> park best</span>
+    </h2>
+  </div>
+</section>
+
+<div className="flex justify-center items-center mb-8">
+  <div
+    ref={containerRef} // Attach the ref to the container
+    id="box-container"
+    className="flex overflow-x-auto gap-8 py-8 pl-12 pr-16 relative"
+    style={{
+      scrollBehavior: 'smooth',
+      scrollbarWidth: 'none', // Hide the scrollbar (works in Firefox)
+      msOverflowStyle: 'none', // Hide the scrollbar (works in IE and Edge)
+      overflowY: 'hidden', // Disable vertical scrollbar
+    }}
+    onScroll={handleScroll} // Handle the scroll event to update the underline width and color
+  >
+    {[
+      { name: 'Zaptec Go', description: 'Up to 7.4kW charging speed', features: 'Up to 22kW charging speed', image: charger1 },
+      { name: 'EO Mini Pro 3', description: 'Up to 7.4kW charging speed', features: 'Up to 22kW charging speed', image: charger2 },
+      { name: 'Easee One', description: 'Up to 7.4kW charging speed',features: 'Up to 22kW charging speed', image: charger3 },
+      { name: 'EO Genious 2', description: 'Up to 7.4kW charging speed',features: 'Up to 22kW charging speed', image: charger3 },
+   
+    ].map((box, index) => (
+      <div key={index} className="flex flex-col items-center">
+        <div
+          className="box bg-gray-200 p-16 rounded-lg relative cursor-pointer hover:scale-105 transform transition-all duration-300 w-[550px] h-[800px]" // Adjust width of box to fit 3 per screen
+          onMouseEnter={() => setHovered(index)}
+          onMouseLeave={() => setHovered(null)}
+        >
+          <div className="flex justify-center items-center w-full h-3/4">
+            <img
+              src={box.image}
+              alt={box.name}
+              className="w-3/4 h-3/4 object-cover rounded-lg mt-20 cursor-pointer"
+              onClick={() => handlePopupOpen(box.image, box.description, box.features)}
+            />
+          </div>
+
+          <div
+            className={`absolute top-4 right-4 bg-yellow-300 w-10 h-10 rounded-full flex justify-center items-center transition-all duration-300 ${hovered === index ? 'opacity-100' : 'opacity-0'}`}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-6 h-6 text-black transition-transform duration-300"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              onClick={() => handlePopupOpen(box.image, box.description, box.features)}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M13 7l5 5m0 0l-5 5m5-5H6"
+              />
+            </svg>
+          </div>
+        </div>
+
+        {/* Box Name and Description */}
+        <div className="text-center mt-4">
+          <h2 className="text-xl font-bold">{box.name}</h2>
+          <p className="text-gray-600 mt-2">{box.description}</p>
+       
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<div className="relative mt-16">
+  {/* Underline Section */}
+  <div
+    className="absolute bottom-0 left-0 right-0 transition-all duration-500"
+    style={{
+      left: '0', // Set underline to start from the left side
+      height: '2px',
+      width: `${underlineWidth}%`, // Dynamically set the width based on scroll position
+      backgroundColor: underlineColor, // Color changes based on scroll position
+      transition: 'width 0.3s ease-in-out, background-color 0.3s ease-in-out',
+    }}
+  ></div>
+
+  {/* Arrow Buttons Section */}
+  <div className="flex justify-end w-full absolute bottom-2 right-4 px-4">
+    <button
+      className="text-xl p-2 rounded-full mx-4"
+      onClick={() => handleArrowClick('left')}
+    >
+      ←
+    </button>
+    <button
+      className="text-xl p-2 rounded-full mx-4"
+      onClick={() => handleArrowClick('right')}
+    >
+      →
+    </button>
+  </div>
+</div>
+<div className="border-t-2 border-gray-300 w-full mb-8"></div>
+<section
+  className="relative py-140 bg-cover bg-center rounded-lg mx-8 px-232 mt-50"
+  style={{
+    backgroundImage: `url(${bg})`,
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+  }}
+>
+  {/* Add additional content here */}
+</section>
+
+
+
+<section className="py-20 bg-white-100 mx-8 rounded-lg mr-50 mt-20">
+  <div className="container mx-auto flex flex-col lg:flex-row justify-between items-center gap-10">
+    {/* Left Side - Text */}
+    <div className="lg:w-1/2 text-center lg:text-left">
+      <h2 className="text-6xl font-semibold mb-4 ml-20">
+        Not sure about the best <br /> solution for you?
+      </h2>
+    </div>
+
+    {/* Right Side - Image */}
+    <div className="lg:w-1/2 flex justify-center items-center">
+      <img
+        src={image} // Use the imported image here
+        alt="Solution Image"
+        className="w-150 h-100 object-cover rounded-xl shadow-lg ml-150" // Set a fixed height (e.g., h-64) and use object-cover to maintain aspect ratio
+      />
+    </div>
+  </div>
+</section>
+
+<section className="py-20 bg-white-100 mx-8 rounded-lg">
+      <div className="container mx-auto text-center mb-10">
+        <h2 className="text-2xl font-semibold mb-4 mr-260">Frequently Asked Questions</h2>
+        <div className="border-t-2 border-gray-300 w-full mb-10"></div>
+      </div>
+
+      <div className="space-y-6 ml-30">
+        {faqs.map((faq, index) => (
+          <div
+            key={index}
+            className="border-b-2 border-gray-300 pb-4 mt-20"
+          >
+            {/* Question Section */}
+            <div className="flex justify-between items-center">
+              {/* Left side - Question Number and Question */}
+              <div className="flex items-center gap-4">
+                <span className="text-4xl font-semibold text-gray-800 ">{`0${index + 1}`}</span>
+                <span className="text-5xl text-gray-800 ml-100">{faq.question}</span>
+              </div>
+
+              {/* Right side - Toggle Icon ( + or - ) */}
+              <div
+                className="flex items-center cursor-pointer ml-60"
+                onClick={() =>
+                  setActiveIndex(activeIndex === index ? null : index) // Toggle the active FAQ
+                }
+              >
+                <div
+                  className={`flex justify-center items-center w-8 h-8 rounded-full ${
+                    activeIndex === index ? "bg-gray-300" : "bg-yellow-300"
+                  }`}
+                >
+                  {activeIndex === index ? (
+                    <FaMinus className="text-black" />
+                  ) : (
+                    <FaPlus className="text-black" />
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Answer Section - Display when active */}
+            {activeIndex === index && (
+              <div className="mt-4 text-gray-600 text-xl ml-40">
+                <p>{faq.answer}</p>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </section>
+    
+
+
+      <div className="w-full h-screen bg-white flex justify-center items-center mt-30">
+      <div className="w-full h-full max-w-screen-3xl bg-gradient-to-r p-10"> 
+      <div className="w-full h-full bg-gradient-to-b from-yellow-200 via-yellow-200 to-red-300 rounded-3xl p-12 shadow-lg max-w-screen-3xl mx-auto">
+          {/* Your content here */}
+          <h2 className="text-9xl font-semibold text-gray-800 text-center font-aeonik">
+      <span className="block mr-240">Ready to get</span>
+      <span className="block mr-300">started?</span>
+    </h2>
+    <div className="flex items-center justify-center">
+    
+      <button
+        id="contact-btn"
+        onClick={handleContactClick}
+        className="flex items-center justify-center px-12 py-4 bg-white text-black font-semibold rounded-full transition-all duration-300 hover:bg-black hover:text-white w-auto h-auto mr-330 mt-20"
+      >
+       
+    
+      <span className="mr-20 text-lg" >Contact Us</span>
+      <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center transition-all duration-300 group-hover:bg-white ml-4">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-6 h-6 text-white transition-transform duration-300 group-hover:text-black group-hover:translate-x-1"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+        </svg>
+      </div>
+    </button>
+    
+    </div>
+    <div className="mt-55 ">
+      {/* Heading: Bold and left-aligned */}
+      <h3 className="text-2xl font-bold text-left text-gray-800 ">
+        EV Charging Solutions for Residential Sites and Businesses
+      </h3>
+    
+      {/* Space between heading and description */}
+      <div className="mt-4">
+        {/* Description: Split into two lines */}
+        <p className="text-lg text-gray-600 leading-relaxed">
+          We’ll listen to your needs, identify the best approach,
+        </p>
+        <p className="text-lg text-gray-600 leading-relaxed">
+          and then create a bespoke smart EV charging solution that’s right for you.
+        </p>
+      </div>
+    </div>
+    
+    
+        </div>
+      </div>
+    </div>
+    <div>
+      {/* Contact Section */}
+      <div className="bg-white-50 py-16">
         <div className="container mx-auto flex justify-between items-center px-8">
           {/* Left Side: Logo */}
           <div className="flex items-center space-x-4">
-            <img src={logo} alt="Company Logo" className="w-32 h-32" />
+            <img src={logo} alt="Company Logo" className="w-32 h-32 ml-20" />
           </div>
 
           {/* Right Side: Phone number and email */}
           <div className="text-right">
-            <div className="text-5xl font-semibold text-gray-800 mb-4">
-              <a href="tel:+02033453310" className="relative inline-block hover:text-black-500">
-                <span className="hover:underline transition-all duration-300 mr-25">033-4601 5366</span>
+            {/* Phone number with hover underline animation */}
+            <div className="text-5xl font-semibold text-gray-800 mb-4 mr-80 ml-150">
+              <a
+                href="tel:+02033453310"
+                className="relative inline-block hover:text-black-500"
+              >
+                <span className="hover:underline transition-all duration-300">033-4601 5366</span>
               </a>
             </div>
 
+            {/* Email with hover underline animation */}
             <div className="text-5xl font-semibold text-gray-800">
-              <a href="mailto:enquiries@energy-park.co.uk" className="relative inline-block hover:text-black-500">
-                <span className="hover:underline transition-all duration-300">tgwbin@gmail.com</span>
+              <a
+                href="mailto:enquiries@energy-park.co.uk"
+                className="relative inline-block hover:text-black-500"
+              >
+                <span className="hover:underline transition-all duration-300 mt-2 mr-60">tgwbin@gmail.com</span>
               </a>
             </div>
           </div>
         </div>
+      </div>
+      
+        {/* Underline Section */}
+      <div className="mt-10 border-t-2 border-gray-400 mx-8 ml-30"></div>
 
-        <div className="mt-10 border-t-2 border-gray-300 mx-8"></div>
+{/* Footer Section */}
+<footer className="bg-white-800 text-black py-8 mt-20 ml-50"> {/* Add ml-4 to shift the footer a little to the right */}
+  <div className="container mx-auto flex justify-between">
+    <div className="w-1/3">
+      <h4 className="text-xl font-semibold mb-4 mr-20">
+        Experts in smart EV charging solutions <br /> for residential sites and businesses.
+      </h4>
 
-        <footer className="bg-white text-black py-8 mt-20">
-          <div className="container mx-auto flex justify-between">
-            <div className="w-1/3">
-              <h4 className="text-xl font-semibold mb-4">Experts in smart EV charging solutions <br/>for residential sites and businesses.</h4>
-              <a href="/client-portal" className="inline-flex items-center px-6 py-3 bg-black text-white font-semibold rounded-full transition-all duration-300 hover:bg-yellow-500 hover:text-black">
-                <span>Client portal</span>
-                <div className="ml-4 w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
-                </div>
-              </a>
-            </div>
+      {/* Client Portal Button */}
+      <a
+        href="/client-portal"
+        className="inline-flex items-center px-6 py-3 bg-black text-white font-semibold rounded-full transition-all duration-300 hover:bg-yellow-500 hover:text-black hover:scale-105 mr-20 mt-10"
+      >
+        <span>Client portal</span>
+        {/* Right Arrow Circle */}
+        <div className="ml-4 w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center transition-all duration-300 group-hover:w-10 group-hover:h-10">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-5 h-5 text-white transition-transform duration-300 group-hover:translate-x-1"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M13 7l5 5m0 0l-5 5m5-5H6"
+            />
+          </svg>
+        </div>
+      </a>
+    </div>
 
-            <div className="w-2/3 flex justify-between space-x-12">
-              {/* Navigation Section */}
-              <div>
-                <h5 className="text-lg font-semibold text-gray-800 mb-5">Navigation</h5>
-                <ul className="space-y-2">
-                  <li><a href="/solutions" className="text-gray hover:underline text-lg">Solutions</a></li>
-                  <li><a href="/contact" className="text-gray hover:underline text-lg">Contact</a></li>
-                  <li><a href="/careers" className="text-gray hover:underline text-lg">Careers</a></li>
-                  <li><a href="/residents" className="text-gray hover:underline text-lg">Residents</a></li>
-                </ul>
-              </div>
+    {/* Flex container for Navigation, Follow us, and Legal sections */}
+    <div className="w-2/3 flex justify-between space-x-12 mt-10">
+      {/* Navigation Section */}
+      <div>
+        <h5 className="text-lg font-semibold text-color-black mb-5">Navigation</h5>
+        <ul className="space-y-2">
+          <li><a href="/solutions" className="text-gray hover:underline text-lg">Solutions</a></li>
+          <li><a href="/contact" className="text-gray hover:underline text-lg">Contact</a></li>
+          <li><a href="/careers" className="text-gray hover:underline text-lg">Careers</a></li>
+          <li><a href="/residents" className="text-gray hover:underline text-lg">Residents</a></li>
+        </ul>
+      </div>
 
-              {/* Follow Us Section */}
-              <div>
-                <h5 className="text-lg font-semibold mb-5">Follow us</h5>
-                <ul className="space-y-2">
-                  <li><a href="/linkedin" className="text-gray hover:underline text-lg">LinkedIn</a></li>
-                  <li><a href="/instagram" className="text-gray hover:underline text-lg">Instagram</a></li>
-                  <li><a href="/facebook" className="text-gray hover:underline text-lg">Facebook</a></li>
-                </ul>
-              </div>
+      {/* Follow Us Section */}
+      <div>
+        <h5 className="text-lg font-semibold mb-5">Follow us</h5>
+        <ul className="space-y-2">
+          <li><a href="/linkedin" className="text-gray hover:underline text-lg">LinkedIn</a></li>
+          <li><a href="/instagram" className="text-gray hover:underline text-lg">Instagram</a></li>
+          <li><a href="/facebook" className="text-gray hover:underline text-lg">Facebook</a></li>
+        </ul>
+      </div>
 
-              {/* Legal Section */}
-              <div>
-                <h5 className="text-lg font-semibold mb-5">Legal</h5>
-                <ul className="space-y-2">
-                  <li><a href="/terms-conditions" className="text-gray hover:underline text-lg">Terms & Conditions</a></li>
-                  <li><a href="/privacy-policy" className="text-gray hover:underline text-lg">Privacy Policy</a></li>
-                  <li><a href="/modern-slavery-policy" className="text-gray hover:underline text-lg">Modern Slavery Policy</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          {/* Footer Bottom */}
-          <div className="container mx-auto text-center mt-10">
-            <p className="text-gray-500 text-sm">&copy; 2025 Company Name. All rights reserved.</p>
-          </div>
-        </footer>
+      {/* Legal Section */}
+      <div>
+        <h5 className="text-lg font-semibold mb-5">Legal</h5>
+        <ul className="space-y-2">
+          <li><a href="/terms-conditions" className="text-gray hover:underline text-lg">Terms & Conditions</a></li>
+          <li><a href="/privacy-policy" className="text-gray hover:underline text-lg">Privacy Policy</a></li>
+          <li><a href="/modern-slavery-policy" className="text-gray hover:underline text-lg">Modern Slavery Policy</a></li>
+          <li><a href="/esg-policy" className="text-gray hover:underline text-lg">ESG Policy</a></li>
+          <li><a href="/sustainability-policy" className="text-gray hover:underline text-lg">Sustainability Policy</a></li>
+        </ul>
       </div>
     </div>
-  );
+  </div>
+
+  {/* Copyright Section */}
+  <div className="text-center mt-8 text-lg mr-300">
+    <p>&copy; TransEv 2025. All Rights Reserved.</p>
+  </div>
+  
+</footer>
+
+{/* Popup Modal */}
+{popupOpen && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+    <div className="bg-white p-8 rounded-lg max-w-6xl w-full flex relative h-auto">
+      {/* Close Button */}
+      <button
+        className="absolute top-4 right-4 text-3xl font-bold text-gray-600 hover:text-gray-900"
+        onClick={handlePopupClose}
+      >
+        &times; {/* "×" represents the close/cross icon */}
+      </button>
+
+      <div className="w-1/2 p-4">
+        <img
+          src={popupContent.image}
+          alt="Popup"
+          className="w-full h-auto object-contain rounded-lg"  // Ensuring the image stays contained and fully visible
+        />
+      </div>
+
+      <div className="w-1/2 p-4">
+        <h3 className="text-2xl font-semibold mb-4">Product Description</h3>
+        <p>{popupContent.description}</p>
+        <h3 className="text-2xl font-semibold mb-4 mt-6">Features</h3>
+        <p>{popupContent.features}</p>
+
+        {/* Buy Now Button */}
+        <button
+          className="mt-4 bg-blue-500 text-white px-6 py-2 rounded-full"
+          onClick={handleBuyNowClick}
+        >
+          Buy Now
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+</div>
+</div>
+
+);
 };
 
-export default ContactPage;
+export default Holiday;

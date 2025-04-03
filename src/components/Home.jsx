@@ -37,7 +37,7 @@ function HomePage() {
   const navigate = useNavigate();
   const [hovered, setHovered] = useState(null);
   const [popupOpen, setPopupOpen] = useState(false);
-   const [popupContent, setPopupContent] = useState(null);
+   
    const [boxNamesVisible, setBoxNamesVisible] = useState(true);
    const [scrollPosition, setScrollPosition] = useState(0);
    const [underlineWidth, setUnderlineWidth] = useState(0);
@@ -49,7 +49,26 @@ function HomePage() {
   const [largeImage, setLargeImage] = useState(slider1); // large image to show when clicked
    
   const [scrollLeft, setScrollLeft] = useState(0);
+ const [popupContent, setPopupContent] = useState({
+    image: '',
+    description: '',
+    features: ''
+  });
 
+  const handlePopupOpen = (image, description, features) => {
+    setPopupContent({ image, description, features });
+    setPopupOpen(true);
+  };
+
+  const handlePopupClose = () => {
+    setPopupOpen(false);
+  };
+
+  const handleBuyNowClick = () => {
+    // Handle login or any other logic for "Buy Now"
+    // Redirecting to login page for now (you can change this logic based on your app)
+    window.location.href = '/login'; // Redirect to login page
+  };
   const containerRef = useRef(null);
   // const imageSources = [slider1, slider2, slider3, slider4, slider5, slider6];
   const sliderImages = [slider,slider2, slider5, newslide, slider4, slider1];
@@ -80,14 +99,7 @@ function HomePage() {
       setLargeImage(image);
     };
   
-   const handlePopupOpen = (image, description) => {
-     setPopupContent({ image, description });
-     setPopupOpen(true);
-   };
- 
-   const handlePopupClose = () => {
-     setPopupOpen(false);
-   };
+   
    const handleContactClick = () => {
     // Get the button element by id
     const button = document.getElementById('contact-btn');
@@ -558,14 +570,14 @@ function HomePage() {
     onScroll={handleScroll} // Handle the scroll event to update the underline width and color
   >
     {[
-      { name: 'Zaptec Go', description: 'Up to 7.4kW charging speed', image: charger1 },
-      { name: 'EO Mini Pro 3', description: 'Up to 7.4kW charging speed', image: charger2 },
-      { name: 'Easee One', description: 'Up to 7.4kW charging speed', image: charger7 },
-      { name: 'EO Genius 2', description: '7.2kW and 22kW variants', image: charger4 },
-      { name: 'Zaptec Pro', description: 'Up to 22kW charging speed', image: charger5 },
-      { name: 'Easee Charge', description: 'Up to 22kW charging speed', image: charger6},
-      { name: 'Garo Entity Pro', description: 'Up to 22kW charging speed', image: charger7 },
-      { name: 'Schneider EVlink Pro AC', description: '7.2kW, 11kW and 22kW variants', image: charger8 },
+      { name: 'Zaptec Go', description: 'Up to 7.4kW charging speed', features: 'Up to 22kW charging speed',image: charger1 },
+      { name: 'EO Mini Pro 3', description: 'Up to 7.4kW charging speed',features: 'Up to 22kW charging speed', image: charger2 },
+      { name: 'Easee One', description: 'Up to 7.4kW charging speed',features: 'Up to 22kW charging speed', image: charger7 },
+      { name: 'EO Genius 2', description: '7.2kW and 22kW variants',features: 'Up to 22kW charging speed', image: charger4 },
+      { name: 'Zaptec Pro', description: 'Up to 22kW charging speed',features: 'Up to 22kW charging speed', image: charger5 },
+      { name: 'Easee Charge', description: 'Up to 22kW charging speed',features: 'Up to 22kW charging speed', image: charger6},
+      { name: 'Garo Entity Pro', description: 'Up to 22kW charging speed',features: 'Up to 22kW charging speed', image: charger7 },
+      { name: 'Schneider EVlink Pro AC', description: '7.2kW, 11kW and 22kW variants',features: 'Up to 22kW charging speed', image: charger8 },
     ].map((box, index) => (
       <div key={index} className="flex flex-col items-center">
         <div
@@ -578,7 +590,7 @@ function HomePage() {
               src={box.image} // Dynamically assign images from the array
               alt={box.name}
               className="w-3/4 h-3/4 object-cover rounded-lg mt-20 cursor-pointer"
-              onClick={() => handlePopupOpen(box.image, box.description)}
+              onClick={() => handlePopupOpen(box.image, box.description,box.features)}
             />
           </div>
 
@@ -591,7 +603,7 @@ function HomePage() {
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              onClick={() => handlePopupOpen(box.image, box.description)}
+              onClick={() => handlePopupOpen(box.image, box.description,box.features)}
             >
               <path
                 strokeLinecap="round"
@@ -887,29 +899,43 @@ function HomePage() {
     </div>
 
      {/* Popup Modal */}
-      {popupOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-8 rounded-lg max-w-4xl w-full flex">
-            <div className="w-1/2 p-4">
-              <img
-                src={popupContent.image}
-                alt="Popup"
-                className="w-full h-96 object-cover rounded-lg"
-              />
-            </div>
-            <div className="w-1/2 p-4">
-              <h3 className="text-2xl font-semibold mb-4">Product Description</h3>
-              <p>{popupContent.description}</p>
-              <button
-                className="mt-8 bg-yellow-300 px-6 py-2 rounded-full"
-                onClick={handlePopupClose}
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+     {popupOpen && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+    <div className="bg-white p-8 rounded-lg max-w-6xl w-full flex relative h-auto">
+      {/* Close Button */}
+      <button
+        className="absolute top-4 right-4 text-3xl font-bold text-gray-600 hover:text-gray-900"
+        onClick={handlePopupClose}
+      >
+        &times; {/* "×" represents the close/cross icon */}
+      </button>
+
+      <div className="w-1/2 p-4">
+        <img
+          src={popupContent.image}
+          alt="Popup"
+          className="w-full h-auto object-contain rounded-lg"  // Ensuring the image stays contained and fully visible
+        />
+      </div>
+
+      <div className="w-1/2 p-4">
+        <h3 className="text-2xl font-semibold mb-4">Product Description</h3>
+        <p>{popupContent.description}</p>
+        <h3 className="text-2xl font-semibold mb-4 mt-6">Features</h3>
+        <p>{popupContent.features}</p>
+
+        {/* Buy Now Button */}
+        <button
+          className="mt-4 bg-blue-500 text-white px-6 py-2 rounded-full"
+          onClick={handleBuyNowClick}
+        >
+          Buy Now
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
     </div>
   );
 };
