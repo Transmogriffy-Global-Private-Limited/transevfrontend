@@ -10,6 +10,7 @@ import ApartmentBuildings from './components/Apartmentbuildings';
 import Holiday from './components/Holiday';
 import Hotels from './components/Hotels';
 import Workplace from './components/Workplace';
+import Work from './components/work';
 function App() {
   return (
     <Router>
@@ -23,6 +24,7 @@ function App() {
         <Route path="/solutions/holiday-parks" element={<Holiday />} />
         <Route path="/solutions/hotels" element={<Hotels />} />
         <Route path="/solutions/workplace" element={<Workplace />} />
+        <Route path="/how-we-work" element={<Work />} />
       </Routes>
     </Router>
   );

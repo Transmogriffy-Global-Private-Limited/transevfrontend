@@ -20,9 +20,9 @@ import hotels from '../assets/hotels.jpg';
 import image6 from '../assets/slide4.jpg';
 import image7 from '../assets/slide1.jpg';
 import image8 from '../assets/slide6.jpg';
-import image9 from '../assets/slide5.jpg';
+import holiday from '../assets/holiday.jpg'
 
-const ApartmentBuildingPage = () => {
+const work = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [hovered, setHovered] = useState(null);
   const [popupOpen, setPopupOpen] = useState(false);
@@ -120,35 +120,19 @@ const ApartmentBuildingPage = () => {
       <div className="absolute top-0 w-full border-b-6 border-yellow-300 z-10"></div> 
       {/* Funded Solutions Section */}
       <section className="text-center py-20 bg-white-100">
-        <h2 className="text-9xl font-aeonik text-black-800 mt-20 mr-180">
-          Funded solutions<br/> <span className="mr-30">for apartments</span>
+        <h2 className="text-9xl font-aeonik text-black-800 mt-20 mr-230">
+        An ongoing EV <br/> <span className="mr-50">partnership</span><br/> 
         </h2>
         
-       <div className="relative">
-  <button className="relative inline-flex items-center justify-center px-10 py-4 bg-yellow-300 text-white font-semibold rounded-full group transition-all duration-300 ease-in-out mt-20 mr-190">
-    
-    {/* "Contact us" text */}
-    <span className="opacity-100 translate-x-0 transition-all duration-300 ease-in-out">
-      Contact us
-    </span>
-    
-    {/* Right arrow inside the circle */}
-    <div className="ml-4 w-12 h-12 bg-yellow-300 rounded-full flex items-center justify-center transition-all duration-300 ease-in-out group-hover:w-20 group-hover:ml-8">
-      <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-6 text-white group-hover:opacity-0 group-hover:translate-x-10 transition-all duration-300 ease-in-out" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-      </svg>
-    </div>
-  </button>
-</div>
-
-
+       
       </section>
 
       {/* Future-Proof Your Sites Section */}
       <section className="px-16 py-20 bg-white-100 flex items-center justify-between mb-50  ">
         <div className="w-1/2">
           <h3 className="text-5xl font-semibold text-gray-800 ">
-            Future-proof your sites with <br/> our fully funded and <br/> managed EV charging <br/>solutions.
+          By your side throughout<br/>
+          your EV journey.
           </h3>
         </div>
         <div className="w-1/2 text-right mt-20">
@@ -167,7 +151,7 @@ const ApartmentBuildingPage = () => {
       <section
       className="relative py-120 bg-cover bg-center rounded-lg mx-8"
       style={{
-        backgroundImage: `url(${background})`,
+        backgroundImage: `url(${holiday})`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
       }}
@@ -188,7 +172,7 @@ const ApartmentBuildingPage = () => {
     href="/contact" // Link to your Contact Us page
     className="text-blue-600 hover:underline hover:text-blue-800 mt-30"
   >
-    Ready to get started? Contact us
+    Ready to get started?
   </a>
 </p>
 
@@ -945,4 +929,4 @@ const ApartmentBuildingPage = () => {
 );
 };
 
-export default ApartmentBuildingPage;
+export default work;
