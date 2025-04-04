@@ -8,7 +8,7 @@ const MyProfile = () => {
   const [imageFile, setImageFile] = useState(null);
   const navigate = useNavigate();
 
-  const BASE_URL_AND_PORT = "http://127.0.0.1:8000"; // Define the base URL and port
+  const BASE_URL_AND_PORT = "http://192.168.0.106:8000"; // Define the base URL and port
   const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf"; // Define the API key
 
   // Retrieve the auth token from localStorage (or cookie, context, etc.)

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"; // Import Link for navigation
 // Import image for the background
 import loginImage from "../assets/new3.jpg"; // Ensure the correct path to your image
 
-const BASE_URL_AND_PORT = "http://127.0.0.1:8000"; // Define the base URL and port
+const BASE_URL_AND_PORT = "http://192.168.0.106:8000"; // Define the base URL and port
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf"; // Define the API key
 
 const LoginPage = () => {

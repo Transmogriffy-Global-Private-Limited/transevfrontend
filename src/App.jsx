@@ -15,6 +15,9 @@ import Signup from './components/Signup';
 import Login from './components/Login';
 import ForgotPasswordPage from './components/ForgetPassword';
 import UserProfile from './components/User_Profile';
+import UserNavbar from './components/User_Navbar';
+import UserSidebar from './components/User_sidebar';
+import Dashboard from './components/Dashboard';
 function App() {
   return (
     <Router>
@@ -33,6 +36,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/profile" element={<UserProfile />} />
+        <Route path="/usernavbar" element={<UserNavbar />} />
+        <Route path="/usersidebar" element={<UserSidebar />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Router>
   );

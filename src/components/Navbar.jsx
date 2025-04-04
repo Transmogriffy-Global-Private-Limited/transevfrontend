@@ -1,93 +1,3 @@
-// import React, { useState } from 'react';
-// import { Link, useNavigate } from 'react-router-dom';
-// import logo from '../assets/transev logo.png'; // Logo import
-// import { FaArrowRight } from 'react-icons/fa'; // Import the right arrow icon from react-icons
-
-// function Navbar() {
-//   const navigate = useNavigate();
-//   const [contactHovered, setContactHovered] = useState(false);
-//   const [contactClicked, setContactClicked] = useState(false);
-
-//   // Handle navigation and animations
-//   const handleContactClick = () => {
-//     setContactClicked(true); // Show the arrow animation on contact click
-//     setTimeout(() => {
-//       navigate('/contact'); // Redirect to contact page after animation
-//     }, 500); // Wait for animation before redirect
-//   };
-
-//   return (
-//     <nav className="absolute top-0 left-0 w-full py-6 px-10 bg-transparent text-white flex items-center justify-between">
-//       {/* Company Logo */}
-//       <div className="flex items-center mr-8">
-//         <img src={logo} alt="Company Logo" className="w-32 h-32" />
-//       </div>
-
-//       {/* Navbar Links */}
-//       <div className="flex space-x-12 text-xl font-bold ml-auto mr-200">
-//         <Link
-//           to="/"
-//           className="text-white hover:text-amber-300 transition duration-300 underline-none hover:underline hover:underline-black"
-//         >
-//           Solutions
-//         </Link>
-//         <Link
-//           to="/about"
-//           className="text-white hover:text-amber-300 transition duration-300 underline-none hover:underline hover:underline-black"
-//         >
-//           About Us
-//         </Link>
-//         <Link
-//           to="/news"
-//           className="text-white hover:text-amber-300 transition duration-300 underline-none hover:underline hover:underline-black"
-//         >
-//           News
-//         </Link>
-//       </div>
-
-//       {/* Login and Contact Buttons */}
-//       <div className="flex items-center space-x-12 ml-auto">
-//         {/* Login Link */}
-//         <Link
-//           to="/login"
-//           className="text-white hover:text-amber-300 transition duration-300 text-lg font-semibold hover:underline"
-//         >
-//           Login
-//         </Link>
-
-     
-//          <button
-//       onClick={handleContactClick}
-//       onMouseEnter={() => setContactHovered(true)}
-//       onMouseLeave={() => setContactHovered(false)}
-//       className={`flex items-center px-8 py-3 bg-black text-white font-semibold rounded-full transition duration-300 hover:bg-gray-800`}
-//     >
-//       Contact
-//       {(contactHovered || contactClicked) && (
-//         <div className="ml-2 w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center transition-all duration-300">
-//           <svg
-//             xmlns="http://www.w3.org/2000/svg"
-//             className="w-6 h-6 text-black transition-transform duration-300"
-//             fill="none"
-//             viewBox="0 0 24 24"
-//             stroke="currentColor"
-//           >
-//             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-//           </svg>
-//         </div>
-//       )}
-//     </button>
-          
-//       </div>
-//     </nav>
-//   );
-// }
-
-// export default Navbar;
-
-
-
-
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import logo from '../assets/transev logo.png'; // Logo import
@@ -97,7 +7,7 @@ import slide3 from '../assets/slide1.jpg';
 import slide4 from '../assets/slide5.jpg';
 import about1 from '../assets/slide4.jpg';
 import about2 from '../assets/slide1.jpg';
-
+import logos from '../assets/up.png';
 function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -187,7 +97,7 @@ function Navbar() {
           {/* Company Logo */}
           <div className="flex items-center mr-8">
             <Link to="/">
-              <img src={logo} alt="Company Logo" className="w-32 h-32" />
+              <img src={logos} alt="Company Logo" className="w-32 h-32" />
             </Link>
           </div>
           {/* Navbar Links */}
