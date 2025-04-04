@@ -1,4 +1,4 @@
-import React, { useState,useRef} from 'react';
+import React, { useState,useRef,useEffect } from 'react';
 import Navbar from './Navbar';  
 import logo from '../assets/transev logo.png'; // Use appropriate path for logo image
 import background from '../assets/apartmnet.jpg';
@@ -21,15 +21,21 @@ import image6 from '../assets/slide4.jpg';
 import image7 from '../assets/slide1.jpg';
 import image8 from '../assets/slide6.jpg';
 import holiday from '../assets/holiday.jpg'
-
+import imageslide from '../assets/charge.jpg';
+import new3 from '../assets/new3.jpg';
 const work = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [hovered, setHovered] = useState(null);
   const [popupOpen, setPopupOpen] = useState(false);
-  
+  const [activeText, setActiveText] = useState(null);
   const [underlineWidth, setUnderlineWidth] = useState(0);
   const [underlineColor, setUnderlineColor] = useState('gray');
   const [activeIndex, setActiveIndex] = useState(null);
+   const [selectedText, setSelectedText] = useState(null);
+  const handleTextClick = (item) => {
+    setSelectedText(item); // Set the clicked text
+  };
+  const images = [imageslide, image4,new3];
   const handleContactClick = () => {
     // Get the button element by id
     const button = document.getElementById('contact-btn');
@@ -96,7 +102,16 @@ const work = () => {
       container.scrollBy({ left: container.offsetWidth, behavior: 'smooth' });
     }
   };
+  const [activeImage, setActiveImage] = useState(0); // Track the active image index
 
+  // Function to cycle images
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveImage((prevIndex) => (prevIndex + 1) % images.length); // cycle through images
+    }, 3000); // Change image every 3 seconds
+
+    return () => clearInterval(interval); // Clean up interval on unmount
+  }, []);
   const handleScroll = () => {
     const container = containerRef.current;
     const scrollPosition = container.scrollLeft;
@@ -156,567 +171,421 @@ const work = () => {
         backgroundSize: 'cover',
       }}
     >
-      {/* Add additional content here */}
-    </section>
-    <section className="flex py-20 px-8 mt-30">
-      {/* Left Side */}
-      <div className="w-1/2 pr-10">
-        {/* Cost-free Installation and Management */}
-        <h2 className="text-7xl font-semibold text-black mb-5 ml-10">
-          Cost-free installation <br/> and management
-        </h2>
-
-        {/* Ready to get started? Contact us */}
-        <p className="text-xl font-semibold text-gray-700 mb-5 ml-10">
-  <a
-    href="/contact" // Link to your Contact Us page
-    className="text-blue-600 hover:underline hover:text-blue-800 mt-30"
-  >
-    Ready to get started?
-  </a>
-</p>
-
-    {/* Meet Growing Tenant Demand */}
-        <div className="text-gray-400 ml-10 mt-50">
-          <h3 className="text-xl font-semibold mb-1 text-black">Meet growing tenant demand</h3>
-          <p className="text-xl font-semibold mt-10">
-            With EV ownership on the rise, having access to reliable, low-cost EV <br/>charging at home is set to become an essential requirement for <br/> tenants. For property owners, preparing for this growing demand now <br/> will help to future-proof your sites, increase their marketability, and <br/>boost your sustainability credentials.
+   </section>
+  
+   <div className="flex justify-between mt-40">
+        {/* Left Section */}
+        <div className="w-1/2 text-xl ml-20">
+          <p>
+            How we work: 
           </p>
+        </div>
 
-          <h3 className="text-xl font-semibold mt-5 text-black">A funded solution</h3>
-          <p className="text-xl font-semibold mt-10">
-            We remove many of the financial and operational barriers to large-scale <br/> EV infrastructure investment for residential landlords by offering a fully <br/>funded, maintained, and managed EV charging solution.
+        {/* Right Section */}
+        <div className="w-2/2 text-7xl mr-[-50] ">
+          <p>
+            We’ll always be on hand to <br/> manage and maintain the <br/>charge points on your behalf, <br/> and we’ll be there to install <br/> more as demand increases in <br/>the future.
           </p>
+          <p>
+          <a href="/solutions" className="text-black-600 underline hover:text-blue- text-xl">
+            See our solutions
+          </a>
+          </p>
+        </div>
+      </div> 
+  
+     <>
+     <style>
+        {`
+          
+          @keyframes fadeInOut {
+            0% {
+              opacity: 0;
+            }
+            20% {
+              opacity: 1;
+            }
+            80% {
+              opacity: 1;
+            }
+            100% {
+              opacity: 0;
+            }
+          }
+
+        
+          @keyframes slideUp {
+            0% {
+              opacity: 0;
+              transform: translateY(50px);
+            }
+            100% {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
 
          
-          <p className="text-xl font-semibold mt-10">
-  <a 
-    href="/contact" // Link to your Contact Us page
-    className="text-gray-500 hover:underline hover:text-gray-500"
-  >
-    Contact us to find out more about our funded solutions.
-  </a>
-</p>
+          @keyframes showText {
+            0%, 33.33% {
+              opacity: 1;
+              visibility: visible;
+              transform: translateY(0);
+            }
+            33.34%, 100% {
+              opacity: 0;
+              visibility: hidden;
+              transform: translateY(50px);
+            }
+          }
 
-        </div>
-      </div>
+          .image-slider-wrapper {
+            overflow: hidden;
+            position: relative;
+          }
 
-      {/* Right Side (Image) */}
-      <div className="w-1/2">
-        <img
-          src={yourImage} // Replace with your actual image path
-          alt="EV Charging"
-          className="w-full h-220 rounded-lg object-cover"
-        />
-      </div>
-    </section>
-    <section className="flex py-20 px-8">
-  {/* Left Side */}
-  <div className="w-1/2 pr-10">
-    <h2 className="text-6xl font-semibold text-black mb-1 mr-30 mt-20">
-      What our funded approach <br/> delivers:
-    </h2>
-  </div>
+          .image-slider {
+            display: flex;
+            position: relative;
+          }
 
-  {/* Right Side (Contact Us) */}
-  <div className="w-1/2">
-  <p className="text-xl font-semibold text-gray-700 mb-5 ml-150 mt-30">
-  <a
-    href="/contact" // Link to your Contact Us page
-    className="text-black-600 hover:underline hover:text-blue-800 mt-60"
-  >
-    Ready to get started? Contact Us
-  </a>
-</p>
-  </div>
-</section>
-<div className="border-t-2 border-gray-300 w-full mb-8 mt-10"></div>
-<div className="flex flex-wrap justify-between">
+          .image-slide {
+            flex: 0 0 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: opacity 1s ease;
+          }
 
-  {/* Row 1 */}
-  <div className="w-full sm:w-1/2 flex mb-8 ml-20">
-    {/* Left Side (Image) */}
-    <div className="w-1/3 flex justify-center items-center">
-      <img
-        src={image3} // Replace with your actual image path
-        alt="EV Charging"
-        className="w-full h-auto rounded-lg object-cover"
-      />
-    </div>
+          .image-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.5s ease;
+            border-radius: 15px;
+          }
 
-    <div className="w-2/3 pl-6 flex items-center">
-    <div className="flex items-center ml-100">
-      <h3 className="text-5xl font-semibold  mr-100">01</h3>
-      <div>
-      <p className="text-5xl text-black-800 mt-3 whitespace-nowrap w-full">
-  Cost-efficient solutions
-</p>
+          .animate-slide-up-text {
+            animation: slideUp 1s ease-out;
+            opacity: 0;
+            animation-fill-mode: forwards;
+          }
 
-        <p className="text-gray-500 mt-2 text-lg">
-          We offer property owners fully funded solutions with no upfront capital required, ensuring cost-free installation for you and your residents.
-        </p>
-      </div>
-      </div>
-      </div>
-  </div>
-  <div className="border-t-2 border-gray-300 w-full mb-8"></div>
+          .pair {
+            opacity: 0;
+            visibility: hidden;
+            animation: showText 9s ease-in-out infinite;
+          }
 
-  {/* Row 2 */}
-  <div className="w-full sm:w-1/2 flex mb-8 ml-20">
-    {/* Left Side (Image) */}
-    <div className="w-1/3 flex justify-center items-center">
-    <img
-        src={image4} // Replace with your actual image path
-        alt="EV Charging"
-        className="w-full h-auto rounded-lg object-cover"
-      />
-    </div>
-    <div className="w-2/3 pl-6 flex items-center">
-    <div className="flex items-center">
-    <h3 className="text-5xl font-semibold  ml-100">02</h3>
-      <div>
-      <p className="text-5xl text-black-800 mt-3 ml-100 whitespace-nowrap">
-  Proactive support
-</p>
+        
+          .pair-1 {
+            animation-delay: 0s;
+          }
 
-        <p className="text-gray-500 mt-2 ml-100 text-lg">
-        We work closely with you throughout the entire process, offering expert guidance to ensure the EV charging infrastructure meets your unique needs and goals.
-        </p>
-      </div>
-      </div>
-      </div>
-  </div>
-   
-  <div className="border-t-2 border-gray-300 w-full mb-8"></div>
+          .pair-2 {
+            animation-delay: 3s;
+          }
 
-  {/* Row 3 */}
-  <div className="w-full sm:w-1/2 flex mb-8 ml-20">
-    {/* Left Side (Image) */}
-    <div className="w-1/3 flex justify-center items-center">
-    <img
-        src={image5} // Replace with your actual image path
-        alt="EV Charging"
-        className="w-full h-auto rounded-lg object-cover"
-      />
-    </div>
-    <div className="w-2/3 pl-6 flex items-center">
-    <div className="flex items-center">
-    <h3 className="text-5xl font-semibold  ml-100">03</h3>
-      <div>
-        <p className="text-5xl text-black-800 mt-3 ml-100 whitespace-nowrap">A fully managed service</p>
-        <p className="text-gray-500 mt-2 ml-100 text-lg">
-        We take care of all ongoing operations, eliminating the need for you to manage day-to-day tasks or invest in additional resources.
-        </p>
-      </div>
-      </div>
-      </div>
-  </div>
-  
-  <div className="border-t-2 border-gray-300 w-full mb-8"></div>
+          .pair-3 {
+            animation-delay: 6s;
+          }
 
-  {/* Row 4 */}
-  <div className="w-full sm:w-1/2 flex mb-8 ml-20">
-    {/* Left Side (Image) */}
-    <div className="w-1/3 flex justify-center items-center">
-    <img
-        src={hotels} // Replace with your actual image path
-        alt="EV Charging"
-        className="w-full h-auto rounded-lg object-cover"
-      />
-    </div>
-    <div className="w-2/3 pl-6 flex items-center">
-    <div className="flex items-center">
-    <h3 className="text-5xl font-semibold  ml-100">04</h3>
-      <div>
-        <p className="text-5xl text-black-800 mt-3 ml-100 whitespace-nowrap">Future-proof designs</p>
-        <p className="text-gray-500 mt-2 ml-100 text-lg">
-         TransEv installation is thoughtfully designed by our in-house design team to support rising EV ownership and evolving energy needs.
-        </p>
-      </div>
-      </div>
-      </div>
-  </div>
-  
-   
-  <div className="border-t-2 border-gray-300 w-full mb-8"></div>
+        
+          .image-zoom-out:hover {
+            transform: scale(0.9);
+          }
 
-  {/* Row 5 */}
-  <div className="w-full sm:w-1/2 flex mb-8 ml-20">
-    {/* Left Side (Image) */}
-    <div className="w-1/3 flex justify-center items-center">
-    <img
-        src={image6} // Replace with your actual image path
-        alt="EV Charging"
-        className="w-full h-auto rounded-lg object-cover"
-      />
-    </div>
-    <div className="w-2/3 pl-6 flex items-center">
-    <div className="flex items-center">
-    <h3 className="text-5xl font-semibold  ml-100">05</h3>
-      <div>
-        <p className="text-5xl text-black-800 mt-3 ml-100 whitespace-nowrap">Added value</p>
-        <p className="text-gray-500 mt-2 ml-100 text-lg">
-        Installing uniform EV charging infrastructure will add value to your sites and boost their appeal to future tenants.
-        </p>
-      </div>
-      </div>
-      </div>
-  </div>
-    
-  <div className="border-t-2 border-gray-300 w-full mb-8"></div>
+          .underline-hover:hover {
+            text-decoration: underline;
+            color: black;
+          }
 
-  {/* Row 6 */}
-  <div className="w-full sm:w-1/2 flex mb-8 ml-20">
-    {/* Left Side (Image) */}
-    <div className="w-1/3 flex justify-center items-center">
-    <img
-        src={yourImage} // Replace with your actual image path
-        alt="EV Charging"
-        className="w-full h-auto rounded-lg object-cover"
-      />
-    </div>
-    <div className="w-2/3 pl-6 flex items-center">
-    <div className="flex items-center">
-    <h3 className="text-5xl font-semibold  ml-100">06</h3>
-      <div>
-        <p className="text-5xl text-black-800 mt-3 ml-100 whitespace-nowrap">Guaranteed expertise</p>
-        <p className="text-gray-500 mt-2 ml-100 text-lg">
-        TransEv is backed by the UK Government's Charging Infrastructure Investment Fund (CIIF) and brings together a team of highly trained professionals to deliver best-in-class EV charging solutions.
-        </p>
-      </div>
-      </div>
-      </div>
-  </div>
-   
-  <div className="border-t-2 border-gray-300 w-full mb-8"></div>
-</div>
-<section className="flex py-20 px-8">
-  {/* Left Side */}
-  <div className="w-1/2 pr-10">
-    <h2 className="text-6xl font-semibold text-black mb-1 mr-30 mt-20">
-    The benefits for your <br/> residents:
-    </h2>
-  </div>
+        
+.active-text {
+  color: black !important;
+}
 
-  {/* Right Side (Contact Us) */}
-  <div className="w-1/2">
-  <p className="text-xl font-semibold text-gray-700 mb-5 ml-150 mt-30">
-  <a
-    href="/contact" // Link to your Contact Us page
-    className="text-black-600 hover:underline hover:text-blue-800 mt-60"
-  >
-    Ready to get started? Contact Us
-  </a>
-</p>
-  </div>
-</section>
-<div className="border-t-2 border-gray-300 w-full mb-8 mt-10"></div>
-<div className="flex flex-wrap justify-between">
+.active-underline {
+  text-decoration: underline; 
+}
 
-  {/* Row 1 */}
-  <div className="w-full sm:w-1/2 flex mb-8 ml-20">
-    {/* Left Side (Image) */}
-    <div className="w-1/3 flex justify-center items-center">
-      <img
-        src={image} // Replace with your actual image path
-        alt="EV Charging"
-        className="w-full h-auto rounded-lg object-cover"
-      />
-    </div>
 
-    <div className="w-2/3 pl-6 flex items-center">
-    <div className="flex items-center ml-100">
-      <h3 className="text-5xl font-semibold  mr-100">01</h3>
-      <div>
-      <p className="text-5xl text-black-800 mt-3 whitespace-nowrap w-full">
-      Low-cost charging
-</p>
+.text-hover:hover {
+  color: black; 
+  text-decoration: underline; 
+}
 
-        <p className="text-gray-500 mt-2 text-lg">
-        Your residents will receive competitive home charging pricing without any costs for installation, maintenance or testing.
-        </p>
-      </div>
-      </div>
-      </div>
-  </div>
-  <div className="border-t-2 border-gray-300 w-full mb-8"></div>
 
-  {/* Row 2 */}
-  <div className="w-full sm:w-1/2 flex mb-8 ml-20">
-    {/* Left Side (Image) */}
-    <div className="w-1/3 flex justify-center items-center">
-    <img
-        src={yourImage} // Replace with your actual image path
-        alt="EV Charging"
-        className="w-full h-auto rounded-lg object-cover"
-      />
-    </div>
-    <div className="w-2/3 pl-6 flex items-center">
-    <div className="flex items-center">
-    <h3 className="text-5xl font-semibold  ml-100">02</h3>
-      <div>
-      <p className="text-5xl text-black-800 mt-3 ml-100 whitespace-nowrap">
-      Convenience and flexibility
-</p>
+.image-slide.fade-out {
+  opacity: 0 !important;
+  transition: opacity 0.3s ease;
+}
 
-        <p className="text-gray-500 mt-2 ml-100 text-lg">
-        With EV charging on their doorstep, residents will have the freedom to charge their vehicle at home whenever they need to.
-        </p>
-      </div>
-      </div>
-      </div>
-  </div>
-   
-  <div className="border-t-2 border-gray-300 w-full mb-8"></div>
 
-  {/* Row 3 */}
-  <div className="w-full sm:w-1/2 flex mb-8 ml-20">
-    {/* Left Side (Image) */}
-    <div className="w-1/3 flex justify-center items-center">
-    <img
-        src={image7} // Replace with your actual image path
-        alt="EV Charging"
-        className="w-full h-auto rounded-lg object-cover"
-      />
-    </div>
-    <div className="w-2/3 pl-6 flex items-center">
-    <div className="flex items-center">
-    <h3 className="text-5xl font-semibold  ml-100">03</h3>
-      <div>
-        <p className="text-5xl text-black-800 mt-3 ml-100 whitespace-nowrap">Fast, efficient charging</p>
-        <p className="text-gray-500 mt-2 ml-100 text-lg">
-        With charging up to 22kW, residents can relax knowing that their vehicle will charge quickly and efficiently.
-        </p>
-      </div>
-      </div>
-      </div>
-  </div>
-  
-  <div className="border-t-2 border-gray-300 w-full mb-8"></div>
+          .active-underline {
+            text-decoration: underline;
+          }
 
-  {/* Row 4 */}
-  <div className="w-full sm:w-1/2 flex mb-8 ml-20">
-    {/* Left Side (Image) */}
-    <div className="w-1/3 flex justify-center items-center">
-    <img
-        src={image8} // Replace with your actual image path
-        alt="EV Charging"
-        className="w-full h-auto rounded-lg object-cover"
-      />
-    </div>
-    <div className="w-2/3 pl-6 flex items-center">
-    <div className="flex items-center">
-    <h3 className="text-5xl font-semibold  ml-100">04</h3>
-      <div>
-        <p className="text-5xl text-black-800 mt-3 ml-100 whitespace-nowrap">
-        Good accessibility</p>
-        <p className="text-gray-500 mt-2 ml-100 text-lg">
-        Our charge points are proactively maintained with any faults detected and fixed quickly, keeping them accessible and ready to use.
-        </p>
-      </div>
-      </div>
-      </div>
-  </div>
-  
-   
-  <div className="border-t-2 border-gray-300 w-full mb-8"></div>
- 
-  <section
-  className="relative py-120 bg-cover bg-center rounded-lg mx-8 px-232 mt-50"
-  style={{
-    backgroundImage: `url(${car})`,
-    backgroundPosition: 'center',
-    backgroundSize: 'cover',
-  }}
->
-  {/* Add additional content here */}
-</section>
+        
+          .image-slide.fade-out {
+            opacity: 0 !important;
+            transition: opacity 0.3s ease; 
+          }
+          
+          .text-hover:hover {
+            color: black;
+            text-decoration: underline;
+          }
+        `}
+      </style>
 
-<section className="py-20 bg-white-100 mx-8 rounded-lg">
-  <div className="container mx-auto flex flex-col lg:flex-row justify-between items-center gap-10">
-    {/* Left Side */}
-    <div className="lg:w-1/2 text-center lg:text-left">
-      <h2 className="text-xl font-semibold mb-4">
-        Take a look at the products we can <br /> install for your residents
-      </h2>
-    </div>
-
-    {/* Right Side */}
-    <h2 className="text-7xl font-semibold mb-1 ml-70 max-w-[80%] mt-25">
-      <span className="block w-full">We offer a range of compatible</span>
-      <span className="block w-full">charge points suitable for</span>
-      <span className="block w-full">apartment buildings</span>
-    </h2>
-  </div>
-</section>
-
-<div className="flex justify-center items-center mb-8">
-  <div
-    ref={containerRef} // Attach the ref to the container
-    id="box-container"
-    className="flex overflow-x-auto gap-8 py-8 pl-12 pr-16 relative"
-    style={{
-      scrollBehavior: 'smooth',
-      scrollbarWidth: 'none', // Hide the scrollbar (works in Firefox)
-      msOverflowStyle: 'none', // Hide the scrollbar (works in IE and Edge)
-      overflowY: 'hidden', // Disable vertical scrollbar
-    }}
-    onScroll={handleScroll} // Handle the scroll event to update the underline width and color
-  >
-    {[
-      { name: 'Zaptec Go', description: 'Up to 7.4kW charging speed', features: 'Up to 22kW charging speed', image: charger1 },
-      { name: 'EO Mini Pro 3', description: 'Up to 7.4kW charging speed', features: 'Up to 22kW charging speed', image: charger2 },
-      { name: 'Easee One', description: 'Up to 7.4kW charging speed',features: 'Up to 22kW charging speed', image: charger3 },
-    ].map((box, index) => (
-      <div key={index} className="flex flex-col items-center">
+      <div className="flex justify-between p-16 space-x-8">
+  {/* Image Slider Section */}
+  <div className="w-full space-y-10 relative overflow-hidden image-slider-wrapper">
+    <div className="image-slider w-200 h-[1000px] relative"> {/* Updated width and height */}
+      {images.map((image, index) => (
         <div
-          className="box bg-gray-200 p-16 rounded-lg relative cursor-pointer hover:scale-105 transform transition-all duration-300 w-[550px] h-[800px]" // Adjust width of box to fit 3 per screen
-          onMouseEnter={() => setHovered(index)}
-          onMouseLeave={() => setHovered(null)}
+          key={index}
+          className={`image-slide flex-shrink-0 ${
+            index === activeImage ? 'opacity-100' : 'opacity-0'
+          }`}
+          style={{
+            animation: `fadeInOut 9s ease-in-out infinite ${index * 3}s`, // Timing control
+          }}
         >
-          <div className="flex justify-center items-center w-full h-3/4">
-            <img
-              src={box.image}
-              alt={box.name}
-              className="w-3/4 h-3/4 object-cover rounded-lg mt-20 cursor-pointer"
-              onClick={() => handlePopupOpen(box.image, box.description, box.features)}
-            />
-          </div>
-
-          <div
-            className={`absolute top-4 right-4 bg-yellow-300 w-10 h-10 rounded-full flex justify-center items-center transition-all duration-300 ${hovered === index ? 'opacity-100' : 'opacity-0'}`}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-6 h-6 text-black transition-transform duration-300"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              onClick={() => handlePopupOpen(box.image, box.description, box.features)}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M13 7l5 5m0 0l-5 5m5-5H6"
-              />
-            </svg>
-          </div>
+          <img
+            src={image}
+            alt={`Image ${index + 1}`}
+            loading="lazy"
+            decoding="async"
+            draggable="false"
+            className="w-full h-full object-cover transition-opacity duration-1000 ease-out" // Set full width and height
+            style={{
+              borderRadius: '15px',
+            }}
+          />
         </div>
-
-        {/* Box Name and Description */}
-        <div className="text-center mt-4">
-          <h2 className="text-xl font-bold">{box.name}</h2>
-          <p className="text-gray-600 mt-2">{box.description}</p>
-       
-        </div>
-      </div>
-    ))}
-  </div>
-</div>
-
-<div className="relative mt-16">
-  {/* Underline Section */}
-  <div
-    className="absolute bottom-0 left-0 right-0 transition-all duration-500"
-    style={{
-      left: '0', // Set underline to start from the left side
-      height: '2px',
-      width: `${underlineWidth}%`, // Dynamically set the width based on scroll position
-      backgroundColor: underlineColor, // Color changes based on scroll position
-      transition: 'width 0.3s ease-in-out, background-color 0.3s ease-in-out',
-    }}
-  ></div>
-
-  {/* Arrow Buttons Section */}
-  <div className="flex justify-end w-full absolute bottom-2 right-4 px-4">
-    <button
-      className="text-xl p-2 rounded-full mx-4"
-      onClick={() => handleArrowClick('left')}
-    >
-      ←
-    </button>
-    <button
-      className="text-xl p-2 rounded-full mx-4"
-      onClick={() => handleArrowClick('right')}
-    >
-      →
-    </button>
-  </div>
-</div>
-
-<div className="border-t-2 border-gray-300 w-full mb-8"></div>
-<section className="py-20 bg-white-100 mx-8 rounded-lg">
-  <div className="container mx-auto flex flex-col lg:flex-row justify-between items-center gap-10">
-    {/* Left Side - Text */}
-    <div className="lg:w-1/2 text-center lg:text-left">
-      <h2 className="text-6xl font-semibold mb-4 ml-20">
-        Not sure about the best <br /> solution for you?
-      </h2>
-    </div>
-
-    {/* Right Side - Image */}
-    <div className="lg:w-1/2 flex justify-center items-center">
-      <img
-        src={image} // Use the imported image here
-        alt="Solution Image"
-        className="w-180 h-100 object-cover rounded-xl shadow-lg ml-150" // Set a fixed height (e.g., h-64) and use object-cover to maintain aspect ratio
-      />
+      ))}
     </div>
   </div>
-</section>
 
-<section className="py-20 bg-white-100 mx-8 rounded-lg">
-      <div className="container mx-auto text-center mb-10">
-        <h2 className="text-2xl font-semibold mb-4 mr-260">Frequently Asked Questions</h2>
-        <div className="border-t-2 border-gray-300 w-full mb-10"></div>
-      </div>
 
-      <div className="space-y-6 ml-30">
-        {faqs.map((faq, index) => (
-          <div
-            key={index}
-            className="border-b-2 border-gray-300 pb-4 mt-20"
-          >
-            {/* Question Section */}
-            <div className="flex justify-between items-center">
-              {/* Left side - Question Number and Question */}
-              <div className="flex items-center gap-4">
-                <span className="text-4xl font-semibold text-gray-800 ">{`0${index + 1}`}</span>
-                <span className="text-5xl text-gray-800 ml-100">{faq.question}</span>
-              </div>
 
-              {/* Right side - Toggle Icon ( + or - ) */}
+
+        {/* Text Section */}
+        <div className="w-1/2 flex flex-col justify-start">
+          <h3 className="text-xl font-semibold mb-2"> How We find the best solution</h3>
+          <div className="space-y-6 mt-20">
+            {['Listen', 'Research', 'Design'].map((item, index) => (
               <div
-                className="flex items-center cursor-pointer ml-60"
-                onClick={() =>
-                  setActiveIndex(activeIndex === index ? null : index) // Toggle the active FAQ
-                }
+                key={index}
+                className={`text-7xl font-aeonik cursor-pointer group ${
+                  selectedText === item
+                    ? 'active-text active-underline' 
+                    : 'text-gray-500 text-hover' 
+                }`}
+                onClick={() => handleTextClick(item)}
               >
-                <div
-                  className={`flex justify-center items-center w-8 h-8 rounded-full ${
-                    activeIndex === index ? "bg-gray-300" : "bg-yellow-300"
-                  }`}
-                >
-                  {activeIndex === index ? (
-                    <FaMinus className="text-black" />
-                  ) : (
-                    <FaPlus className="text-black" />
-                  )}
-                </div>
+                <span className="relative inline-block group">
+                  {item}
+                  <span
+                    className={`absolute bottom-0 left-0 w-0 h-[4px] bg-gray-500 transition-all duration-300 group-hover:w-full group-hover:bg-black`}
+                  />
+                </span>
               </div>
-            </div>
+            ))}
+         
+       {/* Text Section */}
+  <div className="w-1/2 relative mt-70">
+    {/* First h2 and p */}
+    <div className="pair pair-1 absolute top-0 left-0">
+      <h2 className="text-2xl font-bold animate-slide-up-text">We listen carefully</h2>
+      <p className="text-lg mt-4 animate-slide-up-text w-[600px] text-gray-600">
+      Our experienced team will listen carefully to the requirements <br/>of your end-users and what you’re looking to achieve by <br/>installing EV charge points.
+      </p>
+    </div>
 
-            {/* Answer Section - Display when active */}
-            {activeIndex === index && (
-              <div className="mt-4 text-gray-600 text-xl ml-40">
-                <p>{faq.answer}</p>
-              </div>
-            )}
-          </div>
-        ))}
+    {/* Second h2 and p */}
+    <div className="pair pair-2 absolute top-0 left-0">
+      <h2 className="text-2xl font-bold animate-slide-up-text">We do our research</h2>
+      <p className="text-lg mt-4 animate-slide-up-text w-[600px] text-gray-600">
+      Our team will carry out a full site visit and complete a review of <br/>the electricity supply to calculate the capacity available for <br/> charge points.
+      </p>
+    </div>
+
+    {/* Third h2 and p */}
+    <div className="pair pair-3 absolute top-0 left-0">
+      <h2 className="text-2xl font-bold animate-slide-up-text">We create a bespoke design</h2>
+      <p className="text-lg mt-4 animate-slide-up-text w-[600px] text-gray-600">
+      Based on our conversations and site visit, we’ll create a <br/>scheme design that meets the needs of your site and end- <br/>users.
+      </p>
+    </div>
+  </div>
+  </div>
+        </div>
       </div>
-    </section>
+
+<style>
+  {`
+    /* Keyframe for fadeInOut */
+    @keyframes fadeInOut {
+      0%, 100% {
+        opacity: 0;
+      }
+      20% {
+        opacity: 1;
+      }
+      80% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+
+    /* Slide-up effect for text */
+    @keyframes slideUp {
+      0% {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Controls visibility and position for pairs of text */
+    @keyframes showText {
+      0%, 33.33% {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+      33.34%, 100% {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(50px);
+      }
+    }
+
+    .pair {
+      opacity: 0;
+      visibility: hidden;
+      animation: showText 9s ease-in-out infinite;
+    }
+
+    .pair-1 {
+      animation-delay: 0s; /* First pair */
+    }
+
+    .pair-2 {
+      animation-delay: 3s; /* Second pair */
+    }
+
+    .pair-3 {
+      animation-delay: 6s; /* Third pair */
+    }
+
+    /* Animation for the slide-up effect */
+    .animate-slide-up-text {
+      animation: slideUp 1s ease-out;
+      opacity: 0;
+      animation-fill-mode: forwards; /* Keep the final state after animation */
+    }
+  `}
+</style>
+    </>
+    <div className="flex flex-col items-start p-16 mt-10">
+  {/* Main heading */}
+  <h2 className="text-7xl font-aeonik mb-8">We follow a 6-step process to <br/> guide you through your EV <br/>journey.</h2>
+
+  {/* Steps section */}
+  <div className="grid grid-cols-3 gap-10 mt-30">
+    {/* Step 1 */}
+    <div className="flex flex-col items-start">
+      <div className="text-2xl font-bold text-gray-600">
+        <span className="underline mb-2 mt-30 ">01</span>
+      </div>
+      <div className="text-xl font-semibold text-black-600 mb-10">
+        Consultancy
+      </div>
+      <p className="text-gray-600 text-xl">
+        We listen to your objectives and understand your <br/>residents’ needs.
+      </p>
+    </div>
+
+    {/* Step 2 */}
+    <div className="flex flex-col items-start">
+      <div className="text-2xl font-bold text-gray-600">
+        <span className="underline mb-2 mt-30">02</span>
+      </div>
+      <div className="text-xl font-semibold text-black-600 mb-10">
+        Survey and scheme design
+      </div>
+      <p className="text-gray-600 text-xl">
+        We carry out a detailed site survey and create a <br/>bespoke plan tailored to your needs.
+      </p>
+    </div>
+
+    {/* Step 3 */}
+    <div className="flex flex-col items-start">
+      <div className="text-2xl font-bold text-gray-600">
+        <span className="underline mb-2 mt-30">03</span>
+      </div>
+      <div className="text-xl font-semibold text-black-600 mb-10">
+        Installation
+      </div>
+      <p className="text-gray-600 text-xl">
+        We project manage the charge point installation, liaising with <br/>sub-contractors on your behalf.
+      </p>
+    </div>
+
+    {/* Step 4 */}
+    <div className="flex flex-col items-start">
+      <div className="text-2xl font-bold text-gray-600">
+        <span className="underline mb-2 mt-30">04</span>
+      </div>
+      <div className="text-xl font-semibold text-black-600 mb-10">
+        Commissioning
+      </div>
+      <p className="text-gray-600 text-xl">
+        We configure the equipment to your needs and set you <br/>up on our cloud-based software platform.
+      </p>
+    </div>
+
+    {/* Step 5 */}
+    <div className="flex flex-col items-start">
+      <div className="text-2xl font-bold text-gray-600">
+        <span className="underline mb-2 mt-30">05</span>
+      </div>
+      <div className="text-xl font-semibold text-black-600 mb-10">
+        Ongoing service support
+      </div>
+      <p className="text-gray-600 text-xl">
+        We provide ongoing maintenance and online service <br/> support.
+      </p>
+    </div>
+
+    {/* Step 6 */}
+    <div className="flex flex-col items-start">
+      <div className="text-2xl font-bold text-gray-600">
+        <span className="underline mb-2 mt-30">06</span>
+      </div>
+      <div className="text-xl font-semibold text-black-600 mb-10">
+        Future expansion
+      </div>
+      <p className="text-gray-600 text-xl">
+        We’re there to add more charge points as and when <br/>you need them.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<div className="border-t-2 border-gray-300 w-full mb-8 mt-10"></div>
+
     <div className="w-full h-screen bg-white flex justify-center items-center mt-30">
       <div className="w-full h-full max-w-screen-3xl bg-gradient-to-r p-10"> 
       <div className="w-full h-full bg-gradient-to-b from-yellow-200 via-yellow-200 to-red-300 rounded-3xl p-12 shadow-lg max-w-screen-3xl mx-auto">
@@ -925,7 +794,7 @@ const work = () => {
 )}
 </div>
 </div>
-</div>
+
 );
 };
 

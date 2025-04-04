@@ -11,6 +11,10 @@ import Holiday from './components/Holiday';
 import Hotels from './components/Hotels';
 import Workplace from './components/Workplace';
 import Work from './components/work';
+import Signup from './components/Signup';
+import Login from './components/Login';
+import ForgotPasswordPage from './components/ForgetPassword';
+import UserProfile from './components/User_Profile';
 function App() {
   return (
     <Router>
@@ -25,9 +29,14 @@ function App() {
         <Route path="/solutions/hotels" element={<Hotels />} />
         <Route path="/solutions/workplace" element={<Workplace />} />
         <Route path="/how-we-work" element={<Work />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/profile" element={<UserProfile />} />
       </Routes>
     </Router>
   );
 }
 
 export default App;
+
