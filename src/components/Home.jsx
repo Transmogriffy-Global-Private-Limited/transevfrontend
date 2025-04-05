@@ -137,7 +137,7 @@ function HomePage() {
     // Animate and navigate to the solutions page
     document.getElementById('solutions-btn').classList.add('bg-yellow-500');
     setTimeout(() => {
-      navigate('/solutions');  // Navigate to the Solutions page
+      navigate('/solution');  // Navigate to the Solutions page
     }, 500); // After animation, navigate to solutions page
   };
   const handleSectionClick = (section) => {
@@ -564,10 +564,10 @@ function HomePage() {
     className="flex overflow-x-auto gap-8 py-8 pl-12 pr-16 relative"
     style={{
       scrollBehavior: 'smooth',
-      scrollbarWidth: 'none', // Hide the scrollbar (works in Firefox)
-      msOverflowStyle: 'none', // Hide the scrollbar (works in IE and Edge)
+      scrollbarWidth: 'none',
+      msOverflowStyle: 'none', 
     }}
-    onScroll={handleScroll} // Handle the scroll event to update the underline width and color
+    onScroll={handleScroll} 
   >
     {[
       { name: 'Zaptec Go', description: 'Up to 7.4kW charging speed', features: 'Up to 22kW charging speed',image: charger1 },
@@ -587,7 +587,7 @@ function HomePage() {
         >
           <div className="flex justify-center items-center w-full h-3/4">
             <img
-              src={box.image} // Dynamically assign images from the array
+              src={box.image} 
               alt={box.name}
               className="w-3/4 h-3/4 object-cover rounded-lg mt-20 cursor-pointer"
               onClick={() => handlePopupOpen(box.image, box.description,box.features)}
@@ -615,7 +615,7 @@ function HomePage() {
           </div>
         </div>
 
-        {/* Box Name and Description */}
+       
         <div className="text-center mt-4">
           <h2 className="text-xl font-bold">{box.name}</h2>
           <p className="text-gray-600 mt-2">{box.description}</p>
@@ -625,23 +625,23 @@ function HomePage() {
   </div>
 </div>
   
-        {/* Always Visible Underline Below Boxes */}
+       
         <div className="relative mt-16">
-  {/* Underline Section */}
+  
   <div
     className="absolute bottom-0 left-0 right-0 transition-all duration-500"
     style={{
       left: '12%',
       right: '16%',
       height: '2px',
-      width: `${underlineWidth}%`, // Dynamically set the width based on scroll position
-      backgroundColor: underlineColor, // Color changes based on scroll position
+      width: `${underlineWidth}%`, 
+      backgroundColor: underlineColor,
       transition: 'width 0.3s ease-in-out, background-color 0.3s ease-in-out',
       paddingRight: '50px',
     }}
   ></div>
 
-  {/* Arrow Buttons Section */}
+  
   <div className="flex justify-between w-full absolute bottom-2 px-4">
     <button
       className="text-xl p-2 rounded-full mx-4 ml-430"
@@ -658,7 +658,7 @@ function HomePage() {
   </div>
 </div>
 
-{/* Next Section */}
+
 <div class="flex justify-between items-center p-5 mt-50">
   <div class="text-xl font-aeonik  font-bold mr-10">
     We partner with the best.
@@ -674,7 +674,7 @@ function HomePage() {
 
 
 
-    {/* Image Carousel Section */}
+   
     <div className="relative w-full mt-15 ">
         <div
           ref={containerRef}
@@ -685,7 +685,7 @@ function HomePage() {
           onMouseLeave={stopDrag}
           style={{ scrollBehavior: "smooth" }}
         >
-          {/* Image Container for Carousel */}
+        
           <div className="flex gap-8">
             {sliderImages.map((image, index) => (
               <div
@@ -698,7 +698,7 @@ function HomePage() {
                   className="object-cover w-full h-full cursor-pointer"
                   onClick={() => handleImageClick(image)}
                 />
-                {/* Smaller Image inside the large image */}
+              
                 <div className="absolute bottom-2 left-2 w-[220px] h-[100px] border-2 border-gray-300 overflow-hidden rounded-lg ml-5 mb-15">
                   <img
                     src={smallImages[index]}
@@ -730,7 +730,7 @@ function HomePage() {
 <div className="w-full h-screen bg-white flex justify-center items-center mt-30">
   <div className="w-full h-full max-w-screen-3xl bg-gradient-to-r p-10"> 
   <div className="w-full h-full bg-gradient-to-b from-yellow-200 via-yellow-200 to-red-300 rounded-3xl p-12 shadow-lg max-w-screen-3xl mx-auto">
-      {/* Your content here */}
+     
       <h2 className="text-9xl font-semibold text-gray-800 text-center font-aeonik">
   <span className="block mr-240">Ready to get</span>
   <span className="block mr-300">started?</span>
@@ -760,14 +760,14 @@ function HomePage() {
 
 </div>
 <div className="mt-55">
-  {/* Heading: Bold and left-aligned */}
+  
   <h3 className="text-2xl font-bold text-left text-gray-800">
     EV Charging Solutions for Residential Sites and Businesses
   </h3>
 
-  {/* Space between heading and description */}
+ 
   <div className="mt-4">
-    {/* Description: Split into two lines */}
+   
     <p className="text-lg text-gray-600 leading-relaxed">
       We’ll listen to your needs, identify the best approach,
     </p>
@@ -783,17 +783,17 @@ function HomePage() {
 </div>
 
     <div className="bg-white-50 py-16">
-      {/* Contact Section */}
+    
       <div className="container mx-auto flex justify-between items-center px-8">
-        {/* Left Side: Logo */}
+      
         <div className="flex items-center space-x-4">
           <img src={logo} alt="Company Logo" className="w-32 h-32" />
          
         </div>
 
-        {/* Right Side: Phone number and email */}
+       
         <div className="text-right">
-          {/* Phone number with hover underline animation */}
+         
           <div className="text-5xl font-semibold text-gray-800 mb-4 mr-80">
             <a
               href="tel:+02033453310"
@@ -803,7 +803,7 @@ function HomePage() {
             </a>
           </div>
 
-          {/* Email with hover underline animation */}
+        
           <div className="text-5xl font-semibold text-gray-800">
             <a
               href="mailto:enquiries@energy-park.co.uk"
@@ -815,26 +815,25 @@ function HomePage() {
         </div>
       </div>
 
-      {/* Underline Section */}
+      
       <div className="mt-10 border-t-2 border-gray-300 mx-8"></div>
 
 
    
-          {/* Footer Section */}
-          <footer className="bg-white-800 text-black py-8 mt-20">
+         <footer className="bg-white-800 text-black py-8 mt-20">
             <div className="container mx-auto flex justify-between">
               <div className="w-1/3">
                 <h4 className="text-xl font-semibold mb-4 mr-20">
                   Experts in smart EV charging solutions <br/>for residential sites and businesses.
                 </h4>
 
-                {/* Client Portal Button */}
+              
                 <a
                   href="/client-portal"
                   className="inline-flex items-center px-6 py-3 bg-black text-white font-semibold rounded-full transition-all duration-300 hover:bg-yellow-500 hover:text-black hover:scale-105 mr-20 mt-10"
                 >
                   <span>Client portal</span>
-                  {/* Right Arrow Circle */}
+                
                   <div className="ml-4 w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center transition-all duration-300 group-hover:w-10 group-hover:h-10">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -854,9 +853,9 @@ function HomePage() {
                 </a>
               </div>
 
-              {/* Flex container for Navigation, Follow us, and Legal sections */}
+             
               <div className="w-2/3 flex justify-between space-x-12 mt-10">
-                {/* Navigation Section */}
+                
                 <div>
                   <h5 className="text-lg font-semibold text-color-black mb-5">Navigation</h5>
                   <ul className="space-y-2">
@@ -867,7 +866,7 @@ function HomePage() {
                   </ul>
                 </div>
 
-                {/* Follow Us Section */}
+             
                 <div>
                   <h5 className="text-lg font-semibold mb-5">Follow us</h5>
                   <ul className="space-y-2">
@@ -877,7 +876,7 @@ function HomePage() {
                   </ul>
                 </div>
 
-                {/* Legal Section */}
+               
                 <div>
                   <h5 className="text-lg font-semibold mb-5">Legal</h5>
                   <ul className="space-y-2">
@@ -891,14 +890,14 @@ function HomePage() {
               </div>
             </div>
 
-            {/* Copyright Section */}
+            
             <div className="text-center mt-8 text-lg mr-310">
               <p>&copy; TransEv 2025. All Rights Reserved.</p>
             </div>
           </footer>
     </div>
 
-     {/* Popup Modal */}
+     
      {popupOpen && (
   <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
     <div className="bg-white p-8 rounded-lg max-w-6xl w-full flex relative h-auto">
