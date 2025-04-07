@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate to redirec
 import { Link } from "react-router-dom"; // Import Link for navigation
 
 // Import image for the background
-import loginImage from "../assets/new3.jpg"; // Ensure the correct path to your image
+import loginImage from "../../assets/imagee2.jpg"; // Ensure the correct path to your image
 
 const BASE_URL_AND_PORT = "http://192.168.0.106:8000"; // Define the base URL and port
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf"; // Define the API key
@@ -28,7 +28,7 @@ const LoginPage = () => {
     };
 
     try {
-      const response = await fetch(`${BASE_URL_AND_PORT}/users/login`, {
+      const response = await fetch(`${BASE_URL_AND_PORT}/admin/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -57,7 +57,7 @@ const LoginPage = () => {
 
         // Redirect to the dashboard page after login
         setTimeout(() => {
-          navigate("/dashboard");
+          navigate("/admin/dashboard");
         }, 2000); // Redirect after 2 seconds to let user see the success message
       } else {
         setAlertMessage("Login failed! Please check your credentials.");
@@ -163,13 +163,13 @@ const LoginPage = () => {
         <div className="mt-4 text-center">
           <p className="text-sm">
             Don't have an account?{" "}
-            <Link to="/signup" className="text-blue-500 hover:underline">
+            <Link to="/admin/signup" className="text-blue-500 hover:underline">
               Sign up
             </Link>
           </p>
           {/* Forgot Password link */}
           <p className="text-sm mt-2">
-            <Link to="/forgot-password" className="text-blue-500 hover:underline">
+            <Link to="/admin/forgot-password" className="text-blue-500 hover:underline">
               Forgot your password?
             </Link>
           </p>

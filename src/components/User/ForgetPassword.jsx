@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate to redirect after successful reset
 
 // Import image for the background
-import ForgetPassword from "../assets/hotels.jpg"; // Ensure the correct path to your image
+import ForgetPassword from "../../assets/hotels.jpg"; // Ensure the correct path to your image
 
 const BASE_URL_AND_PORT = "http://192.168.0.106:8000"; // Define the base URL and port
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf"; // Define the API key

@@ -11,13 +11,16 @@ import Holiday from './components/Holiday';
 import Hotels from './components/Hotels';
 import Workplace from './components/Workplace';
 import Work from './components/work';
-import Signup from './components/Signup';
-import Login from './components/Login';
-import ForgotPasswordPage from './components/ForgetPassword';
-import UserProfile from './components/User_Profile';
-import UserNavbar from './components/User_Navbar';
-import UserSidebar from './components/User_sidebar';
-import Dashboard from './components/Dashboard';
+import Signup from './components/User/Signup';
+import Login from './components/User/Login';
+import ForgotPasswordPage from './components/User/ForgetPassword';
+import UserProfile from './components/User/User_Profile';
+import UserNavbar from './components/User/User_Navbar';
+import UserSidebar from './components/User/User_sidebar';
+import Dashboard from './components/User/Dashboard';
+import AdminSignup from './components/Admin/Signup';
+import AdminLogin from './components/Admin/Login';
+import AdminForgetPassword from './components/Admin/ForgetPassword';
 function App() {
   return (
     <Router>
@@ -39,10 +42,14 @@ function App() {
         <Route path="/usernavbar" element={<UserNavbar />} />
         <Route path="/usersidebar" element={<UserSidebar />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/admin/signup" element={<AdminSignup/>} />
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin/forgot-password" element={<AdminForgetPassword />} /> 
       </Routes>
     </Router>
   );
 }
 
 export default App;
+
 

@@ -188,7 +188,7 @@ const Sidebar = () => {
 
   // Handle profile navigation (check if token exists)
   const handleProfileClick = () => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("auth_token");
     if (token) {
       navigate("/profile"); // Navigate to Profile page if user is logged in
     } else {

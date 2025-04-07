@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom"; // Import useNavigate for redirecting to the login page
 
 // Import image
-import signupImage from "../assets/holiday.jpg"; // Ensure the correct path to your image.
+import signupImage from "../../assets/woman.jpg"; // Ensure the correct path to your image.
 
 const BASE_URL_AND_PORT = "http://192.168.0.106:8000"; // Define the base URL and port
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf"; // Define the API key
@@ -31,7 +31,7 @@ const SignupPage = () => {
     };
 
     try {
-      const response = await fetch(`${BASE_URL_AND_PORT}/users/signup`, {
+      const response = await fetch(`${BASE_URL_AND_PORT}/admin/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -49,7 +49,7 @@ const SignupPage = () => {
         
         // Redirect to the login page after a successful signup
         setTimeout(() => {
-          navigate("/login");
+          navigate("/admin/login");
         }, 2000); // Redirect after 2 seconds to let user see the success message
       } else {
         setAlertMessage("Signup failed! Please check the details and try again.");
@@ -82,9 +82,7 @@ const SignupPage = () => {
         {/* Alert Message */}
         {alertMessage && (
           <div
-            className={`text-center py-2 mb-4 ${
-              alertType === "success" ? "bg-green-500 text-white" : "bg-red-500 text-white"
-            }`}
+            className={`text-center py-2 mb-4 ${alertType === "success" ? "bg-green-500 text-white" : "bg-red-500 text-white"}`}
           >
             {alertMessage}
           </div>
@@ -190,7 +188,7 @@ const SignupPage = () => {
         <div className="mt-4 text-center">
           <p className="text-sm">
             Already have an account?{" "}
-            <Link to="/login" className="text-blue-500 hover:underline">
+            <Link to="/admin/login" className="text-blue-500 hover:underline">
               Login here
             </Link>
           </p>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaBars } from "react-icons/fa";
 import { useNavigate } from "react-router-dom"; // Import useNavigate hook
-import Sidebar from "../components/User_sidebar"; // Import Sidebar component
+import Sidebar from "../User/User_sidebar"; // Import Sidebar component
 
 const BASE_URL_AND_PORT = "http://192.168.0.106:8000"; // Define the base URL and port
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf"; // Define the API key
