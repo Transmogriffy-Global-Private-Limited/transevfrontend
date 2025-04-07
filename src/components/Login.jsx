@@ -40,9 +40,20 @@ const LoginPage = () => {
       setLoading(false); // Set loading to false after receiving a response
 
       if (response.ok) {
+      
         const data = await response.json();
+        const authorizationHeader = response.headers.get("Authorization");
+
+        if (authorizationHeader && authorizationHeader.startsWith("Bearer ")) {
+            const token = authorizationHeader.substring(7); // Extract everything after "Bearer "
+            localStorage.setItem("auth_token", token); // Store the token in localStorage
+        } else {
+            console.error("Authorization header is missing or improperly formatted");
+        }
         setAlertMessage("Login successful!");
         setAlertType("success");
+
+
 
         // Redirect to the dashboard page after login
         setTimeout(() => {

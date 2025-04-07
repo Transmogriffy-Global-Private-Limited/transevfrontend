@@ -19,7 +19,8 @@ const Navbar = () => {
 
   // Handle Logout (API call and navigation)
   const handleLogout = async () => {
-    const token = localStorage.getItem("token"); // Get the auth token from localStorage
+    const token = localStorage.getItem("auth_token"); // Get the auth token from localStorage
+
     if (!token) {
       console.error("No token found, user is not authenticated.");
       return;
@@ -37,7 +38,7 @@ const Navbar = () => {
 
       if (response.ok) {
         // On successful logout, clear the token and navigate to login page
-        localStorage.removeItem("token");
+        localStorage.removeItem("auth_token"); // Remove the token from localStorage
         navigate("/login"); // Redirect to login page
         console.log("User logged out successfully.");
       } else {

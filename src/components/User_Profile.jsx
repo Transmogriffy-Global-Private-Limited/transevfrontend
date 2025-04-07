@@ -1,136 +1,281 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
-const MyProfile = () => {
-  const [profileData, setProfileData] = useState(null);
-  const [profilePicture, setProfilePicture] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [imageFile, setImageFile] = useState(null);
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+const Profile = () => {
+  const BASE_URL_AND_PORT = "http://192.168.0.106:8000"; // Define the base URL and port
+  const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf"; // API Key (for demonstration purposes)
+  const [user, setUser] = useState(null);
+  const [newImage, setNewImage] = useState(null); // Store the new uploaded image
+  const [isEditing, setIsEditing] = useState(false); // Toggle editing mode
+  const [error, setError] = useState(''); // For displaying errors
+  const [successMessage, setSuccessMessage] = useState('');
+  const [imageFile, setImageFile] = useState(null); 
+  const [profilePicture, setProfilePicture] = useState(null);// For displaying profile picture
+  const [formData, setFormData] = useState({
+    name: '',
+    about: '',
+    email: '',
+    phone_number: '',
+    role: '',
+    address: '',
+    isEmailVerified: false, // To track email verification status
+  });
+  const [isUpdated, setIsUpdated] = useState(false); // To track if the data has been modified
+  const [isImageEditing, setIsImageEditing] = useState(false); // For controlling image editing modal visibility
+  const [showOtpPopup, setShowOtpPopup] = useState(false); // To show the OTP input popup
+  const [otp, setOtp] = useState(''); // Store OTP input by user
+  const [otpError, setOtpError] = useState(''); // For OTP validation errors
   const navigate = useNavigate();
 
-  const BASE_URL_AND_PORT = "http://192.168.0.106:8000"; // Define the base URL and port
-  const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf"; // Define the API key
-
-  // Retrieve the auth token from localStorage (or cookie, context, etc.)
-  const AUTH_TOKEN = localStorage.getItem("auth_token"); // Adjust according to your storage method
-
+  // Fetch user data on component mount
   useEffect(() => {
-    if (!AUTH_TOKEN) {
-      // If there is no token, navigate to login page
-      navigate("/login"); // Replace with your login route
-    } else {
-      fetchProfileData();
-      fetchProfilePicture();
-    }
-  }, [AUTH_TOKEN, navigate]);
+    const fetchUserData = async () => {
+      const token = localStorage.getItem('auth_token'); // Retrieve the token
 
-  // Function to fetch profile data
-  const fetchProfileData = async () => {
-    try {
-      const response = await fetch(`${BASE_URL_AND_PORT}/users/profile`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "API-Key": API_KEY,
-          "Authorization": `Bearer ${AUTH_TOKEN}`, // Use the auth token here
-        },
-      });
-      if (response.ok) {
-        const data = await response.json();
-        setProfileData(data);
-      } else {
-        console.error("Failed to fetch profile data");
+      if (!token) {
+        navigate('/login'); // Redirect if no token
+        return;
       }
-    } catch (error) {
-      console.error("Error fetching profile data:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
-  // Function to fetch profile picture
+      try {
+        const response = await fetch(`${BASE_URL_AND_PORT}/users/profile`, {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'API-KEY': API_KEY, // Add the API key in headers
+          },
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          setUser(data.user_data);
+          setFormData(data.user_data);
+          setSuccessMessage('');
+          setError('');
+          fetchProfilePicture(); // Fetch the profile picture after loading user data
+        } else {
+          setError(data.message || 'Failed to fetch user details');
+        }
+      } catch (error) {
+        console.error('Error fetching user details:', error);
+        setError('An error occurred while fetching user details.');
+      }
+    };
+
+    fetchUserData();
+  }, [navigate]);
+
+  // Fetch profile picture from the server
   const fetchProfilePicture = async () => {
+    const token = localStorage.getItem('auth_token');
     try {
       const response = await fetch(`${BASE_URL_AND_PORT}/users/profile-picture`, {
-        method: "GET",
+        method: 'GET',
         headers: {
-          "Content-Type": "application/json",
-          "API-Key": API_KEY,
-          "Authorization": `Bearer ${AUTH_TOKEN}`,
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+          'API-Key': API_KEY,
         },
       });
       if (response.ok) {
         const data = await response.json();
-        setProfilePicture(data.profile_picture);
+        setProfilePicture(data.profile_picture); // Set the profile picture URL
       } else {
-        console.error("Failed to fetch profile picture");
+        console.error('Failed to fetch profile picture');
       }
     } catch (error) {
-      console.error("Error fetching profile picture:", error);
+      console.error('Error fetching profile picture:', error);
     }
   };
 
-  // Function to handle profile picture upload
+  // Handle image change
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    setImageFile(file);
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setNewImage(reader.result);
+        setImageFile(file); // Store the selected image file for uploading
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   // Function to upload profile picture
   const handleUploadProfilePicture = async () => {
     if (!imageFile) return; // If no image is selected, do nothing
-
+    
     const formData = new FormData();
     formData.append("file", imageFile);
+    
+    const token = localStorage.getItem("auth_token");
 
     try {
       const response = await fetch(`${BASE_URL_AND_PORT}/users/profile-picture/upload`, {
         method: "POST",
         headers: {
           "API-Key": API_KEY,
-          "Authorization": `Bearer ${AUTH_TOKEN}`, // Pass the auth token here
+          "Authorization": `Bearer ${token}`, // Pass the auth token here
         },
         body: formData, // Sending the file as form data
       });
 
       if (response.ok) {
         fetchProfilePicture(); // Refresh the profile picture after successful upload
+        setSuccessMessage("Profile picture uploaded successfully!"); // Display success message
+        setError(""); // Clear any previous errors
       } else {
-        console.error("Failed to upload profile picture");
+        setError("Failed to upload profile picture");
+        setSuccessMessage(""); // Clear success message if error occurs
       }
     } catch (error) {
       console.error("Error uploading profile picture:", error);
+      setError("An error occurred while uploading the profile picture.");
+      setSuccessMessage(""); // Clear success message if error occurs
     }
   };
 
+  // Handle form input changes
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+    setIsUpdated(true);
+  };
+
+  // Update user details
+  const handleUpdateDetails = async () => {
+    const token = localStorage.getItem('auth_token');
+    const dataToUpdate = {
+      name: formData.name,
+      email: formData.email,
+      phone_number: formData.phone_number,
+    };
+
+    try {
+      const response = await fetch(`${BASE_URL_AND_PORT}/users/update`, {
+        method: 'PATCH',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          'API-KEY': API_KEY, // Add the API key in headers
+        },
+        body: JSON.stringify(dataToUpdate),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        setUser(data.updatedUser); // Assuming the response contains the updated user data
+        setIsEditing(false);
+        setIsUpdated(false);
+        setSuccessMessage('User details updated successfully!');
+        setError('');
+      } else {
+        setError(data.message || 'Failed to update user details');
+        setSuccessMessage('');
+      }
+    } catch (error) {
+      console.error('Error updating details:', error);
+      setError('An error occurred while updating details.');
+      setSuccessMessage('');
+    }
+  };
+  // Send OTP for email verification
+  const handleVerifyEmail = async () => {
+    const token = localStorage.getItem('auth_token');
+    const requestData = {
+      email: formData.email,
+      otpType: 'EmailVerification',
+    };
+
+    try {
+      const response = await fetch(`${BASE_URL_AND_PORT}/auth/request-otp`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          'API-KEY': API_KEY,
+        },
+        body: JSON.stringify(requestData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setShowOtpPopup(true);
+        setOtpError('');
+      } else {
+        setOtpError(data.message || 'Failed to send OTP');
+      }
+    } catch (error) {
+      console.error('Error sending OTP:', error);
+      setOtpError('An error occurred while sending OTP.');
+    }
+  };
+
+  // Verify OTP for email confirmation
+  const handleVerifyOtp = async () => {
+    const token = localStorage.getItem('auth_token');
+
+    try {
+      const response = await fetch(`${BASE_URL_AND_PORT}/auth/verify-email-otp`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          'API-KEY': API_KEY,
+        },
+        body: JSON.stringify({ otp }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setFormData((prevData) => ({
+          ...prevData,
+          isEmailVerified: true,
+        }));
+        setShowOtpPopup(false);
+        setSuccessMessage('Email verified successfully!');
+        setError('');
+      } else {
+        setOtpError(data.message || 'Invalid OTP');
+      }
+    } catch (error) {
+      console.error('Error verifying OTP:', error);
+      setOtpError('An error occurred while verifying OTP.');
+    }
+  };
   return (
-    <div
-      className="flex justify-center items-center min-h-screen bg-cover bg-center"
-      style={{ backgroundImage: `url('http://{{BASE_URL_AND_PORT}}/path/to/your/image.jpg')` }}
-    >
-      <div className="bg-white p-6 rounded-lg shadow-lg w-full sm:w-96 md:w-1/2 lg:w-1/4">
-        <h2 className="text-3xl font-bold text-center mb-4 bg-teal-500 text-white rounded-t-lg">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <div className="flex flex-col items-center justify-center flex-1 p-6">
+        {/* Profile Header */}
+        <h2 className="text-3xl md:text-4xl font-extrabold tracking-wide text-gray-900 py-2 px-6 rounded-full shadow-lg">
           My Profile
         </h2>
 
-        {loading ? (
-          <div className="text-center">Loading...</div>
-        ) : (
-          <>
-            {/* Profile Image Section */}
+        {/* Profile Card */}
+        <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-2xl space-y-6">
+          <div className="flex flex-col items-center relative">
             <div className="flex justify-center mb-4">
               <div
                 className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-teal-500 cursor-pointer"
                 onClick={() => document.getElementById("image-upload").click()}
               >
-                {profilePicture ? (
+                {newImage || profilePicture ? (
                   <img
-                    src={profilePicture}
+                    src={newImage || profilePicture}
                     alt="Profile"
                     className="object-cover w-full h-full"
                   />
                 ) : (
-                  <div className="flex justify-center items-center w-full h-full text-gray-500">No Image</div>
+                  <div className="flex justify-center items-center w-full h-full text-gray-500">
+                    No Image
+                  </div>
                 )}
                 <input
                   type="file"
@@ -141,14 +286,8 @@ const MyProfile = () => {
                 />
               </div>
             </div>
-
-            {/* Profile Information */}
-            <div className="text-center mb-4">
-              <h3 className="text-xl font-semibold">{profileData?.name}</h3>
-              <p className="text-gray-600">{profileData?.email}</p>
-            </div>
-
-            {/* Button to upload profile picture */}
+            
+            {/* Display the upload button only if an image is selected */}
             {imageFile && (
               <div className="flex justify-center mb-4">
                 <button
@@ -159,21 +298,130 @@ const MyProfile = () => {
                 </button>
               </div>
             )}
-
-            {/* Edit Button to redirect to profile update page */}
-            <div className="flex justify-center mb-4">
-              <button
-                className="bg-blue-500 text-white p-2 rounded-lg"
-                onClick={() => navigate("/edit-profile")} // Replace with your edit profile path
-              >
-                Edit Profile
-              </button>
+          </div>
+         
+          {/* Profile Details */}
+          <div className="space-y-5">
+            <div className="flex flex-col sm:flex-row items-center">
+              <label className="w-full sm:w-32 font-semibold text-gray-700">Name:</label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                disabled={!isEditing}
+                className="mt-2 sm:mt-0 p-3 border border-gray-300 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:bg-gray-100"
+              />
             </div>
-          </>
-        )}
+            <div className="flex flex-col sm:flex-row items-center">
+               <label className="w-full sm:w-32 font-semibold text-gray-700">Email:</label>
+               <div className="mt-2 sm:mt-0 flex items-center w-full">
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  disabled={!isEditing}
+                  className="p-3 border border-gray-300 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:bg-gray-100"
+                />
+                {!formData.isEmailVerified ? (
+                  <button
+                    onClick={handleVerifyEmail}
+                    className="ml-3 bg-yellow-500 text-white py-2 px-4 rounded-lg hover:bg-yellow-600 transition-colors whitespace-nowrap"
+                  >
+                    Verify Email
+                  </button>
+                ) : (
+                  <span className="ml-3 text-green-600 font-bold">Verified</span>
+                )}
+              </div>
+            </div>
+            <div className="flex flex-col sm:flex-row items-center">
+              <label className="w-full sm:w-32 font-semibold text-gray-700">Phone Number:</label>
+              <input
+                type="text"
+                name="phone_number"
+                value={formData.phone_number}
+                onChange={handleChange}
+                disabled={!isEditing}
+                className="mt-2 sm:mt-0 p-3 border border-gray-300 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:bg-gray-100"
+              />
+            </div>
+            <div className="flex flex-col sm:flex-row items-center">
+              <label className="w-full sm:w-32 font-semibold text-gray-700">Role:</label>
+              <input
+                type="text"
+                name="role"
+                value={formData.role}
+                onChange={handleChange}
+                disabled={!isEditing}
+                className="mt-2 sm:mt-0 p-3 border border-gray-300 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:bg-gray-100"
+              />
+            </div>
+          </div>
+
+          {/* Error and Success Messages */}
+          {error && <p className="text-red-500 text-center">{error}</p>}
+          {successMessage && <p className="text-green-500 text-center">{successMessage}</p>}
+  {/* OTP Popup */}
+            {showOtpPopup && (
+            <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-20">
+              <div className="bg-white rounded-lg p-6 max-w-xs w-full">
+                <h3 className="text-xl font-semibold text-center">Enter OTP</h3>
+                <input
+                  type="text"
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value)}
+                  className="mt-4 p-3 border border-gray-300 rounded-lg w-full"
+                  maxLength="6"
+                />
+                {otpError && <p className="text-red-500 text-center">{otpError}</p>}
+                <button
+                  onClick={handleVerifyOtp}
+                  className="w-full bg-blue-500 text-white py-2 rounded-lg mt-4 hover:bg-blue-600 transition-colors"
+                >
+                  Verify OTP
+                </button>
+                <button
+                  onClick={() => setShowOtpPopup(false)}
+                  className="w-full bg-gray-300 text-gray-700 py-2 rounded-lg mt-2 hover:bg-gray-400 transition-colors"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Update/Cancel */}
+          <div className="flex justify-between">
+            {isEditing ? (
+              <div>
+                <button
+                  onClick={handleUpdateDetails}
+                  className="w-full sm:w-auto bg-green-500 text-white py-2 px-4 rounded-lg mr-2 hover:bg-green-600 transition-colors"
+                >
+                  Save
+                </button>
+                <button
+                  onClick={() => setIsEditing(false)}
+                  className="w-full sm:w-auto bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition-colors"
+                >
+                  Cancel
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => setIsEditing(true)}
+                className="w-full sm:w-auto bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors"
+              >
+                Edit
+              </button>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
-export default MyProfile;
+export default Profile;
