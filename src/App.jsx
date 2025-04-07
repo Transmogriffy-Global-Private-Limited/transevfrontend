@@ -21,6 +21,8 @@ import Dashboard from './components/User/Dashboard';
 import AdminSignup from './components/Admin/Signup';
 import AdminLogin from './components/Admin/Login';
 import AdminForgetPassword from './components/Admin/ForgetPassword';
+import AdminDashboard from './components/Admin/Admindashboard';
+import AdminProfile from './components/Admin/AdminProfile';
 function App() {
   return (
     <Router>
@@ -45,6 +47,8 @@ function App() {
         <Route path="/admin/signup" element={<AdminSignup/>} />
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin/forgot-password" element={<AdminForgetPassword />} /> 
+        <Route path="/admin/dashboard" element={<AdminDashboard />} /> 
+        <Route path="/admin/profile" element={<AdminProfile />} /> 
       </Routes>
     </Router>
   );

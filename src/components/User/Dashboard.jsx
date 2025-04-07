@@ -21,8 +21,7 @@ const Dashboard = () => {
         <UserSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
 
         {/* Main Content */}
-        <div className="flex-1 p-8">
-          {/* Overview Cards */}
+        <div className="mt-10 ml-100">     {/* Overview Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
             <div className="bg-red-300 p-6 rounded-lg shadow-md hover:bg-teal-50 transition duration-300">
               <h3 className="text-xl font-medium text-teal-500">Total Chargers Purchased</h3>
