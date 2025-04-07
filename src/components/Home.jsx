@@ -143,13 +143,13 @@ function HomePage() {
   const handleSectionClick = (section) => {
     // Navigate to the corresponding page based on the section clicked
     if (section === 'Apartment buildings') {
-      navigate('/apartment-buildings'); // Navigate to a specific route for Apartment buildings
+      navigate('/solutions/apartment-buildings'); // Navigate to a specific route for Apartment buildings
     } else if (section === 'Holiday parks') {
-      navigate('/holiday-parks');
+      navigate('/solutions/holiday-parks');
     } else if (section === 'Hotels') {
-      navigate('/hotels');
+      navigate('/solutions/hotels');
     } else if (section === 'Workplaces') {
-      navigate('/workplaces');
+      navigate('/solutions/workplace');
     }
   };
   const images = [charger1 , charger2, charger3, charger4 , charger5 , charger6 , charger7 , charger8 ];
