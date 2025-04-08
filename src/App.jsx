@@ -26,6 +26,8 @@ import AdminProfile from './components/Admin/AdminProfile';
 import AddProduct from './components/Admin/Product/AddProduct';
 import ManageProducts from './components/Admin/Product/ManageProducts';
 import DelistedProducts from './components/Admin/Product/DelistedProducts';
+import ProductView from './components/Admin/Product/ProductView';
+import ProductEdit from './components/Admin/Product/ProductEdit';
 function App() {
   return (
     <Router>
@@ -55,6 +57,8 @@ function App() {
         <Route path="/add-product" element={<AddProduct />} /> 
         <Route path="/manage/products" element={<ManageProducts />} /> 
         <Route path="/admin/delisted-products" element={<DelistedProducts />} /> 
+        <Route path="/admin/product/view/:id" element={<ProductView />} /> {/* Product View Page */}
+        <Route path="/admin/product/edit/:id" element={<ProductEdit />} /> {/* Product Edit Page */}
       </Routes>
     </Router>
   );
