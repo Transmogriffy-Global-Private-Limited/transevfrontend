@@ -97,7 +97,7 @@ const AdminSidebar = () => {
           {/* Manage Products */}
           <li className="flex items-center">
             <Link
-              to="/admin/products"
+              to="/manage/products"
               className="flex items-center px-1 py-2 hover:bg-[#34495e] transition-colors"
             >
               <FaIdBadge className="mr-3 text-xl" />

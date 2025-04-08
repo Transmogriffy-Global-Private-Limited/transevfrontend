@@ -23,6 +23,9 @@ import AdminLogin from './components/Admin/Login';
 import AdminForgetPassword from './components/Admin/ForgetPassword';
 import AdminDashboard from './components/Admin/Admindashboard';
 import AdminProfile from './components/Admin/AdminProfile';
+import AddProduct from './components/Admin/Product/AddProduct';
+import ManageProducts from './components/Admin/Product/ManageProducts';
+import DelistedProducts from './components/Admin/Product/DelistedProducts';
 function App() {
   return (
     <Router>
@@ -49,6 +52,9 @@ function App() {
         <Route path="/admin/forgot-password" element={<AdminForgetPassword />} /> 
         <Route path="/admin/dashboard" element={<AdminDashboard />} /> 
         <Route path="/admin/profile" element={<AdminProfile />} /> 
+        <Route path="/add-product" element={<AddProduct />} /> 
+        <Route path="/manage/products" element={<ManageProducts />} /> 
+        <Route path="/admin/delisted-products" element={<DelistedProducts />} /> 
       </Routes>
     </Router>
   );
