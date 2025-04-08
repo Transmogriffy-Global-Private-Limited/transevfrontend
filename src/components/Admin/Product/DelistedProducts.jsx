@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import backgroundImage from '../../../assets/workplace.jpg'; // Import your background image
-
+import AdminNavbar from '../Admin_navbar'; // Assuming you have a Navbar component
+import AdminSidebar from "../Admin_sidebar"; // Assuming you have a Sidebar component
 const BASE_URL_AND_PORT = 'http://192.168.0.106:8000'; // Replace with your actual base URL
 const API_KEY = 'mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf'; // Replace with your actual API key
 
@@ -14,14 +15,15 @@ const DelistedProductsPage = () => {
   const [loading, setLoading] = useState(true); // Loading state
   const [searchQuery, setSearchQuery] = useState(''); // Search query state
   const [searchResults, setSearchResults] = useState([]); // Search results state
-
+  const [currentPage, setCurrentPage] = useState(1); // Current page for pagination
+  
   // Fetch delisted products from the API
   useEffect(() => {
     const fetchDelistedProducts = async () => {
       const authToken = localStorage.getItem('auth_token');
       try {
         const response = await axios.get(
-          `${BASE_URL_AND_PORT}/products/admin/get-delisted/1-8`,
+          `${BASE_URL_AND_PORT}/products/admin/get-delisted/${(currentPage - 1) * 50 + 1}-${currentPage * 50}`,
           {
             headers: {
               'Authorization': `Bearer ${authToken}`,
@@ -29,8 +31,8 @@ const DelistedProductsPage = () => {
             },
           }
         );
-        setDelistedProducts(response.data.slice(0, 8)); // Show only the first 8 delisted products initially
-        setAllDelistedProducts(response.data); // Store all delisted products for further use
+        setDelistedProducts(response.data.products); // Store delisted products
+        setAllDelistedProducts(response.data.products); // Store all delisted products for further use
         setLoading(false);
       } catch (error) {
         console.error('Error fetching delisted products:', error);
@@ -39,7 +41,7 @@ const DelistedProductsPage = () => {
     };
 
     fetchDelistedProducts();
-  }, []);
+  }, [currentPage]); // Fetch products on page change
 
   // Handle "See All Delisted Products" button click
   const handleSeeAll = () => {
@@ -61,7 +63,7 @@ const DelistedProductsPage = () => {
           },
         }
       );
-      setSearchResults(response.data); // Set the search results to state
+      setSearchResults(response.data.products); // Set the search results to state
     } catch (error) {
       console.error('Error searching delisted products:', error);
     }
@@ -96,11 +98,69 @@ const DelistedProductsPage = () => {
     }
   };
 
+  // Function to parse image_paths string into JSON
+  const parseImagePaths = (imagePathsString) => {
+    try {
+      const parsedJson = JSON.parse(imagePathsString.replace(/'/g, '"')); // Replace single quotes with double quotes to make it valid JSON
+      return parsedJson;
+    } catch (error) {
+      console.error("Error parsing image paths:", error);
+      return []; // Return an empty array if parsing fails
+    }
+  };
+
+  // Handle product view
+  const handleProductView = (id) => {
+    navigate(`/admin/product/view/${id}`);
+  };
+
+  // Handle product edit
+  const handleProductEdit = (id) => {
+    navigate(`/admin/product/edit/${id}`);
+  };
+// Function to handle toggle product listing status
+const handleToggleListing = async (productId) => {
+    const authToken = localStorage.getItem('auth_token');
+    try {
+      const response = await axios.put(
+        `${BASE_URL_AND_PORT}/products/toggle-listing`,
+        { product_id: productId },
+        {
+          headers: {
+            'Authorization': `Bearer ${authToken}`,
+            'API-KEY': API_KEY,
+          },
+        }
+      );
+      if (response.status === 200) {
+        const updatedProducts = delistedProducts.map((product) =>
+          product.id === productId
+            ? { ...product, is_listed: !product.is_listed }
+            : product
+        );
+        setDelistedProducts(updatedProducts);
+      }
+    } catch (error) {
+      console.error('Error toggling product listing:', error);
+    }
+  };
+const [sidebarOpen, setSidebarOpen] = useState(true); // Manage sidebar visibility
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen); // Toggle sidebar visibility
+  };
   return (
     <div
-      className="flex flex-col h-screen bg-gradient-to-r from-teal-400 via-teal-500 to-teal-700 bg-cover bg-center bg-fixed"
+      className="min-h-screen bg-gradient-to-r from-teal-400 via-teal-500 to-teal-700 bg-cover bg-center bg-fixed"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
+         <AdminNavbar onToggleSidebar={toggleSidebar} />
+
+{/* Main Container */}
+<div className="flex flex-1">
+  {/* Sidebar */}
+  <AdminSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
+
       {/* Main Content */}
       <div className="flex flex-1 justify-center items-center p-6">
         {/* Container for the page */}
@@ -135,9 +195,9 @@ const DelistedProductsPage = () => {
                   <div key={product.id} className="bg-white border rounded-lg p-4 shadow-md">
                     <div className="w-full h-40 bg-gray-200 mb-4">
                       {/* Display product image */}
-                      {product.image_paths && product.image_paths.length > 0 ? (
+                      {product.image_paths && parseImagePaths(product.image_paths).length > 0 ? (
                         <img
-                          src={convertBase64ToBlob(product.image_paths[0]?.data)}
+                          src={convertBase64ToBlob(parseImagePaths(product.image_paths)[0]?.data)}
                           alt={product.name}
                           className="w-full h-full object-cover rounded-lg"
                         />
@@ -152,6 +212,28 @@ const DelistedProductsPage = () => {
                     <h3 className="text-xl font-semibold">{product.name}</h3>
                     <p className="text-gray-600">{product.model}</p>
                     <p className="text-gray-700 mt-2">₹{product.price}</p>
+                    <div className="flex justify-between mt-4">
+                      <button
+                        onClick={() => handleProductView(product.id)}
+                        className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300"
+                      >
+                        View
+                      </button>
+                      <button
+                        onClick={() => handleProductEdit(product.id)}
+                        className="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600 transition duration-300"
+                      >
+                        Edit
+                      </button>
+                      {!product.is_listed && (
+                        <button
+                          onClick={() => handleToggleListing(product.id)}
+                          className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition duration-300"
+                        >
+                          Toggle Listing
+                        </button>
+                      )}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -167,9 +249,9 @@ const DelistedProductsPage = () => {
                 <div key={product.id} className="bg-white border rounded-lg p-4 shadow-md cursor-pointer">
                   <div className="w-full h-40 bg-gray-200 mb-4">
                     {/* Display product image */}
-                    {product.image_paths && product.image_paths.length > 0 ? (
+                    {product.image_paths && parseImagePaths(product.image_paths).length > 0 ? (
                       <img
-                        src={convertBase64ToBlob(product.image_paths[0]?.data)}
+                        src={convertBase64ToBlob(parseImagePaths(product.image_paths)[0]?.data)}
                         alt={product.name}
                         className="w-full h-full object-cover rounded-lg"
                       />
@@ -184,6 +266,28 @@ const DelistedProductsPage = () => {
                   <h3 className="text-xl font-semibold">{product.name}</h3>
                   <p className="text-gray-600">{product.model}</p>
                   <p className="text-gray-700 mt-2">₹{product.price}</p>
+                  <div className="flex justify-between mt-4">
+                    <button
+                      onClick={() => handleProductView(product.id)}
+                      className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300"
+                    >
+                      View
+                    </button>
+                    <button
+                      onClick={() => handleProductEdit(product.id)}
+                      className="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600 transition duration-300"
+                    >
+                      Edit
+                    </button>
+                    {!product.is_listed && (
+                      <button
+                        onClick={() => handleToggleListing(product.id)}
+                        className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition duration-300"
+                      >
+                         Listing
+                      </button>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
@@ -200,8 +304,25 @@ const DelistedProductsPage = () => {
               </button>
             </div>
           )}
+
+          {/* Pagination buttons */}
+          <div className="flex justify-center mt-6">
+            <button
+              onClick={() => setCurrentPage((prevPage) => Math.max(1, prevPage - 1))}
+              className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition duration-300"
+            >
+              Previous
+            </button>
+            <button
+              onClick={() => setCurrentPage((prevPage) => prevPage + 1)}
+              className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition duration-300 ml-4"
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };
