@@ -205,7 +205,7 @@ const ProductViewPage = () => {
                   </tr>
                   <tr>
                     <td className="font-semibold">Efficiency</td>
-                    <td>{product.details.effiiency_in_percentage}%</td>
+                    <td>{product.details.efficiency_in_percentage}%</td>
                   </tr>
                   <tr>
                     <td className="font-semibold">Max Operating Temp</td>
