@@ -29,6 +29,7 @@ import DelistedProducts from './components/Admin/Product/DelistedProducts';
 import ProductView from './components/Admin/Product/ProductView';
 import ProductEdit from './components/Admin/Product/ProductEdit';
 import Product from './components/User/Products/Product';
+import Cart from './components/User/Cart/Cart';
 function App() {
   return (
     <Router>
@@ -61,6 +62,7 @@ function App() {
         <Route path="/admin/product/view/:id" element={<ProductView />} /> {/* Product View Page */}
         <Route path="/admin/product/edit/:id" element={<ProductEdit />} /> {/* Product Edit Page */}
         <Route path="/products" element={<Product />} /> 
+        <Route path="/cart" element={<Cart />} /> 
       </Routes>
     </Router>
   );

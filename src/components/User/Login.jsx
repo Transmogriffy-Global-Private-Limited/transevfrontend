@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate to redirect after login
 import { Link } from "react-router-dom"; // Import Link for navigation
+import { jwtDecode } from "jwt-decode"; // Corrected import of jwtDecode function
 
 // Import image for the background
 import loginImage from "../../assets/new3.jpg"; // Ensure the correct path to your image
@@ -40,25 +41,38 @@ const LoginPage = () => {
       setLoading(false); // Set loading to false after receiving a response
 
       if (response.ok) {
-      
         const data = await response.json();
         const authorizationHeader = response.headers.get("Authorization");
 
         if (authorizationHeader && authorizationHeader.startsWith("Bearer ")) {
-            const token = authorizationHeader.substring(7); // Extract everything after "Bearer "
-            localStorage.setItem("auth_token", token); // Store the token in localStorage
+          const token = authorizationHeader.substring(7); // Extract everything after "Bearer "
+          localStorage.setItem("auth_token", token); // Store the token in localStorage
+
+          try {
+            // Decode the token and extract user_id
+            const decodedToken = jwtDecode(token);
+            const userId = decodedToken.user_id; // Assuming the user_id is inside the token
+
+            if (userId) {
+              localStorage.setItem("user_id", userId); // Store the user_id in localStorage
+              console.log("User ID:", userId); // Display the user ID in the console
+            } else {
+              console.error("User ID not found in the token.");
+            }
+
+            setAlertMessage("Login successful!");
+            setAlertType("success");
+
+            // Redirect to the dashboard page after login
+            setTimeout(() => {
+              navigate("/dashboard");
+            }, 2000); // Redirect after 2 seconds to let user see the success message
+          } catch (error) {
+            console.error("Error decoding token:", error);
+          }
         } else {
-            console.error("Authorization header is missing or improperly formatted");
+          console.error("Authorization header is missing or improperly formatted");
         }
-        setAlertMessage("Login successful!");
-        setAlertType("success");
-
-
-
-        // Redirect to the dashboard page after login
-        setTimeout(() => {
-          navigate("/dashboard");
-        }, 2000); // Redirect after 2 seconds to let user see the success message
       } else {
         setAlertMessage("Login failed! Please check your credentials.");
         setAlertType("error");
