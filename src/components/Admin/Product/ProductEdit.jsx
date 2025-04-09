@@ -99,7 +99,7 @@ const ProductEditPage = () => {
           },
         }
       );
-      navigate(`/products/${id}`);
+      navigate(`/manage/products`);
     } catch (error) {
       console.error('Failed to update product:', error);
     }
