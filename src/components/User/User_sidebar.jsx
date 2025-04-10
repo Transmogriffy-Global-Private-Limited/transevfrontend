@@ -91,15 +91,7 @@ const Sidebar = () => {
                 {isExpanded && <span>Products</span>}
               </Link>
             </li>
-            <li className="flex items-center">
-              <Link
-                to="/order"
-                className="flex items-center px-1 py-2 hover:bg-[#34495e] transition-colors"
-              >
-                <FaClipboardList className="mr-3 text-xl" />
-                {isExpanded && <span>My Orders</span>}
-              </Link>
-            </li>
+          
             <li className="flex items-center">
               <Link
                 to="/cart"
@@ -107,6 +99,15 @@ const Sidebar = () => {
               >
                 <FaShoppingCart className="mr-3 text-xl" />
                 {isExpanded && <span>Shopping Cart</span>}
+              </Link>
+            </li>
+            <li className="flex items-center">
+              <Link
+                to="/order"
+                className="flex items-center px-1 py-2 hover:bg-[#34495e] transition-colors"
+              >
+                <FaClipboardList className="mr-3 text-xl" />
+                {isExpanded && <span>My Orders</span>}
               </Link>
             </li>
             <li className="flex items-center">
