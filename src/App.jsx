@@ -31,6 +31,7 @@ import ProductEdit from './components/Admin/Product/ProductEdit';
 import Product from './components/User/Products/Product';
 import Cart from './components/User/Cart/Cart';
 import UserOrder from './components/User/Order/Order';
+import Address from './components/User/Address';
 function App() {
   return (
     <Router>
@@ -65,6 +66,7 @@ function App() {
         <Route path="/products" element={<Product />} /> 
         <Route path="/cart" element={<Cart />} /> 
         <Route path="/order" element={<UserOrder />} /> 
+        <Route path="/address" element={<Address />} /> 
       </Routes>
     </Router>
   );

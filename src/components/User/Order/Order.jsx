@@ -75,7 +75,7 @@ function OrderHistoryPage() {
                 <div className="flex justify-between items-start">
                   <div>
                     <h3 className="text-2xl font-bold text-blue-800">{order.product_name}</h3>
-                    <p className="text-xs text-gray-500 mt-1">Order ID: <span className="font-mono">{order.order_id}</span></p>
+                    <p className="text-s text-gray-500 mt-1">Order ID: <span className="font-mono">{order.order_id}</span></p>
                   </div>
                   <div className="text-right">
                     <p className="text-xl font-semibold text-green-700">₹{order.total_amount}</p>
@@ -84,13 +84,16 @@ function OrderHistoryPage() {
                 </div>
 
                 <div className="mt-4 flex flex-col md:flex-row md:items-center md:justify-between">
-                  <p className="text-sm text-gray-600">
+                  <p className="text-m text-gray-600">
                     Payment Method: <span className="font-medium text-gray-800">{order.payment_option}</span>
                   </p>
-                  <p className="text-sm text-gray-600 mt-2 md:mt-0">
+                  <p className="text-lg text-gray-600">
+                    Delivery Address: <span className="font-medium text-gray-800">{order.deliveryaddress}</span>
+                  </p>
+                  <p className="text-m text-gray-600 mt-2 md:mt-0">
                     Status:{" "}
                     <span
-                      className={`inline-block px-3 py-1 text-xs font-semibold rounded-full ${
+                      className={`inline-block px-3 py-1 text-s font-semibold rounded-full ${
                         order.order_status === "null"
                           ? "bg-yellow-200 text-yellow-800"
                           : "bg-green-200 text-green-800"

@@ -1,7 +1,8 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import UserSidebar from '../User/User_sidebar';
+import UserNavbar from '../User/User_Navbar';
+import background from "../../assets/new3.jpg";
 const Profile = () => {
   const BASE_URL_AND_PORT = "http://192.168.0.106:8000"; // Define the base URL and port
   const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf"; // API Key (for demonstration purposes)
@@ -11,7 +12,9 @@ const Profile = () => {
   const [error, setError] = useState(''); // For displaying errors
   const [successMessage, setSuccessMessage] = useState('');
   const [imageFile, setImageFile] = useState(null); 
-  const [profilePicture, setProfilePicture] = useState(null);// For displaying profile picture
+  const [profilePicture, setProfilePicture] = useState(null);
+  const [userAddresses, setUserAddresses] = useState([]);
+// For displaying profile picture
   const [formData, setFormData] = useState({
     name: '',
     about: '',
@@ -28,7 +31,7 @@ const Profile = () => {
   const [otpError, setOtpError] = useState(''); // For OTP validation errors
   const navigate = useNavigate();
 
-  // Fetch user data on component mount
+ 
   useEffect(() => {
     const fetchUserData = async () => {
       const token = localStorage.getItem('auth_token'); // Retrieve the token
@@ -49,23 +52,88 @@ const Profile = () => {
 
         const data = await response.json();
 
-        if (response.ok) {
-          setUser(data.user_data);
-          setFormData(data.user_data);
-          setSuccessMessage('');
-          setError('');
-          fetchProfilePicture(); // Fetch the profile picture after loading user data
-        } else {
-          setError(data.message || 'Failed to fetch user details');
-        }
-      } catch (error) {
-        console.error('Error fetching user details:', error);
-        setError('An error occurred while fetching user details.');
-      }
-    };
+  
+    if (response.ok) {
+              setUser(data.user_data);
+              fetchUserAddresses();
+              setFormData(data.user_data);
+              setSuccessMessage('');
+              setError('');
+              fetchProfilePicture(); // Fetch the profile picture after loading user data
+            } else {
+              setError(data.message || 'Failed to fetch user details');
+            }
+          } catch (error) {
+            console.error('Error fetching user details:', error);
+            setError('An error occurred while fetching user details.');
+          }
+        };
+    
+        fetchUserData();
+      }, [navigate]);
 
-    fetchUserData();
-  }, [navigate]);
+   
+  // Fetch user addresses
+  const fetchUserAddresses = async () => {
+    const token = localStorage.getItem('auth_token');
+  
+    try {
+      const response = await fetch(`${BASE_URL_AND_PORT}/users/address`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'API-KEY': API_KEY,
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      const data = await response.json();
+      if (response.ok && data?.length) {
+        setUserAddresses(data); // Store addresses
+      } else {
+        setUserAddresses([]); // No addresses available
+      }
+    } catch (error) {
+      console.error("Error fetching addresses:", error);
+    }
+  };
+
+  // Set address as default based on type ('Home', 'Work', 'Other')
+  const handleSetDefaultAddress = async (addressType) => {
+    const token = localStorage.getItem('auth_token');
+    const updatedAddress = { is_default: true };
+
+    try {
+        const response = await fetch(`${BASE_URL_AND_PORT}/users/address/${addressType}/set-default`, {
+            method: 'PATCH',
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'API-KEY': API_KEY,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedAddress),
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+            alert(`${addressType} Address set as default successfully!`);
+            fetchUserAddresses(); // Re-fetch updated addresses
+        } else {
+            console.error("Failed to set default address:", data);
+        }
+    } catch (error) {
+        console.error("Error setting default address:", error);
+    }
+  };
+
+  // Group addresses by type
+  const groupedAddresses = userAddresses.reduce((acc, address) => {
+    if (!acc[address.type]) {
+      acc[address.type] = [];
+    }
+    acc[address.type].push(address);
+    return acc;
+  }, {});
 
   // Fetch profile picture from the server
   const fetchProfilePicture = async () => {
@@ -250,44 +318,61 @@ const Profile = () => {
       setOtpError('An error occurred while verifying OTP.');
     }
   };
+ 
+   const [sidebarOpen, setSidebarOpen] = useState(true);
+     
+      const toggleSidebar = () => {
+          setSidebarOpen(!sidebarOpen);
+      };
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div
+           className=" min-h-screen bg-gradient-to-r from-teal-400 via-teal-500 to-teal-700 bg-cover bg-center bg-fixed"
+           style={{ background: `url(${background})` }}
+         >
+      {/* User Navbar */}
+      <UserNavbar onToggleSidebar={toggleSidebar} />
+
+      {/* Main Container */}
+      <div className="flex flex-1">
+        {/* Sidebar */}
+        <UserSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
+    {/* <div className="min-h-screen bg-gray-50 flex flex-col"> */}
       <div className="flex flex-col items-center justify-center flex-1 p-6">
         {/* Profile Header */}
-        <h2 className="text-3xl md:text-4xl font-extrabold tracking-wide text-gray-900 py-2 px-6 rounded-full shadow-lg">
+        <h2 className="text-3xl md:text-4xl font-extrabold tracking-wide text-teal-500 py-2 px-6 rounded-full shadow-lg">
           My Profile
         </h2>
 
         {/* Profile Card */}
         <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-2xl space-y-6">
           <div className="flex flex-col items-center relative">
-            <div className="flex justify-center mb-4">
-              <div
-                className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-teal-500 cursor-pointer"
-                onClick={() => document.getElementById("image-upload").click()}
-              >
-                {newImage || profilePicture ? (
-                  <img
-                    src={newImage || profilePicture}
-                    alt="Profile"
-                    className="object-cover w-full h-full"
+            {user && (
+              <div className="flex justify-center mb-4">
+                <div
+                  className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-teal-500 cursor-pointer"
+                  onClick={() => document.getElementById("image-upload").click()}
+                >
+                  {newImage || profilePicture ? (
+                    <img
+                      src={newImage || profilePicture}
+                      alt="Profile"
+                      className="object-cover w-full h-full"
+                    />
+                  ) : (
+                    <div className="flex justify-center items-center w-full h-full text-gray-500">
+                      No Image
+                    </div>
+                  )}
+                  <input
+                    type="file"
+                    id="image-upload"
+                    className="hidden"
+                    accept="image/*"
+                    onChange={handleImageChange}
                   />
-                ) : (
-                  <div className="flex justify-center items-center w-full h-full text-gray-500">
-                    No Image
-                  </div>
-                )}
-                <input
-                  type="file"
-                  id="image-upload"
-                  className="hidden"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                />
+                </div>
               </div>
-            </div>
-            
-            {/* Display the upload button only if an image is selected */}
+            )}
             {imageFile && (
               <div className="flex justify-center mb-4">
                 <button
@@ -299,7 +384,7 @@ const Profile = () => {
               </div>
             )}
           </div>
-         
+
           {/* Profile Details */}
           <div className="space-y-5">
             <div className="flex flex-col sm:flex-row items-center">
@@ -314,8 +399,8 @@ const Profile = () => {
               />
             </div>
             <div className="flex flex-col sm:flex-row items-center">
-               <label className="w-full sm:w-32 font-semibold text-gray-700">Email:</label>
-               <div className="mt-2 sm:mt-0 flex items-center w-full">
+              <label className="w-full sm:w-32 font-semibold text-gray-700">Email:</label>
+              <div className="mt-2 sm:mt-0 flex items-center w-full">
                 <input
                   type="email"
                   name="email"
@@ -359,12 +444,88 @@ const Profile = () => {
               />
             </div>
           </div>
+          <div className="flex justify-between">
+            {isEditing ? (
+              <div>
+                <button
+                  onClick={handleUpdateDetails}
+                  className="w-full sm:w-auto bg-green-500 text-white py-2 px-4 rounded-lg mr-2 hover:bg-green-600 transition-colors"
+                >
+                  Save
+                </button>
+                <button
+                  onClick={() => setIsEditing(false)}
+                  className="w-full sm:w-auto bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition-colors"
+                >
+                  Cancel
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => setIsEditing(true)}
+                className="w-full sm:w-auto bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors"
+              >
+                Edit
+              </button>
+            )}
+          </div>
+          <div className="flex flex-col sm:flex-row items-center">
+          <label className="w-full sm:w-32 font-semibold text-gray-700">Address:</label>
+           <div className="mt-2 sm:mt-0 w-full flex items-center">
+            
+            <button
+              onClick={() => navigate('/address')}
+              className="ml-3 bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600 transition-colors"
+            >
+              Create Address
+            </button>
+          </div>
+        </div>
+          {/* Addresses Section */}
+          <div>
+            {Object.keys(groupedAddresses).map((addressType) => (
+              <div key={addressType}>
+                <h3 className="font-semibold text-xl text-gray-800">{addressType} Addresses:</h3>
+                {groupedAddresses[addressType].map((address) => {
+                  // const fullAddress = `${address.house_building}, ${address.locality_street}, ${address.city}, ${address.state}, ${address.country}, ${address.pin}`;
+                  const fullAddress = (
+                    <div>
+                      <p><strong>House Building:</strong> {address.house_building}</p>
+                      <p><strong>Locality/Street:</strong> {address.locality_street}</p>
+                      <p><strong>Land Mark:</strong> {address.landmark}</p>
+                      <p><strong>City:</strong> {address.city}</p>
+                      <p><strong>PO/PS:</strong> {address.po_ps}</p>
+                      <p><strong>State:</strong> {address.state}</p>
+                      <p><strong>Country:</strong> {address.country}</p>
+                      <p><strong>Pin:</strong> {address.pin}</p>
+                    </div>
+                  );
+                  return (
+                    <div
+                      key={address.id}
+                      className={`border p-4 rounded-lg mb-4 shadow-md ${address.is_default ? 'bg-gray-100' : ''}`}
+                    >
+                      <p className="text-gray-600">{fullAddress}</p>
+                      {address.is_default && <span className="text-green-600 font-semibold">Default</span>}
+                      <button
+                        onClick={() => handleSetDefaultAddress(addressType)} // Pass the address type to set it as default
+                        className="mt-2 bg-indigo-500 text-white py-1 px-3 rounded-lg hover:bg-indigo-600 transition-colors ml-10"
+                      >
+                        Set {addressType} as Default
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
+            ))}
+          </div>
 
           {/* Error and Success Messages */}
           {error && <p className="text-red-500 text-center">{error}</p>}
           {successMessage && <p className="text-green-500 text-center">{successMessage}</p>}
-  {/* OTP Popup */}
-            {showOtpPopup && (
+
+          {/* OTP Popup */}
+          {showOtpPopup && (
             <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-20">
               <div className="bg-white rounded-lg p-6 max-w-xs w-full">
                 <h3 className="text-xl font-semibold text-center">Enter OTP</h3>
@@ -393,36 +554,14 @@ const Profile = () => {
           )}
 
           {/* Update/Cancel */}
-          <div className="flex justify-between">
-            {isEditing ? (
-              <div>
-                <button
-                  onClick={handleUpdateDetails}
-                  className="w-full sm:w-auto bg-green-500 text-white py-2 px-4 rounded-lg mr-2 hover:bg-green-600 transition-colors"
-                >
-                  Save
-                </button>
-                <button
-                  onClick={() => setIsEditing(false)}
-                  className="w-full sm:w-auto bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition-colors"
-                >
-                  Cancel
-                </button>
-              </div>
-            ) : (
-              <button
-                onClick={() => setIsEditing(true)}
-                className="w-full sm:w-auto bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors"
-              >
-                Edit
-              </button>
-            )}
-          </div>
+        
         </div>
       </div>
     </div>
+    </div>
+   
   );
 };
 
 export default Profile;
-
+    
