@@ -22,7 +22,7 @@ const Profile = () => {
     phone_number: '',
     role: '',
     address: '',
-    isEmailVerified: false, // To track email verification status
+    emailVerified: false, // To track email verification status
   });
   const [isUpdated, setIsUpdated] = useState(false); // To track if the data has been modified
   const [isImageEditing, setIsImageEditing] = useState(false); // For controlling image editing modal visibility
@@ -257,11 +257,11 @@ const Profile = () => {
     const token = localStorage.getItem('auth_token');
     const requestData = {
       email: formData.email,
-      otpType: 'EmailVerification',
+      purpose: 'Mail Verification',
     };
 
     try {
-      const response = await fetch(`${BASE_URL_AND_PORT}/auth/request-otp`, {
+      const response = await fetch(`${BASE_URL_AND_PORT}/users/otp/generate`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -285,23 +285,30 @@ const Profile = () => {
     }
   };
 
-  // Verify OTP for email confirmation
+  
   const handleVerifyOtp = async () => {
     const token = localStorage.getItem('auth_token');
-
+  
+    // Use email from formData and include the purpose
+    const payload = {
+      email: formData.email,          // dynamically fetched email
+      otp_code: otp,                  // assuming you have setOtp/otp input state
+      purpose: "Mail Verification",   // fixed hidden field
+    };
+  
     try {
-      const response = await fetch(`${BASE_URL_AND_PORT}/auth/verify-email-otp`, {
+      const response = await fetch(`${BASE_URL_AND_PORT}/users/otp/verify/email`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
           'API-KEY': API_KEY,
         },
-        body: JSON.stringify({ otp }),
+        body: JSON.stringify(payload),
       });
-
+  
       const data = await response.json();
-
+  
       if (response.ok) {
         setFormData((prevData) => ({
           ...prevData,
@@ -318,6 +325,7 @@ const Profile = () => {
       setOtpError('An error occurred while verifying OTP.');
     }
   };
+  
  
    const [sidebarOpen, setSidebarOpen] = useState(true);
      
@@ -435,7 +443,7 @@ const Profile = () => {
                   disabled={!isEditing}
                   className="p-3 border border-gray-300 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:bg-gray-100"
                 />
-                {!formData.isEmailVerified ? (
+                {!formData.email_verified ? (
                   <button
                     onClick={handleVerifyEmail}
                     className="ml-3 bg-yellow-500 text-white py-2 px-4 rounded-lg hover:bg-yellow-600 transition-colors whitespace-nowrap"
