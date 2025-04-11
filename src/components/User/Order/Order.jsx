@@ -87,9 +87,10 @@ function OrderHistoryPage() {
                   <p className="text-m text-gray-600">
                     Payment Method: <span className="font-medium text-gray-800">{order.payment_option}</span>
                   </p>
-                  <p className="text-lg text-gray-600">
-                    Delivery Address: <span className="font-medium text-gray-800">{order.deliveryaddress}</span>
-                  </p>
+                  
+                 
+                 
+
                   <p className="text-m text-gray-600 mt-2 md:mt-0">
                     Status:{" "}
                     <span
@@ -103,7 +104,9 @@ function OrderHistoryPage() {
                     </span>
                   </p>
                 </div>
-
+                <p className="text-lg text-gray-600">
+                    Delivery Address: <span className="font-medium text-gray-800">{order.deliveryaddress}</span>
+                  </p> 
                 <button
                   onClick={() => {
                     document.getElementById(order.order_id)?.classList.toggle("hidden");

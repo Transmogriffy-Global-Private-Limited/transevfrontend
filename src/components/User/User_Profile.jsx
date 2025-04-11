@@ -324,6 +324,32 @@ const Profile = () => {
       const toggleSidebar = () => {
           setSidebarOpen(!sidebarOpen);
       };
+      const handleDeleteAddress = async (addressType) => {
+        const token = localStorage.getItem('auth_token');
+      
+        try {
+          const response = await fetch(`${BASE_URL_AND_PORT}/users/address/${addressType}`, {
+            method: 'DELETE',
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'API-KEY': API_KEY,
+            },
+          });
+      
+          if (response.ok) {
+            alert(`${addressType} address deleted successfully.`);
+            fetchUserAddresses(); // Refresh address list
+          } else {
+            const data = await response.json();
+            console.error("Delete failed:", data.message || "Unknown error");
+            alert("Failed to delete address: " + (data.message || "Unknown error"));
+          }
+        } catch (error) {
+          console.error("Error deleting address:", error);
+          alert("Error occurred while deleting the address.");
+        }
+      };
+      
   return (
     <div
            className=" min-h-screen bg-gradient-to-r from-teal-400 via-teal-500 to-teal-700 bg-cover bg-center bg-fixed"
@@ -513,6 +539,13 @@ const Profile = () => {
                       >
                         Set {addressType} as Default
                       </button>
+                      <button
+  onClick={() => handleDeleteAddress(addressType)}
+  className="mt-2 bg-red-500 text-white py-1 px-3 rounded-lg hover:bg-red-600 transition-colors ml-20"
+>
+  Delete {addressType} Address
+</button>
+
                     </div>
                   );
                 })}
@@ -565,3 +598,4 @@ const Profile = () => {
 
 export default Profile;
     
+

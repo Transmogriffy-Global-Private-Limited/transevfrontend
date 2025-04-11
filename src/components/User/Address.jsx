@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-
+import UserSidebar from '../User/User_sidebar';
+import UserNavbar from '../User/User_Navbar';
+import background from "../../assets/new3.jpg";
 const BASE_URL_AND_PORT = "http://192.168.0.106:8000"; // Define the base URL and port
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf"; // Your API key
 const token = localStorage.getItem("auth_token"); // Retrieve the token
@@ -49,9 +51,25 @@ const AddAddressForm = () => {
       alert("Error occurred.");
     }
   };
-
+ const [sidebarOpen, setSidebarOpen] = useState(true);
+     
+      const toggleSidebar = () => {
+          setSidebarOpen(!sidebarOpen);
+      };
   return (
-    <div className="max-w-md mx-auto mt-10">
+    <div
+           className=" min-h-screen bg-gradient-to-r from-teal-400 via-teal-500 to-teal-700 bg-cover bg-center bg-fixed"
+           style={{ background: `url(${background})` }}
+         >
+      {/* User Navbar */}
+      <UserNavbar onToggleSidebar={toggleSidebar} />
+
+      {/* Main Container */}
+      <div className="flex flex-1">
+        {/* Sidebar */}
+        <UserSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
+        <div className="w-[40%] mx-auto mt-10 bg-white p-6 rounded-lg shadow-lg">
+
       <h2 className="text-2xl font-semibold text-center mb-6">Add Address</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
@@ -69,7 +87,7 @@ const AddAddressForm = () => {
             <option value="">Select</option>
             <option value="Home">Home</option>
             <option value="Work">Work</option>
-            <option value="Other">Other</option>
+            {/* <option value="Other">Other</option> */}
           </select>
         </div>
         {formData.type === "Other" && (
@@ -233,6 +251,8 @@ const AddAddressForm = () => {
           </button>
         </div>
       </form>
+    </div>
+    </div>
     </div>
   );
 };

@@ -300,7 +300,9 @@ function CartPage() {
                             return;
                           }
                       
-                          const deliveryAddress = `${defaultAddr.house_building}, ${defaultAddr.locality_street}, ${defaultAddr.city}, ${defaultAddr.state}, ${defaultAddr.country}, ${defaultAddr.pin}`;
+                       
+                        const deliveryAddress = `House Building: ${defaultAddr.house_building}, Locality/Street: ${defaultAddr.locality_street}, City: ${defaultAddr.city},Landmark: ${defaultAddr.landmark},PO/PS:  ${defaultAddr.po_ps}, State: ${defaultAddr.state}, Country: ${defaultAddr.country}, Pin: ${defaultAddr.pin}`;
+
                       
                           // ✅ Prepare final payload
                           const orderPayload = {
