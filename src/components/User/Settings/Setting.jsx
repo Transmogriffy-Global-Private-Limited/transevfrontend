@@ -1,322 +1,271 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import UserSidebar from '../User_sidebar';
-import UserNavbar from '../User_Navbar';
-import background from '../../../assets/new3.jpg';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import UserSidebar from "../../User/User_sidebar";
+import UserNavbar from "../../User/User_Navbar";
+import background from "../../../assets/new3.jpg";
 
-const BASE_URL_AND_PORT = 'http://192.168.0.106:8000';
-const API_KEY = 'mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf';
+const BASE_URL_AND_PORT = "http://192.168.0.106:8000";
+const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
+
+const api = axios.create({
+  baseURL: BASE_URL_AND_PORT,
+  headers: {
+    "api-key": API_KEY,
+    "Content-Type": "application/json",
+  },
+});
 
 const Settings = () => {
-  const [settings, setSettings] = useState({
-    privateProfile: false,
-    searchableProfile: true,
-    allowMessagesfromStrangers: true,
-    twoFaEnabled: false,
-    companyPageWriteAccess: false,
-    lookingToApply: true,
-    lookingToRecruit: false,
-  });
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [is2FAEnabled, setIs2FAEnabled] = useState(false);
+  const [show2FAModal, setShow2FAModal] = useState(false);
+  const [twoFAPassword, setTwoFAPassword] = useState("");
 
-  const [error, setError] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
-  const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
-  const [oldPassword, setOldPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmNewPassword, setConfirmNewPassword] = useState('');
-  const [showDeleteAccountModal, setShowDeleteAccountModal] = useState(false);
-  const [passwordForDeletion, setPasswordForDeletion] = useState('');
-  const [user, setUser] = useState(null);
-  const [isExpanded, setIsExpanded] = useState(false);
-  const navigate = useNavigate();
+  const [showResetEmailModal, setShowResetEmailModal] = useState(false);
+  const [resetEmail, setResetEmail] = useState("");
 
-  const token = localStorage.getItem('auth_token');
+  const [showResetConfirmModal, setShowResetConfirmModal] = useState(false);
+  const [newPassword, setNewPassword] = useState("");
+  const [otpCode, setOtpCode] = useState("");
 
-  const headers = {
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${token}`,
-    'x-api-key': API_KEY,
+  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
+
+  const fetch2FAStatus = async () => {
+    try {
+      const token = localStorage.getItem("auth_token");
+      const res = await api.get("/users/2fa/status", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const message = res.data.status.message;
+      setIs2FAEnabled(message.includes("enabled"));
+    } catch (err) {
+      alert("Failed to load 2FA status");
+    }
   };
 
-  useEffect(() => {
-    if (!token) {
-      navigate('/login');
-      return;
-    }
-
-    const fetchSettings = async () => {
-      try {
-        const response = await fetch(`${BASE_URL_AND_PORT}/user-settings`, {
-          method: 'GET',
-          headers,
-        });
-
-        const data = await response.json();
-        if (response.ok) {
-          setSettings(data);
-        } else {
-          setError(data.message || 'Failed to fetch settings');
+  const submit2FAToggle = async () => {
+    try {
+      const token = localStorage.getItem("auth_token");
+      const res = await api.patch(
+        "/users/2fa/toggle",
+        { entered_password: twoFAPassword },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      } catch (err) {
-        console.error('Fetch settings error:', err);
-        setError('An error occurred while fetching settings.');
-      }
-    };
-
-    fetchSettings();
-  }, [navigate]);
-
-  const handleToggleChange = (event) => {
-    const { name, checked } = event.target;
-
-    if (name === 'lookingToApply' && checked) {
-      setSettings((prev) => ({
-        ...prev,
-        lookingToApply: true,
-        lookingToRecruit: false,
-      }));
-    } else if (name === 'lookingToRecruit' && checked) {
-      setSettings((prev) => ({
-        ...prev,
-        lookingToRecruit: true,
-        lookingToApply: false,
-      }));
-    } else {
-      setSettings((prev) => ({
-        ...prev,
-        [name]: checked,
-      }));
+      );
+      alert(res.data.message);
+      setIs2FAEnabled((prev) => !prev);
+      setShow2FAModal(false);
+      setTwoFAPassword("");
+    } catch (err) {
+      alert(err.response?.data?.detail || "Failed to toggle 2FA");
     }
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    if (!token) return setError('Please login to update settings.');
-
+  const sendOTP = async () => {
     try {
-      const response = await fetch(`${BASE_URL_AND_PORT}/user-settings`, {
-        method: 'PATCH',
-        headers,
-        body: JSON.stringify(settings),
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        setSuccessMessage('Settings updated successfully!');
-        setError('');
-      } else {
-        setError(data.message || 'Failed to update settings');
-        setSuccessMessage('');
-      }
+      await api.post(
+        "/users/password-reset/request",
+        { email: resetEmail },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
+          },
+        }
+      );
+      alert("OTP sent to your email.");
+      setShowResetEmailModal(false);
+      setShowResetConfirmModal(true);
     } catch (err) {
-      console.error('Update settings error:', err);
-      setError('An error occurred while updating settings.');
+      alert("Failed to send OTP.");
     }
   };
 
-  const handleChangePassword = async (event) => {
-    event.preventDefault();
-    if (!oldPassword || !newPassword || !confirmNewPassword) return setError('Please fill in all fields.');
-    if (newPassword !== confirmNewPassword) return setError('New passwords do not match.');
-
+  const confirmReset = async () => {
     try {
-      const response = await fetch(`${BASE_URL_AND_PORT}/auth/change-password`, {
-        method: 'PATCH',
-        headers,
-        body: JSON.stringify({ oldPassword, newPassword }),
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        setSuccessMessage('Password changed successfully!');
-        setError('');
-        setShowChangePasswordModal(false);
-      } else {
-        setError(data.message || 'Failed to change password');
-        setSuccessMessage('');
-      }
+      await api.post(
+        "/users/password-reset/confirm",
+        {
+          email: resetEmail,
+          new_password: newPassword,
+          otp_code: otpCode,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
+          },
+        }
+      );
+      alert("Password reset successful.");
+      setShowResetConfirmModal(false);
+      setNewPassword("");
+      setOtpCode("");
     } catch (err) {
-      console.error('Change password error:', err);
-      setError('An error occurred while changing password.');
-      setSuccessMessage('');
-    }
-  };
-
-  const handleToggle2FA = async () => {
-    try {
-      const response = await fetch(`${BASE_URL_AND_PORT}/auth/toggle-2fa`, {
-        method: 'POST',
-        headers,
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        setSettings((prev) => ({
-          ...prev,
-          twoFaEnabled: !prev.twoFaEnabled,
-        }));
-        setSuccessMessage(data.message || '2FA toggled successfully.');
-        setError('');
-      } else {
-        setError(data.message || 'Failed to toggle 2FA');
-      }
-    } catch (err) {
-      console.error('Toggle 2FA error:', err);
-      setError('An error occurred while toggling 2FA.');
+      alert("Password reset failed.");
     }
   };
 
   const handleDeleteAccount = async () => {
-    if (!passwordForDeletion) return setError('Enter your password to confirm deletion.');
+    if (!window.confirm("Are you sure you want to delete your account?")) return;
 
-    if (window.confirm('Are you sure you want to delete your account? This action is permanent.')) {
-      try {
-        const response = await fetch(`${BASE_URL_AND_PORT}/auth/delete`, {
-          method: 'DELETE',
-          headers,
-          body: JSON.stringify({ password: passwordForDeletion }),
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-          localStorage.removeItem('token');
-          setSuccessMessage('Account deleted successfully.');
-          navigate('/login');
-        } else {
-          setError(data.message || 'Failed to delete account');
-        }
-      } catch (err) {
-        console.error('Delete account error:', err);
-        setError('An error occurred while deleting your account.');
-      }
+    try {
+      await api.delete("/users/delete", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
+        },
+      });
+      alert("Account deleted.");
+      localStorage.removeItem("auth_token");
+      window.location.href = "/";
+    } catch (err) {
+      alert("Failed to delete account.");
     }
   };
 
-  const toggleSidebar = () => setIsExpanded(!isExpanded);
+  useEffect(() => {
+    fetch2FAStatus();
+  }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col">
-      <UserNavbar toggleSidebar={toggleSidebar} />
-      <div
-        className="flex flex-1"
-        style={{
-          backgroundImage: `url(${background})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      >
-        <UserSidebar isExpanded={isExpanded} toggleSidebar={toggleSidebar} />
-        <div className="flex-1 p-6 md:ml-80 max-w-4xl w-full mx-auto mt-20 bg-white rounded-lg shadow-lg">
-          <h2 className="text-3xl font-bold text-center text-white bg-gradient-to-r from-indigo-500 to-purple-600 p-4 rounded-lg">
-            Account Settings
-          </h2>
-         
+    <div
+      className="min-h-screen bg-cover bg-center bg-fixed"
+      style={{ backgroundImage: `url(${background})` }}
+    >
+      <UserNavbar onToggleSidebar={toggleSidebar} />
+      <div className="flex flex-1">
+        <UserSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
+        <div className="max-w-xl mx-auto mt-10 p-6 bg-white shadow-md rounded-lg w-full">
+          <h2 className="text-2xl font-bold mb-6">Account Settings</h2>
 
-            {/* 2FA toggle */}
-            <div className="flex justify-between items-center py-2 border-b border-gray-300">
-              <span className="text-gray-700 font-medium">Two-Factor Authentication (2FA)</span>
-              <label className="relative inline-flex items-center cursor-pointer">
-                <input
-                  type="checkbox"
-                  name="twoFaEnabled"
-                  checked={settings.twoFaEnabled}
-                  onChange={handleToggle2FA}
-                  className="sr-only peer"
-                />
-                <div className="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:bg-green-500"></div>
-                <div className="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform peer-checked:translate-x-5"></div>
-              </label>
+          {/* 2FA Toggle */}
+          <div className="mb-6">
+            <div className="flex justify-between items-center">
+              <span className="text-lg font-medium">Two-Factor Authentication</span>
+              <div
+                onClick={() => setShow2FAModal(true)}
+                className={`w-12 h-6 rounded-full transition-all duration-300 cursor-pointer flex items-center px-1 ${
+                  is2FAEnabled ? "bg-green-500" : "bg-gray-300"
+                }`}
+              >
+                <div
+                  className={`h-4 w-4 bg-white rounded-full shadow-md transition-all duration-300 ${
+                    is2FAEnabled ? "translate-x-6" : "translate-x-0"
+                  }`}
+                ></div>
+              </div>
             </div>
+            <p className="text-sm text-gray-600 mt-1">
+              2FA is {is2FAEnabled ? "enabled ✅" : "disabled ❌"}
+            </p>
+          </div>
 
-           
-
-          {error && <div className="mt-4 bg-red-500 text-white text-center p-2 rounded">{error}</div>}
-          {successMessage && <div className="mt-4 bg-green-500 text-white text-center p-2 rounded">{successMessage}</div>}
-
-          <div className="flex justify-between mt-6">
+          {/* Password Reset */}
+          <div className="mb-6">
             <button
-              onClick={() => setShowDeleteAccountModal(true)}
-              className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
+              onClick={() => setShowResetEmailModal(true)}
             >
-              Delete Account
+              Reset Password
             </button>
+          </div>
+
+          {/* Delete Account */}
+          <div className="mt-8">
             <button
-              onClick={() => setShowChangePasswordModal(true)}
-              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+              className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded"
+              onClick={handleDeleteAccount}
             >
-              Change Password
+              Delete My Account
             </button>
           </div>
         </div>
       </div>
 
-      {/* Delete Account Modal */}
-      {showDeleteAccountModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
-            <h3 className="text-xl font-bold mb-2 text-center">Confirm Account Deletion</h3>
-            <p className="text-sm text-center mb-4">This action cannot be undone.</p>
-            <input
-              type="password"
-              value={passwordForDeletion}
-              onChange={(e) => setPasswordForDeletion(e.target.value)}
-              placeholder="Enter password"
-              className="w-full p-2 border border-gray-300 rounded mb-4"
-            />
-            <div className="flex justify-between">
-              <button onClick={() => setShowDeleteAccountModal(false)} className="bg-gray-500 text-white px-4 py-2 rounded">
-                Cancel
-              </button>
-              <button onClick={handleDeleteAccount} className="bg-red-600 text-white px-4 py-2 rounded">
-                Delete
-              </button>
-            </div>
-          </div>
-        </div>
+      {/* Modals */}
+      {show2FAModal && (
+        <Modal onClose={() => setShow2FAModal(false)}>
+          <h3 className="text-lg font-bold mb-2">Enter your password to toggle 2FA</h3>
+          <input
+            type="password"
+            className="border p-2 w-full rounded mb-4"
+            value={twoFAPassword}
+            onChange={(e) => setTwoFAPassword(e.target.value)}
+            placeholder="Your password"
+          />
+          <button
+            className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded"
+            onClick={submit2FAToggle}
+          >
+            Submit
+          </button>
+        </Modal>
       )}
 
-      {/* Change Password Modal */}
-      {showChangePasswordModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
-            <h3 className="text-xl font-bold mb-4 text-center">Change Password</h3>
-            <form onSubmit={handleChangePassword} className="space-y-4">
-              <input
-                type="password"
-                placeholder="Old Password"
-                value={oldPassword}
-                onChange={(e) => setOldPassword(e.target.value)}
-                className="w-full p-2 border border-gray-300 rounded"
-              />
-              <input
-                type="password"
-                placeholder="New Password"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-                className="w-full p-2 border border-gray-300 rounded"
-              />
-              <input
-                type="password"
-                placeholder="Confirm New Password"
-                value={confirmNewPassword}
-                onChange={(e) => setConfirmNewPassword(e.target.value)}
-                className="w-full p-2 border border-gray-300 rounded"
-              />
-              <div className="flex justify-between">
-                <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
-                  Change
-                </button>
-                <button type="button" onClick={() => setShowChangePasswordModal(false)} className="bg-gray-500 text-white px-4 py-2 rounded">
-                  Cancel
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
+      {showResetEmailModal && (
+        <Modal onClose={() => setShowResetEmailModal(false)}>
+          <h3 className="text-lg font-bold mb-2">Enter your email</h3>
+          <input
+            type="email"
+            className="border p-2 w-full rounded mb-4"
+            value={resetEmail}
+            onChange={(e) => setResetEmail(e.target.value)}
+            placeholder="you@example.com"
+          />
+          <button
+            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
+            onClick={sendOTP}
+          >
+            Send OTP
+          </button>
+        </Modal>
+      )}
+
+      {showResetConfirmModal && (
+        <Modal onClose={() => setShowResetConfirmModal(false)}>
+          <h3 className="text-lg font-bold mb-2">Reset Your Password</h3>
+          <input
+            type="password"
+            className="border p-2 w-full rounded mb-2"
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+            placeholder="New password"
+          />
+          <input
+            type="text"
+            className="border p-2 w-full rounded mb-4"
+            value={otpCode}
+            onChange={(e) => setOtpCode(e.target.value)}
+            placeholder="Enter OTP"
+          />
+          <button
+            className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded"
+            onClick={confirmReset}
+          >
+            Confirm Reset
+          </button>
+        </Modal>
       )}
     </div>
   );
 };
+
+// ✅ Reusable Modal
+const Modal = ({ children, onClose }) => (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md relative">
+      <button
+        className="absolute top-2 right-3 text-gray-600 text-xl"
+        onClick={onClose}
+      >
+        &times;
+      </button>
+      {children}
+    </div>
+  </div>
+);
 
 export default Settings;
