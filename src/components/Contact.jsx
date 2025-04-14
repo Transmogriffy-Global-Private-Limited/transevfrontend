@@ -76,7 +76,7 @@ const ContactPage = () => {
                 Tel: 033-4601 5366/ +91 79080 03488
               </p><br/>
               <p className="font-semibold text-xl mb-2 text-gray-500 mt-2 inline-block border-b-2 border-gray-500">
-                Email: tgwbin@gimail.com
+                Email: tgwbin@gmail.com
               </p>
             </div>
           </div>

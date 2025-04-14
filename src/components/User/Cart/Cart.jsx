@@ -475,6 +475,7 @@ function CartPage() {
     <div className="space-y-1 text-sm text-gray-700">
       <p><strong>House Building:</strong> {defaultAddress.house_building}</p>
       <p><strong>Locality/Street:</strong> {defaultAddress.locality_street}</p>
+      <p><strong>Land Mark:</strong> {defaultAddress.landmark}</p>
       <p><strong>City:</strong> {defaultAddress.city}</p>
       <p><strong>State:</strong> {defaultAddress.state}</p>
       <p><strong>Country:</strong> {defaultAddress.country}</p>
