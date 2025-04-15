@@ -712,8 +712,198 @@ function CartPage() {
                             return [];
                         }
                     };
-                   
+                    const removeFromCart = async (productId) => {
+                        try {
+                          const response = await axios.post(
+                            `${BASE_URL_AND_PORT}/cart/removefromcart`,
+                            {
+                              productid: productId,
+                              user_id: userId,
+                            },
+                            {
+                              headers: {
+                                Authorization: `Bearer ${token}`,
+                                'API-KEY': API_KEY,
+                                'Content-Type': 'application/json',
+                              },
+                            }
+                          );
+                      
+                          if (response.data) {
+                            alert("✅ Product removed from cart successfully!");
+                            fetchCartItems(); // Optional: reload cart
+                          }
+                        } catch (error) {
+                          console.error("❌ Error removing item from cart:", error);
+                          alert("Failed to remove item from cart.");
+                        }
+                      };
+                      
                   
+                    // const placeOrder = async () => {
+                    //     try {
+                    //         if (!cartItems.length) {
+                    //             alert("Your cart is empty.");
+                    //             return;
+                    //         }
+                    
+                    //         const defaultAddr = userAddresses.find(address => address.is_default === true);
+                    //         if (!defaultAddr) {
+                    //             alert("Please set a default delivery address before placing an order.");
+                    //             return;
+                    //         }
+                    
+                    //         const deliveryAddress = `House Building: ${defaultAddr.house_building}, Locality/Street: ${defaultAddr.locality_street}, City: ${defaultAddr.city}, Landmark: ${defaultAddr.landmark}, PO/PS: ${defaultAddr.po_ps}, State: ${defaultAddr.state}, Country: ${defaultAddr.country}, Pin: ${defaultAddr.pin}`;
+                    
+                    //         let totalAmount = 0;
+                    //         const ordersPayload = [];
+                    
+                    //         // Calculate total amount for all items
+                    //         for (const item of cartItems) {
+                    //             const product = productDetails[item.productid];
+                    //             const itemTotalAmount = product ? product.price * item.quantity : 0;
+                    
+                    //             if (!itemTotalAmount || itemTotalAmount === 0) {
+                    //                 alert(`Invalid amount for ${product?.name}`);
+                    //                 return;
+                    //             }
+                    
+                    //             totalAmount += itemTotalAmount;
+                    
+                    //             ordersPayload.push({
+                    //                 user_id: userId,
+                    //                 paymentoption: globalPaymentOption, // We'll use the payment method selected in the modal
+                    //                 orderstatus: "null",
+                    //                 deliveryaddress: deliveryAddress,
+                    //             });
+                    //         }
+                    
+                    //         // Cash payment option
+                    //         if (globalPaymentOption === "Cash") {
+                    //             // Place order directly for all items
+                    //             for (const order of ordersPayload) {
+                    //                 const res = await axios.post(`${BASE_URL_AND_PORT}/order/addorder`, order, {
+                    //                     headers: { 'API-KEY': API_KEY },
+                    //                 });
+                    
+                    //                 if (!res.data) {
+                    //                     alert("❌ Failed to place order for a product.");
+                    //                     return;
+                    //                 }
+                    //             }
+                    
+                    //             alert("✅ All orders placed successfully via Cash!");
+                    //             navigate("/order"); // Redirect to the orders page
+                    //         } else {
+                    //             // For UPI or Card, process via Razorpay
+                    //             const createPaymentRes = await axios.post(
+                    //                 `${BASE_URL_AND_PORT}/payments/createpayment`,
+                    //                 { user_id: userId, price: totalAmount },
+                    //                 { headers: { 'API-KEY': API_KEY } }
+                    //             );
+                    
+                    //             const razorpayOrderId = createPaymentRes.data.order_id;
+                    
+                    //             if (!razorpayOrderId) {
+                    //                 alert("❌ Failed to create Razorpay order.");
+                    //                 return;
+                    //             }
+                    
+                    //             const script = document.createElement('script');
+                    //             script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+                    //             script.async = true;
+                    //             script.onload = () => {
+                    //                 handlePayment(razorpayOrderId, ordersPayload);
+                    //             };
+                    //             document.body.appendChild(script);
+                    //         }
+                    
+                    //     } catch (error) {
+                    //         console.error("❌ Error placing orders:", error);
+                    //         alert("❌ Something went wrong while placing the orders.");
+                    //     }
+                    // };
+                    
+                    // const handlePayment = async (orderId, totalAmount, ordersPayload) => {
+                    //     const options = {
+                    //         key: 'rzp_test_nzmqxQYhvCH9rD',
+                    //         amount: totalAmount * 100,
+                    //         currency: 'INR',
+                    //         name: 'Your Company Name',
+                    //         description: 'Order Payment',
+                    //         order_id: orderId,
+                    //         handler: async function (response) {
+                    //             try {
+                    //                 const verifyResponse = await axios.post(
+                    //                     `${BASE_URL_AND_PORT}/payments/verifypayment`,
+                    //                     {
+                    //                         razorpaypaymentid: response.razorpay_payment_id,
+                    //                         user_id: userId,
+                    //                         price: totalAmount,
+                    //                     },
+                    //                     {
+                    //                         headers: { 'API-KEY': API_KEY },
+                    //                     }
+                    //                 );
+                    
+                    //                 if (verifyResponse.data) {
+                    //                     for (const order of ordersPayload) {
+                    //                         await axios.post(`${BASE_URL_AND_PORT}/order/addorder`, order, {
+                    //                             headers: { 'API-KEY': API_KEY },
+                    //                         });
+                    //                     }
+                    
+                    //                     alert("✅ Payment successful and orders placed!");
+                    //                     navigate("/order");
+                    //                 } else {
+                    //                     alert("❌ Payment verification failed.");
+                    //                 }
+                    //             } catch (err) {
+                    //                 console.error("❌ Error during payment verification:", err);
+                    //                 alert("❌ Error placing order after payment.");
+                    //             }
+                    //         },
+                    //         prefill: {
+                    //             name: "Customer",
+                    //             email: "customer@example.com",
+                    //             contact: "9999999999",
+                    //         },
+                    //         theme: {
+                    //             color: "#F37254",
+                    //         },
+                    //     };
+                    
+                    //     const rzp1 = new window.Razorpay(options);
+                    //     rzp1.open();
+                    // };
+                    
+                            
+                    //   const removeFromCart = async (productId) => {
+                    //     try {
+                    //       const response = await axios.post(
+                    //         `${BASE_URL_AND_PORT}/cart/removefromcart`,
+                    //         {
+                    //           productid: productId,
+                    //           user_id: userId, // ✅ using userId from useState
+                    //         },
+                    //         {
+                    //           headers: {
+                    //             Authorization: `Bearer ${token}`,
+                    //             'API-KEY': API_KEY,
+                    //             'Content-Type': 'application/json',
+                    //           },
+                    //         }
+                    //       );
+                      
+                    //       if (response.data) {
+                    //         alert("✅ Product removed from cart successfully!");
+                    //         fetchCartItems(); // Reload cart
+                    //       }
+                    //     } catch (error) {
+                    //       console.error("❌ Error removing item from cart:", error);
+                    //       alert("Failed to remove item from cart.");
+                    //     }
+                    //   };
                     const placeOrder = async () => {
                         try {
                             if (!cartItems.length) {
@@ -721,7 +911,7 @@ function CartPage() {
                                 return;
                             }
                     
-                            const defaultAddr = userAddresses.find(address => address.is_default === true);
+                            const defaultAddr = userAddresses.find(address => address.is_default);
                             if (!defaultAddr) {
                                 alert("Please set a default delivery address before placing an order.");
                                 return;
@@ -729,76 +919,79 @@ function CartPage() {
                     
                             const deliveryAddress = `House Building: ${defaultAddr.house_building}, Locality/Street: ${defaultAddr.locality_street}, City: ${defaultAddr.city}, Landmark: ${defaultAddr.landmark}, PO/PS: ${defaultAddr.po_ps}, State: ${defaultAddr.state}, Country: ${defaultAddr.country}, Pin: ${defaultAddr.pin}`;
                     
-                            let totalAmount = 0;
-                            const ordersPayload = [];
+                            // Prepare product info
+                            const products = cartItems.map(item => ({
+                                productid: item.productid,
+                                quantity: item.quantity
+                            }));
                     
-                            // Calculate total amount for all items
-                            for (const item of cartItems) {
+                            const pricedProducts = cartItems.map(item => {
                                 const product = productDetails[item.productid];
-                                const itemTotalAmount = product ? product.price * item.quantity : 0;
-                    
-                                if (!itemTotalAmount || itemTotalAmount === 0) {
-                                    alert(`Invalid amount for ${product?.name}`);
-                                    return;
-                                }
-                    
-                                totalAmount += itemTotalAmount;
-                    
-                                ordersPayload.push({
-                                    user_id: userId,
-                                    paymentoption: globalPaymentOption, // We'll use the payment method selected in the modal
-                                    orderstatus: "null",
-                                    deliveryaddress: deliveryAddress,
-                                });
-                            }
-                    
-                            // Cash payment option
-                            if (globalPaymentOption === "Cash") {
-                                // Place order directly for all items
-                                for (const order of ordersPayload) {
-                                    const res = await axios.post(`${BASE_URL_AND_PORT}/order/addorder`, order, {
-                                        headers: { 'API-KEY': API_KEY },
-                                    });
-                    
-                                    if (!res.data) {
-                                        alert("❌ Failed to place order for a product.");
-                                        return;
-                                    }
-                                }
-                    
-                                alert("✅ All orders placed successfully via Cash!");
-                                navigate("/order"); // Redirect to the orders page
-                            } else {
-                                // For UPI or Card, process via Razorpay
-                                const createPaymentRes = await axios.post(
-                                    `${BASE_URL_AND_PORT}/payments/createpayment`,
-                                    { user_id: userId, price: totalAmount },
-                                    { headers: { 'API-KEY': API_KEY } }
-                                );
-                    
-                                const razorpayOrderId = createPaymentRes.data.order_id;
-                    
-                                if (!razorpayOrderId) {
-                                    alert("❌ Failed to create Razorpay order.");
-                                    return;
-                                }
-                    
-                                const script = document.createElement('script');
-                                script.src = 'https://checkout.razorpay.com/v1/checkout.js';
-                                script.async = true;
-                                script.onload = () => {
-                                    handlePayment(razorpayOrderId, ordersPayload);
+                                return {
+                                    productid: item.productid,
+                                    quantity: item.quantity,
+                                    price: product.price
                                 };
-                                document.body.appendChild(script);
+                            });
+                    
+                            const totalAmount = pricedProducts.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                    
+                            const orderPayload = {
+                                user_id: userId,
+                                paymentoption: globalPaymentOption,
+                                orderstatus: "null",
+                                deliveryaddress: deliveryAddress,
+                                products: pricedProducts
+                            };
+                    
+                            // 🔁 Handle Cash Payment (No Razorpay)
+                            if (globalPaymentOption === "Cash") {
+                                const response = await axios.post(`${BASE_URL_AND_PORT}/order/addorder`, orderPayload, {
+                                    headers: { 'API-KEY': API_KEY },
+                                });
+                    
+                                if (response.data) {
+                                    alert("✅ Order placed successfully via Cash!");
+                                    navigate("/order");
+                                } else {
+                                    alert("❌ Failed to place Cash order.");
+                                }
+                    
+                                return;
                             }
+                    
+                            // 🔁 UPI or Card – Use Razorpay
+                            const createPaymentRes = await axios.post(
+                                `${BASE_URL_AND_PORT}/payments/createpayment`,
+                                {
+                                    user_id: userId,
+                                    products: products // productid and quantity only
+                                },
+                                { headers: { 'API-KEY': API_KEY } }
+                            );
+                    
+                            const razorpayOrderId = createPaymentRes.data.order_id;
+                    
+                            if (!razorpayOrderId) {
+                                alert("❌ Failed to create Razorpay order.");
+                                return;
+                            }
+                    
+                            // ✅ Call Razorpay handler with full data
+                            const script = document.createElement('script');
+                            script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+                            script.async = true;
+                            script.onload = () => {
+                                handlePayment(razorpayOrderId, totalAmount, pricedProducts, orderPayload);
+                            };
+                            document.body.appendChild(script);
                     
                         } catch (error) {
                             console.error("❌ Error placing orders:", error);
-                            alert("❌ Something went wrong while placing the orders.");
+                            alert("❌ Something went wrong while placing the order.");
                         }
                     };
-                    
-                    const handlePayment = async (orderId, totalAmount, ordersPayload) => {
+                    const handlePayment = async (orderId, totalAmount, pricedProducts, orderPayload) => {
                         const options = {
                             key: 'rzp_test_nzmqxQYhvCH9rD',
                             amount: totalAmount * 100,
@@ -813,7 +1006,7 @@ function CartPage() {
                                         {
                                             razorpaypaymentid: response.razorpay_payment_id,
                                             user_id: userId,
-                                            price: totalAmount,
+                                            products: pricedProducts // Must include price here
                                         },
                                         {
                                             headers: { 'API-KEY': API_KEY },
@@ -821,14 +1014,21 @@ function CartPage() {
                                     );
                     
                                     if (verifyResponse.data) {
-                                        for (const order of ordersPayload) {
-                                            await axios.post(`${BASE_URL_AND_PORT}/order/addorder`, order, {
+                                        // Order gets placed after successful verification
+                                        const orderRes = await axios.post(
+                                            `${BASE_URL_AND_PORT}/order/addorder`,
+                                            orderPayload,
+                                            {
                                                 headers: { 'API-KEY': API_KEY },
-                                            });
-                                        }
+                                            }
+                                        );
                     
-                                        alert("✅ Payment successful and orders placed!");
-                                        navigate("/order");
+                                        if (orderRes.data) {
+                                            alert("✅ Payment successful and order placed!");
+                                            navigate("/order");
+                                        } else {
+                                            alert("❌ Order failed after payment.");
+                                        }
                                     } else {
                                         alert("❌ Payment verification failed.");
                                     }
@@ -847,38 +1047,10 @@ function CartPage() {
                             },
                         };
                     
-                        const rzp1 = new window.Razorpay(options);
-                        rzp1.open();
+                        const rzp = new window.Razorpay(options);
+                        rzp.open();
                     };
-                    
-                            
-                      const removeFromCart = async (productId) => {
-                        try {
-                          const response = await axios.post(
-                            `${BASE_URL_AND_PORT}/cart/removefromcart`,
-                            {
-                              productid: productId,
-                              user_id: userId, // ✅ using userId from useState
-                            },
-                            {
-                              headers: {
-                                Authorization: `Bearer ${token}`,
-                                'API-KEY': API_KEY,
-                                'Content-Type': 'application/json',
-                              },
-                            }
-                          );
-                      
-                          if (response.data) {
-                            alert("✅ Product removed from cart successfully!");
-                            fetchCartItems(); // Reload cart
-                          }
-                        } catch (error) {
-                          console.error("❌ Error removing item from cart:", error);
-                          alert("Failed to remove item from cart.");
-                        }
-                      };
-                      
+                                        
                     
     return (
         <div
@@ -955,12 +1127,21 @@ function CartPage() {
                                         
                                     </table>
                                     <div className="mt-6 text-right bg-white p-4 rounded shadow-lg">
-            <button
+            {/* <button
                 className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded shadow"
                 onClick={() => setIsModalOpen(true)}
             >
                 Place All Orders
-            </button>
+            </button> */}
+            {cartItems.length > 0 && (
+    <button
+        className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded shadow"
+        onClick={() => setIsModalOpen(true)}
+    >
+        Order Place
+    </button>
+)}
+
         </div>
 
         {isModalOpen && (
