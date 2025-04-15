@@ -5,7 +5,7 @@ import {
   FaHome, FaBox, FaShoppingCart, FaClipboardList, FaUserCircle,
   FaCog, FaBars, FaEnvelope
 } from "react-icons/fa";
-
+import logo from '../../assets/log.png'
 const BASE_URL_AND_PORT = "http://192.168.0.106:8000";
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
 
@@ -48,13 +48,21 @@ const Sidebar = () => {
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
       <div className={`fixed top-0 left-0 h-full transition-all duration-300 
-        ${isExpanded ? "w-64" : "w-20"} bg-[#15803D] text-white shadow-lg z-50`}>
+        ${isExpanded ? "w-64" : "w-20"} bg-[#006400] text-white shadow-lg z-50`}>
 
         <div className="flex justify-between items-center px-4 py-4 border-b border-gray-700">
           <button onClick={toggleSidebar}>
             <FaBars size={22} />
           </button>
-          {isExpanded && <h1 className="text-2xl font-bold text-orange-500">TransEV</h1>}
+          {/* {isExpanded && <h1 className="text-2xl font-bold text-[#fa9d1c]">TransEV</h1>} */}
+          {isExpanded && (
+  <img
+    src={logo}
+    alt="TransEV Logo"
+    className="h-10 w-auto ml-2"
+  />
+)}
+
         </div>
 
         {/* Sidebar Links */}

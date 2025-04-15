@@ -136,51 +136,53 @@ const Settings = () => {
       style={{ backgroundImage: `url(${background})` }}
     >
       <UserNavbar onToggleSidebar={toggleSidebar} />
-      <div className="flex flex-1">
+      <div className="flex">
         <UserSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
-        <div className="max-w-xl mx-auto mt-10 p-6 bg-white shadow-md rounded-lg w-full">
-          <h2 className="text-2xl font-bold mb-6">Account Settings</h2>
+        <div className="w-full px-4 sm:px-6 lg:px-8 py-10">
+          <div className="max-w-4xl mx-auto p-6 bg-gradient-to-r from-green-600 via-green-500 to-orange-500 shadow-lg rounded-xl text-white">
+            <h2 className="text-2xl font-bold mb-6">Account Settings</h2>
 
-          {/* 2FA Toggle */}
-          <div className="mb-6">
-            <div className="flex justify-between items-center">
-              <span className="text-lg font-medium">Two-Factor Authentication</span>
-              <div
-                onClick={() => setShow2FAModal(true)}
-                className={`w-12 h-6 rounded-full transition-all duration-300 cursor-pointer flex items-center px-1 ${
-                  is2FAEnabled ? "bg-green-500" : "bg-gray-300"
-                }`}
-              >
+            {/* 2FA Toggle */}
+            <div className="mb-6">
+              <div className="flex justify-between items-center">
+                <span className="text-lg font-medium">Two-Factor Authentication</span>
                 <div
-                  className={`h-4 w-4 bg-white rounded-full shadow-md transition-all duration-300 ${
-                    is2FAEnabled ? "translate-x-6" : "translate-x-0"
+                  onClick={() => setShow2FAModal(true)}
+                  className={`w-12 h-6 rounded-full transition-all duration-300 cursor-pointer flex items-center px-1 ${
+                    is2FAEnabled ? "bg-green-500" : "bg-gray-300"
                   }`}
-                ></div>
+                >
+                  <div
+                    className={`h-4 w-4 bg-white rounded-full shadow-md transition-all duration-300 ${
+                      is2FAEnabled ? "translate-x-6" : "translate-x-0"
+                    }`}
+                  ></div>
+                </div>
               </div>
+              <p className="text-sm text-gray-600 mt-1">
+                2FA is {is2FAEnabled ? "enabled ✅" : "disabled ❌"}
+              </p>
             </div>
-            <p className="text-sm text-gray-600 mt-1">
-              2FA is {is2FAEnabled ? "enabled ✅" : "disabled ❌"}
-            </p>
-          </div>
 
-          {/* Password Reset */}
-          <div className="mb-6">
-            <button
-              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
-              onClick={() => setShowResetEmailModal(true)}
-            >
-              Reset Password
-            </button>
-          </div>
+            {/* Password Reset */}
+            <div className="mb-6">
+              <button
+                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
+                onClick={() => setShowResetEmailModal(true)}
+              >
+                Reset Password
+              </button>
+            </div>
 
-          {/* Delete Account */}
-          <div className="mt-8">
-            <button
-              className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded"
-              onClick={handleDeleteAccount}
-            >
-              Delete My Account
-            </button>
+            {/* Delete Account */}
+            <div className="mt-8">
+              <button
+                className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded"
+                onClick={handleDeleteAccount}
+              >
+                Delete My Account
+              </button>
+            </div>
           </div>
         </div>
       </div>

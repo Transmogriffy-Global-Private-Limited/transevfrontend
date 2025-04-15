@@ -1,8 +1,9 @@
+
 import React, { useState, useEffect } from "react";
 import { FaBars } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../User/User_sidebar";
-
+import logo from '../../assets/log.png'
 const BASE_URL_AND_PORT = "http://192.168.0.106:8000";
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
 
@@ -75,25 +76,27 @@ const Navbar = () => {
   const goToProfile = () => navigate("/profile");
 
   return (
-    <div className="bg-[#2E8B57] font-sans shadow-md sticky top-0 z-50">
+    <div className="bg-[#006400] font-sans shadow-md sticky top-0 z-50 w-full">
       <header className="flex items-center justify-between px-4 py-3 md:px-6">
-        {/* Sidebar Toggle */}
-        <div className="flex items-center space-x-4">
+        {/* Left Side: Logo and Sidebar Toggle */}
+        <div className="flex items-center gap-4">
           <button onClick={toggleSidebar} className="text-white md:hidden">
             <FaBars size={24} />
           </button>
-          
-          <span className="text-white font-bold text-xl md:text-2xl text-right ml-20">Dashboard</span>
+          {/* <span className="text-[#fa9d1c] font-bold text-xl sm:text-2xl ml-2 sm:ml-20">TransEV</span> */}
+          <img
+  src={logo}
+  alt="TransEV Logo"
+  className="h-8 sm:h-10 ml-2 sm:ml-20"
+/>
 
         </div>
 
-        {/* User Info Section */}
-        <div className="flex items-center space-x-3">
-        <span className="hidden lg:inline-block text-white text-xl lg:text-xl">
-
+        {/* Right Side: User Info and Dropdown */}
+        <div className="flex items-center gap-3">
+          <span className="hidden md:inline-block text-white text-lg lg:text-xl">
             Hello, {userData?.name || "User"}
           </span>
-
           <div className="relative">
             <button
               onClick={toggleDropdown}
@@ -110,13 +113,13 @@ const Navbar = () => {
               <div className="absolute right-0 mt-2 w-44 bg-white rounded-lg shadow-lg py-2 z-50">
                 <button
                   onClick={goToProfile}
-                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  className="block w-full text-left px-4 py-2 text-base text-gray-700 hover:bg-gray-100"
                 >
                   My Profile
                 </button>
                 <button
                   onClick={handleLogout}
-                  className="block w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-gray-100"
+                  className="block w-full text-left px-4 py-2 text-base text-red-500 hover:bg-gray-100"
                 >
                   Logout
                 </button>
@@ -126,8 +129,12 @@ const Navbar = () => {
         </div>
       </header>
 
-      {/* Sidebar on Mobile */}
-      {sidebarVisible && <Sidebar />}
+      {/* Sidebar for Mobile */}
+      {sidebarVisible && (
+        <div className="md:hidden">
+          <Sidebar />
+        </div>
+      )}
     </div>
   );
 };
