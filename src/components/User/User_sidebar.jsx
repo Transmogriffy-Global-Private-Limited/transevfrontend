@@ -1,152 +1,110 @@
 
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaHome, FaUsers, FaBriefcase, FaEnvelope, FaClipboardList, FaCog, FaUserCircle, FaIdBadge,FaShoppingCart,FaBox } from "react-icons/fa";
-import { FaBars } from "react-icons/fa";
+import {
+  FaHome, FaBox, FaShoppingCart, FaClipboardList, FaUserCircle,
+  FaCog, FaBars, FaEnvelope
+} from "react-icons/fa";
+
+const BASE_URL_AND_PORT = "http://192.168.0.106:8000";
+const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
 
 const Sidebar = () => {
-  const [profileImage, setProfileImage] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isExpanded, setIsExpanded] = useState(true); // State to handle sidebar expansion
-  const navigate = useNavigate(); // Hook for navigation
+  const [isExpanded, setIsExpanded] = useState(true);
+  const navigate = useNavigate();
 
-  const fetchProfileImage = async () => {
+  const handleLogout = async () => {
     const token = localStorage.getItem("auth_token");
-    if (!token) {
-      console.log("No token found");
-      setIsLoading(false);
-      return;
-    }
+    if (!token) return;
+
     try {
-      const response = await fetch("http://192.168.0.106:7000/auth/profile-picture", {
-        method: "GET",
+      const response = await fetch(`${BASE_URL_AND_PORT}/users/logout`, {
+        method: "POST",
         headers: {
-          Authorization: ` ${token}`,
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          "API-Key": API_KEY,
         },
       });
+
       if (response.ok) {
-        const data = await response.json();
-        setProfileImage(data.profilePicture);
+        localStorage.removeItem("auth_token");
+        navigate("/login");
       } else {
-        console.error("Failed to fetch profile picture");
+        console.error("Logout failed");
       }
     } catch (error) {
-      console.error("Error fetching profile picture:", error);
-    } finally {
-      setIsLoading(false);
+      console.error("Logout error:", error);
     }
   };
 
-  useEffect(() => {
-    fetchProfileImage();
-  }, []);
-
-  // Sidebar toggle function
-  const toggleSidebar = () => {
-    setIsExpanded(!isExpanded); // Toggle sidebar state (expanded or collapsed)
-  };
-
-  // Handle profile navigation (check if token exists)
+  const toggleSidebar = () => setIsExpanded(!isExpanded);
   const handleProfileClick = () => {
     const token = localStorage.getItem("auth_token");
-    if (token) {
-      navigate("/profile"); // Navigate to Profile page if user is logged in
-    } else {
-      navigate("/login"); // Redirect to login if no token is found
-    }
+    navigate(token ? "/profile" : "/login");
   };
 
   return (
-    <div className={`flex h-screen`}>
+    <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
-      <div
-        className={`fixed top-0 left-0 h-screen transition-all duration-300 ${isExpanded ? "w-[250px]" : "w-[80px]"} bg-[#2c3e50] text-white z-50`}
-      >
-        {/* Sidebar Links */}
-        <div className="p-3">
-          {/* Profile Image & Name */}
-          <div className="flex items-center justify-between">
-            <div className="cursor-pointer text-white" onClick={toggleSidebar}>
-              <FaBars size={30} />
-            </div>
-          </div>
+      <div className={`fixed top-0 left-0 h-full transition-all duration-300 
+        ${isExpanded ? "w-64" : "w-20"} bg-[#15803D] text-white shadow-lg z-50`}>
 
-          {/* Sidebar Links */}
-          <ul className="space-y-2 px-1 mt-6">
-            <li className="flex items-center">
-              <Link
-                to="/dashboard"
-                className="flex items-center px-1 py-2 hover:bg-[#34495e] transition-colors"
-              >
-                <FaHome className="mr-3 text-xl" />
-                {isExpanded && <span>Dashboard</span>}
-              </Link>
-            </li>
-            <li className="flex items-center">
-              <Link
-                to="/products"
-                className="flex items-center px-1 py-2 hover:bg-[#34495e] transition-colors"
-              >
-                <FaBox className="mr-3 text-xl" />
-                {isExpanded && <span>Products</span>}
-              </Link>
-            </li>
-          
-            <li className="flex items-center">
-              <Link
-                to="/cart"
-                className="flex items-center px-1 py-2 hover:bg-[#34495e] transition-colors"
-              >
-                <FaShoppingCart className="mr-3 text-xl" />
-                {isExpanded && <span>Shopping Cart</span>}
-              </Link>
-            </li>
-            <li className="flex items-center">
-              <Link
-                to="/order"
-                className="flex items-center px-1 py-2 hover:bg-[#34495e] transition-colors"
-              >
-                <FaClipboardList className="mr-3 text-xl" />
-                {isExpanded && <span>My Orders</span>}
-              </Link>
-            </li>
-            <li className="flex items-center">
-              <button
-                onClick={handleProfileClick} // Handle click for profile
-                className="flex items-center px-1 py-2 hover:bg-[#34495e] transition-colors"
-              >
-                <FaUserCircle className="mr-3 text-xl" />
-                {isExpanded && <span>Profile</span>}
-              </button>
-            </li>
-            <li className="flex items-center">
-              <Link
-                to="/login"
-                className="flex items-center px-1 py-2 hover:bg-[#34495e] transition-colors"
-              >
-                <FaEnvelope className="mr-3 text-xl" />
-                {isExpanded && <span>Logout</span>}
-              </Link>
-            </li>
-            <li className="flex items-center">
-              <Link
-                to="/setting"
-                className="flex items-center px-1 py-2 hover:bg-[#34495e] transition-colors"
-              >
-                <FaCog className="mr-3 text-xl" />
-                {isExpanded && <span>Settings</span>}
-              </Link>
-            </li>
-          </ul>
+        <div className="flex justify-between items-center px-4 py-4 border-b border-gray-700">
+          <button onClick={toggleSidebar}>
+            <FaBars size={22} />
+          </button>
+          {isExpanded && <h1 className="text-2xl font-bold text-orange-500">TransEV</h1>}
         </div>
+
+        {/* Sidebar Links */}
+        <ul className="mt-4 space-y-1 px-2">
+          <SidebarLink icon={<FaHome />} to="/dashboard" label="Dashboard" isExpanded={isExpanded} />
+          <SidebarLink icon={<FaBox />} to="/products" label="Products" isExpanded={isExpanded} />
+          <SidebarLink icon={<FaShoppingCart />} to="/cart" label="Shopping Cart" isExpanded={isExpanded} />
+          <SidebarLink icon={<FaClipboardList />} to="/order" label="My Orders" isExpanded={isExpanded} />
+          
+          <li>
+            <button
+              onClick={handleProfileClick}
+              className="flex items-center w-full px-3 py-2 rounded-md text-sm hover:bg-[#2d3748] transition-colors"
+            >
+              <FaUserCircle className="mr-3 text-2xl" />
+              {isExpanded && <span className=" text-lg">Profile</span>}
+            </button>
+          </li>
+
+          <li>
+            <button
+              onClick={handleLogout}
+              className="flex items-center w-full px-3 py-2 rounded-md text-sm text-red-400 hover:bg-[#2d3748] transition-colors"
+            >
+              <FaEnvelope className="mr-3 text-2xl text-red-400" />
+              {isExpanded && <span className=" text-lg">Logout</span>}
+            </button>
+          </li>
+
+          <SidebarLink icon={<FaCog />} to="/setting" label="Settings" isExpanded={isExpanded} />
+        </ul>
       </div>
 
-      {/* Main content area */}
-      <div className={`flex-1 bg-gradient-to-r from-teal-400 via-teal-500 to-teal-700 p-6`}>
-        {/* You can place other content here */}
-      </div>
+    
+     
     </div>
   );
 };
+
+// Reusable sidebar link component
+const SidebarLink = ({ icon, to, label, isExpanded }) => (
+  <li>
+    <Link
+      to={to}
+      className="flex items-center px-3 py-2 rounded-md text-lg hover:bg-[#2d3748] transition-colors"
+    >
+      <span className="text-2xl mr-3">{icon}</span>
+      {isExpanded && <span>{label}</span>}
+    </Link>
+  </li>
+);
 
 export default Sidebar;
