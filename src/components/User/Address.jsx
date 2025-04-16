@@ -38,7 +38,7 @@ const AddAddressForm = () => {
       headers: {
         "Content-Type": "application/json",
         "API-KEY": API_KEY,
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
       },
       body: JSON.stringify(formData),
     });

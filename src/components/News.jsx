@@ -236,7 +236,7 @@ function NewsPage() {
           </div>
 
           <div className="text-center mt-8 text-lg mr-300">
-            <p>&copy; Energy Park 2025. All Rights Reserved.</p>
+            <p>&copy; TransEV 2025. All Rights Reserved.</p>
           </div>
         </footer>
       </div>

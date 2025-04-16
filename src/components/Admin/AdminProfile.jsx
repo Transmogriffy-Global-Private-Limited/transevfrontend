@@ -67,27 +67,7 @@ const Profile = () => {
   }, [navigate]);
 
   // Fetch profile picture from the server
-  const fetchProfilePicture = async () => {
-    const token = localStorage.getItem('auth_token');
-    try {
-      const response = await fetch(`${BASE_URL_AND_PORT}/admin/profile-picture`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-          'API-Key': API_KEY,
-        },
-      });
-      if (response.ok) {
-        const data = await response.json();
-        setProfilePicture(data.profile_picture); // Set the profile picture URL
-      } else {
-        console.error('Failed to fetch profile picture');
-      }
-    } catch (error) {
-      console.error('Error fetching profile picture:', error);
-    }
-  };
+  
 
   // Handle image change
   const handleImageChange = (e) => {
@@ -103,39 +83,7 @@ const Profile = () => {
   };
 
   // Function to upload profile picture
-  const handleUploadProfilePicture = async () => {
-    if (!imageFile) return; // If no image is selected, do nothing
-    
-    const formData = new FormData();
-    formData.append("file", imageFile);
-    
-    const token = localStorage.getItem("auth_token");
-
-    try {
-      const response = await fetch(`${BASE_URL_AND_PORT}/admin/profile-picture/upload`, {
-        method: "POST",
-        headers: {
-          "API-Key": API_KEY,
-          "Authorization": `Bearer ${token}`, // Pass the auth token here
-        },
-        body: formData, // Sending the file as form data
-      });
-
-      if (response.ok) {
-        fetchProfilePicture(); // Refresh the profile picture after successful upload
-        setSuccessMessage("Profile picture uploaded successfully!"); // Display success message
-        setError(""); // Clear any previous errors
-      } else {
-        setError("Failed to upload profile picture");
-        setSuccessMessage(""); // Clear success message if error occurs
-      }
-    } catch (error) {
-      console.error("Error uploading profile picture:", error);
-      setError("An error occurred while uploading the profile picture.");
-      setSuccessMessage(""); // Clear success message if error occurs
-    }
-  };
-
+  
   // Handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -259,45 +207,8 @@ const Profile = () => {
 
         {/* Profile Card */}
         <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-2xl space-y-6">
-          <div className="flex flex-col items-center relative">
-            <div className="flex justify-center mb-4">
-              <div
-                className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-teal-500 cursor-pointer"
-                onClick={() => document.getElementById("image-upload").click()}
-              >
-                {newImage || profilePicture ? (
-                  <img
-                    src={newImage || profilePicture}
-                    alt="Profile"
-                    className="object-cover w-full h-full"
-                  />
-                ) : (
-                  <div className="flex justify-center items-center w-full h-full text-gray-500">
-                    No Image
-                  </div>
-                )}
-                <input
-                  type="file"
-                  id="image-upload"
-                  className="hidden"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                />
-              </div>
-            </div>
-            
-            {/* Display the upload button only if an image is selected */}
-            {imageFile && (
-              <div className="flex justify-center mb-4">
-                <button
-                  className="bg-teal-500 text-white p-2 rounded-lg"
-                  onClick={handleUploadProfilePicture}
-                >
-                  Upload Image
-                </button>
-              </div>
-            )}
-          </div>
+         
+             
          
           {/* Profile Details */}
           <div className="space-y-5">

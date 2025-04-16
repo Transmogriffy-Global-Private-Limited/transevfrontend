@@ -11,7 +11,7 @@ import {
 } from 'chart.js';
 import UserSidebar from '../User/User_sidebar';
 import UserNavbar from '../User/User_Navbar';
-import Ac_Charger from '../../assets/tf14.png'; // Imported AC Charger image
+import Ac_Charger from '../../assets/tf9.png'; // Imported AC Charger image
 import DC_charger from '../../assets/tf15.png'; // Imported DC Charger image
 import newcharger from '../../assets/tf13.png'; // Imported new charger image
 
@@ -148,6 +148,82 @@ const Dashboard = () => {
         <main className="flex-1 p-4 md:p-6 lg:p-10 overflow-y-auto bg-green rounded-tl-3xl shadow-inner">
          
            <div className="max-w-7xl mx-auto space-y-10">
+           <section>
+              <h2 className="text-xl font-bold text-teal-700 mb-4">EV Chargers</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[
+                  {
+                    name: 'Wallbox Pulsar Plus',
+                    type: 'Home Charger',
+                    color: 'green',
+                    image: DC_charger,
+                  },
+                  {
+                    name: 'Portable EV Charger',
+                    type: 'Travel Ready',
+                    color: 'blue',
+                    image: Ac_Charger,
+                  },
+                  {
+                    name: 'Fast DC Charger',
+                    type: 'Public Use',
+                    color: 'red',
+                    image: newcharger,
+                  },
+                ].map((charger, index) => (
+                  <div key={index} className="bg-white p-4 rounded-lg shadow-md">
+                    <img
+                      src={charger.image}
+                      alt={charger.name}
+                      className="rounded mb-4 w-full h-[450px] object-cover"
+                    />
+                    <h4 className="font-bold text-lg">{charger.name}</h4>
+                    <p className={`text-${charger.color}-500 font-medium`}>{charger.type}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+{/* <div className="max-w-7xl mx-auto space-y-10">
+  <section>
+    <h2 className="text-xl font-bold text-teal-700 mb-4"> New Arrival EV Chargers</h2>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {[
+        {
+          name: 'Wallbox Pulsar Plus',
+          type: 'Home Charger',
+          color: 'green',
+          image: Ac_Charger,
+        },
+        {
+          name: 'Portable EV Charger',
+          type: 'Travel Ready',
+          color: 'blue',
+          image: DC_charger,
+        },
+        {
+          name: 'Fast DC Charger',
+          type: 'Public Use',
+          color: 'red',
+          image: newcharger,
+        },
+      ].map((charger, index) => (
+        <div key={index} className="bg-white p-4 rounded-lg shadow-md">
+      
+          <div className={`bg-${charger.color}-500 p-4 rounded-lg`}>
+            <img
+              src={charger.image}
+              alt={charger.name}
+              className="rounded mb-4 w-full h-[450px] object-cover"
+            />
+          </div>
+          <h4 className="font-bold text-lg">{charger.name}</h4>
+          <p className={`text-${charger.color}-500 font-medium`}>{charger.type}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+</div> */}
+
   {/* Top Stats */}
   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
     <div className="bg-white p-6 rounded-xl shadow border-l-4 border-teal-500">
@@ -194,42 +270,7 @@ const Dashboard = () => {
 
 
             {/* Your EV Chargers */}
-            <section>
-              <h2 className="text-xl font-bold text-teal-700 mb-4">EV Chargers</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {[
-                  {
-                    name: 'Wallbox Pulsar Plus',
-                    type: 'Home Charger',
-                    color: 'green',
-                    image: Ac_Charger,
-                  },
-                  {
-                    name: 'Portable EV Charger',
-                    type: 'Travel Ready',
-                    color: 'blue',
-                    image: DC_charger,
-                  },
-                  {
-                    name: 'Fast DC Charger',
-                    type: 'Public Use',
-                    color: 'red',
-                    image: newcharger,
-                  },
-                ].map((charger, index) => (
-                  <div key={index} className="bg-white p-4 rounded-lg shadow-md">
-                    <img
-                      src={charger.image}
-                      alt={charger.name}
-                      className="rounded mb-4 w-full h-[450px] object-cover"
-                    />
-                    <h4 className="font-bold text-lg">{charger.name}</h4>
-                    <p className={`text-${charger.color}-500 font-medium`}>{charger.type}</p>
-                  </div>
-                ))}
-              </div>
-            </section>
-
+           
             {/* Purchase Chart */}
            
             {/* Recent Activity */}
