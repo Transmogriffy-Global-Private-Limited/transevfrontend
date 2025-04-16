@@ -53,7 +53,7 @@ const Profile = () => {
           setFormData(data.user_data);
           setSuccessMessage('');
           setError('');
-          fetchProfilePicture(); // Fetch the profile picture after loading user data
+         // Fetch the profile picture after loading user data
         } else {
           setError(data.message || 'Failed to fetch user details');
         }
