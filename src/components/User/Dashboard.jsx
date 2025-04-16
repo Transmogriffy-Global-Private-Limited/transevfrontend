@@ -1,100 +1,224 @@
-import React, { useState } from 'react';
-import UserSidebar from '../User/User_sidebar';
- import UserNavbar from '../User/User_Navbar';
 
+import React, { useState, useEffect } from 'react';
+import { Bar } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+import UserSidebar from '../User/User_sidebar';
+import UserNavbar from '../User/User_Navbar';
+import Ac_Charger from '../../assets/tf14.png'; // Imported AC Charger image
+import DC_charger from '../../assets/tf15.png'; // Imported DC Charger image
+import newcharger from '../../assets/tf13.png'; // Imported new charger image
+
+const BASE_URL_AND_PORT = 'http://192.168.0.106:8000';
+const API_KEY = 'mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf';
+
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const Dashboard = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(true); // Manage sidebar visibility
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [purchaseData, setPurchaseData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [totalOrders, setTotalOrders] = useState(0); // New state for total orders
 
-  const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen); // Toggle sidebar visibility
+  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
+
+  // Fetch purchase summary and total orders
+  useEffect(() => {
+    const userId = localStorage.getItem('user_id');
+    if (!userId) {
+      console.error('User ID not found in localStorage');
+      setLoading(false);
+      return;
+    }
+
+    const fetchPurchaseData = async () => {
+      try {
+        const response = await fetch(
+          `${BASE_URL_AND_PORT}/analytics/user_purchase_summary`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'API-Key': API_KEY,
+            },
+            body: JSON.stringify({ user_id: userId }),
+          }
+        );
+
+        if (!response.ok) throw new Error('Failed to fetch purchase data');
+
+        const data = await response.json();
+        setPurchaseData(data.user_purchase_summary || []);
+      } catch (error) {
+        console.error('Error fetching purchase data:', error);
+      }
+    };
+
+    const fetchTotalOrders = async () => {
+      try {
+        const response = await fetch(
+          `${BASE_URL_AND_PORT}/analytics/user_total_spent_and_orders`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'API-Key': API_KEY,
+            },
+            body: JSON.stringify({ user_id: userId }),
+          }
+        );
+
+        if (!response.ok) throw new Error('Failed to fetch total orders');
+
+        const data = await response.json();
+        const summary = data.user_total_spent_and_orders || {};
+        setTotalOrders(summary.total_orders || 0); // Update total orders state
+      } catch (error) {
+        console.error('Error fetching total orders:', error);
+      }
+    };
+
+    Promise.all([fetchPurchaseData(), fetchTotalOrders()]).finally(() => setLoading(false));
+  }, []);
+
+  // Prepare chart data
+  const chartData = {
+    labels: purchaseData.map((item) => item.product_name),
+    datasets: [
+      {
+        label: 'Chargers Purchased',
+        data: purchaseData.map((item) => item.total_items_purchased),
+        backgroundColor: [
+          '#60a5fa', '#34d399', '#f87171', '#fbbf24', '#a78bfa', '#fb7185',
+        ],
+        borderColor: '#fff',
+        borderWidth: 2,
+      },
+    ],
   };
 
-  return (
-    <div className="flex flex-col h-screen bg-gradient-to-r from-teal-400 via-teal-500 to-teal-700 bg-cover bg-center" style={{ backgroundImage: 'url("https://example.com/your-image.jpg")' }}>
-      {/* User Navbar */}
-      <UserNavbar onToggleSidebar={toggleSidebar} />
+  const totalChargers = purchaseData.reduce((sum, item) => sum + item.total_items_purchased, 0);
+  const totalAmount = purchaseData.reduce((sum, item) => sum + item.total_purchase_amount, 0);
 
-      {/* Main Container */}
+  return (
+    <div className="flex flex-col min-h-screen bg-gradient-to-r from-green-50 to-green-100 text-gray-800">
+      <UserNavbar onToggleSidebar={toggleSidebar} />
       <div className="flex flex-1">
-        {/* Sidebar */}
         <UserSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
 
-        {/* Main Content */}
-        <div className="mt-10 ml-100">     {/* Overview Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
-            <div className="bg-red-300 p-6 rounded-lg shadow-md hover:bg-teal-50 transition duration-300">
-              <h3 className="text-xl font-medium text-teal-500">Total Chargers Purchased</h3>
-              <p className="text-2xl font-semibold mt-2">5</p>
-            </div>
-            <div className="bg-yellow-200 p-6 rounded-lg shadow-md hover:bg-teal-50 transition duration-300">
-              <h3 className="text-xl font-medium text-teal-500">Pending Orders</h3>
-              <p className="text-2xl font-semibold mt-2">2</p>
-            </div>
-            <div className="bg-purple-400 p-6 rounded-lg shadow-md hover:bg-teal-50 transition duration-300">
-              <h3 className="text-xl font-medium text-teal-500">Total Spending</h3>
-              <p className="text-2xl font-semibold mt-2">₹3,500</p>
-            </div>
-          </div>
+        <main className="flex-1 p-4 md:p-6 lg:p-10 overflow-y-auto bg-green rounded-tl-3xl shadow-inner">
+         
+           <div className="max-w-7xl mx-auto space-y-10">
+  {/* Top Stats */}
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="bg-white p-6 rounded-xl shadow border-l-4 border-teal-500">
+      <h3 className="text-lg font-semibold">Total Product Order</h3>
+      <p className="text-3xl font-bold">{totalChargers}</p>
+    </div>
+    <div className="bg-white p-6 rounded-xl shadow border-l-4 border-yellow-400">
+      <h3 className="text-lg font-semibold">Total Spend</h3>
+      <p className="text-3xl font-bold">₹{totalAmount}</p>
+    </div>
+    <div className="bg-white p-6 rounded-xl shadow border-l-4 border-pink-500">
+      <h3 className="text-lg font-semibold">Total Order</h3>
+      <p className="text-3xl font-bold">{totalOrders}</p>
+    </div>
+    <div className="bg-white p-6 rounded-xl shadow border-l-4 border-indigo-500">
+      <h3 className="text-lg font-semibold">Avg. Usage</h3>
+      <p className="text-3xl font-bold">876 kWh</p>
+    </div>
+  </div>
+  {!loading && (
+              <div className="bg-white p-6 rounded-lg shadow-md w-full">
+                <h2 className="text-xl font-semibold text-teal-600 mb-4">Purchase Summary</h2>
+                <div className="w-full h-[300px]">
+                  <Bar
+                    data={chartData}
+                    options={{
+                      responsive: true,
+                      maintainAspectRatio: false,
+                      plugins: {
+                        legend: { display: true, position: 'top' },
+                      },
+                      scales: {
+                        y: {
+                          beginAtZero: true,
+                          ticks: { stepSize: 1 },
+                        },
+                      },
+                    }}
+                  />
+                </div>
+              </div>
+            )}
 
-          {/* New Section: User Stats */}
-          <div className="bg-white p-6 rounded-lg shadow-md mb-8">
-            <h3 className="text-xl font-medium text-teal-500 mb-4">User Stats</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div className="bg-teal-100 p-4 rounded-lg">
-                <h4 className="font-semibold text-teal-600">Total Purchases</h4>
-                <p className="text-xl">15</p>
-              </div>
-              <div className="bg-teal-100 p-4 rounded-lg">
-                <h4 className="font-semibold text-teal-600">Total Savings</h4>
-                <p className="text-xl">₹450</p>
-              </div>
-              <div className="bg-teal-100 p-4 rounded-lg">
-                <h4 className="font-semibold text-teal-600">Order Completion Rate</h4>
-                <p className="text-xl">98%</p>
-              </div>
-            </div>
-          </div>
 
-          {/* New Section: New Arrivals */}
-          <div className="bg-white p-6 rounded-lg shadow-md mb-8">
-            <h3 className="text-xl font-medium text-teal-500 mb-4">New Arrivals</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {/* Example product card */}
-              <div className="bg-gray-100 p-4 rounded-lg shadow-md">
-                <img src="https://via.placeholder.com/150" alt="Product 1" className="w-full h-32 object-cover rounded-lg mb-4" />
-                <h4 className="text-xl font-semibold">Smart Charger V2</h4>
-                <p className="text-teal-500">₹150</p>
-              </div>
-              <div className="bg-gray-100 p-4 rounded-lg shadow-md">
-                <img src="https://via.placeholder.com/150" alt="Product 2" className="w-full h-32 object-cover rounded-lg mb-4" />
-                <h4 className="text-xl font-semibold">Portable Charger</h4>
-                <p className="text-teal-500">₹120</p>
-              </div>
-              <div className="bg-gray-100 p-4 rounded-lg shadow-md">
-                <img src="https://via.placeholder.com/150" alt="Product 3" className="w-full h-32 object-cover rounded-lg mb-4" />
-                <h4 className="text-xl font-semibold">Solar Charger</h4>
-                <p className="text-teal-500">₹200</p>
-              </div>
-            </div>
-          </div>
 
-          {/* Quick Actions */}
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h3 className="text-xl font-medium text-teal-500 mb-4">Quick Actions</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              <button className="bg-teal-500 text-white p-4 rounded-lg hover:bg-teal-600">Buy New Charger</button>
-              <button className="bg-teal-500 text-white p-4 rounded-lg hover:bg-teal-600">View Promotions</button>
-              <button className="bg-teal-500 text-white p-4 rounded-lg hover:bg-teal-600">Check Order Status</button>
-            </div>
+            {/* Your EV Chargers */}
+            <section>
+              <h2 className="text-xl font-bold text-teal-700 mb-4">EV Chargers</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[
+                  {
+                    name: 'Wallbox Pulsar Plus',
+                    type: 'Home Charger',
+                    color: 'green',
+                    image: Ac_Charger,
+                  },
+                  {
+                    name: 'Portable EV Charger',
+                    type: 'Travel Ready',
+                    color: 'blue',
+                    image: DC_charger,
+                  },
+                  {
+                    name: 'Fast DC Charger',
+                    type: 'Public Use',
+                    color: 'red',
+                    image: newcharger,
+                  },
+                ].map((charger, index) => (
+                  <div key={index} className="bg-white p-4 rounded-lg shadow-md">
+                    <img
+                      src={charger.image}
+                      alt={charger.name}
+                      className="rounded mb-4 w-full h-[450px] object-cover"
+                    />
+                    <h4 className="font-bold text-lg">{charger.name}</h4>
+                    <p className={`text-${charger.color}-500 font-medium`}>{charger.type}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Purchase Chart */}
+           
+            {/* Recent Activity */}
+            <section>
+              <h2 className="text-xl font-bold text-teal-700 mb-4">Recent Activity</h2>
+              <ul className="bg-white rounded-lg shadow divide-y divide-gray-200">
+                {[
+                  'Charged 18kWh at Fast DC Charger – ₹215',
+                  'Bought Portable Charger – ₹1200',
+                  'Session completed at Wallbox – 9:30 PM',
+                ].map((item, i) => (
+                  <li key={i} className="px-4 py-3 hover:bg-gray-50">{item}</li>
+                ))}
+              </ul>
+            </section>
+            
           </div>
-        </div>
+        </main>
       </div>
     </div>
   );
 };
 
 export default Dashboard;
-
-
-
