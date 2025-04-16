@@ -26,7 +26,7 @@ const Dashboard = () => {
   const [purchaseData, setPurchaseData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [totalOrders, setTotalOrders] = useState(0); // New state for total orders
-
+  const [orders, setOrders] = useState([]);
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
   // Fetch purchase summary and total orders
@@ -87,7 +87,40 @@ const Dashboard = () => {
 
     Promise.all([fetchPurchaseData(), fetchTotalOrders()]).finally(() => setLoading(false));
   }, []);
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const userId = localStorage.getItem("user_id");
+        if (!userId) {
+          console.error("User ID not found in localStorage");
+          return;
+        }
 
+        const response = await axios.post(
+          `${BASE_URL}/order/orderhistory`,
+          { user_id: userId },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "API-Key": API_KEY,
+            },
+          }
+        );
+
+        setOrders(response.data.slice(0, 4)); // Get the first 4 orders
+      } catch (error) {
+        console.error("Error fetching order history:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchOrders();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
   // Prepare chart data
   const chartData = {
     labels: purchaseData.map((item) => item.product_name),
