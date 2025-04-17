@@ -79,25 +79,27 @@ const UserList = () => {
             <table className="min-w-full table-auto bg-gray-800 text-white rounded-lg shadow-lg">
               <thead className="bg-gray-900">
                 <tr>
+                <th className="py-3 px-6 text-left text-sm font-medium text-gray-300">Profile Picture</th>
                   <th className="py-3 px-6 text-left text-sm font-medium text-gray-300">Name</th>
                   <th className="py-3 px-6 text-left text-sm font-medium text-gray-300">Email</th>
                   <th className="py-3 px-6 text-left text-sm font-medium text-gray-300">Phone</th>
                   <th className="py-3 px-6 text-left text-sm font-medium text-gray-300">Role</th>
                   <th className="py-3 px-6 text-left text-sm font-medium text-gray-300">Registered On</th>
-                  <th className="py-3 px-6 text-left text-sm font-medium text-gray-300">Profile Picture</th>
+                
                 </tr>
               </thead>
               <tbody>
                 {users.map((user) => (
                   <tr key={user.id} className="border-b border-gray-700 hover:bg-gray-700">
+                     <td className="py-4 px-6 text-sm text-gray-300">
+                      <img src={user.profile_picture} alt="Profile" className="w-12 h-12 rounded-full" />
+                    </td>
                     <td className="py-4 px-6 text-sm text-gray-300">{user.name}</td>
                     <td className="py-4 px-6 text-sm text-gray-300">{user.email}</td>
                     <td className="py-4 px-6 text-sm text-gray-300">{user.phone_number}</td>
                     <td className="py-4 px-6 text-sm text-gray-300">{user.role}</td>
                     <td className="py-4 px-6 text-sm text-gray-300">{new Date(user.created_at).toLocaleString()}</td>
-                    <td className="py-4 px-6 text-sm text-gray-300">
-                      <img src={user.profile_picture} alt="Profile" className="w-12 h-12 rounded-full" />
-                    </td>
+                   
                   </tr>
                 ))}
               </tbody>
