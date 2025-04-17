@@ -33,6 +33,7 @@ import Cart from './components/User/Cart/Cart';
 import UserOrder from './components/User/Order/Order';
 import Address from './components/User/Address';
 import Setting from './components/User/Settings/Setting';
+import ManageUser from './components/Admin/Users/ViewUser';
 function App() {
   return (
     <Router>
@@ -69,6 +70,7 @@ function App() {
         <Route path="/order" element={<UserOrder />} /> 
         <Route path="/address" element={<Address />} /> 
         <Route path="/setting" element={<Setting />} /> 
+        <Route path="/admin/users" element={<ManageUser />} /> 
       </Routes>
     </Router>
   );

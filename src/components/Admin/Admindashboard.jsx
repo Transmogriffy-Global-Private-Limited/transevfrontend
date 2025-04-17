@@ -1,114 +1,212 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AdminSidebar from './Admin_sidebar';
- import AdminNavbar from './Admin_navbar'
+import AdminNavbar from './Admin_navbar';
+import { Bar } from 'react-chartjs-2';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 
+// Register Chart.js components
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+
+const BASE_URL_AND_PORT = 'http://192.168.0.106:8000';
+const API_KEY = 'mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf';
 
 const Dashboard = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(true); // Manage sidebar visibility
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [productAnalytics, setProductAnalytics] = useState([]);
+  const [productStockAnalysis, setProductStockAnalysis] = useState([]);
+  const [totalSales, setTotalSales] = useState(0);
+  const [orderHistory, setOrderHistory] = useState([]);
+  const [totalChargers, setTotalChargers] = useState(131); // Hardcoded as per your provided value
 
   const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen); // Toggle sidebar visibility
+    setSidebarOpen(!sidebarOpen);
+  };
+
+  // Fetch Product Analytics and Total Sales
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Fetch product analytics
+        const productAnalyticsResponse = await fetch(`${BASE_URL_AND_PORT}/analytics/product_analytics`, {
+          method: 'GET',
+          headers: {
+            'API-Key': API_KEY,
+          },
+        });
+        const productAnalyticsData = await productAnalyticsResponse.json();
+        setProductAnalytics(productAnalyticsData.product_analytics);
+
+        // Fetch product stock analysis
+        const productStockAnalysisResponse = await fetch(`${BASE_URL_AND_PORT}/analytics/product_stock_analysis`, {
+          method: 'GET',
+          headers: {
+            'API-Key': API_KEY,
+          },
+        });
+        const productStockAnalysisData = await productStockAnalysisResponse.json();
+        setProductStockAnalysis(productStockAnalysisData.product_stock_analysis);
+
+        // Fetch total sales
+        const totalSalesResponse = await fetch(`${BASE_URL_AND_PORT}/analytics/total_sales`, {
+          method: 'GET',
+          headers: {
+            'API-Key': API_KEY,
+          },
+        });
+        const totalSalesData = await totalSalesResponse.json();
+        setTotalSales(totalSalesData.total_sales);
+
+        // Fetch order history based on user_id
+        const userId = "d6e4eff7-0ae9-4deb-8220-cd04be74f013"; // Use the actual user ID
+        const orderHistoryResponse = await fetch(`${BASE_URL_AND_PORT}/order/orderhistory`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'API-Key': API_KEY,
+          },
+          body: JSON.stringify({ user_id: userId }),
+        });
+        const orderHistoryData = await orderHistoryResponse.json();
+        setOrderHistory(orderHistoryData.orders);  // Assuming the API returns an `orders` array
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const calculateTotalOrders = () => {
+    return productAnalytics.reduce((total, product) => total + product.total_orders, 0);
+  };
+
+  const calculateTotalSalesFromAnalytics = () => {
+    return productAnalytics.reduce((total, product) => total + product.total_sales, 0);
+  };
+
+  const chartData = {
+    labels: productAnalytics.map((product) => product.product_name),
+    datasets: [
+      {
+        label: 'Total Orders',
+        data: productAnalytics.map((product) => product.total_orders),
+        backgroundColor: productAnalytics.map(() => {
+          const randomColor = `hsl(${Math.random() * 360}, 100%, 75%)`; 
+          return randomColor;
+        }),
+        borderColor: productAnalytics.map(() => '#000000'),
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const chartOptions = {
+    responsive: true,
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: {
+          font: {
+            size: 14,
+          },
+        },
+      },
+      x: {
+        ticks: {
+          font: {
+            size: 14,
+          },
+        },
+      },
+    },
+    plugins: {
+      title: {
+        display: true,
+        text: 'Performance Overview of Total Orders per Product',
+        font: {
+          size: 20,
+        },
+      },
+      tooltip: {
+        callbacks: {
+          label: (tooltipItem) => `Orders: ${tooltipItem.raw}`,
+        },
+      },
+    },
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gradient-to-r from-teal-400 via-teal-500 to-teal-700 bg-cover bg-center" style={{ backgroundImage: 'url("https://example.com/your-image.jpg")' }}>
+    <div className="flex flex-col min-h-screen bg-gradient-to-r from-green-50 to-green-100 text-gray-800">
       {/* User Navbar */}
       <AdminNavbar onToggleSidebar={toggleSidebar} />
 
-      {/* Main Container */}
       <div className="flex flex-1">
         {/* Sidebar */}
         <AdminSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
 
-        {/* Content Area */}
-        <div className="mt-10 ml-100">
-          {/* Charger Inventory Overview */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
-            <div className="bg-red-300 p-6 rounded-lg shadow-md hover:bg-teal-50 transition duration-300">
-              <h3 className="text-xl font-medium text-teal-500">Total Chargers Available</h3>
-              <p className="text-2xl font-semibold mt-2">150</p>
-            </div>
-            <div className="bg-yellow-200 p-6 rounded-lg shadow-md hover:bg-teal-50 transition duration-300">
-              <h3 className="text-xl font-medium text-teal-500">Low Stock Chargers</h3>
-              <p className="text-2xl font-semibold mt-2">12</p>
-            </div>
-            <div className="bg-purple-400 p-6 rounded-lg shadow-md hover:bg-teal-50 transition duration-300">
-              <h3 className="text-xl font-medium text-teal-500">Total Charger Sales</h3>
-              <p className="text-2xl font-semibold mt-2">₹45,000</p>
-            </div>
-          </div>
+        {/* Main Content Area */}
+        <main className="flex-1 p-6 lg:p-10 overflow-y-auto bg-green-50 rounded-tl-3xl shadow-inner">
+          <div className="max-w-7xl mx-auto space-y-10">
+            {/* Section Title */}
+            <section>
+              <h2 className="text-2xl font-bold text-teal-700 mb-6">EV Chargers Dashboard</h2>
 
-          {/* Charger Orders Section */}
-          <div className="bg-white p-6 rounded-lg shadow-md mb-8">
-            <h3 className="text-xl font-medium text-teal-500 mb-4">Charger Orders</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div className="bg-teal-100 p-4 rounded-lg">
-                <h4 className="font-semibold text-teal-600">Pending Orders</h4>
-                <p className="text-xl">10</p>
+              {/* Stat Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div className="p-6 rounded-lg shadow bg-blue-100 text-blue-700 transition-transform hover:scale-105">
+                  <h5 className="text-lg font-semibold">Total Chargers</h5>
+                  <h2 className="text-4xl font-bold mt-2">{productAnalytics.length}</h2>
+                </div>
+                <div className="p-6 rounded-lg shadow bg-green-100 text-green-700 transition-transform hover:scale-105">
+                  <h5 className="text-lg font-semibold">Total Orders</h5>
+                  <h2 className="text-4xl font-bold mt-2">{calculateTotalOrders()}</h2>
+                </div>
+                <div className="p-6 rounded-lg shadow bg-purple-100 text-purple-700 transition-transform hover:scale-105">
+                  <h5 className="text-lg font-semibold">Total Sales</h5>
+                  <h2 className="text-4xl font-bold mt-2">{totalSales}</h2>
+                </div>
               </div>
-              <div className="bg-teal-100 p-4 rounded-lg">
-                <h4 className="font-semibold text-teal-600">Shipped Orders</h4>
-                <p className="text-xl">85</p>
-              </div>
-              <div className="bg-teal-100 p-4 rounded-lg">
-                <h4 className="font-semibold text-teal-600">Completed Orders</h4>
-                <p className="text-xl">55</p>
-              </div>
-            </div>
-          </div>
 
-          {/* Sales Stats Section */}
-          <div className="bg-white p-6 rounded-lg shadow-md mb-8">
-            <h3 className="text-xl font-medium text-teal-500 mb-4">Sales Stats</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div className="bg-teal-100 p-4 rounded-lg">
-                <h4 className="font-semibold text-teal-600">Total Sales Today</h4>
-                <p className="text-xl">₹5000</p>
+              {/* Charger Status Table */}
+              <div className="bg-white p-6 rounded-lg shadow mb-8">
+                <h5 className="text-2xl font-semibold text-gray-700 mb-6">Charger Status Overview</h5>
+                <div className="overflow-x-auto">
+                  <table className="min-w-full divide-y divide-gray-200">
+                    <thead className="bg-gradient-to-r from-teal-500 to-teal-700 text-white">
+                      <tr>
+                        <th className="px-6 py-3 text-left text-lg font-medium text-white-500 uppercase">Product Name</th>
+                        <th className="px-6 py-3 text-left text-lg font-medium text-white-500 uppercase">Initial Stock</th>
+                        <th className="px-6 py-3 text-left text-lg font-medium text-white--500 uppercase">Remaining Stock</th>
+                        <th className="px-6 py-3 text-left text-lg font-medium text-white--500 uppercase">Total Ordered</th>
+                      </tr>
+                    </thead>
+                    <tbody className="bg-white divide-y divide-gray-200">
+                      {productStockAnalysis.map((product, index) => (
+                        <tr key={index} className="hover:bg-teal-50">
+                          <td className="px-6 py-4 text-m font-medium text-gray-900">{product.product_name}</td>
+                          <td className="px-6 py-4 text-m text-white-700">{product.initial_stock}</td>
+                          <td className="px-6 py-4 text-m text-white-700">{product.remaining_stock}</td>
+                          <td className="px-6 py-4 text-m text--700">{product.total_ordered}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
-              <div className="bg-teal-100 p-4 rounded-lg">
-                <h4 className="font-semibold text-teal-600">Total Sales This Month</h4>
-                <p className="text-xl">₹45,000</p>
+
+              {/* Performance Overview (Bar Chart) */}
+              <div className="bg-white p-6 rounded-xl shadow mb-8">
+                <h5 className="text-2xl font-semibold text-gray-700 mb-6">Performance Overview</h5>
+                <div className="h-100 flex items-center justify-center">
+                  <Bar data={chartData} options={chartOptions} />
+                </div>
               </div>
-              <div className="bg-teal-100 p-4 rounded-lg">
-                <h4 className="font-semibold text-teal-600">Total Chargers Sold</h4>
-                <p className="text-xl">150</p>
-              </div>
-            </div>
+            </section>
           </div>
-
-          {/* New Charger Management Section */}
-          <div className="bg-white p-6 rounded-lg shadow-md mb-8">
-            <h3 className="text-xl font-medium text-teal-500 mb-4">Manage Chargers</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              <button className="bg-teal-500 text-white p-4 rounded-lg hover:bg-teal-600">Add New Charger</button>
-              <button className="bg-teal-500 text-white p-4 rounded-lg hover:bg-teal-600">Edit Charger</button>
-              <button className="bg-teal-500 text-white p-4 rounded-lg hover:bg-teal-600">Remove Charger</button>
-            </div>
-          </div>
-
-          {/* Charger Promotions Section */}
-          <div className="bg-white p-6 rounded-lg shadow-md mb-8">
-            <h3 className="text-xl font-medium text-teal-500 mb-4">Charger Promotions</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              <button className="bg-teal-500 text-white p-4 rounded-lg hover:bg-teal-600">Add Promotion</button>
-              <button className="bg-teal-500 text-white p-4 rounded-lg hover:bg-teal-600">View Active Promotions</button>
-            </div>
-          </div>
-
-          {/* Quick Actions */}
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h3 className="text-xl font-medium text-teal-500 mb-4">Quick Actions</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              <button className="bg-teal-500 text-white p-4 rounded-lg hover:bg-teal-600">View Charger Inventory</button>
-              <button className="bg-teal-500 text-white p-4 rounded-lg hover:bg-teal-600">Manage Orders</button>
-              <button className="bg-teal-500 text-white p-4 rounded-lg hover:bg-teal-600">View Sales Reports</button>
-            </div>
-          </div>
-        </div>
+        </main>
       </div>
-  </div>
+    </div>
   );
 };
 
 export default Dashboard;
-
