@@ -225,13 +225,29 @@ const ProductPage = () => {
                   <h2 className="text-xl font-bold">{product.name}</h2>
                   <p className="text-gray-600 mt-2">{product.model}</p>
                   {/* Add to Cart Button */}
-                  <button
+                  {/* <button
                     onClick={() => handleAddToCart(product.id, product.price)}
                     className={`mt-4 flex items-center justify-center px-4 py-2 rounded-md ${cart.includes(product.id) ? 'bg-green-500' : 'bg-pink-500'} text-white hover:${cart.includes(product.id) ? 'bg-green-600' : 'bg-blue-600'}`}
                   >
                     <FaShoppingCart className="mr-2" />
                     {cart.includes(product.id) ? 'Added to Cart' : 'Add to Cart'}
-                  </button>
+                  </button> */}
+                  {product.quantity > 0 ? (
+  <button
+    onClick={() => handleAddToCart(product.id, product.price)}
+    className={`mt-4 flex items-center justify-center px-4 py-2 rounded-md ${
+      cart.includes(product.id) ? 'bg-green-500' : 'bg-pink-500'
+    } text-white hover:${
+      cart.includes(product.id) ? 'bg-green-600' : 'bg-blue-600'
+    }`}
+  >
+    <FaShoppingCart className="mr-2" />
+    {cart.includes(product.id) ? 'Added to Cart' : 'Add to Cart'}
+  </button>
+) : (
+  <div className="mt-4 text-red-600 font-semibold">No Stock Available</div>
+)}
+
                 </div>
               </div>
             ))
@@ -280,6 +296,16 @@ const ProductPage = () => {
   )}
 
   {/* Add to Cart Button */}
+  {/* <button
+    onClick={() => handleAddToCart(popupContent.id, popupContent.price)}
+    className={`mt-4 flex items-center justify-center px-4 py-2 rounded-md ${cart.includes(popupContent.id) ? 'bg-green-500' : 'bg-pink-500'} text-white hover:${cart.includes(popupContent.id) ? 'bg-green-600' : 'bg-blue-600'}`}
+  >
+    <FaShoppingCart className="mr-2" />
+    {cart.includes(popupContent.id) ? 'Added to Cart' : 'Add to Cart'}
+  </button>
+
+</div> */}
+{popupContent.quantity > 0 ? (
   <button
     onClick={() => handleAddToCart(popupContent.id, popupContent.price)}
     className={`mt-4 flex items-center justify-center px-4 py-2 rounded-md ${cart.includes(popupContent.id) ? 'bg-green-500' : 'bg-pink-500'} text-white hover:${cart.includes(popupContent.id) ? 'bg-green-600' : 'bg-blue-600'}`}
@@ -287,8 +313,11 @@ const ProductPage = () => {
     <FaShoppingCart className="mr-2" />
     {cart.includes(popupContent.id) ? 'Added to Cart' : 'Add to Cart'}
   </button>
-</div>
+) : (
+  <div className="mt-4 text-red-600 font-semibold">No Stock Available</div>
+)}
 
+</div>
 
         {/* Right Section: Product Details */}
         <div className="w-full sm:w-1/2 p-4">
