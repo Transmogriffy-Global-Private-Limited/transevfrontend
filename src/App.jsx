@@ -35,6 +35,7 @@ import Address from './components/User/Address';
 import Setting from './components/User/Settings/Setting';
 import ManageUser from './components/Admin/Users/ViewUser';
 import ManageOrder from './components/Admin/AdminOrder/ManageOrder';
+import Adminsetting from './components/Admin/Settings/Adminsetting';
 function App() {
   return (
     <Router>
@@ -73,6 +74,7 @@ function App() {
         <Route path="/setting" element={<Setting />} /> 
         <Route path="/admin/users" element={<ManageUser />} /> 
         <Route path="/admin/orders" element={<ManageOrder />} /> 
+        <Route path="/admin/settings" element={<Adminsetting />} /> 
       </Routes>
     </Router>
   );
