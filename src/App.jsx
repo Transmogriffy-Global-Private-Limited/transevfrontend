@@ -46,10 +46,10 @@ function App() {
         <Route path="/news" element={<NewsPage />} />
         <Route path="/solution" element={<Solution />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/solutions/apartment-buildings" element={<ApartmentBuildings />} />
-        <Route path="/solutions/holiday-parks" element={<Holiday />} />
-        <Route path="/solutions/hotels" element={<Hotels />} />
-        <Route path="/solutions/workplace" element={<Workplace />} />
+        <Route path="/solutions/home-and-housing-societies" element={<ApartmentBuildings />} />
+        <Route path="/solutions/office-and-workplace" element={<Holiday />} />
+        <Route path="/solutions/public-places" element={<Hotels />} />
+        <Route path="/solutions/fleet-organization" element={<Workplace />} />
         <Route path="/how-we-work" element={<Work />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
