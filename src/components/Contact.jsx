@@ -1,334 +1,296 @@
 import React, { useState } from 'react';
-import Navbar from './Navbar';  
-import logo from '../assets/transev logo.png';  
+import Navbar from './Navbar';
+import logo from '../assets/transev logo.png';
+import contactImage from '../assets/tf1.png';
+
+const BASE_URL_AND_PORT = "http://192.168.0.106:8000";
+const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
 
 const ContactPage = () => {
   const [isChecked, setIsChecked] = useState(false);
-  const [selectedOption, setSelectedOption] = useState('');
+  const [selectedOption, setSelectedOption] = useState('residential-apartment');
   const [formErrors, setFormErrors] = useState({});
-  
-  const handleOptionChange = (event) => {
-    setSelectedOption(event.target.value);
+  const [formData, setFormData] = useState({
+    firstname: '',
+    lastname: '',
+    company: '',
+    yoursite: 'Home and Housing Societies ',
+    address: '',
+    city: '',
+    postcode: '',
+    telephone: '',
+    email: '',
+    message: ''
+  });
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
-  const handleCheckboxChange = () => {
-    setIsChecked(!isChecked);
+  const handleOptionChange = (e) => {
+    const optionMap = {
+      'residential-apartment': 'Residential Apartment',
+      'hotel-leisure': 'Hotel & Leisure',
+      'holiday-park': 'Holiday Park',
+      'workplace': 'Workplace'
+    };
+    setSelectedOption(e.target.value);
+    setFormData((prev) => ({ ...prev, yoursite: optionMap[e.target.value] }));
   };
 
-  // Form validation handler
-  const handleSubmit = (event) => {
-    event.preventDefault(); // Prevent the default form submission
+  const handleCheckboxChange = () => setIsChecked(!isChecked);
 
-    // Validate the form
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     const errors = {};
-    const formElements = event.target.elements;
+    const requiredFields = ['firstname', 'lastname', 'postcode', 'email', 'message'];
 
-    // Check if all required fields are filled
-    if (!formElements['first-name'].value) errors['first-name'] = 'First name is required';
-    if (!formElements['last-name'].value) errors['last-name'] = 'Last name is required';
-    if (!formElements['postcode'].value) errors['postcode'] = 'Postcode is required';
-    if (!formElements['email'].value) errors['email'] = 'Email is required';
-    if (!formElements['message'].value) errors['message'] = 'Message is required';
-    if (!isChecked) errors['privacy'] = 'You must agree with the privacy statement';
+    requiredFields.forEach((field) => {
+      if (!formData[field]) errors[field] = `${field} is required`;
+    });
+
+    if (!isChecked) errors.privacy = 'You must agree with the privacy statement';
 
     setFormErrors(errors);
 
-    // If there are no errors, submit the form (for now, just log the success message)
     if (Object.keys(errors).length === 0) {
-      console.log('Form submitted successfully!');
+      try {
+        const res = await fetch(`${BASE_URL_AND_PORT}/contact/contactus`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+           'API-KEY': API_KEY,
+          },
+          body: JSON.stringify(formData)
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+          alert('Message sent successfully! We will get back to you soon.');
+        } else {
+          alert('Submission failed: ' + (data.message || 'Unknown error'));
+        }
+      } catch (error) {
+        alert('Network error: ' + error.message);
+      }
     }
   };
 
   return (
-    <div className="min-h-screen bg-white-50">
-      {/* Navbar Section */}
+    <div className="min-h-screen bg-white">
       <Navbar />
-      <div className="absolute top-0 w-full border-b-6 border-yellow-300 z-10"></div> 
-      {/* Get in Touch Section */}
-      <div className="flex items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-9xl font-aeonik text-gray-900 animate__animated animate__fadeIn animate__delay-1s mt-50 mr-250 whitespace-nowrap">
-            Get in touch
-          </h2>
-        </div>
+      <div className="border-b-4 border-yellow-400 w-full"></div>
+
+      {/* Title */}
+      <div className="flex items-center justify-start px-4 sm:px-6 lg:px-8 mt-28 md:mt-40 lg:mt-40">
+        <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-aeonik text-gray-900 animate__animated animate__fadeIn animate__delay-1s mr-0 md:mr-16 lg:mr-24 whitespace-nowrap">
+          Get in touch
+        </h2>
       </div>
 
-      <section className="px-4 md:px-16 py-10 mt-50">
-        <div className="flex flex-col md:flex-row gap-10">
-          {/* Left Section: If you have any questions and Contact Details */}
-          <div className="md:w-1/2 flex flex-col justify-start items-start mb-10">
-            <p className="text-5xl font-semibold text-gray-700 space-y-4 mb-10">
-              <span>If you have any questions or you'd</span>
-              <br />
-              <span>like to find out more about our</span>
-              <br />
-              <span>services, please get in touch.</span>
+      <section className="px-4 md:px-16 py-20">
+        <div className="flex flex-col lg:flex-row gap-12">
+          {/* Left Content */}
+          <div className="lg:w-1/2 flex flex-col space-y-6">
+            <p className="text-xl md:text-2xl font-semibold text-gray-700">
+              If you have any questions or you'd like to find out more about our services, please get in touch.
             </p>
 
-            <div className="text-xl mb-6">
-              <h4 className="font-semibold text-xl mb-4 mt-15">Contact Details:</h4>
-              <p className="font-semibold text-xl mb-4 text-gray-500">Office address:</p>
-              <p className="font-semibold text-xl mb-4 text-gray-500">MANI CASADONA, UNIT - 10 ES06,IIF/04,STREET NO.372,ACTION AREA-11F NEWTOWN,RAJARHAT,KOLKATA - 700156, WEST BENGAL,INDIA</p>
-              <p className="font-semibold text-xl mb-4 text-gray-500">Landmark address:</p>
-              <p className="font-semibold text-xl mb-4 text-gray-500">OPPOSITE ECOSPACE BUSINESS PARK</p>
-             
-              <p className="font-semibold text-xl mb-4 text-gray-500 mt-15 inline-block border-b-2 border-gray-500">
-                Tel: 033-4601 5366/ +91 79080 03488
-              </p><br/>
-              <p className="font-semibold text-xl mb-2 text-gray-500 mt-2 inline-block border-b-2 border-gray-500">
-                Email: tgwbin@gmail.com
+            <div className="text-base md:text-lg">
+              <h4 className="font-bold mb-2">Contact Details:</h4>
+              <p className="text-gray-600 mb-2">Office Address:</p>
+              <p className="text-gray-600 mb-2">
+                MANI CASADONA, UNIT - 10 ES06, IIF/04, STREET NO.372, ACTION AREA-11F, NEWTOWN, RAJARHAT, KOLKATA - 700156, WEST BENGAL, INDIA
               </p>
+              <p className="text-gray-600 mb-2">Landmark: OPPOSITE ECOSPACE BUSINESS PARK</p>
+              <p className="text-gray-600 mb-2">Tel: 033-4601 5366 / +91 79080 03488</p>
+              <p className="text-gray-600">Email: <a href="mailto:tgwbin@gmail.com" className="underline">tgwbin@gmail.com</a></p>
             </div>
+
+            <img src={contactImage} alt="Contact" className="rounded-lg shadow-md w-full h-auto mt-4" />
           </div>
 
-          {/* Right Section: Contact Form */}
-          <div className="md:w-1/2 bg-white p-6 rounded-lg shadow-lg">
+          {/* Right Content - Form */}
+          <div className="lg:w-1/2 w-full bg-gradient-to-r from-green-500 via-teal-400 to-indigo-600 p-8 rounded-xl shadow-lg">
             <form onSubmit={handleSubmit}>
-              {/* First Name */}
-              <div className="mb-10">
-                <label htmlFor="first-name" className="block text-black text-xl mb-5">First name*</label>
-                <input
-                  type="text"
-                  id="first-name"
-                  className={`w-full p-7 border ${formErrors['first-name'] ? 'border-red-500' : 'border-gray-300'} rounded-md`}
-                  required
-                />
-                {formErrors['first-name'] && <span className="text-red-500 text-sm">{formErrors['first-name']}</span>}
-              </div>
+              {/* Inputs */}
+              {[
+                ['firstname', 'First Name*'],
+                ['lastname', 'Last Name*'],
+                ['company', 'Company'],
+                ['address', 'Address'],
+                ['city', 'City'],
+                ['postcode', 'Postcode*'],
+                ['email', 'Email*'],
+                ['telephone', 'Telephone'],
+              ].map(([id, label]) => (
+                <div key={id} className="mb-5">
+                  <label htmlFor={id} className="block text-gray-900 font-medium mb-1">{label}</label>
+                  <input
+                    type={id === 'email' ? 'email' : 'text'}
+                    id={id}
+                    value={formData[id]}
+                    onChange={handleChange}
+                    className={`w-full p-3 border rounded-md ${formErrors[id] ? 'border-red-500' : 'border-gray-300'}`}
+                  />
+                  {formErrors[id] && <p className="text-sm text-red-500">{formErrors[id]}</p>}
+                </div>
+              ))}
 
-              {/* Last Name */}
-              <div className="mb-10">
-                <label htmlFor="last-name" className="block text-black text-xl mb-5">Last name*</label>
-                <input
-                  type="text"
-                  id="last-name"
-                  className={`w-full p-7 border ${formErrors['last-name'] ? 'border-red-500' : 'border-gray-300'} rounded-md`}
-                  required
-                />
-                {formErrors['last-name'] && <span className="text-red-500 text-sm">{formErrors['last-name']}</span>}
-              </div>
-
-              {/* Company */}
-              <div className="mb-10">
-                <label htmlFor="company" className="block text-black text-xl mb-5">Company</label>
-                <input
-                  type="text"
-                  id="company"
-                  className="w-full p-7 border border-gray-300 rounded-md"
-                />
-              </div>
-
-              {/* Dropdown Menu */}
-              <div className="mb-10">
-                <label htmlFor="dropdown" className="block text-black text-xl mb-5">Your site*</label>
+              {/* Dropdown */}
+              <div className="mb-5">
+              <label htmlFor="yoursite" className="block text-gray-900 font-medium mb-1">Your site*</label>
                 <select
                   id="dropdown"
                   value={selectedOption}
                   onChange={handleOptionChange}
-                  className="w-full p-7 border border-gray-300 rounded-md"
+                  className="w-full p-3 border border-gray-300 rounded-md"
                 >
-                  <option value="residential-apartment">Residential Apartment</option>
-                  <option value="hotel-leisure">Hotel & Leisure</option>
-                  <option value="holiday-park">Holiday Park</option>
-                  <option value="workplace">Workplace</option>
+                  <option value="residential-apartment">Home and Housing Societies</option>
+                  <option value="hotel-leisure">Office and Workplace</option>
+                  <option value="holiday-park">Public Places</option>
+                  <option value="workplace">Fleet Organization</option>
                 </select>
               </div>
 
-              {/* Address */}
-              <div className="mb-10">
-                <label htmlFor="address" className="block text-black text-xl mb-5">Address</label>
-                <input
-                  type="text"
-                  id="address"
-                  className="w-full p-7 border border-gray-300 rounded-md"
-                />
-              </div>
-
-              {/* City */}
-              <div className="mb-10">
-                <label htmlFor="city" className="block text-black text-xl mb-5">City</label>
-                <input
-                  type="text"
-                  id="city"
-                  className="w-full p-7 border border-gray-300 rounded-md"
-                />
-              </div>
-
-              {/* Postcode */}
-              <div className="mb-10">
-                <label htmlFor="postcode" className="block text-black text-xl mb-5">Postcode*</label>
-                <input
-                  type="text"
-                  id="postcode"
-                  className={`w-full p-7 border ${formErrors['postcode'] ? 'border-red-500' : 'border-gray-300'} rounded-md`}
-                  required
-                />
-                {formErrors['postcode'] && <span className="text-red-500 text-sm">{formErrors['postcode']}</span>}
-              </div>
-
-              {/* Email */}
-              <div className="mb-10">
-                <label htmlFor="email" className="block text-black text-xl mb-5">Email*</label>
-                <input
-                  type="email"
-                  id="email"
-                  className={`w-full p-7 border ${formErrors['email'] ? 'border-red-500' : 'border-gray-300'} rounded-md`}
-                  required
-                />
-                {formErrors['email'] && <span className="text-red-500 text-sm">{formErrors['email']}</span>}
-              </div>
-
-              {/* Telephone */}
-              <div className="mb-10">
-                <label htmlFor="telephone" className="block text-black text-xl mb-5">Telephone</label>
-                <input
-                  type="text"
-                  id="telephone"
-                  className="w-full p-7 border border-gray-300 rounded-md"
-                />
-              </div>
-
-              {/* Message */}
-              <div className="mb-10">
-                <label htmlFor="message" className="block text-black text-xl mb-5">Please tell us a bit about your site</label>
+              {/* Message Textarea */}
+              <div className="mb-5">
+                <label htmlFor="message" className="block text-gray-900 font-medium mb-1">Please tell us a bit about your site*</label>
                 <textarea
                   id="message"
-                  className={`w-full p-15 border ${formErrors['message'] ? 'border-red-500' : 'border-gray-300'} rounded-md`}
+                  value={formData.message}
+                  onChange={handleChange}
                   rows="4"
-                  required
+                  className={`w-full p-3 border rounded-md ${formErrors.message ? 'border-red-500' : 'border-gray-300'}`}
                 ></textarea>
-                {formErrors['message'] && <span className="text-red-500 text-sm">{formErrors['message']}</span>}
+                {formErrors.message && <p className="text-sm text-red-500">{formErrors.message}</p>}
               </div>
 
-              {/* Privacy Agreement */}
-              <div className="flex items-center mb-10">
+              {/* Privacy Checkbox */}
+              <div className="flex items-center mb-4">
                 <input
                   type="checkbox"
                   id="privacy"
                   checked={isChecked}
                   onChange={handleCheckboxChange}
-                  className="h-5 w-5 border-gray-300 rounded-md"
+                  className="w-5 h-5"
                 />
-                <label htmlFor="privacy" className="ml-4 text-black text-xl mb-2">
-                  I agree with the privacy statement
-                </label>
-                {formErrors['privacy'] && <span className="text-red-500 text-sm">{formErrors['privacy']}</span>}
+                <label htmlFor="privacy" className="ml-2 text-gray-900 text-sm sm:text-base">I agree with the privacy statement</label>
               </div>
+              {formErrors.privacy && <p className="text-sm text-red-500 mb-4">{formErrors.privacy}</p>}
 
-              {/* Send Message Button */}
+              {/* Submit Button */}
               <button
                 type="submit"
-                className="relative flex items-center justify-center w-35 h-12 bg-yellow-500 text-white rounded-full font-semibold group transition-all duration-300 ease-in-out overflow-hidden ml-100"
+                className="w-full py-3 bg-yellow-500 text-white font-bold text-lg rounded-full hover:bg-yellow-600 transition"
               >
-                {/* Right Arrow Icon */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-6 h-6 text-white group-hover:opacity-0 group-hover:translate-x-10 transition-all duration-300 ease-in-out"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M13 7l5 5m0 0l-5 5m5-5H6"
-                  />
-                </svg>
-
-                {/* Expanded Button Text */}
-                <span className="absolute left-0 w-0 group-hover:w-full group-hover:left-4 group-hover:opacity-100 opacity-0 transition-all duration-300 ease-in-out text-white text-sm text-center">
-                  Send Message
-                </span>
+                Send Message
               </button>
-            </form>
+              </form>
           </div>
         </div>
       </section>
 
       {/* Footer Section */}
-      {/* <div className="mt-20 border-t-2 border-gray-300 mx-8 "></div> */}
       <div className="bg-white py-16 mt-15">
-        <div className="container mx-auto flex justify-between items-center px-8">
-          {/* Left Side: Logo */}
-          <div className="flex items-center space-x-4">
-            <img src={logo} alt="Company Logo" className="w-32 h-32" />
-          </div>
-
-          {/* Right Side: Phone number and email */}
-          <div className="text-right">
-            <div className="text-5xl font-semibold text-gray-800 mb-4">
-              <a href="tel:+02033453310" className="relative inline-block hover:text-black-500">
-                <span className="hover:underline transition-all duration-300 mr-25">033-4601 5366</span>
-              </a>
+        <div className="container mx-auto px-8">
+          <div className="flex flex-col lg:flex-row justify-between items-center">
+            {/* Left Side: Logo */}
+            <div className="flex items-center space-x-4 mb-8 lg:mb-0">
+              <img src={logo} alt="Company Logo" className="w-32 h-32" />
             </div>
 
-            <div className="text-5xl font-semibold text-gray-800">
-              <a href="mailto:enquiries@energy-park.co.uk" className="relative inline-block hover:text-black-500">
-                <span className="hover:underline transition-all duration-300">tgwbin@gmail.com</span>
-              </a>
+            {/* Right Side: Phone and Email */}
+            <div className="text-center lg:text-right">
+              <div className="text-2xl sm:text-3xl font-semibold text-gray-800 mb-4">
+                <a href="tel:+02033453310" className="hover:underline transition duration-300">
+                  033-4601 5366
+                </a>
+              </div>
+              <div className="text-2xl sm:text-3xl font-semibold text-gray-800">
+                <a href="mailto:tgwbin@gmail.com" className="hover:underline transition duration-300">
+                  tgwbin@gmail.com
+                </a>
+              </div>
             </div>
           </div>
+
+    {/* Divider */}
+    <div className="mt-10 border-t-2 border-gray-300"></div>
+
+    {/* Footer Links */}
+    <footer className="text-black py-10">
+      <div className="flex flex-col lg:flex-row justify-between gap-12">
+        {/* Left description */}
+        <div className="lg:w-1/3">
+          <h4 className="text-lg sm:text-xl font-semibold mb-4">
+            Experts in smart EV charging solutions<br />
+            for residential sites and businesses.
+          </h4>
+          <a
+            href="/client-portal"
+            className="inline-flex items-center px-6 py-3 bg-black text-white font-semibold rounded-full hover:bg-yellow-500 hover:text-black transition-all duration-300 mt-6"
+          >
+            <span>Client portal</span>
+            <div className="ml-4 w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </div>
+          </a>
         </div>
 
-        <div className="mt-10 border-t-2 border-gray-300 mx-8"></div>
-
-        <footer className="bg-white text-black py-8 mt-20">
-          <div className="container mx-auto flex justify-between">
-            <div className="w-1/3">
-              <h4 className="text-xl font-semibold mb-4">Experts in smart EV charging solutions <br/>for residential sites and businesses.</h4>
-              <a href="/client-portal" className="inline-flex items-center px-6 py-3 bg-black text-white font-semibold rounded-full transition-all duration-300 hover:bg-yellow-500 hover:text-black mt-10">
-                <span>Client portal</span>
-                <div className="ml-4 w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
-                </div>
-              </a>
-            </div>
-
-            <div className="w-2/3 flex justify-between space-x-12">
-              {/* Navigation Section */}
-              <div>
-                <h5 className="text-lg font-semibold text-gray-800 mb-5">Navigation</h5>
-                <ul className="space-y-2">
-                  <li><a href="/solutions" className="text-gray hover:underline text-lg">Solutions</a></li>
-                  <li><a href="/contact" className="text-gray hover:underline text-lg">Contact</a></li>
-                  <li><a href="/careers" className="text-gray hover:underline text-lg">Careers</a></li>
-                  <li><a href="/residents" className="text-gray hover:underline text-lg">Residents</a></li>
-                </ul>
-              </div>
-
-              {/* Follow Us Section */}
-              <div>
-                <h5 className="text-lg font-semibold mb-5">Follow us</h5>
-                <ul className="space-y-2">
-                  <li><a href="/linkedin" className="text-gray hover:underline text-lg">LinkedIn</a></li>
-                  <li><a href="/instagram" className="text-gray hover:underline text-lg">Instagram</a></li>
-                  <li><a href="/facebook" className="text-gray hover:underline text-lg">Facebook</a></li>
-                </ul>
-              </div>
-
-              {/* Legal Section */}
-              <div>
-                <h5 className="text-lg font-semibold mb-5">Legal</h5>
-                <ul className="space-y-2">
-                  <li><a href="/terms-conditions" className="text-gray hover:underline text-lg">Terms & Conditions</a></li>
-                  <li><a href="/privacy-policy" className="text-gray hover:underline text-lg">Privacy Policy</a></li>
-                  <li><a href="/modern-slavery-policy" className="text-gray hover:underline text-lg">Modern Slavery Policy</a></li>
-                </ul>
-              </div>
-            </div>
+        {/* Navigation Sections */}
+        <div className="lg:w-2/3 flex flex-col sm:flex-row justify-between gap-10">
+          {/* Navigation */}
+          <div>
+            <h5 className="text-base sm:text-lg font-semibold mb-4">Navigation</h5>
+            <ul className="space-y-2 text-sm sm:text-base">
+              <li><a href="/solutions" className="hover:underline">Solutions</a></li>
+              <li><a href="/contact" className="hover:underline">Contact</a></li>
+              <li><a href="/careers" className="hover:underline">Careers</a></li>
+              <li><a href="/residents" className="hover:underline">Residents</a></li>
+            </ul>
           </div>
 
-          {/* Footer Bottom */}
-          <div className="text mt-15 text-lg mr-200 ml-30">
-            <p className="text-gray-500 text-lg">&copy; TransEv 2025. All Rights Reserved.</p>
+          {/* Follow Us */}
+          <div>
+            <h5 className="text-base sm:text-lg font-semibold mb-4">Follow us</h5>
+            <ul className="space-y-2 text-sm sm:text-base">
+              <li><a href="/linkedin" className="hover:underline">LinkedIn</a></li>
+              <li><a href="/instagram" className="hover:underline">Instagram</a></li>
+              <li><a href="/facebook" className="hover:underline">Facebook</a></li>
+            </ul>
           </div>
-        </footer>
+
+          {/* Legal */}
+          <div>
+            <h5 className="text-base sm:text-lg font-semibold mb-4">Legal</h5>
+            <ul className="space-y-2 text-sm sm:text-base">
+              <li><a href="/terms-conditions" className="hover:underline">Terms & Conditions</a></li>
+              <li><a href="/privacy-policy" className="hover:underline">Privacy Policy</a></li>
+              <li><a href="/modern-slavery-policy" className="hover:underline">Modern Slavery Policy</a></li>
+              <li><a href="/modern-slavery-policy" className="hover:underline">  ESG Policy</a></li>
+            
+              <li><a href="/modern-slavery-policy" className="hover:underline">Sustainability Policy</a></li>
+
+            </ul>
+          </div>
+        </div>
       </div>
-    </div>
+
+      {/* Bottom Line */}
+      <div className="mt-10 text-center text-gray-500 text-sm sm:text-base">
+        <p>&copy; TransEv 2025. All Rights Reserved.</p>
+      </div>
+    </footer>
+  </div>
+</div>
+</div>
+
   );
 };
 
 export default ContactPage;
+
