@@ -104,8 +104,8 @@ const ContactPage = () => {
                 MANI CASADONA, UNIT - 10 ES06, IIF/04, STREET NO.372, ACTION AREA-11F, NEWTOWN, RAJARHAT, KOLKATA - 700156, WEST BENGAL, INDIA
               </p>
               <p className="text-gray-600 mb-2">Landmark: OPPOSITE ECOSPACE BUSINESS PARK</p>
-              <p className="text-gray-600 mb-2">Tel: 033-4601 5366 / +91 79080 03488</p>
-              <p className="text-gray-600">Email: <a href="mailto:tgwbin@gmail.com" className="underline">tgwbin@gmail.com</a></p>
+              <p className="text-bold-900 mb-2">Tel: 033-4601 5366 / +91 79080 03488</p>
+              <p className="text-bold-900">Email: <a href="mailto:tgwbin@gmail.com" className="underline">tgwbin@gmail.com</a></p>
             </div>
 
             <img src={contactImage} alt="Contact" className="rounded-lg shadow-md w-full h-auto mt-4" />
