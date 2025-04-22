@@ -186,39 +186,73 @@ function Navbar() {
 
       {/* Mobile Menu (Hamburger) */}
       <div
-        className={`md:hidden ${isMenuOpen ? 'block' : 'hidden'} bg-white text-black p-4 absolute top-0 left-0 w-full h-full z-20`}
-      >
-        <div className="flex flex-col gap-4 text-xl font-semibold">
-          <div onClick={() => setPopupType('solutions')}>
-            <Link to="/solution" className="hover:underline">
-              Solutions
-            </Link>
-          </div>
-          <div onClick={() => setPopupType('about')}>
-            <Link to="/about" className="hover:underline">
-              About Us
-            </Link>
-          </div>
-          <div onClick={() => setPopupType(null)}>
-            <Link to="/news" className="hover:underline">
-              News
-            </Link>
-          </div>
-          <div className="flex flex-col gap-4 mt-6">
-            <Link to="/login" className="hover:underline text-base">
-              Login
-            </Link>
-            <button
-              onClick={handleContactClick}
-              className="flex items-center px-4 sm:px-6 py-2 sm:py-3 bg-black text-white rounded-full hover:bg-gray-800 transition"
-            >
-              Contact
-            </button>
-          </div>
-        </div>
-      </div>
+  className={`md:hidden ${isMenuOpen ? 'block' : 'hidden'} bg-white text-black px-4 py-6 absolute top-0 left-0 w-full min-h-[20vh] z-20`}
+>
+  {/* Close Button */}
+  <div className="flex justify-end">
+    <button
+      onClick={() => setIsMenuOpen(false)}
+      className="text-black text-3xl font-bold focus:outline-none"
+    >
+      &times;
+    </button>
+  </div>
+
+  {/* Menu Items in one row */}
+  <div
+  className={`md:hidden ${isMenuOpen ? 'block' : 'hidden'} bg-white text-black px-4 py-6 absolute top-0 left-0 w-full min-h-[20vh] z-20`}
+>
+  {/* Close Button */}
+  <div className="flex justify-end">
+    <button
+      onClick={() => setIsMenuOpen(false)}
+      className="text-black text-3xl font-bold focus:outline-none"
+    >
+      &times;
+    </button>
+  </div>
+
+  {/* Menu Items in one row */}
+  <div className="flex flex-wrap items-center gap-6 text-base font-semibold mt-6 justify-center">
+    <div onClick={() => setPopupType('solutions')}>
+      <Link to="/solution" className="hover:underline">
+        Solutions
+      </Link>
+    </div>
+    <div onClick={() => setPopupType('about')}>
+      <Link to="/about" className="hover:underline">
+        About Us
+      </Link>
+    </div>
+    <div onClick={() => setPopupType(null)}>
+      <Link to="/news" className="hover:underline">
+        News
+      </Link>
+    </div>
+    <Link
+      to="/login"
+      onClick={() => setIsMenuOpen(false)}
+      className="hover:underline text-base"
+    >
+      Login
+    </Link>
+    <button
+      onClick={() => {
+        setIsMenuOpen(false);
+        handleContactClick();
+      }}
+      className="flex items-center px-3 py-2 bg-black text-white rounded-full hover:bg-gray-800 transition text-sm"
+    >
+      Contact
+    </button>
+  </div>
+</div>
+</div>
+
     </nav>
   );
 }
 
 export default Navbar;
+
+
