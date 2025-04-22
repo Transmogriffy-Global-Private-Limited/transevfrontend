@@ -121,11 +121,11 @@ const ApartmentBuildingPage = () => {
       {/* Funded Solutions Section */}
       <section className="text-center py-20 bg-white-100">
         <h2 className="text-9xl font-aeonik text-black-800 mt-20 mr-180">
-          Funded solutions<br/> <span className="mr-30">for apartments</span>
+          Funded solutions<br/> <span className="mr-30">for Home and Housing Societies</span>
         </h2>
         
        <div className="relative">
-  <button className="relative inline-flex items-center justify-center px-10 py-4 bg-yellow-300 text-white font-semibold rounded-full group transition-all duration-300 ease-in-out mt-20 mr-190">
+  <button className="relative inline-flex items-center justify-center px-10 py-4 bg-orange-300 text-white font-semibold rounded-full group transition-all duration-300 ease-in-out mt-20 mr-190">
     
     {/* "Contact us" text */}
     <span className="opacity-100 translate-x-0 transition-all duration-300 ease-in-out">
@@ -561,7 +561,7 @@ const ApartmentBuildingPage = () => {
     <h2 className="text-7xl font-semibold mb-1 ml-70 max-w-[80%] mt-25">
       <span className="block w-full">We offer a range of compatible</span>
       <span className="block w-full">charge points suitable for</span>
-      <span className="block w-full">apartment buildings</span>
+      <span className="block w-full">home and housing societies</span>
     </h2>
   </div>
 </section>
