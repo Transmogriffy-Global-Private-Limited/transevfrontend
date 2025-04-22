@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from './Navbar';
 import logo from '../assets/transev logo.png';
-import contactImage from '../assets/tf1.png';
+import contactImage from '../assets/Office.png';
 
 const BASE_URL_AND_PORT = "http://192.168.0.106:8000";
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
@@ -112,7 +112,8 @@ const ContactPage = () => {
           </div>
 
           {/* Right Content - Form */}
-          <div className="lg:w-1/2 w-full bg-gradient-to-r from-green-500 via-teal-400 to-indigo-600 p-8 rounded-xl shadow-lg">
+          <div className="lg:w-1/2 w-full bg-gradient-to-r from-yellow-100 via-white-400 to-pink-100 p-8 rounded-xl shadow-lg">
+       
             <form onSubmit={handleSubmit}>
               {/* Inputs */}
               {[

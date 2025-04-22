@@ -37,6 +37,8 @@ import ManageUser from './components/Admin/Users/ViewUser';
 import ManageOrder from './components/Admin/AdminOrder/ManageOrder';
 import Adminsetting from './components/Admin/Settings/Adminsetting';
 import AdminReports from './components/Admin/Report/Report';
+
+
 function App() {
   return (
     <Router>
@@ -77,6 +79,9 @@ function App() {
         <Route path="/admin/orders" element={<ManageOrder />} /> 
         <Route path="/admin/settings" element={<Adminsetting />} /> 
         <Route path="/admin/report" element={<AdminReports />} /> 
+     
+       
+       
       </Routes>
     </Router>
   );
