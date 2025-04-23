@@ -7,9 +7,9 @@ import NewsPage from './components/News';
 import Solution from './components/Solution';
 import Contact  from './components/Contact';
 import ApartmentBuildings from './components/Apartmentbuildings';
-import Holiday from './components/Holiday';
-import Hotels from './components/Hotels';
 import Workplace from './components/Workplace';
+import Hotels from './components/Hotels';
+import FleetOrganization from './components/FleetOrganization';
 import Work from './components/work';
 import Signup from './components/User/Signup';
 import Login from './components/User/Login';
@@ -49,9 +49,9 @@ function App() {
         <Route path="/solution" element={<Solution />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/solutions/home-and-housing-societies" element={<ApartmentBuildings />} />
-        <Route path="/solutions/office-and-workplace" element={<Holiday />} />
+        <Route path="/solutions/office-and-workplace" element={<Workplace />} />
         <Route path="/solutions/public-places" element={<Hotels />} />
-        <Route path="/solutions/fleet-organization" element={<Workplace />} />
+        <Route path="/solutions/fleet-organization" element={<FleetOrganization />} />
         <Route path="/how-we-work" element={<Work />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />

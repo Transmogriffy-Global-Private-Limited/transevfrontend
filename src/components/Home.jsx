@@ -1739,7 +1739,7 @@ function HomePage() {
   <div className="flex flex-wrap justify-between px-4">
     {/* Left Section */}
     <div className="text-xl font-semibold ml-0 sm:ml-12 font-aeonik">
-      Drag Slider
+      Slider
     </div>
 
     {/* Right Section */}

@@ -4,19 +4,27 @@
 // import background from '../assets/apartmnet.jpg';
 // import yourImage from '../assets/new.jpg';
 // import { useInView } from 'react-intersection-observer';
-
+// import car from '../assets/car1.jpg'
 // import charger1 from '../assets/charger7.png';
 // import charger2 from '../assets/charger2.png';
 // import charger3 from '../assets/charger1.png';
-
+// import last from '../assets/woman.jpg';
+// import ev from '../assets/ev_charger.jpg';
 // import { FaPlus, FaMinus } from "react-icons/fa"; 
 // import image from '../assets/imagee2.jpg';
-
-// import holiday from '../assets/holiday.jpg';
-// import charger from '../assets/charge.jpg';
-// import residental from '../assets/residental.jpg';
-// import bg from '../assets/charger3.jpg';
-// const Holiday = () => {
+// import image2 from '../assets/image.png';
+// import image3 from '../assets/aboutbg.jpg';
+// import image4 from '../assets/car1.jpg';
+// import image5 from '../assets/ev.jpg';
+// import hotels from '../assets/hotels.jpg';
+// import image6 from '../assets/slide4.jpg';
+// import image7 from '../assets/slide1.jpg';
+// import image8 from '../assets/slide6.jpg';
+// import image9 from '../assets/slide5.jpg';
+// import mobile from '../assets/mobile.jpg';
+// import new1 from '../assets/nwe1.jpg';
+// import new2 from '../assets/new2.jpg';
+// const Workplace = () => {
 //   const [isChecked, setIsChecked] = useState(false);
 //   const [hovered, setHovered] = useState(null);
 //   const [popupOpen, setPopupOpen] = useState(false);
@@ -39,16 +47,30 @@
 //   // FAQ data
 //   const faqs = [
 //     {
-//       question: "Can you recommend which charge point to use?",
+//       question: "Will the EV charge points work with every electric vehicle?",
 //       answer:
-//         "Yes, once we’ve received your survey response and spoken to you via our video consultation, we’ll recommend the best charge point to suit your needs..",
+//         "Yes, the EV charge point connecters we use are compatible with all new electric vehicles currently available in the UK..",
+//     },
+//     {
+//       question: "How do you know there will be sufficient electrical capacity for the EV charge points at my workplace?",
+//       answer:
+//         "Before we install your EV charge points, we’ll visit your site to get a full understanding of your site’s electrical capacity. Once we’ve installed your charge points, we’ll then monitor your usage on our online platform and distribute electricity to the charge points in a smart and balanced way.",
+//     },
+//     {
+//       question: " How can I control who uses the EV charge points?",
+//       answer:
+//         "You can either open up the EV charge points for use by all staff and visitors to your site, or you can use a key to allow access to authorised drivers only. You can also choose to issue approved drivers with an RFID (Radio Frequency Identification) access card..",
+//     },
+//     {
+//       question: "Can you help with the ongoing management and maintenance of the EV charge points?",
+//       answer:
+//         "Yes, via our cloud-based software platform we can provide ongoing maintenance, as well as service support for you and customer support for drivers. We’ll carry out in-person periodic testing, and if issues arise that can’t be rectified remotely, we’ll send a technician to your site.",
 //     },
 //     {
 //       question: "How can I get a quote from you?",
 //       answer:
-//         "To get started, fill out our form on our contact page here. We’ll send you an online survey to fill in so we can understand more about your property, and then we’ll be in touch to arrange a video consultation to give you more detail on our pricing and installation process..",
+//         "To get started, fill out our form on our contact page here. We’ll send you a quick online survey to fill in so we can understand more about your site, and then we’ll be in touch to give you more details on our pricing and installation process.",
 //     },
-    
 //   ];
 
 //   const [popupContent, setPopupContent] = useState({
@@ -106,8 +128,7 @@
 //       {/* Funded Solutions Section */}
 //       <section className="text-center py-20 bg-white-100">
 //         <h2 className="text-9xl font-aeonik text-black-800 mt-20 mr-180">
-//         <span className="mr-75 font-bold text-9xl "> Holiday park </span> <br/> <span className=" font-bold text-9xl ">charging solutions</span>
-       
+//         Workplace <br/>charging solutions
 //         </h2>
         
 //        <div className="relative">
@@ -134,7 +155,7 @@
 //       <section className="px-16 py-20 bg-white-100 flex items-center justify-between mb-50  ">
 //         <div className="w-1/2">
 //           <h3 className="text-5xl font-semibold text-gray-800 ">
-//           Attract more holidaymakers <br/> with charge point facilities. <br/> 
+//           Support your employees <br/>with convenient charge <br/>point access. 
 //           </h3>
 //         </div>
 //         <div className="w-1/2 text-right mt-20">
@@ -153,7 +174,7 @@
 //       <section
 //       className="relative py-120 bg-cover bg-center rounded-lg mx-8"
 //       style={{
-//         backgroundImage: `url(${holiday})`,
+//         backgroundImage: `url(${yourImage})`,
 //         backgroundPosition: 'center',
 //         backgroundSize: 'cover',
 //       }}
@@ -165,93 +186,60 @@
 //       <div className="w-1/2 pr-10">
 //         {/* Cost-free Installation and Management */}
 //         <h2 className="text-7xl font-semibold text-black mb-5 ml-10">
-//         Fast and reliable <br/>charging at your <br/>holiday park. 
+//         We’ll identify and <br/> install the best <br/>solution for you.
 //         </h2>
 
 //         {/* Ready to get started? Contact us */}
 //         <p className="text-xl font-semibold text-gray-700 mb-5 ml-10">
 //   <a
 //     href="/contact" // Link to your Contact Us page
-//     className="text-black-600 hover:underline hover:text-blue-800 mt-50"
+//     className="text-black-600 hover:underline hover:text-blue-800 mt-30"
 //   >
-//     Ready to get started?Contact Us
+//     Ready to get started?Contact us
 //   </a>
 // </p>
 
 //     {/* Meet Growing Tenant Demand */}
-//         <div className="text-gray-400 ml-10 mt-140">
-        
-
-//           <h3 className="text-xl font-semibold mt-5 text-black">Cater for your guests' EV needs</h3>
+//         <div className="text-gray-400 ml-10 mt-50">
+//           <h3 className="text-xl font-semibold mb-1 text-black">Meet growing employee demand</h3>
 //           <p className="text-xl font-semibold mt-10">
-//           With the uptake of electric vehicles on the rise, increasing numbers of <br/> holidaymakers are going to require charge point facilities at their holiday <br/> home. Providing this facility is a great way to stand out from the <br/> competition and secure more bookings.
+//           As the uptake of electric vehicles increases, having access to a charge <br/>point at work will become increasingly important to your staff.  Being <br/> able to charge their vehicle while they work will be seen as a valuable <br/>employee benefit.
+//           </p>
+
+//           <h3 className="text-xl font-semibold mt-5 text-black">A funded solution</h3>
+//           <p className="text-xl font-semibold mt-10">
+//           No two organisations’ EV charge point requirements are the same, so <br/>we see every project as a blank canvas, taking into consideration the <br/>size of your workforce, your site’s electrical capacity and any plans to <br/> upscale in the future.
 //           </p>
 
          
-        
+       
 
 //         </div>
 //       </div>
-      
 
 //       {/* Right Side (Image) */}
 //       <div className="w-1/2">
 //         <img
-//           src={charger} // Replace with your actual image path
+//           src={mobile} // Replace with your actual image path
 //           alt="EV Charging"
-//           className="w-full h-270 rounded-lg object-cover"
+//           className="w-full h-220 rounded-lg object-cover"
 //         />
 //       </div>
 //     </section>
-//     <section className="flex py-20 px-8 mt-30">
-//   {/* Left Side: Image with padding and rounded corners */}
-//   <div className="w-1/2 pr-10 p-4 rounded-lg overflow-hidden">  {/* Added padding (p-4) and rounded corners */}
-//     <img 
-//       src={residental} // Adjust the image source path
-//       alt="EV Charging Solution"
-//       className="w-full h-full object-cover rounded-lg" // Added rounded corners to the image
-//     />
-//   </div>
-
-//   {/* Right Side: Text Content */}
-//   <div className="w-1/2 pl-10 flex flex-col justify-between mt-20">
-//     {/* Cost-free Installation and Management */}
-//     <h2 className="text-7xl font-semibold text-black mb-5">
-//     Charge points  <br /> for holiday parks
-//     </h2>
-
-    
-
-//     {/* Meet Growing Tenant Demand */}
-//     <div className="text-gray-400 mb-20">
-    
-
-//       <h3 className="text-xl font-semibold mt-5 text-black">How it works</h3>
-//       <p className="text-xl font-semibold mt-10">
-//       When we manage your charge point installation, we can take care of <br/> everything on your behalf, from helping you choose the correct charge <br/>point for your needs, right through to installation and ongoing <br/> management.
-//       </p>
-//       <p className="text-xl font-semibold mt-10">
-//       As part of our service via our online management platform, we can set <br/> tariff rates for your guests which could also generate additional income <br/> for you, while covering your electricity costs.
-//       </p>
-     
-//     </div>
-//   </div>
-// </section>
-
-// <section className="py-20 bg-white-100 mx-8 rounded-lg">
+//     <section className="py-20 bg-white-100 mx-8 rounded-lg mr-70">
 //   <div className="container mx-auto flex flex-col lg:flex-row justify-between items-center gap-10">
 //     {/* Left Side */}
-//     <div className="lg:w-1/2 text-center lg:text-left ">
-//       <h2 className="text-xl font-semibold mb-4 w-1000 mr-40">
-//       We offer a range of charge points suitable for  <br /> holiday parks
+//     <div className="lg:w-1/2 text-center lg:text-left">
+//       <h2 className="text-xl font-semibold mb-4 mr-40 w-1000">
+//         Take a look at the products we can <br /> install for your organization's charging needs
 //       </h2>
 //     </div>
 
 //     {/* Right Side */}
-//     <h2 className="text-7xl font-semibold mb-1 ml-[-30] max-w-[80%] mt-25">
-//       <span className="block w-1200 ">Choose a Charger that fits </span>
-//       <span className="block w-full"> the needs of your holiday </span>
-//       <span className="block w-full"> park best</span>
+//     <h2 className="text-7xl font-semibold mb-1 mr-70 max-w-[80%] mt-25">
+//       <span className="block w-1200">Charge Points suitable for</span>
+//       <span className="block w-full">workplaces and accessible to </span>
+//       <span className="block w-full">all electric vehicle drivers.</span>
 //     </h2>
 //   </div>
 // </section>
@@ -273,8 +261,6 @@
 //       { name: 'Zaptec Go', description: 'Up to 7.4kW charging speed', features: 'Up to 22kW charging speed', image: charger1 },
 //       { name: 'EO Mini Pro 3', description: 'Up to 7.4kW charging speed', features: 'Up to 22kW charging speed', image: charger2 },
 //       { name: 'Easee One', description: 'Up to 7.4kW charging speed',features: 'Up to 22kW charging speed', image: charger3 },
-//       { name: 'EO Genious 2', description: 'Up to 7.4kW charging speed',features: 'Up to 22kW charging speed', image: charger3 },
-   
 //     ].map((box, index) => (
 //       <div key={index} className="flex flex-col items-center">
 //         <div
@@ -352,21 +338,122 @@
 //     </button>
 //   </div>
 // </div>
-// <div className="border-t-2 border-gray-300 w-full mb-8"></div>
 // <section
 //   className="relative py-140 bg-cover bg-center rounded-lg mx-8 px-232 mt-50"
 //   style={{
-//     backgroundImage: `url(${bg})`,
+//     backgroundImage: `url(${image7})`,
 //     backgroundPosition: 'center',
 //     backgroundSize: 'cover',
 //   }}
 // >
 //   {/* Add additional content here */}
 // </section>
+//     <section className="flex py-20 px-8">
+//   {/* Left Side */}
+//   <div className="w-1/2 pr-10">
+//     <h2 className="text-6xl font-semibold text-black mb-1 mr-30 mt-20">
+//     The benefits of investing.
+//     </h2>
+//   </div>
 
+//   {/* Right Side (Contact Us) */}
+//   <div className="w-1/2">
+//   <p className="text-xl font-semibold text-gray-700 mb-5 ml-150 mt-30">
+//   <a
+//     href="/contact" // Link to your Contact Us page
+//     className="text-black-600 hover:underline hover:text-blue-800 mt-60"
+//   >
+//     Ready to get started? Contact Us
+//   </a>
+// </p>
+//   </div>
+// </section>
+// <div className="border-t-2 border-gray-300 w-full mb-8 mt-10"></div>
+// <div className="flex flex-wrap justify-between">
 
+//   {/* Row 1 */}
+//   <div className="w-full sm:w-1/2 flex mb-8 ml-20">
+//     {/* Left Side (Image) */}
+//     <div className="w-1/3 flex justify-center items-center">
+//       <img
+//         src={new1} // Replace with your actual image path
+//         alt="EV Charging"
+//         className="w-full h-auto rounded-lg object-cover"
+//       />
+//     </div>
 
-// <section className="py-20 bg-white-100 mx-8 rounded-lg mr-50 mt-20">
+//     <div className="w-2/3 pl-6 flex items-center">
+//     <div className="flex items-center ml-100">
+//       <h3 className="text-5xl font-semibold  mr-100">01</h3>
+//       <div>
+//       <p className="text-5xl text-black-800 mt-3 whitespace-nowrap w-full">
+ 
+// Boost recruitment
+// </p>
+
+//         <p className="text-gray-500 mt-2 text-lg">
+//         Providing workplace charging will show your commitment to employees, increase staff satisfaction and help to attract the best future candidates.
+//         </p>
+//       </div>
+//       </div>
+//       </div>
+//   </div>
+//   <div className="border-t-2 border-gray-300 w-full mb-8"></div>
+
+//   {/* Row 2 */}
+//   <div className="w-full sm:w-1/2 flex mb-8 ml-20">
+//     {/* Left Side (Image) */}
+//     <div className="w-1/3 flex justify-center items-center">
+//     <img
+//         src={new2} // Replace with your actual image path
+//         alt="EV Charging"
+//         className="w-full h-auto rounded-lg object-cover"
+//       />
+//     </div>
+//     <div className="w-2/3 pl-6 flex items-center">
+//     <div className="flex items-center">
+//     <h3 className="text-5xl font-semibold  ml-100">02</h3>
+//       <div>
+//       <p className="text-5xl text-black-800 mt-3 ml-100 whitespace-nowrap">
+ 
+// Hit sustainability targets
+// </p>
+
+//         <p className="text-gray-500 mt-2 ml-100 text-lg">
+//         Reducing the environmental impact of your employees’ commute will help you achieve your sustainability goals.
+//         </p>
+//       </div>
+//       </div>
+//       </div>
+//   </div>
+   
+//   <div className="border-t-2 border-gray-300 w-full mb-8"></div>
+
+//   {/* Row 3 */}
+//   <div className="w-full sm:w-1/2 flex mb-8 ml-20">
+//     {/* Left Side (Image) */}
+//     <div className="w-1/3 flex justify-center items-center">
+//     <img
+//         src={image5} // Replace with your actual image path
+//         alt="EV Charging"
+//         className="w-full h-auto rounded-lg object-cover"
+//       />
+//     </div>
+//     <div className="w-2/3 pl-6 flex items-center">
+//     <div className="flex items-center">
+//     <h3 className="text-5xl font-semibold  ml-100">03</h3>
+//       <div>
+//         <p className="text-5xl text-black-800 mt-3 ml-100 whitespace-nowrap">
+//         Boost your reputation</p>
+//         <p className="text-gray-500 mt-2 ml-100 text-lg">
+//         With climate change high on today’s agenda, providing charge point access at your workplace demonstrates your commitment to sustainability to both customers and staff.
+//         </p>
+//       </div>
+//       </div>
+//       </div>
+//   </div>
+//   <div className="border-t-2 border-gray-300 w-full mb-8"></div>
+// <section className="py-20 bg-white-100 mx-8 rounded-lg">
 //   <div className="container mx-auto flex flex-col lg:flex-row justify-between items-center gap-10">
 //     {/* Left Side - Text */}
 //     <div className="lg:w-1/2 text-center lg:text-left">
@@ -380,7 +467,7 @@
 //       <img
 //         src={image} // Use the imported image here
 //         alt="Solution Image"
-//         className="w-150 h-100 object-cover rounded-xl shadow-lg ml-150" // Set a fixed height (e.g., h-64) and use object-cover to maintain aspect ratio
+//         className="w-180 h-100 object-cover rounded-xl shadow-lg ml-150" // Set a fixed height (e.g., h-64) and use object-cover to maintain aspect ratio
 //       />
 //     </div>
 //   </div>
@@ -437,10 +524,7 @@
 //         ))}
 //       </div>
 //     </section>
-    
-
-
-//       <div className="w-full h-screen bg-white flex justify-center items-center mt-30">
+//     <div className="w-full h-screen bg-white flex justify-center items-center mt-30">
 //       <div className="w-full h-full max-w-screen-3xl bg-gradient-to-r p-10"> 
 //       <div className="w-full h-full bg-gradient-to-b from-yellow-200 via-yellow-200 to-red-300 rounded-3xl p-12 shadow-lg max-w-screen-3xl mx-auto">
 //           {/* Your content here */}
@@ -605,6 +689,7 @@
 //   {/* Copyright Section */}
 //   <div className="text-center mt-8 text-lg mr-300">
 //     <p>&copy; TransEv 2025. All Rights Reserved.</p>
+    
 //   </div>
   
 // </footer>
@@ -648,38 +733,30 @@
 // )}
 // </div>
 // </div>
-
+// </div>
 // );
 // };
 
-// export default Holiday;
+// export default Workplace;
 import React, { useState,useRef} from 'react';
 import Navbar from './Navbar';  
 import logo from '../assets/transev logo.png'; // Use appropriate path for logo image
 import background from '../assets/apartmnet.jpg';
 import yourImage from '../assets/new.jpg';
 import { useInView } from 'react-intersection-observer';
-import car from '../assets/car1.jpg'
+
 import charger1 from '../assets/charger7.png';
 import charger2 from '../assets/charger2.png';
 import charger3 from '../assets/charger1.png';
-import last from '../assets/woman.jpg';
-import ev from '../assets/ev_charger.jpg';
+
 import { FaPlus, FaMinus } from "react-icons/fa"; 
 import image from '../assets/imagee2.jpg';
-import image2 from '../assets/image.png';
-import image3 from '../assets/aboutbg.jpg';
-import image4 from '../assets/car1.jpg';
-import image5 from '../assets/ev.jpg';
-import hotels from '../assets/hotels.jpg';
-import image6 from '../assets/slide4.jpg';
-import image7 from '../assets/slide1.jpg';
-import image8 from '../assets/slide6.jpg';
-import image9 from '../assets/slide5.jpg';
-import mobile from '../assets/mobile.jpg';
-import new1 from '../assets/nwe1.jpg';
-import new2 from '../assets/new2.jpg';
-const Workplace = () => {
+
+import holiday from '../assets/holiday.jpg';
+import charger from '../assets/charge.jpg';
+import residental from '../assets/residental.jpg';
+import bg from '../assets/charger3.jpg';
+const Holiday = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [hovered, setHovered] = useState(null);
   const [popupOpen, setPopupOpen] = useState(false);
@@ -702,30 +779,16 @@ const Workplace = () => {
   // FAQ data
   const faqs = [
     {
-      question: "Will the EV charge points work with every electric vehicle?",
+      question: "Can you recommend which charge point to use?",
       answer:
-        "Yes, the EV charge point connecters we use are compatible with all new electric vehicles currently available in the UK..",
-    },
-    {
-      question: "How do you know there will be sufficient electrical capacity for the EV charge points at my workplace?",
-      answer:
-        "Before we install your EV charge points, we’ll visit your site to get a full understanding of your site’s electrical capacity. Once we’ve installed your charge points, we’ll then monitor your usage on our online platform and distribute electricity to the charge points in a smart and balanced way.",
-    },
-    {
-      question: " How can I control who uses the EV charge points?",
-      answer:
-        "You can either open up the EV charge points for use by all staff and visitors to your site, or you can use a key to allow access to authorised drivers only. You can also choose to issue approved drivers with an RFID (Radio Frequency Identification) access card..",
-    },
-    {
-      question: "Can you help with the ongoing management and maintenance of the EV charge points?",
-      answer:
-        "Yes, via our cloud-based software platform we can provide ongoing maintenance, as well as service support for you and customer support for drivers. We’ll carry out in-person periodic testing, and if issues arise that can’t be rectified remotely, we’ll send a technician to your site.",
+        "Yes, once we’ve received your survey response and spoken to you via our video consultation, we’ll recommend the best charge point to suit your needs..",
     },
     {
       question: "How can I get a quote from you?",
       answer:
-        "To get started, fill out our form on our contact page here. We’ll send you a quick online survey to fill in so we can understand more about your site, and then we’ll be in touch to give you more details on our pricing and installation process.",
+        "To get started, fill out our form on our contact page here. We’ll send you an online survey to fill in so we can understand more about your property, and then we’ll be in touch to arrange a video consultation to give you more detail on our pricing and installation process..",
     },
+    
   ];
 
   const [popupContent, setPopupContent] = useState({
@@ -783,7 +846,8 @@ const Workplace = () => {
       {/* Funded Solutions Section */}
       <section className="text-center py-20 bg-white-100">
         <h2 className="text-9xl font-aeonik text-black-800 mt-20 mr-180">
-        Workplace <br/>charging solutions
+        <span className="mr-75 font-bold text-9xl "> Holiday park </span> <br/> <span className=" font-bold text-9xl ">charging solutions</span>
+       
         </h2>
         
        <div className="relative">
@@ -810,7 +874,7 @@ const Workplace = () => {
       <section className="px-16 py-20 bg-white-100 flex items-center justify-between mb-50  ">
         <div className="w-1/2">
           <h3 className="text-5xl font-semibold text-gray-800 ">
-          Support your employees <br/>with convenient charge <br/>point access. 
+          Attract more holidaymakers <br/> with charge point facilities. <br/> 
           </h3>
         </div>
         <div className="w-1/2 text-right mt-20">
@@ -829,7 +893,7 @@ const Workplace = () => {
       <section
       className="relative py-120 bg-cover bg-center rounded-lg mx-8"
       style={{
-        backgroundImage: `url(${yourImage})`,
+        backgroundImage: `url(${holiday})`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
       }}
@@ -841,60 +905,93 @@ const Workplace = () => {
       <div className="w-1/2 pr-10">
         {/* Cost-free Installation and Management */}
         <h2 className="text-7xl font-semibold text-black mb-5 ml-10">
-        We’ll identify and <br/> install the best <br/>solution for you.
+        Fast and reliable <br/>charging at your <br/>holiday park. 
         </h2>
 
         {/* Ready to get started? Contact us */}
         <p className="text-xl font-semibold text-gray-700 mb-5 ml-10">
   <a
     href="/contact" // Link to your Contact Us page
-    className="text-black-600 hover:underline hover:text-blue-800 mt-30"
+    className="text-black-600 hover:underline hover:text-blue-800 mt-50"
   >
-    Ready to get started?Contact us
+    Ready to get started?Contact Us
   </a>
 </p>
 
     {/* Meet Growing Tenant Demand */}
-        <div className="text-gray-400 ml-10 mt-50">
-          <h3 className="text-xl font-semibold mb-1 text-black">Meet growing employee demand</h3>
-          <p className="text-xl font-semibold mt-10">
-          As the uptake of electric vehicles increases, having access to a charge <br/>point at work will become increasingly important to your staff.  Being <br/> able to charge their vehicle while they work will be seen as a valuable <br/>employee benefit.
-          </p>
+        <div className="text-gray-400 ml-10 mt-140">
+        
 
-          <h3 className="text-xl font-semibold mt-5 text-black">A funded solution</h3>
+          <h3 className="text-xl font-semibold mt-5 text-black">Cater for your guests' EV needs</h3>
           <p className="text-xl font-semibold mt-10">
-          No two organisations’ EV charge point requirements are the same, so <br/>we see every project as a blank canvas, taking into consideration the <br/>size of your workforce, your site’s electrical capacity and any plans to <br/> upscale in the future.
+          With the uptake of electric vehicles on the rise, increasing numbers of <br/> holidaymakers are going to require charge point facilities at their holiday <br/> home. Providing this facility is a great way to stand out from the <br/> competition and secure more bookings.
           </p>
 
          
-       
+        
 
         </div>
       </div>
+      
 
       {/* Right Side (Image) */}
       <div className="w-1/2">
         <img
-          src={mobile} // Replace with your actual image path
+          src={charger} // Replace with your actual image path
           alt="EV Charging"
-          className="w-full h-220 rounded-lg object-cover"
+          className="w-full h-270 rounded-lg object-cover"
         />
       </div>
     </section>
-    <section className="py-20 bg-white-100 mx-8 rounded-lg mr-70">
+    <section className="flex py-20 px-8 mt-30">
+  {/* Left Side: Image with padding and rounded corners */}
+  <div className="w-1/2 pr-10 p-4 rounded-lg overflow-hidden">  {/* Added padding (p-4) and rounded corners */}
+    <img 
+      src={residental} // Adjust the image source path
+      alt="EV Charging Solution"
+      className="w-full h-full object-cover rounded-lg" // Added rounded corners to the image
+    />
+  </div>
+
+  {/* Right Side: Text Content */}
+  <div className="w-1/2 pl-10 flex flex-col justify-between mt-20">
+    {/* Cost-free Installation and Management */}
+    <h2 className="text-7xl font-semibold text-black mb-5">
+    Charge points  <br /> for holiday parks
+    </h2>
+
+    
+
+    {/* Meet Growing Tenant Demand */}
+    <div className="text-gray-400 mb-20">
+    
+
+      <h3 className="text-xl font-semibold mt-5 text-black">How it works</h3>
+      <p className="text-xl font-semibold mt-10">
+      When we manage your charge point installation, we can take care of <br/> everything on your behalf, from helping you choose the correct charge <br/>point for your needs, right through to installation and ongoing <br/> management.
+      </p>
+      <p className="text-xl font-semibold mt-10">
+      As part of our service via our online management platform, we can set <br/> tariff rates for your guests which could also generate additional income <br/> for you, while covering your electricity costs.
+      </p>
+     
+    </div>
+  </div>
+</section>
+
+<section className="py-20 bg-white-100 mx-8 rounded-lg">
   <div className="container mx-auto flex flex-col lg:flex-row justify-between items-center gap-10">
     {/* Left Side */}
-    <div className="lg:w-1/2 text-center lg:text-left">
-      <h2 className="text-xl font-semibold mb-4 mr-40 w-1000">
-        Take a look at the products we can <br /> install for your organization's charging needs
+    <div className="lg:w-1/2 text-center lg:text-left ">
+      <h2 className="text-xl font-semibold mb-4 w-1000 mr-40">
+      We offer a range of charge points suitable for  <br /> holiday parks
       </h2>
     </div>
 
     {/* Right Side */}
-    <h2 className="text-7xl font-semibold mb-1 mr-70 max-w-[80%] mt-25">
-      <span className="block w-1200">Charge Points suitable for</span>
-      <span className="block w-full">workplaces and accessible to </span>
-      <span className="block w-full">all electric vehicle drivers.</span>
+    <h2 className="text-7xl font-semibold mb-1 ml-[-30] max-w-[80%] mt-25">
+      <span className="block w-1200 ">Choose a Charger that fits </span>
+      <span className="block w-full"> the needs of your holiday </span>
+      <span className="block w-full"> park best</span>
     </h2>
   </div>
 </section>
@@ -916,6 +1013,8 @@ const Workplace = () => {
       { name: 'Zaptec Go', description: 'Up to 7.4kW charging speed', features: 'Up to 22kW charging speed', image: charger1 },
       { name: 'EO Mini Pro 3', description: 'Up to 7.4kW charging speed', features: 'Up to 22kW charging speed', image: charger2 },
       { name: 'Easee One', description: 'Up to 7.4kW charging speed',features: 'Up to 22kW charging speed', image: charger3 },
+      { name: 'EO Genious 2', description: 'Up to 7.4kW charging speed',features: 'Up to 22kW charging speed', image: charger3 },
+   
     ].map((box, index) => (
       <div key={index} className="flex flex-col items-center">
         <div
@@ -993,122 +1092,21 @@ const Workplace = () => {
     </button>
   </div>
 </div>
+<div className="border-t-2 border-gray-300 w-full mb-8"></div>
 <section
   className="relative py-140 bg-cover bg-center rounded-lg mx-8 px-232 mt-50"
   style={{
-    backgroundImage: `url(${image7})`,
+    backgroundImage: `url(${bg})`,
     backgroundPosition: 'center',
     backgroundSize: 'cover',
   }}
 >
   {/* Add additional content here */}
 </section>
-    <section className="flex py-20 px-8">
-  {/* Left Side */}
-  <div className="w-1/2 pr-10">
-    <h2 className="text-6xl font-semibold text-black mb-1 mr-30 mt-20">
-    The benefits of investing.
-    </h2>
-  </div>
 
-  {/* Right Side (Contact Us) */}
-  <div className="w-1/2">
-  <p className="text-xl font-semibold text-gray-700 mb-5 ml-150 mt-30">
-  <a
-    href="/contact" // Link to your Contact Us page
-    className="text-black-600 hover:underline hover:text-blue-800 mt-60"
-  >
-    Ready to get started? Contact Us
-  </a>
-</p>
-  </div>
-</section>
-<div className="border-t-2 border-gray-300 w-full mb-8 mt-10"></div>
-<div className="flex flex-wrap justify-between">
 
-  {/* Row 1 */}
-  <div className="w-full sm:w-1/2 flex mb-8 ml-20">
-    {/* Left Side (Image) */}
-    <div className="w-1/3 flex justify-center items-center">
-      <img
-        src={new1} // Replace with your actual image path
-        alt="EV Charging"
-        className="w-full h-auto rounded-lg object-cover"
-      />
-    </div>
 
-    <div className="w-2/3 pl-6 flex items-center">
-    <div className="flex items-center ml-100">
-      <h3 className="text-5xl font-semibold  mr-100">01</h3>
-      <div>
-      <p className="text-5xl text-black-800 mt-3 whitespace-nowrap w-full">
- 
-Boost recruitment
-</p>
-
-        <p className="text-gray-500 mt-2 text-lg">
-        Providing workplace charging will show your commitment to employees, increase staff satisfaction and help to attract the best future candidates.
-        </p>
-      </div>
-      </div>
-      </div>
-  </div>
-  <div className="border-t-2 border-gray-300 w-full mb-8"></div>
-
-  {/* Row 2 */}
-  <div className="w-full sm:w-1/2 flex mb-8 ml-20">
-    {/* Left Side (Image) */}
-    <div className="w-1/3 flex justify-center items-center">
-    <img
-        src={new2} // Replace with your actual image path
-        alt="EV Charging"
-        className="w-full h-auto rounded-lg object-cover"
-      />
-    </div>
-    <div className="w-2/3 pl-6 flex items-center">
-    <div className="flex items-center">
-    <h3 className="text-5xl font-semibold  ml-100">02</h3>
-      <div>
-      <p className="text-5xl text-black-800 mt-3 ml-100 whitespace-nowrap">
- 
-Hit sustainability targets
-</p>
-
-        <p className="text-gray-500 mt-2 ml-100 text-lg">
-        Reducing the environmental impact of your employees’ commute will help you achieve your sustainability goals.
-        </p>
-      </div>
-      </div>
-      </div>
-  </div>
-   
-  <div className="border-t-2 border-gray-300 w-full mb-8"></div>
-
-  {/* Row 3 */}
-  <div className="w-full sm:w-1/2 flex mb-8 ml-20">
-    {/* Left Side (Image) */}
-    <div className="w-1/3 flex justify-center items-center">
-    <img
-        src={image5} // Replace with your actual image path
-        alt="EV Charging"
-        className="w-full h-auto rounded-lg object-cover"
-      />
-    </div>
-    <div className="w-2/3 pl-6 flex items-center">
-    <div className="flex items-center">
-    <h3 className="text-5xl font-semibold  ml-100">03</h3>
-      <div>
-        <p className="text-5xl text-black-800 mt-3 ml-100 whitespace-nowrap">
-        Boost your reputation</p>
-        <p className="text-gray-500 mt-2 ml-100 text-lg">
-        With climate change high on today’s agenda, providing charge point access at your workplace demonstrates your commitment to sustainability to both customers and staff.
-        </p>
-      </div>
-      </div>
-      </div>
-  </div>
-  <div className="border-t-2 border-gray-300 w-full mb-8"></div>
-<section className="py-20 bg-white-100 mx-8 rounded-lg">
+<section className="py-20 bg-white-100 mx-8 rounded-lg mr-50 mt-20">
   <div className="container mx-auto flex flex-col lg:flex-row justify-between items-center gap-10">
     {/* Left Side - Text */}
     <div className="lg:w-1/2 text-center lg:text-left">
@@ -1122,7 +1120,7 @@ Hit sustainability targets
       <img
         src={image} // Use the imported image here
         alt="Solution Image"
-        className="w-180 h-100 object-cover rounded-xl shadow-lg ml-150" // Set a fixed height (e.g., h-64) and use object-cover to maintain aspect ratio
+        className="w-150 h-100 object-cover rounded-xl shadow-lg ml-150" // Set a fixed height (e.g., h-64) and use object-cover to maintain aspect ratio
       />
     </div>
   </div>
@@ -1179,7 +1177,10 @@ Hit sustainability targets
         ))}
       </div>
     </section>
-    <div className="w-full h-screen bg-white flex justify-center items-center mt-30">
+    
+
+
+      <div className="w-full h-screen bg-white flex justify-center items-center mt-30">
       <div className="w-full h-full max-w-screen-3xl bg-gradient-to-r p-10"> 
       <div className="w-full h-full bg-gradient-to-b from-yellow-200 via-yellow-200 to-red-300 rounded-3xl p-12 shadow-lg max-w-screen-3xl mx-auto">
           {/* Your content here */}
@@ -1344,7 +1345,6 @@ Hit sustainability targets
   {/* Copyright Section */}
   <div className="text-center mt-8 text-lg mr-300">
     <p>&copy; TransEv 2025. All Rights Reserved.</p>
-    
   </div>
   
 </footer>
@@ -1388,8 +1388,8 @@ Hit sustainability targets
 )}
 </div>
 </div>
-</div>
+
 );
 };
 
-export default Workplace;
+export default Holiday;
