@@ -142,7 +142,7 @@ const Holiday = () => {
       {/* Funded Solutions Section */}
       <section className="text-center py-20 bg-white-100">
         <h2 className="text-9xl font-aeonik text-black-800 mt-20 mr-180">
-        <span className="mr-75 font-bold text-9xl "> Holiday park </span> <br/> <span className=" font-bold text-9xl ">charging solutions</span>
+        <span className=" font-bold text-9xl "> Fleet Organization </span> <br/> <span className=" font-bold text-9xl ">charging solutions</span>
        
         </h2>
         
@@ -170,7 +170,7 @@ const Holiday = () => {
       <section className="px-16 py-20 bg-white-100 flex items-center justify-between mb-50  ">
         <div className="w-1/2">
           <h3 className="text-5xl font-semibold text-gray-800 ">
-          Attract more holidaymakers <br/> with charge point facilities. <br/> 
+          Attract more drivers  <br/>   with fleet charge point facilities.<br/> 
           </h3>
         </div>
         <div className="w-1/2 text-right mt-20">

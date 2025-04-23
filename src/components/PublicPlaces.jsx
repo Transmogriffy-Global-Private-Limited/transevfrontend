@@ -45,26 +45,42 @@ const Hotels = () => {
   // FAQ data
   const faqs = [
     {
-      question: "What is the best solution for my building?",
+      question: "What are the benefits of installing EV chargers in public spaces?",
       answer:
-        "The best solution depends on the size of your building, number of residents, and available parking spaces. We offer customizable solutions to fit your needs.",
+        "Installing EV chargers in public spaces helps promote the adoption of electric vehicles (EVs), reduces the carbon footprint, and increases the convenience for EV owners. It also enhances the reputation of businesses or public areas by offering eco-friendly services.",
     },
     {
-      question: "How many charge points do I need?",
+      question: "How much does it cost to install an EV charging station in a public space?",
       answer:
-        "The number of charge points depends on the number of residents and the type of charging stations you wish to install. We recommend assessing the demand to determine the optimal number.",
+        "The cost of installing an EV charging station in a public space varies based on factors like the type of charger (Level 2 or DC fast charger), the electrical infrastructure required, and the location. It's best to consult with an expert for a detailed quote based on your space and requirements.",
     },
     {
-      question: "What is the cost of installation?",
+      question: "What types of EV chargers are suitable for public spaces?",
       answer:
-        "The cost of installation varies depending on the type of charging station and the complexity of the installation. Contact us for a detailed quote.",
+        "For public spaces, we recommend Level 2 chargers, which offer a balance between speed and affordability. DC fast chargers are ideal for high-traffic areas where users may need to charge quickly, but they come with a higher installation cost.",
     },
     {
-      question: "Do I need a special electrical connection?",
+      question: "Do I need to make my space accessible for EV chargers?",
       answer:
-        "Yes, depending on the charging station's power requirements, you may need to upgrade your electrical infrastructure. Our team will assess your needs during the consultation.",
+        "Yes, accessibility is crucial. You should ensure that your charging stations are placed in convenient and accessible locations, especially for people with disabilities. Additionally, providing clear signage and offering options for mobile payments enhances the user experience.",
+    },
+    {
+      question: "How can I monitor the usage of public charging stations?",
+      answer:
+        "You can use an EV charger management platform that provides real-time monitoring, usage statistics, and payment tracking. These systems help you keep track of charging station activity and ensure smooth operation.",
+    },
+    {
+      question: "Are there any incentives for installing EV chargers in public spaces?",
+      answer:
+        "Yes, there are government grants and incentives in many regions that support the installation of EV chargers in public spaces. These incentives aim to encourage the adoption of electric vehicles and the expansion of charging infrastructure.",
+    },
+    {
+      question: "How do I ensure the safety of EV chargers in public spaces?",
+      answer:
+        "To ensure safety, you should install chargers that comply with local regulations and industry standards. Regular maintenance, safety checks, and user education are essential to ensure that the chargers are always in good working order.",
     },
   ];
+  
 
   const [popupContent, setPopupContent] = useState({
     image: '',
@@ -121,7 +137,7 @@ const Hotels = () => {
       {/* Funded Solutions Section */}
       <section className="text-center py-20 bg-white-100">
         <h2 className="text-9xl font-aeonik text-black-800 mt-20 mr-180">
-        Charging solutions <br/> <span  className="mr-120" >for hotels</span>
+        Charging solutions <br/> <span  className="mr-" >for Public Places</span>
         </h2>
         
        <div className="relative">
@@ -147,10 +163,9 @@ const Hotels = () => {
       {/* Future-Proof Your Sites Section */}
       <section className="px-16 py-20 bg-white-100 flex items-center justify-between mb-50  ">
         <div className="w-1/2">
-          <h3 className="text-5xl font-semibold text-gray-800 ">
-          Attract guests with <br/>convenient charge point <br/>
-access. 
-          </h3>
+        <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-black mb-6">
+  Attract visitors with <br /> convenient EV charge point <br /> access in public spaces.
+</h3>
         </div>
         <div className="w-1/2 text-right mt-20">
   <a href="#explore" className="text-2xl font-semibold text-black-500 hover:underline inline-flex items-center">
@@ -197,11 +212,11 @@ access.
         <div className="text-gray-400 ml-10 mt-50">
           <h3 className="text-xl font-semibold mb-1 text-black">Meet growing customer demand</h3>
           <p className="text-xl font-semibold mt-10">
-          As electric vehicle ownership continues to rise, increasing numbers of <br/> hotel guests are going to need access to an EV charge point during their <br/> stay. 
+          As electric vehicle ownership grows, more visitors to public spaces will<br/> access to convenient EV charge points during their time in these <br/> locations. 
 </p>
           <h3 className="text-xl font-semibold mt-5 text-black">A tailored EV solution</h3>
           <p className="text-xl font-semibold mt-10">
-          Every hotel is unique with a distinctive customer base, so we create a <br/>tailored solution that meets your hotel's specific requirements. Taking <br/> into consideration the size of your site, your customer base and any <br/> plans to upscale in the future, we’ll advise you on the best solution for <br/> you.
+          Every public space is unique with different visitor needs, so we create a <br /> tailored solution that fits the specific requirements of your location. Whether it's the size of the space, the number of visitors, or future plans for expansion, we’ll help you choose the best EV charging solution for your public place.
           </p>
 
          
@@ -232,7 +247,7 @@ access.
     <h2 className="text-7xl font-semibold mb-1 ml-[-0] max-w-[80%] mt-25 ">
       <span className="block w-1200">We offer a range of compatible</span>
       <span className="block w-full">charge points suitable for</span>
-      <span className="block w-full">hotels</span>
+      <span className="block w-full">Public Places</span>
     </h2>
   </div>
 </section>

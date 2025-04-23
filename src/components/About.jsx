@@ -8,6 +8,10 @@ import logo from '../assets/transev logo.png';
 import { FaArrowDown } from 'react-icons/fa';
 import holiday from '../assets/holiday.jpg';
 import hero from '../assets/heroabout.jpg';
+import mission from '../assets/mission.png';
+import vision from '../assets/vission.png';
+import value from '../assets/value.png';
+import { FaBolt, FaCheckCircle, FaLeaf, FaHandHoldingHeart } from 'react-icons/fa';
 function AboutUs() {
   const navigate = useNavigate();
   const handleButtonClick = () => {
@@ -152,6 +156,99 @@ function AboutUs() {
 
   </div>
 </section>
+<section className="py-16 px-4 md:px-16 bg-white">
+  {/* Our Mission Section */}
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+    <div className="text-left">
+      <h2 className="text-3xl font-bold text-black mb-4">Our Mission</h2>
+      <p className="text-lg text-gray-700">
+        Promoting the adoption of green technology and contributing to the growth of society by providing sustainable energy solutions. Also, it aspires to play an instrumental role in reducing pollution in the country by encouraging the use of Electric Vehicles.
+      </p>
+    </div>
+    <div className="flex justify-center">
+      <img
+        src={mission} // Replace with the path to your image
+        alt="Our Mission"
+        className="w-full h-auto rounded-lg shadow-lg object-cover"
+      />
+    </div>
+  </div>
+
+  {/* Our Vision Section */}
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mt-16">
+    <div className="text-left md:order-2">
+      <h2 className="text-3xl font-bold text-black mb-4">Our Vision</h2>
+      <p className="text-lg text-gray-700">
+        A good time to think beyond proof-of-concept solutions and to make intelligent choices for the next generation of electric drive technologies that give electric vehicles their rightful place in the transportation market.
+      </p>
+    </div>
+    <div className="flex justify-center md:order-1">
+      <img
+        src={vision} // Replace with the path to your image
+        alt="Our Vision"
+        className="w-full h-auto rounded-lg shadow-lg object-cover"
+      />
+    </div>
+  </div>
+
+  {/* Our Values Section */}
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mt-16">
+    <div className="text-left">
+      <h2 className="text-3xl font-bold text-black mb-4">Our Values</h2>
+      <ul className="list-disc pl-5 text-lg text-gray-700">
+        <li><strong>Innovation:</strong> Driving technology for a greener tomorrow.</li>
+        <li><strong>Sustainability:</strong> Empowering eco-friendly energy solutions.</li>
+        <li><strong>Accessibility:</strong> Making EV charging hassle-free for all.</li>
+        <li><strong>Customer-centric:</strong> Prioritizing user needs and satisfaction.</li>
+        <li><strong>Environmental commitment:</strong> Reducing pollution through EV promotion.</li>
+      </ul>
+    </div>
+    <div className="flex justify-center">
+      <img
+        src={value} // Replace with the path to your image
+        alt="Our Values"
+        className="w-full h-auto rounded-lg shadow-lg object-cover"
+      />
+    </div>
+  </div>
+</section>
+<section className="py-16 px-4 md:px-16 bg-white">
+      {/* Our Vision and Why People Love Us Section */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Left Side - Our Vision */}
+        <div className="text-left">
+        <h2 className="text-3xl font-bold text-black mb-4">
+  Our vision is to create a <br/><span className="text-green-500">sustainable future</span>.
+</h2>
+
+        
+        </div>
+
+        {/* Right Side - Why People Love Us */}
+        <div className="text-left">
+          <h3 className="text-6xl font-bold text-black mb-8">Why People Love Us</h3>
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="flex items-center space-x-3">
+              <FaBolt className="text-yellow-500 text-3xl" />
+              <span className="text-lg text-gray-700">Fast Charging</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <FaCheckCircle className="text-green-500 text-3xl" />
+              <span className="text-lg text-gray-700">Reliable</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <FaLeaf className="text-green-700 text-3xl" />
+              <span className="text-lg text-gray-700">Sustainable</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <FaHandHoldingHeart className="text-pink-500 text-3xl" />
+              <span className="text-lg text-gray-700">Convenient</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
 <section className="py-20 px-10 bg-gradient-to-r from-blue-100 via-blue-50 to-white">
 
 <h2 className="text-4xl font-semibold text-gray-800 text-center mb-12">Our Projects</h2>
