@@ -130,47 +130,30 @@ const Workplace = () => {
       {/* Navbar Section */}
       <Navbar />
       <div className="absolute top-0 w-full border-b-6 border-yellow-300 z-10"></div> 
-      {/* Funded Solutions Section */}
-      <section className="py-16 sm:py-20 bg-white-100 px-4 sm:px-8 ">
-  <div className="max-w-screen-xl mx-auto flex flex-col items-start text-left">
-    
-    {/* Heading */}
-    <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-9xl font-aeonik text-black-800 leading-tight mt-15 mr-20">
-      Workplace <br className="hidden sm:block" />
-      charging solutions
-    </h2>
+      
+   <section className="text-center py-16 sm:py-20 bg-white">
+<h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-9xl font-aeonik text-black-800 mt-10 sm:mt-16 lg:mt-20 px-4 sm:px-10 lg:px-32 xl:px-40 text-center lg:text-left">
+ 
 
-    {/* Button */}
-    <div className="mt-10 sm:mt-14 md:mt-20">
-      <button className="relative inline-flex items-center justify-center px-8 sm:px-10 py-4 bg-yellow-300 text-white font-semibold rounded-full group transition-all duration-300 ease-in-out">
-        
-        {/* Button Text */}
-        <span className="text-base sm:text-lg md:text-xl">
-          Contact us
-        </span>
+ Workplace<br />
+    <span className="inline-block">Charging solutions</span>
+  </h2>
 
-        {/* Arrow inside circle */}
-        <div className="ml-4 w-10 h-10 sm:w-12 sm:h-12 bg-yellow-300 rounded-full flex items-center justify-center transition-all duration-300 ease-in-out group-hover:w-16 group-hover:ml-8">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-6 sm:w-8 h-6 text-white group-hover:opacity-0 group-hover:translate-x-10 transition-all duration-300 ease-in-out"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M13 7l5 5m0 0l-5 5m5-5H6"
-            />
-          </svg>
-        </div>
-      </button>
+  <div className="flex justify-center lg:justify-start mt-12 sm:mt-16 px-4 sm:px-10 lg:px-32 xl:px-40">
+  <button className="relative inline-flex items-center justify-center px-6 sm:px-8 md:px-10 py-3 sm:py-4 bg-yellow-300 text-white font-semibold rounded-full group transition-all duration-300 ease-in-out">
+    <span className="opacity-100 translate-x-0 transition-all duration-300 ease-in-out text-sm sm:text-base md:text-lg">
+      Contact us
+    </span>
+
+    <div className="ml-3 sm:ml-4 w-10 h-10 sm:w-12 sm:h-12 bg-yellow-300 rounded-full flex items-center justify-center transition-all duration-300 ease-in-out group-hover:w-16 group-hover:ml-6">
+      <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 sm:w-6 sm:h-6 text-white group-hover:opacity-0 group-hover:translate-x-10 transition-all duration-300 ease-in-out" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+      </svg>
     </div>
-  </div>
-</section>
+  </button>
+</div>
 
+</section>
 
       {/* Future-Proof Your Sites Section */}
       <section className="px-4 sm:px-8 md:px-12 lg:px-16 py-10 sm:py-16 md:py-20 bg-white-100 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 mb-12">
