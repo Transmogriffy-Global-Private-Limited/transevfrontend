@@ -127,7 +127,7 @@ Facilitating fairer, <br />
       <span className="text-left inline-block">site.</span>
     </h2>
 
-    <Link to="/your-target-page">
+    <Link to="/how-we-work">
       <h4 className="text-xl sm:text-2xl font-bold text-gray-800 mb-10 lg:mb-20 group cursor-pointer inline-block lg:ml-60">
         How we do it
         <span className="block h-[2px] bg-gray-800 mt-2 w-full"></span>
