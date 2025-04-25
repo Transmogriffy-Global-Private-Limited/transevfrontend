@@ -22,7 +22,7 @@ function CartPage() {
     const [showPaymentOptions, setShowPaymentOptions] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [globalPaymentOption, setGlobalPaymentOption] = useState("Cash");
-
+const [imageIndex, setImageIndex] = useState({});
     
     const navigate = useNavigate();
 
@@ -415,7 +415,7 @@ function CartPage() {
                                                         {productDetails[item.productid] && (
                                                             <div>
                                                                 <img
-                                                                    src={convertBase64ToBlob(parseImagePaths(productDetails[item.productid].image_paths)[0]?.data)}
+                                                                    src={productDetails[item.productid].image_paths[imageIndex[item.productid] || 0]}
                                                                     alt={productDetails[item.productid].name}
                                                                     className="w-20 h-20 object-cover mr-4"
                                                                 />
