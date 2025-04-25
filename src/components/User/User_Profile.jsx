@@ -372,10 +372,13 @@ const Profile = () => {
         <UserSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
     {/* <div className="min-h-screen bg-gray-50 flex flex-col"> */}
       <div className="flex flex-col items-center justify-center flex-1 p-6">
-        {/* Profile Header */}
-        <h2 className="text-3xl md:text-4xl font-extrabold tracking-wide text-teal-500 py-2 px-6 rounded-full shadow-lg">
-          My Profile
-        </h2>
+      
+    <div className=" p-4 shadow-lg rounded-md max-w-full">
+  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-wide text-teal-500 py-2 px-6 rounded-full shadow-lg text-center">
+    My Profile
+  </h2>
+</div>
+
 
         {/* Profile Card */}
         <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-2xl space-y-6">
@@ -495,12 +498,14 @@ const Profile = () => {
                 </button>
               </div>
             ) : (
+              
               <button
-                onClick={() => setIsEditing(true)}
-                className="w-full sm:w-auto bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors"
-              >
-                Edit
-              </button>
+  onClick={() => setIsEditing(true)}
+  className="w-full sm:w-auto bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors mx-auto block"
+>
+  Edit
+</button>
+
             )}
           </div>
           <div className="flex flex-col sm:flex-row items-center">
