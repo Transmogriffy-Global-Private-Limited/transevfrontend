@@ -12,6 +12,7 @@ import mission from '../assets/mission.png';
 import vision from '../assets/vission.png';
 import value from '../assets/value.png';
 import { FaBolt, FaCheckCircle, FaLeaf, FaHandHoldingHeart } from 'react-icons/fa';
+import mission1 from '../assets/mission1.png';
 function AboutUs() {
   const navigate = useNavigate();
   const handleButtonClick = () => {
