@@ -171,41 +171,7 @@ const [imageIndex, setImageIndex] = useState({});
                     };
     
     
-    const convertBase64ToBlob = (base64String) => {
-                        try {
-                            const base64Regex = /^data:image\/[a-zA-Z]*;base64,/;
-                            if (base64String.match(base64Regex)) {
-                                base64String = base64String.replace(base64Regex, '');
-                            }
-                            const byteCharacters = atob(base64String);
-                            const byteArrays = [];
-                
-                            for (let offset = 0; offset < byteCharacters.length; offset += 1024) {
-                                const slice = byteCharacters.slice(offset, offset + 1024);
-                                const byteNumbers = new Array(slice.length);
-                                for (let i = 0; i < slice.length; i++) {
-                                    byteNumbers[i] = slice.charCodeAt(i);
-                                }
-                                byteArrays.push(new Uint8Array(byteNumbers));
-                            }
-                
-                            const blob = new Blob(byteArrays, { type: 'image/jpeg' });
-                            return URL.createObjectURL(blob);
-                        } catch (error) {
-                            console.error("Error converting base64 to Blob:", error);
-                            return 'https://via.placeholder.com/150';
-                        }
-                    };
-                
-                    const parseImagePaths = (imagePathsString) => {
-                        try {
-                            const parsedJson = JSON.parse(imagePathsString.replace(/'/g, '"'));
-                            return parsedJson;
-                        } catch (error) {
-                            console.error("Error parsing image paths:", error);
-                            return [];
-                        }
-                    };
+  
                     const removeFromCart = async (productId) => {
                         try {
                           const response = await axios.post(
