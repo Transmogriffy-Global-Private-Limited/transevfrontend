@@ -521,7 +521,19 @@ const [imageIndex, setImageIndex] = useState({});
       return { ...prev, [productId]: prevIndex };
     });
   };
+  const [popupImageIndex, setPopupImageIndex] = useState(0);
 
+  const goToNextImageInPopup = () => {
+    setPopupImageIndex((prevIndex) => (prevIndex + 1) % popupContent.image_paths.length);
+  };
+  
+  const goToPrevImageInPopup = () => {
+    setPopupImageIndex((prevIndex) => (prevIndex - 1 + popupContent.image_paths.length) % popupContent.image_paths.length);
+  };
+  
+  const toggleImagePopup = () => {
+    goToNextImageInPopup();
+  };
 
   // Function to handle Add to Cart
   const handleAddToCart = async (productId, price) => {
@@ -762,13 +774,36 @@ const [imageIndex, setImageIndex] = useState({});
 
      
          <div className="flex flex-wrap sm:flex-nowrap max-w-full overflow-hidden">
-        <div className="w-full sm:w-1/2 p-4">
+         <div className="w-full sm:w-1/2 p-4 relative">
+  {/* Image Display Logic */}
   {popupContent.image_paths && popupContent.image_paths.length > 0 ? (
-    <img
-      src={popupContent.image_paths[0]}  // Use the base64 data from popupContent
-      alt={popupContent.name}
-      className="w-full h-auto object-contain rounded-lg shadow-md"
-    />
+    <div className="relative">
+      {/* Display Current Image */}
+      <img
+        src={popupContent.image_paths[popupImageIndex]}  // Use the current image index for the popup
+        alt={popupContent.name}
+        className="w-full h-auto object-contain rounded-lg shadow-md cursor-pointer"
+        onClick={toggleImagePopup} // Handle click to show the next image
+      />
+      
+      {/* Image Navigation Buttons */}
+      {popupContent.image_paths.length > 1 && (
+        <div className="absolute top-1/2 left-2 transform -translate-y-1/2 flex space-x-4">
+          <button
+            onClick={goToPrevImageInPopup} // Go to previous image
+            className="bg-gray-700 text-white p-2 rounded-full"
+          >
+            &#60; {/* Left Arrow */}
+          </button>
+          <button
+            onClick={goToNextImageInPopup} // Go to next image
+            className="bg-gray-700 text-white p-2 rounded-full ml-4 md:ml-8 lg:ml-100"
+          >
+            &#62; {/* Right Arrow */}
+          </button>
+        </div>
+      )}
+    </div>
   ) : (
     <img
       src="https://via.placeholder.com/150"
