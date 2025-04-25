@@ -976,6 +976,15 @@ import logo from '../assets/transev logo.png';
 import woman from '../assets/woman.jpg';
 import car from '../assets/car.jpg';
 import mobile from '../assets/mobile.jpg';
+import AC01W from '../assets/AC01W3.png';
+import AC02P from '../assets/AC02P3.png';
+import AC02P7 from '../assets/AC02P7.4.png';
+import AC02WCH from '../assets/AC02WC&H.png';
+import AC03W7 from '../assets/AC03W7.png';
+import AC03W22 from '../assets/AC03W22.png';
+import DC04W from '../assets/DC04W.png';
+import DC04G60 from '../assets/DC04G60.png';
+import DC04G150 from '../assets/DC04G150.png';
 function HomePage() {
   const navigate = useNavigate();
   const [hovered, setHovered] = useState(null);
@@ -1560,14 +1569,15 @@ function HomePage() {
     onScroll={handleScroll}
   >
     {[
-      { name: 'Zaptec Go', description: 'Up to 7.4kW charging speed', features: 'Up to 22kW charging speed', image: charger1 },
-      { name: 'EO Mini Pro 3', description: 'Up to 7.4kW charging speed', features: 'Up to 22kW charging speed', image: charger2 },
-      { name: 'Easee One', description: 'Up to 7.4kW charging speed', features: 'Up to 22kW charging speed', image: charger7 },
-      { name: 'EO Genius 2', description: '7.2kW and 22kW variants', features: 'Up to 22kW charging speed', image: charger4 },
-      { name: 'Zaptec Pro', description: 'Up to 22kW charging speed', features: 'Up to 22kW charging speed', image: charger5 },
-      { name: 'Easee Charge', description: 'Up to 22kW charging speed', features: 'Up to 22kW charging speed', image: charger6 },
-      { name: 'Garo Entity Pro', description: 'Up to 22kW charging speed', features: 'Up to 22kW charging speed', image: charger7 },
-      { name: 'Schneider EVlink Pro AC', description: '7.2kW, 11kW and 22kW variants', features: 'Up to 22kW charging speed', image: charger8 },
+      { name: 'AC01W', description: '3.3 kW', features: 'Up to 22kW charging speed', image: AC01W  },
+      { name: 'AC02P', description: '3.7 kW ', features: 'Up to 22kW charging speed', image:AC02P  },
+      { name: 'AC02P', description: '7.4 kW ', features: 'Up to 22kW charging speed', image: AC02P7 },
+      { name: 'AC02W C & H', description: ' 7.4kW ', features: 'Up to 22kW charging speed', image: AC02WCH },
+      { name: 'AC03W', description: '7.4 kW', features: 'Up to 22kW charging speed', image: AC03W7 },
+      { name: 'AC03W', description: ' 22 kW', features: 'Up to 22kW charging speed', image: AC03W22 },
+      { name: 'DC04W', description: '30 kW', features: 'Up to 22kW charging speed', image: DC04W },
+      { name: 'DC04G', description: ' 60 kW ', features: 'Up to 22kW charging speed', image: DC04G60 },
+      { name: 'DC04G', description: '150 kW', features: 'Up to 22kW charging speed', image: DC04G150 },
     ].map((box, index) => (
       <div key={index} className="flex flex-col items-center">
         <div
