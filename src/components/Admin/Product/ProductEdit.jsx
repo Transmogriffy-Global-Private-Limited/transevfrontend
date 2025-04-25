@@ -9,7 +9,7 @@ const BASE_URL_AND_PORT = 'http://192.168.0.106:8000';
 const API_KEY = 'mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf';
 
 const ProductEditPage = () => {
-  const { id } = useParams();  // Get product ID from URL params
+  const { id } = useParams(); // Get product ID from URL params
   const navigate = useNavigate();
 
   const [product, setProduct] = useState(null);
@@ -18,6 +18,7 @@ const ProductEditPage = () => {
   const [updatedProductData, setUpdatedProductData] = useState(null);
   const [removedImages, setRemovedImages] = useState([]);
   const [files, setFiles] = useState([]);
+  const [imageIndex, setImageIndex] = useState(0); // For image slider
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const toggleSidebar = () => {
@@ -104,34 +105,8 @@ const ProductEditPage = () => {
       console.error('Failed to update product:', error);
     }
   };
- //Helper function to convert base64 string to Blob
-  const convertBase64ToBlob = (base64String) => {
-    try {
-      const base64Regex = /^data:image\/[a-zA-Z]*;base64,/;
-      if (base64String.match(base64Regex)) {
-        base64String = base64String.replace(base64Regex, ''); // Remove the data URI prefix
-      }
-      const byteCharacters = atob(base64String); // Decode the base64 string into bytes
-      const byteArrays = [];
 
-      for (let offset = 0; offset < byteCharacters.length; offset += 1024) {
-        const slice = byteCharacters.slice(offset, offset + 1024);
-        const byteNumbers = new Array(slice.length);
-        for (let i = 0; i < slice.length; i++) {
-          byteNumbers[i] = slice.charCodeAt(i);
-        }
-        byteArrays.push(new Uint8Array(byteNumbers));
-      }
-
-      const blob = new Blob(byteArrays, { type: 'image/jpeg' });
-      const blobUrl = URL.createObjectURL(blob);
-      return blobUrl;
-    } catch (error) {
-      console.error('Error converting base64 to Blob:', error);
-      return 'https://picsum.photos/150/150'; // Fallback image URL
-    }
-  };
-
+  // Helper function to parse image paths from a JSON string
   const parseImagePaths = (imagePathsString) => {
     try {
       const parsedJson = JSON.parse(imagePathsString.replace(/'/g, '"')); // Replace single quotes with double quotes to make it valid JSON
@@ -140,6 +115,25 @@ const ProductEditPage = () => {
       console.error("Error parsing image paths:", error);
       return []; // Return an empty array if parsing fails
     }
+  };
+
+  const handleNextImage = () => {
+    if (product && product.image_paths) {
+      const nextIndex = (imageIndex + 1) % product.image_paths.length;
+      setImageIndex(nextIndex);
+    }
+  };
+
+  const handlePrevImage = () => {
+    if (product && product.image_paths) {
+      const prevIndex = (imageIndex - 1 + product.image_paths.length) % product.image_paths.length;
+      setImageIndex(prevIndex);
+    }
+  };
+
+  const handleImageClickToRemove = (filename) => {
+    // Add the image filename to removedImages array
+    setRemovedImages((prev) => [...prev, filename]);
   };
 
   if (loading) {
@@ -469,30 +463,44 @@ const ProductEditPage = () => {
                 Update Product
               </button>
               {/* Display current images */}
-               <div className="w-full h-96 bg-gray-200 mb-6">
-              {product.image_paths && parseImagePaths(product.image_paths).length > 0 ? (
-                  parseImagePaths(product.image_paths).map((image, index) => (
-                    <div key={index} className="relative">
-                      <img
-                        src={convertBase64ToBlob(image.data)}
-                        alt={image.name}
-                        className="w-full h-full object-cover rounded-lg"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => handleImageClickToRemove(image.filename)}  // Remove image on click
-                        className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full"
-                      >
-                        Remove
-                      </button>
-                      {/* Display the filename */}
-                      <div className="text-sm text-gray-600">{image.filename}</div>
-                    </div>
-                  ))
-                ) : (
-                  null
-                )}
-              </div>
+              {/* Image Slider */}
+              <div className="relative w-full h-96 bg-gray-200 mb-6">
+              {product.image_paths?.length > 0 ? (
+                <>
+                  <img
+                    src={product.image_paths[imageIndex]}
+                    alt={product.name}
+                    className="w-full h-full object-cover rounded-lg"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = 'https://via.placeholder.com/500';
+                    }}
+                  />
+                  <button
+                    className="absolute top-1/2 left-2 transform -translate-y-1/2 text-white bg-gray-800 bg-opacity-50 p-2 rounded-full"
+                    onClick={handlePrevImage}
+                  >
+                    &#10094;
+                  </button>
+                  <button
+                    className="absolute top-1/2 right-2 transform -translate-y-1/2 text-white bg-gray-800 bg-opacity-50 p-2 rounded-full"
+                    onClick={handleNextImage}
+                  >
+                    &#10095;
+                  </button>
+                </>
+              ) : (
+                <img
+                  src={product.image_paths?.[0] || 'https://via.placeholder.com/500'}
+                  alt={product.name}
+                  className="w-full h-full object-cover rounded-lg"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = 'https://via.placeholder.com/500';
+                  }}
+                />
+              )}
+            </div>
             </form>
           </div>
         </div>
@@ -502,3 +510,4 @@ const ProductEditPage = () => {
 };
 
 export default ProductEditPage;
+

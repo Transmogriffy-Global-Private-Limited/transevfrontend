@@ -1,22 +1,26 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Hook for navigation after actions
-import axios from "axios"; // To handle HTTP requests
-import AdminNavbar from '../Admin_navbar'; // Assuming you have a Navbar component
-import AdminSidebar from "../Admin_sidebar"; // Assuming you have a Sidebar component
-import backgroundImage from '../../../assets/workplace.jpg'; // Import the local image
-const BASE_URL_AND_PORT = "http://192.168.0.106:8000"; // Define the base URL and port
-const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf"; // API key for authorization
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import AdminNavbar from "../Admin_navbar";
+import AdminSidebar from "../Admin_sidebar";
+import backgroundImage from "../../../assets/workplace.jpg";
+
+const BASE_URL_AND_PORT = "http://192.168.0.106:8000";
+const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
 
 const ManageProductsPage = () => {
-  const navigate = useNavigate(); // Hook to navigate to the update page
+  const navigate = useNavigate();
 
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true); // Loading state
-  const [allProducts, setAllProducts] = useState([]); // Store all products
-  const [searchQuery, setSearchQuery] = useState(''); // State for search query
-  const [searchResults, setSearchResults] = useState([]); // Search results state
+  const [loading, setLoading] = useState(true);
+  const [allProducts, setAllProducts] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
-  // Fetch products from the API
+  // State to manage current image index for products with multiple images
+  const [imageIndex, setImageIndex] = useState({});
+
   useEffect(() => {
     const fetchProducts = async () => {
       const authToken = localStorage.getItem("auth_token");
@@ -27,8 +31,8 @@ const ManageProductsPage = () => {
             "API-KEY": API_KEY,
           },
         });
-        setProducts(response.data.slice(0, 8)); // Show only the first 8 products initially
-        setAllProducts(response.data); // Store all products for further use
+        setProducts(response.data.slice(0, 8));
+        setAllProducts(response.data);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -39,32 +43,26 @@ const ManageProductsPage = () => {
     fetchProducts();
   }, []);
 
-  // Handle "See All Products" button click
   const handleSeeAll = () => {
-    setProducts(allProducts); // Display all products
+    setProducts(allProducts);
   };
 
-  // Handle product click to view
   const handleProductView = (id) => {
-    navigate(`/admin/product/view/${id}`); // Navigate to the product details page (View)
+    navigate(`/admin/product/view/${id}`);
   };
 
-  // Handle product click to edit
   const handleProductEdit = (id) => {
-    navigate(`/admin/product/edit/${id}`); // Navigate to the product edit page
+    navigate(`/admin/product/edit/${id}`);
   };
 
-  // Handle Add Product button click
   const handleAddProduct = () => {
-    navigate("/add-product"); // Navigate to the Add Product page
+    navigate("/add-product");
   };
 
-  // Handle Delisted Products Button
   const handleDelistedProducts = () => {
-    navigate("/admin/delisted-products"); // Navigate to the delisted products page
+    navigate("/admin/delisted-products");
   };
 
-  // Search Products based on the query
   const handleSearch = async (event) => {
     event.preventDefault();
     const authToken = localStorage.getItem("auth_token");
@@ -79,61 +77,16 @@ const ManageProductsPage = () => {
           },
         }
       );
-      setSearchResults(response.data); // Set the search results to state
+      setSearchResults(response.data);
     } catch (error) {
       console.error("Error searching products:", error);
     }
   };
 
-  const [sidebarOpen, setSidebarOpen] = useState(true); // Manage sidebar visibility
-
   const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen); // Toggle sidebar visibility
+    setSidebarOpen(!sidebarOpen);
   };
 
-  // Function to convert base64 string to Blob and create an object URL for it
-  const convertBase64ToBlob = (base64String) => {
-    try {
-      // Ensure the base64 string is valid by removing data URI scheme if present
-      const base64Regex = /^data:image\/[a-zA-Z]*;base64,/;
-      if (base64String.match(base64Regex)) {
-        base64String = base64String.replace(base64Regex, ''); // Remove the data URI prefix
-      }
-
-      const byteCharacters = atob(base64String); // Decode the base64 string into bytes
-      const byteArrays = [];
-
-      // Convert the decoded string into binary data
-      for (let offset = 0; offset < byteCharacters.length; offset += 1024) {
-        const slice = byteCharacters.slice(offset, offset + 1024);
-        const byteNumbers = new Array(slice.length);
-        for (let i = 0; i < slice.length; i++) {
-          byteNumbers[i] = slice.charCodeAt(i);
-        }
-        byteArrays.push(new Uint8Array(byteNumbers));
-      }
-
-      const blob = new Blob(byteArrays, { type: 'image/jpeg' });
-      const blobUrl = URL.createObjectURL(blob); // Create a URL for the image blob
-      return blobUrl; // Return the object URL for the image
-    } catch (error) {
-      console.error("Error converting base64 to Blob:", error);
-      return 'https://via.placeholder.com/150'; // Fallback image URL
-    }
-  };
-
-  // Function to parse image_paths string into JSON
-  const parseImagePaths = (imagePathsString) => {
-    try {
-      const parsedJson = JSON.parse(imagePathsString.replace(/'/g, '"')); // Replace single quotes with double quotes to make it valid JSON
-      return parsedJson;
-    } catch (error) {
-      console.error("Error parsing image paths:", error);
-      return []; // Return an empty array if parsing fails
-    }
-  };
-
-  // Function to handle toggle product listing status
   const handleToggleListing = async (productId) => {
     const authToken = localStorage.getItem("auth_token");
     try {
@@ -160,20 +113,35 @@ const ManageProductsPage = () => {
     }
   };
 
+  // Functions to handle image sliding
+  const goToNextImage = (productId) => {
+    setImageIndex((prev) => {
+      const currentIndex = prev[productId] || 0;
+      const product = products.find((product) => product.id === productId);
+      const nextIndex = (currentIndex + 1) % product.image_paths.length;
+      return { ...prev, [productId]: nextIndex };
+    });
+  };
+
+  const goToPrevImage = (productId) => {
+    setImageIndex((prev) => {
+      const currentIndex = prev[productId] || 0;
+      const product = products.find((product) => product.id === productId);
+      const prevIndex = (currentIndex - 1 + product.image_paths.length) % product.image_paths.length;
+      return { ...prev, [productId]: prevIndex };
+    });
+  };
+
   return (
     <div
-    className=" min-h-screen bg-gradient-to-r from-teal-400 via-teal-500 to-teal-700 bg-cover bg-center bg-fixed"
-    style={{ backgroundImage: `url(${backgroundImage})` }}
-  >
-      {/* User Navbar */}
+      className="min-h-screen bg-gradient-to-r from-teal-400 via-teal-500 to-teal-700 bg-cover bg-center bg-fixed"
+      style={{ backgroundImage: `url(${backgroundImage})` }}
+    >
       <AdminNavbar onToggleSidebar={toggleSidebar} />
 
-      {/* Main Container */}
       <div className="flex flex-1">
-        {/* Sidebar */}
         <AdminSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
 
-        {/* Main Content */}
         <div className="bg-white rounded-lg shadow-lg p-6 ml-50 mt-6 w-400">
           <h2 className="text-3xl font-bold text-center mb-6">Manage Products</h2>
 
@@ -196,27 +164,23 @@ const ManageProductsPage = () => {
             </form>
           </div>
 
-        
+          {/* Action Buttons */}
           <div className="flex justify-center mb-6 space-x-4">
-  {/* Add Product Button */}
-  <button
-    onClick={handleAddProduct}
-    className="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 transition duration-300"
-  >
-    Add Product
-  </button>
+            <button
+              onClick={handleAddProduct}
+              className="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 transition duration-300"
+            >
+              Add Product
+            </button>
+            <button
+              onClick={handleDelistedProducts}
+              className="bg-red-500 text-white px-6 py-2 rounded-md hover:bg-red-600 transition duration-300"
+            >
+              View Delisted Products
+            </button>
+          </div>
 
-  {/* View Delisted Products Button */}
-  <button
-    onClick={handleDelistedProducts}
-    className="bg-red-500 text-white px-6 py-2 rounded-md hover:bg-red-600 transition duration-300"
-  >
-    View Delisted Products
-  </button>
-</div>
-
-
-          {/* Display search results */}
+          {/* Search Results */}
           {searchQuery && searchResults.length > 0 && (
             <div className="mb-6">
               <h3 className="text-2xl font-semibold">Search Results</h3>
@@ -224,12 +188,15 @@ const ManageProductsPage = () => {
                 {searchResults.map((product) => (
                   <div key={product.id} className="bg-white border rounded-lg p-4 shadow-md">
                     <div className="w-full h-40 bg-gray-200 mb-4">
-                      {/* Display product image */}
-                      {product.image_paths && parseImagePaths(product.image_paths).length > 0 ? (
+                      {product.image_paths?.length > 0 ? (
                         <img
-                          src={convertBase64ToBlob(parseImagePaths(product.image_paths)[0]?.data)}
+                          src={product.image_paths[0]}
                           alt={product.name}
                           className="w-full h-full object-cover rounded-lg"
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = 'https://via.placeholder.com/150';
+                          }}
                         />
                       ) : (
                         <img
@@ -248,21 +215,30 @@ const ManageProductsPage = () => {
             </div>
           )}
 
-      
-         
-
-          {/* Display loading state */}
+          {/* Product List */}
           {loading ? (
             <div className="text-center">Loading products...</div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {products.map((product) => (
                 <div key={product.id} className="bg-white border rounded-lg p-4 shadow-md cursor-pointer">
-                  <div className="w-full h-40 bg-gray-200 mb-4">
-                    {/* Display product image */}
-                    {product.image_paths && parseImagePaths(product.image_paths).length > 0 ? (
+                  <div className="relative w-full h-40 bg-gray-200 mb-4 overflow-hidden">
+                    {/* Conditional Image Slider for Products with Multiple Images */}
+                    {product.image_paths?.length > 1 ? (
+                      <div className="flex transition-all duration-500 ease-in-out">
+                        <img
+                          src={product.image_paths[imageIndex[product.id] || 0]}
+                          alt={product.name}
+                          className="w-full h-full object-cover rounded-lg"
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = 'https://via.placeholder.com/150';
+                          }}
+                        />
+                      </div>
+                    ) : (
                       <img
-                        src={convertBase64ToBlob(parseImagePaths(product.image_paths)[0]?.data)}
+                        src={product.image_paths[0]}
                         alt={product.name}
                         className="w-full h-full object-cover rounded-lg"
                         onError={(e) => {
@@ -270,19 +246,30 @@ const ManageProductsPage = () => {
                           e.target.src = 'https://via.placeholder.com/150';
                         }}
                       />
-                    ) : (
-                      <img
-                        src="https://via.placeholder.com/150"
-                        alt={product.name}
-                        className="w-full h-full object-cover rounded-lg"
-                      />
+                    )}
+
+                    {/* Navigation Buttons */}
+                    {product.image_paths?.length > 1 && (
+                      <>
+                        <button
+                          className="absolute top-1/2 left-2 transform -translate-y-1/2 text-white bg-gray-800 bg-opacity-50 p-2 rounded-full"
+                          onClick={() => goToPrevImage(product.id)}
+                        >
+                          &#10094;
+                        </button>
+                        <button
+                          className="absolute top-1/2 right-2 transform -translate-y-1/2 text-white bg-gray-800 bg-opacity-50 p-2 rounded-full"
+                          onClick={() => goToNextImage(product.id)}
+                        >
+                          &#10095;
+                        </button>
+                      </>
                     )}
                   </div>
                   <h3 className="text-xl font-semibold">{product.name}</h3>
                   <p className="text-gray-600">{product.model}</p>
                   <p className="text-gray-700 mt-2">₹{product.price}</p>
-                  
-                  {/* Action buttons */}
+
                   <div className="flex justify-between mt-4">
                     <button
                       onClick={() => handleProductView(product.id)}
@@ -296,14 +283,13 @@ const ManageProductsPage = () => {
                     >
                       Edit
                     </button>
-                    {/* Toggle Listing button */}
                     <button
                       onClick={() => handleToggleListing(product.id)}
                       className={`${
                         product.is_listed ? 'bg-red-500' : 'bg-green-500'
                       } text-white px-4 py-2 rounded-md hover:bg-opacity-80 transition duration-300`}
                     >
-                      {product.is_listed ? 'Delisted' : 'Show'}
+                      {product.is_listed ? 'Delist' : 'Show'}
                     </button>
                   </div>
                 </div>
@@ -311,7 +297,7 @@ const ManageProductsPage = () => {
             </div>
           )}
 
-          {/* See All Products Button */}
+          {/* See All Products */}
           {products.length < allProducts.length && (
             <div className="flex justify-center mt-6">
               <button
