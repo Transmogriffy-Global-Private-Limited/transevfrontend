@@ -22,6 +22,16 @@ import image7 from '../assets/slide1.jpg';
 import image8 from '../assets/slide6.jpg';
 import new3 from '../assets/new3.jpg';
 import publicspace from '../assets/slide5.jpg';
+import AC01W from '../assets/AC01W3.png';
+import AC02P from '../assets/AC02P3.png';
+import AC02P7 from '../assets/AC02P7.4.png';
+import AC02WCH from '../assets/AC02WC&H.png';
+import AC03W7 from '../assets/AC03W7.png';
+import AC03W22 from '../assets/AC03W22.png';
+import DC04W from '../assets/DC04W.png';
+import DC04G60 from '../assets/DC04G60.png';
+import DC04G150 from '../assets/DC04G150.png';
+import AC03w from '../assets/AC03w.png';
 const Hotels = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [hovered, setHovered] = useState(null);
@@ -308,9 +318,11 @@ const Hotels = () => {
     onScroll={handleScroll}
   >
     {[ 
-      { name: 'Zaptec Go', description: 'Up to 7.4kW charging speed', features: 'Up to 22kW charging speed', image: charger1 },
-      { name: 'EO Mini Pro 3', description: 'Up to 7.4kW charging speed', features: 'Up to 22kW charging speed', image: charger2 },
-      { name: 'Easee One', description: 'Up to 7.4kW charging speed', features: 'Up to 22kW charging speed', image: charger3 },
+      { name: 'AC03W', description: '7.4 kW', features: 'Rating: 7.4 kW,Single Connector,GSM/Wi-Fi/BLE/4G', image: AC03W7 },
+           { name: 'AC03W', description: ' 22 kW', features: 'Rating: 22 kW,Single Connector,GSM/Wi-Fi/BLE/4G', image: AC03w },
+           { name: 'DC04W', description: '30 kW', features: 'Rating:30 kW,Single Gun,Ethernet | Wi-fi|4G', image: DC04W },
+           { name: 'DC04G', description: ' 60 kW ', features: 'Rating:60 kW,High Speed Charging,OCPP1.6J Or Latest | RFID', image: DC04G60 },
+           { name: 'DC04G', description: '150 kW', features: 'Rating:150 kW,High Speed Charging,OCPP1.6J Or Latest | RFID', image: DC04G150 },
     ].map((box, index) => (
       <div key={index} className="flex flex-col items-center">
         <div
@@ -787,7 +799,13 @@ const Hotels = () => {
                    <h3 className="text-2xl font-semibold mb-4">Product Description</h3>
                    <p>{popupContent.description}</p>
                    <h3 className="text-2xl font-semibold mb-4 mt-6">Features</h3>
-                   <p>{popupContent.features}</p>
+                   <div className="flex flex-col space-y-2 mt-2">
+    {popupContent.features.split(',').map((feature, index) => (
+      <div key={index} className="text-md text-gray-700">
+        {feature.trim()}
+      </div>
+    ))}
+  </div>
      
                    {/* Buy Now Button */}
                    <button

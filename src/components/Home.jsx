@@ -1569,15 +1569,15 @@ function HomePage() {
     onScroll={handleScroll}
   >
     {[
-      { name: 'AC01W', description: '3.3 kW', features: 'Up to 22kW charging speed', image: AC01W  },
-      { name: 'AC02P', description: '3.7 kW ', features: 'Up to 22kW charging speed', image:AC02P  },
-      { name: 'AC02P', description: '7.4 kW ', features: 'Up to 22kW charging speed', image: AC02P7 },
-      { name: 'AC02W C & H', description: ' 7.4kW ', features: 'Up to 22kW charging speed', image: AC02WCH },
-      { name: 'AC03W', description: '7.4 kW', features: 'Up to 22kW charging speed', image: AC03W7 },
-      { name: 'AC03W', description: ' 22 kW', features: 'Up to 22kW charging speed', image: AC03W22 },
-      { name: 'DC04W', description: '30 kW', features: 'Up to 22kW charging speed', image: DC04W },
-      { name: 'DC04G', description: ' 60 kW ', features: 'Up to 22kW charging speed', image: DC04G60 },
-      { name: 'DC04G', description: '150 kW', features: 'Up to 22kW charging speed', image: DC04G150 },
+      { name: 'AC01W', description: '3.3 kW', features: 'Rating: 3.3 kW,Single Connector,GSM/Wi-Fi/BLE', image: AC01W  },
+      { name: 'AC02P', description: '3.7 kW ', features: 'Rating: 3.7 kW,Portable Charger,Plug and Play', image:AC02P  },
+      { name: 'AC02P', description: '7.4 kW ', features: 'Rating: 3.7 kW,Portable Charger,Plug and Play', image: AC02P7 },
+      { name: 'AC02W C & H', description: ' 7.4kW ', features: 'Rating: 7.4 kW,Single Connector,GSM/Wi-Fi/BLE/4G/Ethernet or Optional', image: AC02WCH },
+      { name: 'AC03W', description: '7.4 kW', features: 'Rating: 7.4 kW,Single Connector,GSM/Wi-Fi/BLE/4G', image: AC03W7 },
+      { name: 'AC03W', description: ' 22 kW', features: 'Rating: 22 kW,Single Connector,GSM/Wi-Fi/BLE/4G', image: AC03W22 },
+      { name: 'DC04W', description: '30 kW', features: 'Rating:30 kW,Single Gun,Ethernet | Wi-fi|4G', image: DC04W },
+      { name: 'DC04G', description: ' 60 kW ', features: 'Rating:60 kW,High Speed Charging,OCPP1.6J Or Latest | RFID', image: DC04G60 },
+      { name: 'DC04G', description: '150 kW', features: 'Rating:150 kW,High Speed Charging,OCPP1.6J Or Latest | RFID', image: DC04G150 },
     ].map((box, index) => (
       <div key={index} className="flex flex-col items-center">
         <div
@@ -1593,7 +1593,7 @@ function HomePage() {
               onClick={() => handlePopupOpen(box.image, box.description, box.features)}
             />
           </div>
-
+         
           <div
             className={`absolute top-4 right-4 bg-yellow-300 w-10 h-10 rounded-full flex justify-center items-center transition-all duration-300 ${hovered === index ? 'opacity-100' : 'opacity-0'}`}
           >
@@ -1964,7 +1964,16 @@ function HomePage() {
         <h3 className="text-2xl font-semibold mb-4">Product Description</h3>
         <p>{popupContent.description}</p>
         <h3 className="text-2xl font-semibold mb-4 mt-6">Features</h3>
-        <p>{popupContent.features}</p>
+        {/* <p>{popupContent.features}</p> */}
+      
+ 
+  <div className="flex flex-col space-y-2 mt-2">
+    {popupContent.features.split(',').map((feature, index) => (
+      <div key={index} className="text-md text-gray-700">
+        {feature.trim()}
+      </div>
+    ))}
+  </div>
 
         {/* Buy Now Button */}
         <button

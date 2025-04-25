@@ -21,7 +21,10 @@ import image6 from '../assets/slide4.jpg';
 import image7 from '../assets/slide1.jpg';
 import image8 from '../assets/slide6.jpg';
 import image9 from '../assets/slide5.jpg';
-
+import AC01W from '../assets/AC01W3.png';
+import AC02P from '../assets/AC02P3.png';
+import AC02P7 from '../assets/AC02P7.4.png';
+import AC02WCH from '../assets/AC02WC&H.png';
 const ApartmentBuildingPage = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [hovered, setHovered] = useState(null);
@@ -649,9 +652,10 @@ const ApartmentBuildingPage = () => {
     onScroll={handleScroll}
   >
     {[
-      { name: 'Zaptec Go', description: 'Up to 7.4kW charging speed', features: 'Up to 22kW charging speed', image: charger1 },
-      { name: 'EO Mini Pro 3', description: 'Up to 7.4kW charging speed', features: 'Up to 22kW charging speed', image: charger2 },
-      { name: 'Easee One', description: 'Up to 7.4kW charging speed', features: 'Up to 22kW charging speed', image: charger3 },
+      { name: 'AC01W', description: '3.3 kW', features: 'Rating: 3.3 kW,Single Connector,GSM/Wi-Fi/BLE', image: AC01W  },
+        
+          { name: 'AC02P', description: '7.4 kW ', features: 'Rating: 3.7 kW,Portable Charger,Plug and Play', image: AC02P7 },
+          { name: 'AC02WH', description: ' 7.4kW ', features: 'Rating: 7.4 kW,Single Connector,GSM/Wi-Fi/BLE/4G/Ethernet or Optional', image: AC02WCH },
     ].map((box, index) => (
       <div key={index} className="flex flex-col items-center flex-shrink-0">
         <div
@@ -999,8 +1003,13 @@ const ApartmentBuildingPage = () => {
               <h3 className="text-2xl font-semibold mb-4">Product Description</h3>
               <p>{popupContent.description}</p>
               <h3 className="text-2xl font-semibold mb-4 mt-6">Features</h3>
-              <p>{popupContent.features}</p>
-
+              <div className="flex flex-col space-y-2 mt-2">
+    {popupContent.features.split(',').map((feature, index) => (
+      <div key={index} className="text-md text-gray-700">
+        {feature.trim()}
+      </div>
+    ))}
+  </div>
               {/* Buy Now Button */}
               <button
                 className="mt-4 bg-blue-500 text-white px-6 py-2 rounded-full"
