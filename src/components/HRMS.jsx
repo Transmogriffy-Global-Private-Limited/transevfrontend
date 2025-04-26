@@ -1,13 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaPhoneAlt, FaEnvelope, FaUserShield, FaRegLightbulb } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 const HRMSPage = () => {
   const navigate = useNavigate();
+  const [showDemoForm, setShowDemoForm] = useState(false);
+
   const handleContactClick = () => {
-    
     navigate("/contact");
   };
+
+  const handleDemoClick = () => {
+    setShowDemoForm(true);
+  };
+
+  const closeModal = () => {
+    setShowDemoForm(false);
+  };
+
+  const handleDemoSubmit = (e) => {
+    e.preventDefault();
+    // Add backend logic here if needed
+    alert("Demo request submitted!");
+    setShowDemoForm(false);
+  };
+
   return (
     <div className="bg-gray-100">
       {/* Hero Section */}
@@ -85,16 +102,65 @@ const HRMSPage = () => {
         <h2 className="text-3xl sm:text-4xl font-semibold mb-6">Get in Touch</h2>
         <p className="text-lg mb-6">Have questions or need a custom solution? Contact us and let’s discuss how we can help!</p>
         <div className="space-x-4">
-          {/* <button className="bg-yellow-500 text-teal-900 px-6 py-3 rounded-full text-xl hover:bg-yellow-600 transition-all">Contact Us</button> */}
-           <button
-      onClick={handleContactClick}
-      className="bg-yellow-500 text-teal-900 px-6 py-3 rounded-full text-xl hover:bg-yellow-600 transition-all"
-    >
-      Contact Us
-    </button>
-          <button className="bg-teal-700 px-6 py-3 rounded-full text-xl hover:bg-teal-600 transition-all">Request a Demo</button>
+          <button
+            onClick={handleContactClick}
+            className="bg-yellow-500 text-teal-900 px-6 py-3 rounded-full text-xl hover:bg-yellow-600 transition-all"
+          >
+            Contact Us
+          </button>
+          <button
+            onClick={handleDemoClick}
+            className="bg-teal-700 px-6 py-3 rounded-full text-xl hover:bg-teal-600 transition-all"
+          >
+            Request a Demo
+          </button>
         </div>
       </section>
+
+      {/* Demo Request Modal */}
+      {showDemoForm && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-8 w-full max-w-md shadow-lg relative">
+            <button
+              onClick={closeModal}
+              className="absolute top-2 right-4 text-gray-600 text-2xl hover:text-red-500"
+            >
+              &times;
+            </button>
+            <h2 className="text-2xl font-bold text-teal-600 mb-4">Request a Demo</h2>
+            <form onSubmit={handleDemoSubmit} className="space-y-4">
+              <input
+                type="text"
+                placeholder="Your Name"
+                required
+                className="w-full border border-gray-300 rounded px-4 py-2"
+              />
+              <input
+                type="email"
+                placeholder="Your Email"
+                required
+                className="w-full border border-gray-300 rounded px-4 py-2"
+              />
+              <input
+                type="text"
+                placeholder="Company Name"
+                className="w-full border border-gray-300 rounded px-4 py-2"
+              />
+              <textarea
+                placeholder="What are you looking for?"
+                rows="4"
+                className="w-full border border-gray-300 rounded px-4 py-2"
+              ></textarea>
+              <button
+                type="submit"
+                className="bg-teal-600 text-white px-6 py-2 rounded-full hover:bg-teal-700 transition-all"
+              >
+                Submit Request
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
@@ -124,7 +190,6 @@ const Testimonial = ({ name, position, company, feedback }) => (
     <p className="font-semibold text-teal-500">{name}</p>
     <p className="text-sm text-gray-500">{position} at {company}</p>
   </div>
-  
 );
 
 export default HRMSPage;

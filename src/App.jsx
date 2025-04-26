@@ -39,7 +39,9 @@ import Adminsetting from './components/Admin/Settings/Adminsetting';
 import AdminReports from './components/Admin/Report/Report';
 import ViewDelistedProduct from './components/Admin/Product/ViewDelistedProduct';
 import HRMS from './components/HRMS';
-
+import Education from './components/Education';
+import Hospital from './components/Hospital';
+import Job from './components/Job';
 function App() {
   return (
     <Router>
@@ -82,6 +84,9 @@ function App() {
         <Route path="/admin/report" element={<AdminReports />} /> 
         <Route path="/admin/delistproduct/view/:id" element={<ViewDelistedProduct />} /> 
         <Route path="/hrms" element={<HRMS/>} /> 
+        <Route path="/education" element={<Education/>} /> 
+        <Route path="/health" element={<Hospital/>} /> 
+        <Route path="/job" element={<Job/>} /> 
      
        
        
