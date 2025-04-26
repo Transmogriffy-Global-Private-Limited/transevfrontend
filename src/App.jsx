@@ -38,6 +38,7 @@ import ManageOrder from './components/Admin/AdminOrder/ManageOrder';
 import Adminsetting from './components/Admin/Settings/Adminsetting';
 import AdminReports from './components/Admin/Report/Report';
 import ViewDelistedProduct from './components/Admin/Product/ViewDelistedProduct';
+import HRMS from './components/HRMS';
 
 function App() {
   return (
@@ -80,6 +81,7 @@ function App() {
         <Route path="/admin/settings" element={<Adminsetting />} /> 
         <Route path="/admin/report" element={<AdminReports />} /> 
         <Route path="/admin/delistproduct/view/:id" element={<ViewDelistedProduct />} /> 
+        <Route path="/hrms" element={<HRMS/>} /> 
      
        
        
