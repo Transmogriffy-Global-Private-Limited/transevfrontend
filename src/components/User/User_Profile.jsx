@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserSidebar from '../User/User_sidebar';
 import UserNavbar from '../User/User_Navbar';
-import background from "../../assets/new3.jpg";
+import background from "../../assets/slider.jpg";
 const Profile = () => {
   const BASE_URL_AND_PORT = "http://192.168.0.106:8000"; // Define the base URL and port
   const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf"; // API Key (for demonstration purposes)
@@ -359,34 +359,35 @@ const Profile = () => {
       };
       
   return (
-    <div
-           className=" min-h-screen bg-gradient-to-r from-teal-400 via-teal-500 to-teal-700 bg-cover bg-center bg-fixed"
-           style={{ background: `url(${background})` }}
-         >
-      {/* User Navbar */}
-      <UserNavbar onToggleSidebar={toggleSidebar} />
-
-      {/* Main Container */}
-      <div className="flex flex-1">
-        {/* Sidebar */}
-        <UserSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
-    {/* <div className="min-h-screen bg-gray-50 flex flex-col"> */}
-      <div className="flex flex-col items-center justify-center flex-1 p-6">
+    <div className="min-h-screen bg-gradient-to-r from-teal-100 via-teal-100 to-teal-100 bg-cover bg-center bg-fixed">
+  
+    {/* User Navbar */}
+    <UserNavbar onToggleSidebar={toggleSidebar} />
+    
+    {/* Main Container */}
+    <div className="flex flex-col md:flex-row">
       
-    <div className=" p-4 shadow-lg rounded-md max-w-full">
-  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-wide text-teal-500 py-2 px-6 rounded-full shadow-lg text-center">
-    My Profile
-  </h2>
-</div>
+      {/* Sidebar */}
+      <UserSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
+  
+      {/* Main Content Area */}
+      <div className="flex-1 p-6 bg-teal-100 shadow-xl rounded-xl mx-4 my-6 md:mx-12 md:my-8">
+        
+        {/* Profile Heading */}
+        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-teal-700 py-4 px-8 rounded-full shadow-md text-center">
+          My Profile
+        </h2>
+
+
 
 
         {/* Profile Card */}
-        <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-2xl space-y-6">
+        <div className="bg-teal rounded-2xl shadow-2xl p-8 w-full max-w-2xl space-y-6 ml-130">
           <div className="flex flex-col items-center relative">
             {user && (
               <div className="flex justify-center mb-4">
                 <div
-                  className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-teal-500 cursor-pointer"
+                  className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-green-100 cursor-pointer"
                   onClick={() => document.getElementById("image-upload").click()}
                 >
                   {newImage || profilePicture ? (

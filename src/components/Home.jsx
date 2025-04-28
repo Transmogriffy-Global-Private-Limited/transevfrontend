@@ -1,4 +1,3 @@
-
 import React, { useState,useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
@@ -639,7 +638,7 @@ function HomePage() {
     ].map((box, index) => (
       <div key={index} className="flex flex-col items-center">
         <div
-          className="box bg-gray-200 p-6 sm:p-8 md:p-10 rounded-lg relative cursor-pointer hover:scale-105 transform transition-all duration-300 w-[300px] sm:w-[400px] md:w-[450px] lg:w-[550px] h-[400px] sm:h-[500px] md:h-[600px] lg:h-[800px]"
+          className="box bg-gray-200 p-6 sm:p-8 md:p-10 rounded-lg relative cursor-pointer hover:scale-105 transform transition-all duration-300 w-[300px] sm:w-[400px] md:w-[450px] lg:w-[550px] h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px]"
           onMouseEnter={() => setHovered(index)}
           onMouseLeave={() => setHovered(null)}
         >

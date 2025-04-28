@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   FaHome, FaBox, FaClipboardList, FaUserCircle,
-  FaCog, FaBars, FaEnvelope,FaChartBar,FaUsers
+  FaCog, FaBars, FaEnvelope,FaChartBar,FaUsers,FaSignOutAlt
 } from "react-icons/fa";
 import logo from '../../assets/log.png'
 const BASE_URL_AND_PORT = "http://192.168.0.106:8000";
@@ -89,7 +89,7 @@ const Sidebar = () => {
               onClick={handleLogout}
               className="flex items-center w-full px-3 py-2 rounded-md text-sm text-red-400 hover:bg-[#2d3748] transition-colors"
             >
-              <FaEnvelope className="mr-3 text-2xl text-red-400" />
+              <FaSignOutAlt className="mr-3 text-2xl text-red-400" />
               {isExpanded && <span className=" text-lg">Logout</span>}
             </button>
           </li>

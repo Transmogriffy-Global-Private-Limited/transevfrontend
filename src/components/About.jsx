@@ -228,7 +228,7 @@ Facilitating fairer, <br />
 
         {/* Right Side - Why People Love Us */}
         <div className="text-left">
-          <h3 className="text-6xl font-bold text-black mb-8">Why People Love Us</h3>
+          <h3 className="text-6xl font-bold text-black mb-8">Why TransEv?</h3>
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8">
             <div className="flex items-center space-x-3">
               <FaBolt className="text-yellow-500 text-3xl" />

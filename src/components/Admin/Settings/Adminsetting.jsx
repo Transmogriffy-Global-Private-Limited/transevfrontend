@@ -226,7 +226,7 @@ const fetch2FAStatus = async () => {
   </div>
 
   {/* --- Danger Zone --- */}
-  <div className="bg-red-50 rounded-xl p-6 shadow-md border border-red-300">
+  {/* <div className="bg-red-50 rounded-xl p-6 shadow-md border border-red-300">
     <h3 className="text-xl font-semibold text-red-700 flex items-center gap-2">
       <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-6.364 6.364m0 0l-6.364 6.364M5.636 18.364l6.364-6.364m0 0l6.364-6.364" />
@@ -242,7 +242,7 @@ const fetch2FAStatus = async () => {
     >
       Delete My Account
     </button>
-  </div>
+  </div> */}
 </div>
 
 

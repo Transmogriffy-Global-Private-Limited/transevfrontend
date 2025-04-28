@@ -100,7 +100,7 @@ function OrderHistoryPage() {
                           : "bg-green-200 text-green-800"
                       }`}
                     >
-                      {order.order_status === "null" ? "Pending" : order.order_status}
+                      {order.order_status === "null" ? "Order Confirm" : order.order_status}
                     </span>
                   </p>
                 </div>
