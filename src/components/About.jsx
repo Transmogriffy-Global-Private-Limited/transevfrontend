@@ -360,53 +360,54 @@ Facilitating fairer, <br />
 </section>
 
 <div className="w-full h-screen bg-white flex justify-center items-center mt-10 sm:mt-20 md:mt-30 lg:mt-40">
-                  <div className="w-full h-full max-w-screen-3xl bg-gradient-to-r p-6 sm:p-8 md:p-10 lg:p-12">
-                    <div className="w-full h-full bg-gradient-to-b from-yellow-200 via-yellow-200 to-red-300 rounded-3xl p-8 sm:p-10 md:p-12 lg:p-16 shadow-lg max-w-screen-3xl mx-auto">
-                      {/* Heading */}
-                      <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-semibold text-gray-800 text-left font-aeonik">
-                        <span className="mr-10 sm:mr-20 md:mr-40 lg:inline-block lg:mr-80">Ready to get</span><br />
-                        <span className="sm:mr-10 md:mr-20 lg:mr-0 lg:inline-block">Started ?</span>
-                      </h2>
-          
-                      {/* Contact Button */}
-                      <div className="flex items-center justify-start mt-10 sm:mt-12 md:mt-14 lg:mt-20">
-                        <button
-                          id="contact-btn"
-                          onClick={handleButtonClick}
-                          className="flex items-center justify-center px-8 sm:px-10 md:px-12 py-4 bg-white text-black font-semibold rounded-full transition-all duration-300 hover:bg-black hover:text-white w-auto h-auto"
-                        >
-                          <span className="mr-4 sm:mr-6 text-lg">Contact Us</span>
-                          <div className="w-8 sm:w-10 h-8 sm:h-10 bg-black rounded-full flex items-center justify-center transition-all duration-300 group-hover:bg-white ml-4">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="w-5 sm:w-6 h-5 sm:h-6 text-white transition-transform duration-300 group-hover:text-black group-hover:translate-x-1"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                            >
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                            </svg>
-                          </div>
-                        </button>
-                      </div>
-          
-                      {/* Description */}
-                      <div className="mt-20 sm:mt-20 md:mt-30 lg:mt-50 ml-5">
-                        <h3 className="text-xl sm:text-2xl md:text-2xl lg:text-2xl font-bold text-left text-gray-800">
-                          EV Charging Solutions for Residential Sites and Businesses
-                        </h3>
-                        <div className="mt-4 sm:mt-6 lg:mr-230">
-                          <p className="text-lg text-gray-600 leading-relaxed ">
-                            We’ll listen to your needs, identify the best approach, and then create a bespoke
-                          </p>
-                          <p className="text-lg text-gray-600 leading-relaxed lg:mr-60">
-                            smart EV charging solution that’s right for you.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+           <div className="w-full h-full max-w-screen-3xl bg-gradient-to-r p-6 sm:p-8 md:p-10 lg:p-12">
+             <div className="w-full h-full bg-gradient-to-b from-yellow-200 via-yellow-200 to-red-300 rounded-3xl p-8 sm:p-10 md:p-12 lg:p-16 shadow-lg max-w-screen-3xl mx-auto">
+               {/* Heading */}
+               <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-semibold text-gray-800 text-left font-aeonik">
+                 <span className="mr-10 sm:mr-20 md:mr-40 lg:inline-block lg:mr-80">Ready to get</span><br />
+                 <span className="sm:mr-10 md:mr-20 lg:mr-0 lg:inline-block">Started ?</span>
+               </h2>
+   
+               {/* Contact Button */}
+               <div className="flex items-center justify-start mt-10 sm:mt-12 md:mt-14 lg:mt-20">
+                 <button
+                   id="contact-btn"
+                   onClick={handleButtonClick}
+                   className="flex items-center justify-center px-8 sm:px-10 md:px-12 py-4 bg-white text-black font-semibold rounded-full transition-all duration-300 hover:bg-black hover:text-white w-auto h-auto"
+                 >
+                   <span className="mr-4 sm:mr-6 text-lg">Contact Us</span>
+                   <div className="w-8 sm:w-10 h-8 sm:h-10 bg-black rounded-full flex items-center justify-center transition-all duration-300 group-hover:bg-white ml-4">
+                     <svg
+                       xmlns="http://www.w3.org/2000/svg"
+                       className="w-5 sm:w-6 h-5 sm:h-6 text-white transition-transform duration-300 group-hover:text-black group-hover:translate-x-1"
+                       fill="none"
+                       viewBox="0 0 24 24"
+                       stroke="currentColor"
+                     >
+                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                     </svg>
+                   </div>
+                 </button>
+               </div>
+   
+               
+   <div className="mt-16 sm:mt-20 md:mt-24 lg:mt-15 xl:mt-40 px-4 sm:px-6 lg:px-8">
+  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 text-left">
+    EV Charging Solutions for Residential Sites and Businesses
+  </h3>
+  <div className="mt-4 sm:mt-6 lg:mr-12 max-w-3xl">
+  <p className="text-base sm:text-lg text-gray-600 leading-relaxed whitespace-nowrap">
+    We’ll listen to your needs, identify the best approach, and then create a bespoke
+  </p>
+  <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
+    smart EV charging solution that’s right for you.
+  </p>
+</div>
+
+</div>
+</div>
+</div>
+</div>
   {/* Footer */}
                 <div className="bg-white-50 py-16 ml-20">
                   <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center px-8">

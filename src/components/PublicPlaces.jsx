@@ -650,23 +650,22 @@ const Hotels = () => {
                  </div>
      
                  {/* Description */}
-                 <div className="mt-20 sm:mt-20 md:mt-30 lg:mt-50 ml-5">
-                   <h3 className="text-xl sm:text-2xl md:text-2xl lg:text-2xl font-bold text-left text-gray-800">
-                     EV Charging Solutions for Residential Sites and Businesses
-                   </h3>
-                   <div className="mt-4 sm:mt-6">
-                     <p className="text-lg text-gray-600 leading-relaxed">
-                       We’ll listen to your needs, identify the best approach, and then create a bespoke
-                     </p>
-                     <p className="text-lg text-gray-600 leading-relaxed">
-                       smart EV charging solution that’s right for you.
-                     </p>
-                   </div>
-                 </div>
-               </div>
-             </div>
-           </div>
-     
+                 <div className="mt-16 sm:mt-20 md:mt-24 lg:mt-15 xl:mt-40 px-4 sm:px-6 lg:px-8">
+  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 text-left">
+    EV Charging Solutions for Residential Sites and Businesses
+  </h3>
+  <div className="mt-4 sm:mt-6">
+    <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
+      We’ll listen to your needs, identify the best approach, and then create a bespoke
+    </p>
+    <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
+      smart EV charging solution that’s right for you.
+    </p>
+  </div>
+</div>
+</div>
+</div>
+</div>
            {/* Footer */}
            <div className="bg-white-50 py-16 ml-20">
              <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center px-8">
