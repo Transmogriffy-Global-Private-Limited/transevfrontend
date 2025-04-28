@@ -42,6 +42,7 @@ import HRMS from './components/HRMS';
 import Education from './components/Education';
 import Hospital from './components/Hospital';
 import Job from './components/Job';
+
 function App() {
   return (
     <Router>
@@ -87,6 +88,7 @@ function App() {
         <Route path="/education" element={<Education/>} /> 
         <Route path="/health" element={<Hospital/>} /> 
         <Route path="/job" element={<Job/>} /> 
+    
      
        
        

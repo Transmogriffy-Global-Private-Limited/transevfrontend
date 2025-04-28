@@ -80,6 +80,7 @@ const UserList = () => {
               <thead className="bg-gray-900">
                 <tr>
                 <th className="py-3 px-6 text-left text-sm font-medium text-gray-300">Profile Picture</th>
+                <th className="py-3 px-6 text-left text-sm font-medium text-gray-300">User Id</th>
                   <th className="py-3 px-6 text-left text-sm font-medium text-gray-300">Name</th>
                   <th className="py-3 px-6 text-left text-sm font-medium text-gray-300">Email</th>
                   <th className="py-3 px-6 text-left text-sm font-medium text-gray-300">Phone</th>
@@ -94,6 +95,7 @@ const UserList = () => {
                      <td className="py-4 px-6 text-sm text-gray-300">
                       <img src={user.profile_picture} alt="Profile" className="w-12 h-12 rounded-full" />
                     </td>
+                    <td className="py-4 px-6 text-sm text-gray-300">{user.user_number}</td>
                     <td className="py-4 px-6 text-sm text-gray-300">{user.name}</td>
                     <td className="py-4 px-6 text-sm text-gray-300">{user.email}</td>
                     <td className="py-4 px-6 text-sm text-gray-300">{user.phone_number}</td>

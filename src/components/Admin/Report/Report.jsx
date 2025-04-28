@@ -178,11 +178,11 @@ const AdminDashboard = () => {
                   <tr>
                     <th className="px-4 py-2 text-left">Name</th>
                     <th className="px-4 py-2 text-left">Email</th>
-                    <th className="px-4 py-2 text-left">Company</th>
+                    {/* <th className="px-4 py-2 text-left">Company</th>
                     <th className="px-4 py-2 text-left">Site</th>
                     <th className="px-4 py-2 text-left">Address</th>
                     <th className="px-4 py-2 text-left">City</th>
-                    <th className="px-4 py-2 text-left">Post Code</th>
+                    <th className="px-4 py-2 text-left">Post Code</th> */}
                     <th className="px-4 py-2 text-left">Telephone</th>
                     <th className="px-4 py-2 text-left">Message</th>
                   </tr>
@@ -192,11 +192,11 @@ const AdminDashboard = () => {
                     <tr key={contact.id} className="border-t">
                       <td className="px-4 py-2">{contact.firstname} {contact.lastname}</td>
                       <td className="px-4 py-2">{contact.email}</td>
-                      <td className="px-4 py-2">{contact.company}</td>
+                      {/* <td className="px-4 py-2">{contact.company}</td>
                       <td className="px-4 py-2">{contact.yoursite}</td>
                       <td className="px-4 py-2">{contact.address}</td>
                       <td className="px-4 py-2">{contact.city}</td>
-                      <td className="px-4 py-2">{contact.postcode}</td>
+                      <td className="px-4 py-2">{contact.postcode}</td> */}
                       <td className="px-4 py-2">{contact.telephone}</td>
                       <td className="px-4 py-2">{contact.message}</td>
                     </tr>

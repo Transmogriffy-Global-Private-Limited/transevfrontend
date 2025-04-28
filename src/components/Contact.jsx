@@ -1,23 +1,17 @@
 import React, { useState } from 'react';
 import Navbar from './Navbar';
 import logo from '../assets/transev logo.png';
-import contactImage from '../assets/Office.png';
+import contactImage from '../assets/office.png';
 
 const BASE_URL_AND_PORT = "http://192.168.0.106:8000";
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
 
 const ContactPage = () => {
   const [isChecked, setIsChecked] = useState(false);
-  const [selectedOption, setSelectedOption] = useState('residential-apartment');
   const [formErrors, setFormErrors] = useState({});
   const [formData, setFormData] = useState({
     firstname: '',
     lastname: '',
-    company: '',
-    yoursite: 'Home and Housing Societies ',
-    address: '',
-    city: '',
-    postcode: '',
     telephone: '',
     email: '',
     message: ''
@@ -28,41 +22,40 @@ const ContactPage = () => {
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
-  const handleOptionChange = (e) => {
-    const optionMap = {
-      'residential-apartment': 'Residential Apartment',
-      'hotel-leisure': 'Hotel & Leisure',
-      'holiday-park': 'Holiday Park',
-      'workplace': 'Workplace'
-    };
-    setSelectedOption(e.target.value);
-    setFormData((prev) => ({ ...prev, yoursite: optionMap[e.target.value] }));
-  };
-
   const handleCheckboxChange = () => setIsChecked(!isChecked);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const errors = {};
-    const requiredFields = ['firstname', 'lastname', 'postcode', 'email', 'message'];
 
+    const errors = {};
+    const requiredFields = ['firstname', 'lastname', 'email', 'message'];
+
+    // Validating required fields
     requiredFields.forEach((field) => {
       if (!formData[field]) errors[field] = `${field} is required`;
     });
 
+    // Validating privacy checkbox
     if (!isChecked) errors.privacy = 'You must agree with the privacy statement';
 
     setFormErrors(errors);
 
     if (Object.keys(errors).length === 0) {
       try {
+        // Sending form data to the backend in the specified format
         const res = await fetch(`${BASE_URL_AND_PORT}/contact/contactus`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-           'API-KEY': API_KEY,
+            'API-KEY': API_KEY,
           },
-          body: JSON.stringify(formData)
+          body: JSON.stringify({
+            firstname: formData.firstname,
+            lastname: formData.lastname,
+            telephone: formData.telephone,
+            email: formData.email,
+            message: formData.message,
+          }),
         });
 
         const data = await res.json();
@@ -113,46 +106,57 @@ const ContactPage = () => {
 
           {/* Right Content - Form */}
           <div className="lg:w-1/2 w-full bg-gradient-to-r from-yellow-100 via-white-400 to-pink-100 p-8 rounded-xl shadow-lg">
-       
             <form onSubmit={handleSubmit}>
-              {/* Inputs */}
-              {[
-                ['firstname', 'First Name*'],
-                ['lastname', 'Last Name*'],
-                ['company', 'Company'],
-                ['address', 'Address'],
-                ['city', 'City'],
-                ['postcode', 'Postcode*'],
-                ['email', 'Email*'],
-                ['telephone', 'Telephone'],
-              ].map(([id, label]) => (
-                <div key={id} className="mb-5">
-                  <label htmlFor={id} className="block text-gray-900 font-medium mb-1">{label}</label>
-                  <input
-                    type={id === 'email' ? 'email' : 'text'}
-                    id={id}
-                    value={formData[id]}
-                    onChange={handleChange}
-                    className={`w-full p-3 border rounded-md ${formErrors[id] ? 'border-red-500' : 'border-gray-300'}`}
-                  />
-                  {formErrors[id] && <p className="text-sm text-red-500">{formErrors[id]}</p>}
-                </div>
-              ))}
-
-              {/* Dropdown */}
+              {/* First Name */}
               <div className="mb-5">
-              <label htmlFor="yoursite" className="block text-gray-900 font-medium mb-1">Your site*</label>
-                <select
-                  id="dropdown"
-                  value={selectedOption}
-                  onChange={handleOptionChange}
-                  className="w-full p-3 border border-gray-300 rounded-md"
-                >
-                  <option value="residential-apartment">Home and Housing Societies</option>
-                  <option value="hotel-leisure">Office and Workplace</option>
-                  <option value="holiday-park">Public Places</option>
-                  <option value="workplace">Fleet Organization</option>
-                </select>
+                <label htmlFor="firstname" className="block text-gray-900 font-medium mb-1">First Name*</label>
+                <input
+                  type="text"
+                  id="firstname"
+                  value={formData.firstname}
+                  onChange={handleChange}
+                  className={`w-full p-3 border rounded-md ${formErrors.firstname ? 'border-red-500' : 'border-gray-300'}`}
+                />
+                {formErrors.firstname && <p className="text-sm text-red-500">{formErrors.firstname}</p>}
+              </div>
+
+              {/* Last Name */}
+              <div className="mb-5">
+                <label htmlFor="lastname" className="block text-gray-900 font-medium mb-1">Last Name*</label>
+                <input
+                  type="text"
+                  id="lastname"
+                  value={formData.lastname}
+                  onChange={handleChange}
+                  className={`w-full p-3 border rounded-md ${formErrors.lastname ? 'border-red-500' : 'border-gray-300'}`}
+                />
+                {formErrors.lastname && <p className="text-sm text-red-500">{formErrors.lastname}</p>}
+              </div>
+
+              {/* Email */}
+              <div className="mb-5">
+                <label htmlFor="email" className="block text-gray-900 font-medium mb-1">Email*</label>
+                <input
+                  type="email"
+                  id="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className={`w-full p-3 border rounded-md ${formErrors.email ? 'border-red-500' : 'border-gray-300'}`}
+                />
+                {formErrors.email && <p className="text-sm text-red-500">{formErrors.email}</p>}
+              </div>
+
+              {/* Telephone */}
+              <div className="mb-5">
+                <label htmlFor="telephone" className="block text-gray-900 font-medium mb-1">Telephone</label>
+                <input
+                  type="text"
+                  id="telephone"
+                  value={formData.telephone}
+                  onChange={handleChange}
+                  className={`w-full p-3 border rounded-md ${formErrors.telephone ? 'border-red-500' : 'border-gray-300'}`}
+                />
+                {formErrors.telephone && <p className="text-sm text-red-500">{formErrors.telephone}</p>}
               </div>
 
               {/* Message Textarea */}
@@ -188,7 +192,7 @@ const ContactPage = () => {
               >
                 Send Message
               </button>
-              </form>
+            </form>
           </div>
         </div>
       </section>
@@ -217,19 +221,19 @@ const ContactPage = () => {
             </div>
           </div>
 
-    {/* Divider */}
-    <div className="mt-10 border-t-2 border-gray-300"></div>
-
-    {/* Footer Links */}
-    <footer className="text-black py-10">
-      <div className="flex flex-col lg:flex-row justify-between gap-12">
-        {/* Left description */}
-        <div className="lg:w-1/3">
-          <h4 className="text-lg sm:text-xl font-semibold mb-4">
-            Experts in smart EV charging solutions<br />
-            for residential sites and businesses.
-          </h4>
-          <a
+          {/* Divider */}
+          <div className="mt-10 border-t-2 border-gray-300"></div>
+    
+     {/* Footer Links */}
+     <footer className="text-black py-10">
+       <div className="flex flex-col lg:flex-row justify-between gap-12">
+         {/* Left description */}
+         <div className="lg:w-1/3">
+           <h4 className="text-lg sm:text-xl font-semibold mb-4">
+             Experts in smart EV charging solutions<br />
+             for residential sites and businesses.
+           </h4>
+           <a
             href="/client-portal"
             className="inline-flex items-center px-6 py-3 bg-black text-white font-semibold rounded-full hover:bg-yellow-500 hover:text-black transition-all duration-300 mt-6"
           >
@@ -294,4 +298,3 @@ const ContactPage = () => {
 };
 
 export default ContactPage;
-
