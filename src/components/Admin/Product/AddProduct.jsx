@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Hook for navigation after success
 import AdminNavbar from '../Admin_navbar'; // Assuming you have a Navbar component
@@ -16,24 +17,29 @@ const AddProductPage = () => {
     price: "",
     quantity: "",
     details: {
-      voltage: "230V",
+      input_voltage: "230V",
       phase: "Single",
       current: "16A",
       frequency: "50Hz",
       rated_power: "250W",
       fast_charger: "yes",
-      protection: "Overload",
-      communication: "Modbus",
-      maximum_operating_temperature: 100,
-      minimum_operating_temperature: 20,
+      protection: "Overload, Short Circuit",
+      communication: "Modbus, CAN",
       cooling: "Air cooled",
       ingress_protection: "IP65",
-      length: 0.5,
-      breadth: 0.3,
-      height: 0.2,
-      weight_in_kgs: 2.0,
-      noise_level: "55dB",
-      efficiency_in_percentage: 95.5,
+     
+      dimensions: "W X D X H (310x220x90mm)",
+      gun_details: "Two guns",
+      gun_type: "CCS2",
+      material: "Aluminum",
+      ouput_voltage: "7.7 KW",
+      display: "Yes",
+      push_button: "Yes",
+      operatingtemps: "-10°C to 50°C",
+      chargingoperation: "Standard charging operation",
+      safetyregulation: "IEC 61000-2-2",
+      mountingtype: "Wall mounted",
+      cable_length: "10m",
       additional_details: "This is a high-efficiency product for industrial use.",
     },
   });
@@ -49,17 +55,22 @@ const AddProductPage = () => {
       const [section, field] = name.split(".");
       setProduct((prevProduct) => ({
         ...prevProduct,
-        [section]: { ...prevProduct[section], [field]: value },
+        details: {
+          ...prevProduct.details,
+          [field]: value,
+        },
       }));
     } else {
       setProduct({ ...product, [name]: value });
     }
   };
- const [sidebarOpen, setSidebarOpen] = useState(true); // Manage sidebar visibility
+
+  const [sidebarOpen, setSidebarOpen] = useState(true); // Manage sidebar visibility
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen); // Toggle sidebar visibility
   };
+
   // Handle file input changes
   const handleFileChange = (e) => {
     setFiles(e.target.files);
@@ -102,24 +113,29 @@ const AddProductPage = () => {
           price: "",
           quantity: "",
           details: {
-            voltage: "230V",
+            input_voltage: "230V",
             phase: "Single",
             current: "16A",
             frequency: "50Hz",
             rated_power: "250W",
             fast_charger: "yes",
-            protection: "Overload",
-            communication: "Modbus",
-            maximum_operating_temperature: 100,
-            minimum_operating_temperature: 20,
+            protection: "Overload, Short Circuit",
+            communication: "Modbus, CAN",
             cooling: "Air cooled",
             ingress_protection: "IP65",
-            length: 0.5,
-            breadth: 0.3,
-            height: 0.2,
-            weight_in_kgs: 2.0,
-            noise_level: "55dB",
-            efficiency_in_percentage: 95.5,
+          
+            dimensions: "W X D X H (310x220x90mm)",
+            gun_details: "Two guns",
+            gun_type: "CCS2",
+            material: "Aluminum",
+            ouput_voltage: "7.7 KW",
+            display: "Yes",
+            push_button: "Yes",
+            operatingtemps: "-10°C to 50°C",
+            chargingoperation: "Standard charging operation",
+            safetyregulation: "IEC 61000-2-2",
+            mountingtype: "Wall mounted",
+            cable_length: "10m",
             additional_details: "This is a high-efficiency product for industrial use.",
           },
         });
@@ -132,401 +148,136 @@ const AddProductPage = () => {
       setLoading(false);
     }
   };
+
   const handleAllProduct = () => {
     navigate("/manage/products"); // Navigate to the Add Product page
   };
+
   return (
-    <div
-    className="min-h-screen bg-gradient-to-r from-teal-400 via-teal-500 to-teal-700 bg-cover bg-center bg-fixed"
-    style={{ backgroundImage: `url(${backgroundImage})` }}
-  >
-      {/* User Navbar */}
+    <div className="min-h-screen bg-gradient-to-r from-teal-400 via-teal-500 to-teal-700 bg-cover bg-center bg-fixed" style={{ backgroundImage: `url(${backgroundImage})` }}>
       <AdminNavbar onToggleSidebar={toggleSidebar} />
-
-      {/* Main Container */}
       <div className="flex flex-1">
-        {/* Sidebar */}
         <AdminSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6 ml-70 w-200" >
-      <div className="w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
-        <h2 className="text-3xl font-semibold mb-6 text-center text-gray-700">Add Product</h2>
-        <div className="flex justify-center mb-6 space-x-4 ml-100">
-  {/* Add Product Button */}
-  <button
-    onClick={handleAllProduct}
-    className="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 transition duration-300"
-  >
-  View Products
-  </button>
-  </div>
-        {/* Success/Failure Messages */}
-        {success && <div className="text-green-500 mb-4 text-center">Product added successfully!</div>}
-        {error && <div className="text-red-500 mb-4 text-center">{error}</div>}
+        <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6 ml-70 w-200">
+          <div className="w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
+            <h2 className="text-3xl font-semibold mb-6 text-center text-gray-700">Add Product</h2>
+            <div className="flex justify-center mb-6 space-x-4 ml-100">
+              <button
+                onClick={handleAllProduct}
+                className="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 transition duration-300"
+              >
+                View Products
+              </button>
+            </div>
 
-        <form onSubmit={handleSubmit}>
-          {/* Product Name */}
-          <div className="mb-4">
-            <label className="block text-gray-600" htmlFor="name">
-              Product Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={product.name}
-              onChange={handleChange}
-              required
-              className="mt-2 px-4 py-2 w-full border rounded-md"
-            />
+            {/* Success/Failure Messages */}
+            {success && <div className="text-green-500 mb-4 text-center">Product added successfully!</div>}
+            {error && <div className="text-red-500 mb-4 text-center">{error}</div>}
+
+            <form onSubmit={handleSubmit}>
+              {/* Product Name */}
+              <div className="mb-4">
+                <label className="block text-gray-600" htmlFor="name">Product Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={product.name}
+                  onChange={handleChange}
+                  required
+                  className="mt-2 px-4 py-2 w-full border rounded-md"
+                />
+              </div>
+
+              {/* Product Model */}
+              <div className="mb-4">
+                <label className="block text-gray-600" htmlFor="model">Product Model</label>
+                <input
+                  type="text"
+                  id="model"
+                  name="model"
+                  value={product.model}
+                  onChange={handleChange}
+                  required
+                  className="mt-2 px-4 py-2 w-full border rounded-md"
+                />
+              </div>
+
+              {/* Product Price */}
+              <div className="mb-4">
+                <label className="block text-gray-600" htmlFor="price">Price</label>
+                <input
+                  type="number"
+                  id="price"
+                  name="price"
+                  value={product.price}
+                  onChange={handleChange}
+                  required
+                  className="mt-2 px-4 py-2 w-full border rounded-md"
+                />
+              </div>
+
+              {/* Product Quantity */}
+              <div className="mb-4">
+                <label className="block text-gray-600" htmlFor="quantity">Quantity</label>
+                <input
+                  type="number"
+                  id="quantity"
+                  name="quantity"
+                  value={product.quantity}
+                  onChange={handleChange}
+                  required
+                  className="mt-2 px-4 py-2 w-full border rounded-md"
+                />
+              </div>
+
+              {/* Details Inputs */}
+              <div className="space-y-4">
+                {/* Loop through each detail field */}
+                {Object.entries(product.details).map(([key, value]) => (
+                  <div key={key} className="mb-4">
+                    <label className="block text-gray-600" htmlFor={key}>
+                      {key.replace("_", " ").toUpperCase()}
+                    </label>
+                    <input
+                      type="text"
+                      id={key}
+                      name={`details.${key}`}
+                      value={value}
+                      onChange={handleChange}
+                      className="mt-2 px-4 py-2 w-full border rounded-md"
+                    />
+                  </div>
+                ))}
+              </div>
+
+              {/* File Upload */}
+              <div className="mb-4">
+                <label className="block text-gray-600" htmlFor="files">Upload Files</label>
+                <input
+                  type="file"
+                  id="files"
+                  name="files"
+                  multiple
+                  onChange={handleFileChange}
+                  className="mt-2 px-4 py-2 w-full border rounded-md"
+                />
+              </div>
+
+              {/* Submit Button */}
+              <div className="flex justify-center">
+                <button
+                  type="submit"
+                  className="bg-blue-500 text-white px-8 py-3 rounded-md hover:bg-blue-600 transition duration-300"
+                  disabled={loading}
+                >
+                  {loading ? "Submitting..." : "Add Product"}
+                </button>
+              </div>
+            </form>
           </div>
-
-          {/* Product Model */}
-          <div className="mb-4">
-            <label className="block text-gray-600" htmlFor="model">
-              Product Model
-            </label>
-            <input
-              type="text"
-              id="model"
-              name="model"
-              value={product.model}
-              onChange={handleChange}
-              required
-              className="mt-2 px-4 py-2 w-full border rounded-md"
-            />
-          </div>
-
-          {/* Product Price */}
-          <div className="mb-4">
-            <label className="block text-gray-600" htmlFor="price">
-              Price
-            </label>
-            <input
-              type="number"
-              id="price"
-              name="price"
-              value={product.price}
-              onChange={handleChange}
-              required
-              className="mt-2 px-4 py-2 w-full border rounded-md"
-            />
-          </div>
-
-          {/* Product Quantity */}
-          <div className="mb-4">
-            <label className="block text-gray-600" htmlFor="quantity">
-              Quantity
-            </label>
-            <input
-              type="number"
-              id="quantity"
-              name="quantity"
-              value={product.quantity}
-              onChange={handleChange}
-              required
-              className="mt-2 px-4 py-2 w-full border rounded-md"
-            />
-          </div>
-                    {/* Details Inputs */}
-          <div className="space-y-4">
-            <div className="mb-4">
-              <label className="block text-gray-600" htmlFor="voltage">
-                Voltage
-             </label>
-              <input
-                type="text"
-                id="voltage"
-                name="voltage"
-                value={product.details.voltage}
-                onChange={handleChange}
-                className="mt-2 px-4 py-2 w-full border rounded-md"
-              />
-            </div>
-
-            <div className="mb-4">
-              <label className="block text-gray-600" htmlFor="phase">
-                Phase
-              </label>
-              <input
-                type="text"
-                id="phase"
-                name="phase"
-                value={product.details.phase}
-                onChange={handleChange}
-                className="mt-2 px-4 py-2 w-full border rounded-md"
-              />
-            </div>
-
-            <div className="mb-4">
-              <label className="block text-gray-600" htmlFor="current">
-                Current
-              </label>
-              <input
-                type="text"
-                id="current"
-                name="current"
-                value={product.details.current}
-                onChange={handleChange}
-                className="mt-2 px-4 py-2 w-full border rounded-md"
-              />
-            </div>
-
-            <div className="mb-4">
-              <label className="block text-gray-600" htmlFor="frequency">
-                Frequency
-              </label>
-              <input
-                type="text"
-                id="frequency"
-                name="frequency"
-                value={product.details.frequency}
-                onChange={handleChange}
-                className="mt-2 px-4 py-2 w-full border rounded-md"
-              />
-            </div>
-
-            <div className="mb-4">
-              <label className="block text-gray-600" htmlFor="rated_power">
-                Rated Power
-              </label>
-              <input
-                type="text"
-                id="rated_power"
-                name="rated_power"
-                value={product.details.rated_power}
-                onChange={handleChange}
-                className="mt-2 px-4 py-2 w-full border rounded-md"
-              />
-            </div>
-
-            <div className="mb-4">
-  <label className="block text-gray-600" htmlFor="fast_charger">
-    Fast Charger
-  </label>
-  <select
-    id="fast_charger"
-    name="fast_charger"
-    value={product.details.fast_charger}
-    onChange={handleChange}
-    className="mt-2 px-4 py-2 w-full border rounded-md"
-  >
-    <option value="yes">Yes</option>
-    <option value="no">No</option>
-  </select>
-</div>
-
-
-            <div className="mb-4">
-              <label className="block text-gray-600" htmlFor="protection">
-                Protection
-              </label>
-              <input
-                type="text"
-                id="protection"
-                name="protection"
-                value={product.details.protection}
-                onChange={handleChange}
-                className="mt-2 px-4 py-2 w-full border rounded-md"
-              />
-            </div>
-
-            <div className="mb-4">
-              <label className="block text-gray-600" htmlFor="communication">
-                Communication
-              </label>
-              <input
-                type="text"
-                id="communication"
-                name="communication"
-                value={product.details.communication}
-                onChange={handleChange}
-                className="mt-2 px-4 py-2 w-full border rounded-md"
-              />
-            </div>
-
-            <div className="mb-4">
-              <label className="block text-gray-600" htmlFor="maximum_operating_temperature">
-                Maximum Operating Temperature
-              </label>
-              <input
-                type="number"
-                id="maximum_operating_temperature"
-                name="maximum_operating_temperature"
-                value={product.details.maximum_operating_temperature}
-                onChange={handleChange}
-                className="mt-2 px-4 py-2 w-full border rounded-md"
-              />
-            </div>
-
-            <div className="mb-4">
-              <label className="block text-gray-600" htmlFor="minimum_operating_temperature">
-                Minimum Operating Temperature
-              </label>
-              <input
-                type="number"
-                id="minimum_operating_temperature"
-                name="minimum_operating_temperature"
-                value={product.details.minimum_operating_temperature}
-                onChange={handleChange}
-                className="mt-2 px-4 py-2 w-full border rounded-md"
-              />
-            </div>
-
-            <div className="mb-4">
-              <label className="block text-gray-600" htmlFor="cooling">
-                Cooling
-              </label>
-              <input
-                type="text"
-                id="cooling"
-                name="cooling"
-                value={product.details.cooling}
-                onChange={handleChange}
-                className="mt-2 px-4 py-2 w-full border rounded-md"
-              />
-            </div>
-
-            <div className="mb-4">
-              <label className="block text-gray-600" htmlFor="ingress_protection">
-                Ingress Protection
-              </label>
-              <input
-                type="text"
-                id="ingress_protection"
-                name="ingress_protection"
-                value={product.details.ingress_protection}
-                onChange={handleChange}
-                className="mt-2 px-4 py-2 w-full border rounded-md"
-              />
-            </div>
-
-            <div className="mb-4">
-              <label className="block text-gray-600" htmlFor="length">
-                Length (m)
-              </label>
-              <input
-                type="number"
-                id="length"
-                name="length"
-                value={product.details.length}
-                onChange={handleChange}
-                className="mt-2 px-4 py-2 w-full border rounded-md"
-              />
-            </div>
-
-            <div className="mb-4">
-              <label className="block text-gray-600" htmlFor="breadth">
-                Breadth (m)
-              </label>
-              <input
-                type="number"
-                id="breadth"
-                name="breadth"
-                value={product.details.breadth}
-                onChange={handleChange}
-                className="mt-2 px-4 py-2 w-full border rounded-md"
-              />
-            </div>
-
-            <div className="mb-4">
-              <label className="block text-gray-600" htmlFor="height">
-                Height (m)
-              </label>
-              <input
-                type="number"
-                id="height"
-                name="height"
-                value={product.details.height}
-                onChange={handleChange}
-                className="mt-2 px-4 py-2 w-full border rounded-md"
-              />
-            </div>
-
-            <div className="mb-4">
-              <label className="block text-gray-600" htmlFor="weight_in_kgs">
-                Weight (kg)
-              </label>
-              <input
-                type="number"
-                id="weight_in_kgs"
-                name="weight_in_kgs"
-                value={product.details.weight_in_kgs}
-                onChange={handleChange}
-                className="mt-2 px-4 py-2 w-full border rounded-md"
-              />
-            </div>
-
-            <div className="mb-4">
-              <label className="block text-gray-600" htmlFor="noise_level">
-                Noise Level
-              </label>
-              <input
-                type="text"
-                id="noise_level"
-                name="noise_level"
-                value={product.details.noise_level}
-                onChange={handleChange}
-                className="mt-2 px-4 py-2 w-full border rounded-md"
-              />
-            </div>
-
-            <div className="mb-4">
-              <label className="block text-gray-600" htmlFor="efficiency_in_percentage">
-                Efficiency (%)
-              </label>
-              <input
-                type="number"
-                id="efficiency_in_percentage"
-                name="efficiency_in_percentage"
-                value={product.details.efficiency_in_percentage}
-                onChange={handleChange}
-                className="mt-2 px-4 py-2 w-full border rounded-md"
-              />
-            </div>
-
-            <div className="mb-4">
-              <label className="block text-gray-600" htmlFor="additional_details">
-                Additional Details
-              </label>
-              <textarea
-                id="additional_details"
-                name="additional_details"
-                value={product.details.additional_details}
-                onChange={handleChange}
-                className="mt-2 px-4 py-2 w-full border rounded-md"
-              ></textarea>
-            </div>
-          </div>
-
-          {/* File Upload */}
-          <div className="mb-4">
-            <label className="block text-gray-600" htmlFor="files">
-              Upload Files
-            </label>
-            <input
-              type="file"
-              id="files"
-              name="files"
-              multiple
-              onChange={handleFileChange}
-              className="mt-2 px-4 py-2 w-full border rounded-md"
-            />
-          </div>
-
-          {/* Submit Button */}
-          <div className="flex justify-center">
-            <button
-              type="submit"
-              className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition duration-300"
-              disabled={loading}
-            >
-              {loading ? "Submitting..." : "Add Product"}
-            </button>
-          </div>
-        </form>
+        </div>
       </div>
-    </div>
-    </div>
     </div>
   );
 };

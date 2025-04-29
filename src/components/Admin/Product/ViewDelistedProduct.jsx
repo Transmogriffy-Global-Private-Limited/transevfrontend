@@ -90,7 +90,7 @@ const DelistedProductViewPage = () => {
                   key={product.id}
                   className="border rounded-lg p-4 shadow-md bg-gray-50 hover:shadow-lg transition-shadow duration-200"
                 >
-                  <div className="relative h-48 sm:h-56 md:h-60 bg-gray-200 mb-4 overflow-hidden rounded">
+                  <div className="relative w-full max-w-xl mx-auto aspect-[4/3] bg-gray-200 mb-4 overflow-hidden rounded">
                     {product.image_paths?.length > 1 ? (
                       <>
                         <img
@@ -130,22 +130,14 @@ const DelistedProductViewPage = () => {
                   <h1 className="text-3xl font-semibold mb-4">{product.name}</h1>
                   <p className="text-xl text-gray-600 mb-4">Model: {product.model}</p>
                   <p className="text-lg text-gray-700 mb-4">Price: ₹{product.price}</p>
-                  <p className="text-lg text-gray-700 mb-4">Quantity: {product.quantity}</p>
+                  {/* <p className="text-lg text-gray-700 mb-4">Quantity: {product.quantity}</p> */}
 
                   {/* Table Format for Product Details */}
                   <table className="w-full table-auto">
                     <tbody>
                       <tr>
-                        <td className="font-semibold">Height</td>
-                        <td>{product.details.height} m</td>
-                      </tr>
-                      <tr>
-                        <td className="font-semibold">Length</td>
-                        <td>{product.details.length} m</td>
-                      </tr>
-                      <tr>
-                        <td className="font-semibold">Breadth</td>
-                        <td>{product.details.breadth} m</td>
+                        <td className="font-semibold">Phase</td>
+                        <td>{product.details.phase}</td>
                       </tr>
                       <tr>
                         <td className="font-semibold">Cooling</td>
@@ -156,56 +148,64 @@ const DelistedProductViewPage = () => {
                         <td>{product.details.current}</td>
                       </tr>
                       <tr>
-                        <td className="font-semibold">Voltage</td>
-                        <td>{product.details.voltage}</td>
+                        <td className="font-semibold">Display</td>
+                        <td>{product.details.display}</td>
+                      </tr>
+                      <tr>
+                        <td className="font-semibold">Gun Type</td>
+                        <td>{product.details.gun_type}</td>
+                      </tr>
+                      <tr>
+                        <td className="font-semibold">Material</td>
+                        <td>{product.details.material}</td>
                       </tr>
                       <tr>
                         <td className="font-semibold">Frequency</td>
                         <td>{product.details.frequency}</td>
                       </tr>
                       <tr>
+                        <td className="font-semibold">Dimensions </td>
+                        <td>{product.details.dimensions}</td>
+                      </tr>
+                      <tr>
                         <td className="font-semibold">Protection</td>
                         <td>{product.details.protection}</td>
                       </tr>
                       <tr>
-                        <td className="font-semibold">Noise Level</td>
-                        <td>{product.details.noise_level}</td>
+                        <td className="font-semibold">Push Button</td>
+                        <td>{product.details.push_button}</td>
                       </tr>
                       <tr>
                         <td className="font-semibold">Rated Power</td>
                         <td>{product.details.rated_power}</td>
                       </tr>
                       <tr>
-                        <td className="font-semibold">Fast Charger</td>
-                        <td>{product.details.fast_charger}</td>
+                        <td className="font-semibold">Cable Length</td>
+                        <td>{product.details.cable_length}</td>
                       </tr>
                       <tr>
-                        <td className="font-semibold">Communication</td>
-                        <td>{product.details.communication}</td>
+                        <td className="font-semibold">Mounting Type </td>
+                        <td>{product.details.mountingtype}</td>
                       </tr>
                       <tr>
-                        <td className="font-semibold">Weight</td>
-                        <td>{product.details.weight_in_kgs} kg</td>
+                        <td className="font-semibold">Output Voltage </td>
+                        <td>{product.details.ouput_voltage}</td>
+                      </tr>
+                      <tr>
+                        <td className="font-semibold">Operating Temps</td>
+                        <td>{product.details.operatingtemps}</td>
+                      </tr>
+                      <tr>
+                        <td className="font-semibold">Safety Regulation</td>
+                        <td>{product.details.safetyregulation}</td>
+                      </tr>
+                      <tr>
+                        <td className="font-semibold">Charging Operation</td>
+                        <td>{product.details.chargingoperation}</td>
                       </tr>
                       <tr>
                         <td className="font-semibold">Ingress Protection</td>
                         <td>{product.details.ingress_protection}</td>
-                      </tr>
-                      <tr>
-                        <td className="font-semibold">Efficiency</td>
-                        <td>{product.details.efficiency_in_percentage}%</td>
-                      </tr>
-                      <tr>
-                        <td className="font-semibold">Max Operating Temp</td>
-                        <td>{product.details.maximum_operating_temperature} °C</td>
-                      </tr>
-                      <tr>
-                        <td className="font-semibold">Min Operating Temp</td>
-                        <td>{product.details.minimum_operating_temperature} °C</td>
-                      </tr>
-                      <tr>
-                        <td className="font-semibold">Additional Details</td>
-                        <td>{product.details.additional_details}</td>
                       </tr>
                     </tbody>
                   </table>

@@ -16,8 +16,7 @@ const ProductViewPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(true);
-
-  const [imageIndex, setImageIndex] = useState(0); // State to manage current image index for product
+  const [imageIndex, setImageIndex] = useState(0);
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -48,65 +47,64 @@ const ProductViewPage = () => {
   }, [id]);
 
   const handleNextImage = () => {
-    if (product && product.image_paths) {
+    if (product?.image_paths?.length > 1) {
       const nextIndex = (imageIndex + 1) % product.image_paths.length;
       setImageIndex(nextIndex);
     }
   };
 
   const handlePrevImage = () => {
-    if (product && product.image_paths) {
+    if (product?.image_paths?.length > 1) {
       const prevIndex = (imageIndex - 1 + product.image_paths.length) % product.image_paths.length;
       setImageIndex(prevIndex);
     }
   };
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
+  if (loading) return <div className="text-center text-white p-10">Loading...</div>;
+  if (error) return <div className="text-center text-red-500 p-10">{error}</div>;
 
   return (
     <div
-      className="min-h-screen bg-gradient-to-r from-teal-400 via-teal-500 to-teal-700 bg-cover bg-center bg-fixed"
+      className="min-h-screen bg-gradient-to-r from-teal-400 via-teal-500 to-teal-700 bg-fixed bg-cover bg-center"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <AdminNavbar onToggleSidebar={toggleSidebar} />
 
-      <div className="flex flex-1">
+      <div className="flex flex-1 flex-col sm:flex-row">
         <AdminSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
 
-        <div className="product-view-page bg-white ml-80 w-200 mt-8">
-          <div className="container mx-auto p-6">
+        <div className="bg-white w-full px-4 py-8 sm:ml-80">
+          <div className="container mx-auto">
             <button
               onClick={() => navigate(-1)}
-              className="bg-blue-500 text-white px-4 py-2 rounded-md mb-4"
+              className="bg-blue-500 text-white px-4 py-2 rounded-md mb-6"
             >
               Back to Product List
             </button>
 
             {product && (
-              <div className="product-details">
-                <div className="relative w-full h-96 bg-gray-200 mb-6">
-                  {/* Image Slider */}
+              <div>
+                {/* Image Display */}
+                <div className="relative w-full max-w-xl mx-auto aspect-[4/3] bg-gray-200 mb-8 rounded-lg overflow-hidden shadow-lg">
                   {product.image_paths?.length > 1 ? (
                     <>
                       <img
                         src={product.image_paths[imageIndex]}
                         alt={product.name}
-                        className="w-full h-full object-cover rounded-lg"
+                        className="w-full h-full object-cover"
                         onError={(e) => {
                           e.target.onerror = null;
                           e.target.src = 'https://via.placeholder.com/500';
                         }}
                       />
-                      {/* Prev and Next Buttons */}
                       <button
-                        className="absolute top-1/2 left-2 transform -translate-y-1/2 text-white bg-gray-800 bg-opacity-50 p-2 rounded-full"
+                        className="absolute top-1/2 left-2 transform -translate-y-1/2 text-white bg-black bg-opacity-50 p-2 rounded-full"
                         onClick={handlePrevImage}
                       >
                         &#10094;
                       </button>
                       <button
-                        className="absolute top-1/2 right-2 transform -translate-y-1/2 text-white bg-gray-800 bg-opacity-50 p-2 rounded-full"
+                        className="absolute top-1/2 right-2 transform -translate-y-1/2 text-white bg-black bg-opacity-50 p-2 rounded-full"
                         onClick={handleNextImage}
                       >
                         &#10095;
@@ -116,7 +114,7 @@ const ProductViewPage = () => {
                     <img
                       src={product.image_paths?.[0] || 'https://via.placeholder.com/500'}
                       alt={product.name}
-                      className="w-full h-full object-cover rounded-lg"
+                      className="w-full h-full object-cover"
                       onError={(e) => {
                         e.target.onerror = null;
                         e.target.src = 'https://via.placeholder.com/500';
@@ -125,32 +123,31 @@ const ProductViewPage = () => {
                   )}
                 </div>
 
-                <h1 className="text-3xl font-semibold mb-4">Product Name: {product.name}</h1>
-                <p className="text-xl text-gray-600 mb-4">Model: {product.model}</p>
-                <p className="text-lg text-gray-700 mb-4">Price: ₹{product.price}</p>
-                <p className="text-lg text-gray-700 mb-4">Quantity: {product.quantity}</p>
+                {/* Basic Info */}
+                <div className="mb-6 text-center sm:text-left">
+                  <h1 className="text-3xl font-bold mb-2">{product.name}</h1>
+                  <p className="text-xl text-gray-600 mb-1">Model: {product.model}</p>
+                  <p className="text-lg text-gray-700 mb-1">Price: ₹{product.price}</p>
+                  <p className="text-lg text-gray-700">Quantity: {product.quantity}</p>
+                </div>
 
-                <div className="product-details-table">
-                  <table className="table-auto w-full">
+                {/* Details Table */}
+                <div className="overflow-x-auto bg-gray-50 p-4 rounded-lg shadow">
+                  <table className="table-auto w-full border-collapse">
                     <tbody>
-                      <tr><td className="font-semibold">Phase</td><td>{product.details.phase}</td></tr>
-                      <tr><td className="font-semibold">Height</td><td>{product.details.height} m</td></tr>
-                      <tr><td className="font-semibold">Length</td><td>{product.details.length} m</td></tr>
-                      <tr><td className="font-semibold">Breadth</td><td>{product.details.breadth} m</td></tr>
-                      <tr><td className="font-semibold">Cooling</td><td>{product.details.cooling}</td></tr>
-                      <tr><td className="font-semibold">Current</td><td>{product.details.current}</td></tr>
-                      <tr><td className="font-semibold">Voltage</td><td>{product.details.voltage}</td></tr>
-                      <tr><td className="font-semibold">Frequency</td><td>{product.details.frequency}</td></tr>
-                      <tr><td className="font-semibold">Protection</td><td>{product.details.protection}</td></tr>
-                      <tr><td className="font-semibold">Noise Level</td><td>{product.details.noise_level}</td></tr>
-                      <tr><td className="font-semibold">Rated Power</td><td>{product.details.rated_power}</td></tr>
-                      <tr><td className="font-semibold">Fast Charger</td><td>{product.details.fast_charger}</td></tr>
-                      <tr><td className="font-semibold">Communication</td><td>{product.details.communication}</td></tr>
-                      <tr><td className="font-semibold">Weight</td><td>{product.details.weight_in_kgs} kg</td></tr>
-                      <tr><td className="font-semibold">Ingress Protection</td><td>{product.details.ingress_protection}</td></tr>
-                      <tr><td className="font-semibold">Efficiency</td><td>{product.details.efficiency_in_percentage}%</td></tr>
-                      <tr><td className="font-semibold">Max Operating Temp</td><td>{product.details.maximum_operating_temperature} °C</td></tr>
-                      <tr><td className="font-semibold">Min Operating Temp</td><td>{product.details.minimum_operating_temperature} °C</td></tr>
+                      {product.details && Object.entries(product.details).map(([key, value]) => {
+                        if (value && value.trim() !== "") {
+                          return (
+                            <tr key={key} className="border-b border-gray-200">
+                              <td className="font-semibold py-2 pr-4 capitalize text-gray-800">
+                                {key.replace(/_/g, " ")}
+                              </td>
+                              <td className="py-2 text-gray-700">{value}</td>
+                            </tr>
+                          );
+                        }
+                        return null;
+                      })}
                     </tbody>
                   </table>
                 </div>

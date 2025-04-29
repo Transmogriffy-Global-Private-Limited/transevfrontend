@@ -142,7 +142,7 @@ const ManageProductsPage = () => {
       <div className="flex flex-1">
         <AdminSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
 
-        <div className="bg-white rounded-lg shadow-lg p-6 ml-50 mt-6 w-400">
+        <div className="bg-white rounded-lg shadow-lg p-6 ml-70 mt-6 w-400">
           <h2 className="text-3xl font-bold text-center mb-6">Manage Products</h2>
 
           {/* Search Bar */}
@@ -221,8 +221,9 @@ const ManageProductsPage = () => {
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {products.map((product) => (
-                <div key={product.id} className="bg-white border rounded-lg p-4 shadow-md cursor-pointer">
-                  <div className="relative w-full h-40 bg-gray-200 mb-4 overflow-hidden">
+              
+                <div key={product.id} className="bg-white border rounded-lg p-4 shadow-md cursor-pointer flex flex-col justify-between h-[400px] w-[300px]">
+  <div className="relative w-full h-[250px] bg-gray-200 mb-4 overflow-hidden">
                     {/* Conditional Image Slider for Products with Multiple Images */}
                     {product.image_paths?.length > 1 ? (
                       <div className="flex transition-all duration-500 ease-in-out">

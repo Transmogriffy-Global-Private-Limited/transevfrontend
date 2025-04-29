@@ -134,7 +134,7 @@ const DelistedProductsPage = () => {
         <AdminSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
 
         <div className="flex flex-1 justify-center items-center p-6">
-          <div className="bg-white rounded-lg shadow-lg p-6 w-full md:w-4/5 lg:w-3/5">
+          <div className=" bg-white rounded-lg shadow-lg p-6 w-full md:w-4/5 lg:w-3/5">
             <h2 className="text-3xl font-bold text-center mb-6">Delisted Products</h2>
 
             {/* Search Bar */}
@@ -207,7 +207,7 @@ const DelistedProductsPage = () => {
                 {delistedProducts.map((product) => (
                   <div key={product.id} className="bg-white border rounded-lg p-4 shadow-md cursor-pointer">
                     {/* Image Slider Section */}
-                    <div className="relative w-full h-96 bg-gray-200 mb-6">
+                    <div className="relative w-full h-[190px] bg-gray-200 mb-6">
                       {product.image_paths?.length > 1 ? (
                         <>
                           <img

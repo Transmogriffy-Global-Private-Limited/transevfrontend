@@ -220,11 +220,11 @@ const ProductEditPage = () => {
               <h3 className="text-xl font-semibold mt-4">Product Details</h3>
               
               <div className="form-group">
-                <label>Voltage</label>
+                <label>Input Voltage</label>
                 <input
                   type="text"
                   name="voltage"
-                  value={updatedProductData.details.voltage}
+                  value={updatedProductData.details.input_voltage}
                   onChange={handleDetailsChange}
                   className="border p-2 w-full"
                 />
@@ -275,15 +275,58 @@ const ProductEditPage = () => {
               </div>
 
               <div className="form-group">
-                <label>Noise Level</label>
-                <input
-                  type="text"
-                  name="noise_level"
-                  value={updatedProductData.details.noise_level}
-                  onChange={handleDetailsChange}
-                  className="border p-2 w-full"
-                />
-              </div>
+  <label>Dimensions</label>
+  <input
+    type="text"
+    name="dimensions"
+    value={updatedProductData.details.dimensions}
+    onChange={handleDetailsChange}
+    className="border p-2 w-full"
+  />
+</div>
+<div className="form-group mb-4">
+  <label>Display</label>
+  <input
+    type="text"
+    name="display"
+    value={updatedProductData.details.display}
+    onChange={handleDetailsChange}
+    className="border p-2 w-full"
+  />
+</div>
+
+<div className="form-group mb-4">
+  <label>Gun Type</label>
+  <input
+    type="text"
+    name="gun_type"
+    value={updatedProductData.details.gun_type}
+    onChange={handleDetailsChange}
+    className="border p-2 w-full"
+  />
+</div>
+<div className="form-group mb-4">
+  <label>Gun Details</label>
+  <input
+    type="text"
+    name="gun_details"
+    value={updatedProductData.details.gun_details}
+    onChange={handleDetailsChange}
+    className="border p-2 w-full"
+  />
+</div>
+
+<div className="form-group mb-4">
+  <label>Material</label>
+  <input
+    type="text"
+    name="material"
+    value={updatedProductData.details.material}
+    onChange={handleDetailsChange}
+    className="border p-2 w-full"
+  />
+</div>
+
 
               <div className="form-group">
                 <label>Rated Power</label>
@@ -328,16 +371,7 @@ const ProductEditPage = () => {
                 />
               </div>
 
-              <div className="form-group">
-                <label>Weight in Kgs</label>
-                <input
-                  type="text"
-                  name="weight_in_kgs"
-                  value={updatedProductData.details.weight_in_kgs}
-                  onChange={handleDetailsChange}
-                  className="border p-2 w-full"
-                />
-              </div>
+             
 
               <div className="form-group">
                 <label>Ingress Protection</label>
@@ -350,82 +384,86 @@ const ProductEditPage = () => {
                 />
               </div>
 
-              {/* <div className="form-group">
-                <label>Efficiency in Percentage</label>
-                <input
-                  type="text"
-                  name="efficiency_in_percentage"
-                  value={updatedProductData.details.effiiency_in_percentage}
-                  onChange={handleDetailsChange}
-                  className="border p-2 w-full"
-                />
-              </div> */}
-              <div className="form-group">
-  <label>Efficiency in Percentage</label>
+           
+            <div className="form-group mb-4">
+  <label>Push Button</label>
   <input
     type="text"
-    name="efficiency_in_percentage"
-    value={updatedProductData.details.efficiency_in_percentage}  
-    onChange={handleDetailsChange}  
+    name="push_button"
+    value={updatedProductData.details.push_button}
+    onChange={handleDetailsChange}
+    className="border p-2 w-full"
+  />
+</div>
+<div className="form-group mb-4">
+  <label>Cable Length</label>
+  <input
+    type="text"
+    name="cable_length"
+    value={updatedProductData.details.cable_length}
+    onChange={handleDetailsChange}
+    className="border p-2 w-full"
+  />
+</div>
+
+<div className="form-group mb-4">
+  <label>Mounting Type</label>
+  <input
+    type="text"
+    name="mountingtype"
+    value={updatedProductData.details.mountingtype}
+    onChange={handleDetailsChange}
+    className="border p-2 w-full"
+  />
+</div>
+
+<div className="form-group mb-4">
+  <label>Output Voltage</label>
+  <input
+    type="text"
+    name="ouput_voltage"
+    value={updatedProductData.details.ouput_voltage}
+    onChange={handleDetailsChange}
+    className="border p-2 w-full"
+  />
+</div>
+
+<div className="form-group mb-4">
+  <label>Operating Temperature</label>
+  <input
+    type="text"
+    name="operatingtemps"
+    value={updatedProductData.details.operatingtemps}
+    onChange={handleDetailsChange}
+    className="border p-2 w-full"
+  />
+</div>
+
+<div className="form-group mb-4">
+  <label>Safety Regulation</label>
+  <input
+    type="text"
+    name="safetyregulation"
+    value={updatedProductData.details.safetyregulation}
+    onChange={handleDetailsChange}
+    className="border p-2 w-full"
+  />
+</div>
+
+<div className="form-group mb-4">
+  <label>Charging Operation</label>
+  <input
+    type="text"
+    name="chargingoperation"
+    value={updatedProductData.details.chargingoperation}
+    onChange={handleDetailsChange}
     className="border p-2 w-full"
   />
 </div>
 
 
-              <div className="form-group">
-                <label>Max Operating Temperature</label>
-                <input
-                  type="text"
-                  name="maximum_operating_temperature"
-                  value={updatedProductData.details.maximum_operating_temperature}
-                  onChange={handleDetailsChange}
-                  className="border p-2 w-full"
-                />
-              </div>
 
-              <div className="form-group">
-                <label>Min Operating Temperature</label>
-                <input
-                  type="text"
-                  name="minimum_operating_temperature"
-                  value={updatedProductData.details.minimum_operating_temperature}
-                  onChange={handleDetailsChange}
-                  className="border p-2 w-full"
-                />
-              </div>
-
-              <div className="form-group">
-                <label>Length</label>
-                <input
-                  type="text"
-                  name="length"
-                  value={updatedProductData.details.length}
-                  onChange={handleDetailsChange}
-                  className="border p-2 w-full"
-                />
-              </div>
-
-              <div className="form-group">
-                <label>Height</label>
-                <input
-                  type="text"
-                  name="height"
-                  value={updatedProductData.details.height}
-                  onChange={handleDetailsChange}
-                  className="border p-2 w-full"
-                />
-              </div>
-
-              <div className="form-group">
-                <label>Breadth</label>
-                <input
-                  type="text"
-                  name="breadth"
-                  value={updatedProductData.details.breadth}
-                  onChange={handleDetailsChange}
-                  className="border p-2 w-full"
-                />
-              </div>
+             
               <div className="form-group">
                 <label>Additional Details</label>
                 <textarea
@@ -464,7 +502,7 @@ const ProductEditPage = () => {
               </button>
               {/* Display current images */}
               {/* Image Slider */}
-              <div className="relative w-full h-96 bg-gray-200 mb-6">
+              <div className="relative w-full max-w-xl mx-auto aspect-[4/3] bg-gray-200 mb-6">
               {product.image_paths?.length > 0 ? (
                 <>
                   <img

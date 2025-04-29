@@ -362,18 +362,7 @@ const [imageIndex, setImageIndex] = useState({});
                   <td className="px-4 py-2 text-sm font-medium">Phase:</td>
                   <td className="px-4 py-2 text-sm">{popupContent.details?.phase}</td>
                 </tr>
-                <tr className="bg-gray-50">
-                  <td className="px-4 py-2 text-sm font-medium">Height:</td>
-                  <td className="px-4 py-2 text-sm">{popupContent.details?.height} meters</td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-2 text-sm font-medium">Length:</td>
-                  <td className="px-4 py-2 text-sm">{popupContent.details?.length} meters</td>
-                </tr>
-                <tr className="bg-gray-50">
-                  <td className="px-4 py-2 text-sm font-medium">Breadth:</td>
-                  <td className="px-4 py-2 text-sm">{popupContent.details?.breadth} meters</td>
-                </tr>
+               
                 <tr>
                   <td className="px-4 py-2 text-sm font-medium">Cooling:</td>
                   <td className="px-4 py-2 text-sm">{popupContent.details?.cooling}</td>
@@ -382,53 +371,86 @@ const [imageIndex, setImageIndex] = useState({});
                   <td className="px-4 py-2 text-sm font-medium">Rated Power:</td>
                   <td className="px-4 py-2 text-sm">{popupContent.details?.rated_power}</td>
                 </tr>
+                
+                <tr className="bg-gray-50">
+                  <td className="px-4 py-2 text-sm font-medium"> Ingress Protection:</td>
+                  <td className="px-4 py-2 text-sm">{popupContent.details?.ingress_protection}</td>
+                </tr>
                 <tr>
-                  <td className="px-4 py-2 text-sm font-medium">Efficiency:</td>
-                  <td className="px-4 py-2 text-sm">{popupContent.details?.efficiency_in_percentage}%</td>
+                  <td className="px-4 py-2 text-sm font-medium">Current:</td>
+                  <td className="px-4 py-2 text-sm">{popupContent.details?.current}</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-2 text-sm font-medium">Display:</td>
+                  <td className="px-4 py-2 text-sm">{popupContent.details?.display}</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-2 text-sm font-medium">Gun Type:</td>
+                  <td className="px-4 py-2 text-sm">{popupContent.details?.gun_type}</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-2 text-sm font-medium">Gun Details:</td>
+                  <td className="px-4 py-2 text-sm">{popupContent.details?.gun_details}</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-2 text-sm font-medium">Material:</td>
+                  <td className="px-4 py-2 text-sm">{popupContent.details?.material}</td>
+                </tr>
+              
+                <tr>
+                  <td className="px-4 py-2 text-sm font-medium">Frequency:</td>
+                  <td className="px-4 py-2 text-sm">{popupContent.details?.frequency}</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-2 text-sm font-medium">Dimensions:</td>
+                  <td className="px-4 py-2 text-sm">{popupContent.details?.dimensions}</td>
                 </tr>
                 <tr className="bg-gray-50">
                   <td className="px-4 py-2 text-sm font-medium">Protection:</td>
                   <td className="px-4 py-2 text-sm">{popupContent.details?.protection}</td>
                 </tr>
                 <tr>
-                  <td className="px-4 py-2 text-sm font-medium">Current:</td>
-                  <td className="px-4 py-2 text-sm">{popupContent.details?.current}</td>
-                </tr>
-                <tr className="bg-gray-50">
-                  <td className="px-4 py-2 text-sm font-medium">Voltage:</td>
-                  <td className="px-4 py-2 text-sm">{popupContent.details?.voltage}</td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-2 text-sm font-medium">Frequency:</td>
-                  <td className="px-4 py-2 text-sm">{popupContent.details?.frequency}</td>
-                </tr>
-                <tr className="bg-gray-50">
-                  <td className="px-4 py-2 text-sm font-medium">Noise Level:</td>
-                  <td className="px-4 py-2 text-sm">{popupContent.details?.noise_level}</td>
-                </tr>
-                <tr>
                   <td className="px-4 py-2 text-sm font-medium">Fast Charger:</td>
                   <td className="px-4 py-2 text-sm">{popupContent.details?.fast_charger}</td>
                 </tr>
+               
                 <tr className="bg-gray-50">
                   <td className="px-4 py-2 text-sm font-medium">Communication:</td>
                   <td className="px-4 py-2 text-sm">{popupContent.details?.communication}</td>
                 </tr>
+               
+               
                 <tr>
-                  <td className="px-4 py-2 text-sm font-medium">Weight (in kgs):</td>
-                  <td className="px-4 py-2 text-sm">{popupContent.details?.weight_in_kgs}</td>
-                </tr>
-                <tr className="bg-gray-50">
-                  <td className="px-4 py-2 text-sm font-medium">Ingress Protection:</td>
-                  <td className="px-4 py-2 text-sm">{popupContent.details?.ingress_protection}</td>
+                  <td className="px-4 py-2 text-sm font-medium">Cable Length:</td>
+                  <td className="px-4 py-2 text-sm">{popupContent.details?.cable_length}</td>
                 </tr>
                 <tr>
-                  <td className="px-4 py-2 text-sm font-medium">Max Operating Temp:</td>
-                  <td className="px-4 py-2 text-sm">{popupContent.details?.maximum_operating_temperature} °C</td>
+                  <td className="px-4 py-2 text-sm font-medium">Mounting Type:</td>
+                  <td className="px-4 py-2 text-sm">{popupContent.details?.mountingtype}</td>
                 </tr>
-                <tr className="bg-gray-50">
-                  <td className="px-4 py-2 text-sm font-medium">Min Operating Temp:</td>
-                  <td className="px-4 py-2 text-sm">{popupContent.details?.minimum_operating_temperature} °C</td>
+                <tr>
+                  <td className="px-4 py-2 text-sm font-medium">Input Voltage:</td>
+                  <td className="px-4 py-2 text-sm">{popupContent.details?.input_voltage}</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-2 text-sm font-medium">Output Voltage:</td>
+                  <td className="px-4 py-2 text-sm">{popupContent.details?.ouput_voltage}</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-2 text-sm font-medium">Operating Temparature:</td>
+                  <td className="px-4 py-2 text-sm">{popupContent.details?.operatingtemps}</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-2 text-sm font-medium">Safety Regulation:</td>
+                  <td className="px-4 py-2 text-sm">{popupContent.details?.safetyregulation}</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-2 text-sm font-medium">Push Button:</td>
+                  <td className="px-4 py-2 text-sm">{popupContent.details?.push_button}</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-2 text-sm font-medium">Charging Operation:</td>
+                  <td className="px-4 py-2 text-sm">{popupContent.details?.chargingoperation}</td>
                 </tr>
               </tbody>
             </table>
