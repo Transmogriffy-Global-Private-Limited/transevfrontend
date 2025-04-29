@@ -42,7 +42,8 @@ import HRMS from './components/HRMS';
 import Education from './components/Education';
 import Hospital from './components/Hospital';
 import Job from './components/Job';
-import WebDevelopment from './components/Services/WebDevelopment'
+
+
 
 function App() {
   return (
@@ -89,7 +90,7 @@ function App() {
         <Route path="/education" element={<Education/>} /> 
         <Route path="/health" element={<Hospital/>} /> 
         <Route path="/job" element={<Job/>} /> 
-        <Route path="/services/webdevelopment" element={<WebDevelopment/>} /> 
+  
        
      
        
