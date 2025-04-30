@@ -42,6 +42,11 @@ import HRMS from './components/HRMS';
 import Education from './components/Education';
 import Hospital from './components/Hospital';
 import Job from './components/Job';
+import Cms from './components/cms';
+import Ecom from './components/Ecom';
+import Park from './components/Park';
+import Food from './components/Food';
+import CRM from './components/CRM';
 
 
 
@@ -91,6 +96,12 @@ function App() {
         <Route path="/education" element={<Education/>} /> 
         <Route path="/health" element={<Hospital/>} /> 
         <Route path="/job" element={<Job/>} /> 
+        <Route path="/charger" element={<Cms/>} /> 
+        <Route path="/e-com" element={<Ecom/>} /> 
+        <Route path="/park" element={<Park/>} /> 
+        <Route path="/food" element={<Food/>} /> 
+        <Route path="/crm" element={<CRM/>} /> 
+         
          
   
        
