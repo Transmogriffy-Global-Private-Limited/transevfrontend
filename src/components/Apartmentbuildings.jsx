@@ -1,4 +1,5 @@
 import React, { useState,useRef} from 'react';
+import { Link } from 'react-router-dom';
 import Navbar from './Navbar';  
 import logo from '../assets/transev logo.png'; // Use appropriate path for logo image
 import background from '../assets/apartmnet.jpg';
@@ -157,10 +158,11 @@ const ApartmentBuildingPage = () => {
   <div className="relative mt-12 sm:mt-16 text-left">
     <button className="relative inline-flex items-center justify-center px-6 sm:px-10 py-3 sm:py-4 bg-orange-300 text-white font-semibold rounded-full group transition-all duration-300 ease-in-out">
       {/* "Contact us" text */}
-      <span className="transition-all duration-300 ease-in-out">
-        Contact us
-      </span>
-
+      <Link to="/contact">
+  <span className="transition-all duration-300 ease-in-out cursor-pointer">
+    Contact us
+  </span>
+</Link>
       {/* Right arrow inside the circle */}
       <div className="ml-3 sm:ml-4 w-10 sm:w-12 h-10 sm:h-12 bg-yellow-300 rounded-full flex items-center justify-center transition-all duration-300 ease-in-out group-hover:w-16 group-hover:ml-6">
         <svg
@@ -173,7 +175,9 @@ const ApartmentBuildingPage = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
         </svg>
       </div>
+      
     </button>
+
   </div>
 </section>
 

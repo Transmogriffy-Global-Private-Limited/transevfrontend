@@ -148,7 +148,7 @@ const ContactPage = () => {
 
               {/* Telephone */}
               <div className="mb-5">
-                <label htmlFor="telephone" className="block text-gray-900 font-medium mb-1">Telephone</label>
+                <label htmlFor="telephone" className="block text-gray-900 font-medium mb-1">Telephone*</label>
                 <input
                   type="text"
                   id="telephone"

@@ -5,7 +5,7 @@ import logo from '../assets/transev logo.png'; // Use appropriate path for logo 
 import background from '../assets/apartmnet.jpg';
 import yourImage from '../assets/new.jpg';
 import { useInView } from 'react-intersection-observer';
-
+import { Link } from 'react-router-dom';
 import charger1 from '../assets/charger7.png';
 import charger2 from '../assets/charger2.png';
 import charger3 from '../assets/charger1.png';
@@ -159,9 +159,11 @@ const Fleet = () => {
 
   <div className="flex justify-center lg:justify-start mt-12 sm:mt-16 px-4 sm:px-10 lg:px-32 xl:px-40">
   <button className="relative inline-flex items-center justify-center px-6 sm:px-8 md:px-10 py-3 sm:py-4 bg-yellow-300 text-white font-semibold rounded-full group transition-all duration-300 ease-in-out">
-    <span className="opacity-100 translate-x-0 transition-all duration-300 ease-in-out text-sm sm:text-base md:text-lg">
-      Contact us
-    </span>
+  <Link to="/contact">
+  <span className="transition-all duration-300 ease-in-out cursor-pointer">
+    Contact us
+  </span>
+</Link>
 
     <div className="ml-3 sm:ml-4 w-10 h-10 sm:w-12 sm:h-12 bg-yellow-300 rounded-full flex items-center justify-center transition-all duration-300 ease-in-out group-hover:w-16 group-hover:ml-6">
       <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 sm:w-6 sm:h-6 text-white group-hover:opacity-0 group-hover:translate-x-10 transition-all duration-300 ease-in-out" viewBox="0 0 24 24" fill="none" stroke="currentColor">
