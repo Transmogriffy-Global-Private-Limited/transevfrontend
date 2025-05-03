@@ -357,7 +357,10 @@ const [imageIndex, setImageIndex] = useState({});
             <UserNavbar onToggleSidebar={toggleSidebar} />
             <div className="flex flex-1">
                 <UserSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
-                <div className="container mx-auto p-4 pt-6 mt-10 bg-[#f0f0f0] ml-55">
+                {/* <div className="container mx-auto p-4 pt-6 mt-10 bg-[#f0f0f0] ml-55"> */}
+                <div className="w-full px-4 py-6 mt-10 bg-[#f0f0f0] sm:max-w-7xl mx-auto">
+              
+
                     <h2 className="text-3xl font-bold mb-4 ml-150 text-green-600">Your Cart</h2>
                     
                     <div className="flex flex-col">
@@ -424,12 +427,7 @@ const [imageIndex, setImageIndex] = useState({});
                                         
                                     </table>
                                     <div className="mt-6 text-right bg-white p-4 rounded shadow-lg">
-            {/* <button
-                className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded shadow"
-                onClick={() => setIsModalOpen(true)}
-            >
-                Place All Orders
-            </button> */}
+           
             {cartItems.length > 0 && (
     <button
         className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded shadow"

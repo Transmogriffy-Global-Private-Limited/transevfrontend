@@ -139,10 +139,13 @@ const [imageIndex, setImageIndex] = useState({});
   };
  
   return (
+   
     <div
-       className=" min-h-screen bg-gradient-to-r from-teal-400 via-teal-500 to-teal-700 bg-cover bg-center bg-fixed"
-       style={{ background: `url(${background})` }}
-     >
+  className="min-h-screen bg-gradient-to-r from-green-200 via-green-200 to-teal-200 bg-cover bg-center bg-fixed"
+  style={{
+    backgroundColor: "#00BFAE", // Set a solid background color
+  }}
+>
       {/* User Navbar */}
       <UserNavbar onToggleSidebar={toggleSidebar} />
 
@@ -150,7 +153,8 @@ const [imageIndex, setImageIndex] = useState({});
       <div className="flex flex-1">
         {/* Sidebar */}
         <UserSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
-        <div className="bg-white rounded-lg shadow-lg p-6 ml-50 mt-6 w-400">
+        {/* <div className="bg-white rounded-lg shadow-lg p-6 ml-50 mt-6 w-400"> */}
+        <div className="bg-white rounded-lg shadow-lg p-6 mt-6 w-full sm:w-96 lg:w-400 ml-0 sm:ml-4 lg:ml-60">
         <h2 className="text-3xl font-bold text-center mb-6">See Our Products</h2>
         {displayedProducts.length < allProducts.length && (
           <div className="justify-center mt-6 ">
@@ -275,193 +279,11 @@ const [imageIndex, setImageIndex] = useState({});
           </div>
         )}
 
-        
-      {/* {popupOpen && (
-  <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-    <div className="bg-white p-8 rounded-lg max-w-6xl w-full flex relative h-auto shadow-lg overflow-hidden">
-    
-      <button
-        className="absolute top-4 right-4 text-3xl font-bold text-gray-600 hover:text-gray-900"
-        onClick={handlePopupClose}
-      >
-        &times;
-      </button>
 
-     
-         <div className="flex flex-wrap sm:flex-nowrap max-w-full overflow-hidden">
-         <div className="w-full sm:w-1/2 p-4 relative">
- 
-  {popupContent.image_paths && popupContent.image_paths.length > 0 ? (
-    <div className="relative">
-     
-      <img
-        src={popupContent.image_paths[popupImageIndex]}  
-        alt={popupContent.name}
-        className="w-full h-auto object-contain rounded-lg shadow-md cursor-pointer"
-        onClick={toggleImagePopup} 
-      />
-    
-      {popupContent.image_paths.length > 1 && (
-        <div className="absolute top-1/2 left-2 transform -translate-y-1/2 flex space-x-4">
-          <button
-            onClick={goToPrevImageInPopup} 
-            className="bg-gray-700 text-white p-2 rounded-full"
-          >
-            &#60;
-          </button>
-          <button
-            onClick={goToNextImageInPopup} 
-            className="bg-gray-700 text-white p-2 rounded-full ml-4 md:ml-8 lg:ml-100"
-          >
-            &#62; 
-          </button>
-        </div>
-      )}
-    </div>
-  ) : (
-    <img
-      src="https://via.placeholder.com/150"
-      alt={popupContent.name}
-      className="w-full h-auto object-contain rounded-lg shadow-md"
-    />
-  )}
-
-  
-{popupContent.quantity > 0 ? (
-  <button
-    onClick={() => handleAddToCart(popupContent.id, popupContent.price)}
-    className={`mt-4 flex items-center justify-center px-4 py-2 rounded-md ${cart.includes(popupContent.id) ? 'bg-green-500' : 'bg-pink-500'} text-white hover:${cart.includes(popupContent.id) ? 'bg-green-600' : 'bg-blue-600'}`}
-  >
-    <FaShoppingCart className="mr-2" />
-    {cart.includes(popupContent.id) ? 'Added to Cart' : 'Add to Cart'}
-  </button>
-) : (
-  <div className="mt-4 text-red-600 font-semibold">No Stock Available</div>
-)}
-
-</div>
-
-        <div className="w-full sm:w-1/2 p-4">
-        <h3 className="text-3xl font-semibold mb-4 text-blue-600">Product Name: {popupContent.name}</h3>
-<h4 className="text-3xl font-semibold mb-4 text-green-600">Model: {popupContent.model}</h4>
-<h4 className="text-3xl font-semibold mb-4 text-red-600">Price: {popupContent.price}</h4>
-<p className="text-lg mb-4">Features: {popupContent.details?.additional_details}</p>
-
-          <div className="overflow-x-auto bg-white rounded-lg shadow-md p-6 max-h-[400px] overflow-y-auto">
-            <table className="min-w-full table-auto">
-              <thead>
-                <tr className="bg-gray-100">
-                  <th className="px-4 py-2 text-left text-sm font-semibold">Detail</th>
-                  <th className="px-4 py-2 text-left text-sm font-semibold">Value</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="px-4 py-2 text-sm font-medium">Phase:</td>
-                  <td className="px-4 py-2 text-sm">{popupContent.details?.phase}</td>
-                </tr>
-               
-                <tr>
-                  <td className="px-4 py-2 text-sm font-medium">Cooling:</td>
-                  <td className="px-4 py-2 text-sm">{popupContent.details?.cooling}</td>
-                </tr>
-                <tr className="bg-gray-50">
-                  <td className="px-4 py-2 text-sm font-medium">Rated Power:</td>
-                  <td className="px-4 py-2 text-sm">{popupContent.details?.rated_power}</td>
-                </tr>
-                
-                <tr className="bg-gray-50">
-                  <td className="px-4 py-2 text-sm font-medium"> Ingress Protection:</td>
-                  <td className="px-4 py-2 text-sm">{popupContent.details?.ingress_protection}</td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-2 text-sm font-medium">Current:</td>
-                  <td className="px-4 py-2 text-sm">{popupContent.details?.current}</td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-2 text-sm font-medium">Display:</td>
-                  <td className="px-4 py-2 text-sm">{popupContent.details?.display}</td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-2 text-sm font-medium">Gun Type:</td>
-                  <td className="px-4 py-2 text-sm">{popupContent.details?.gun_type}</td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-2 text-sm font-medium">Gun Details:</td>
-                  <td className="px-4 py-2 text-sm">{popupContent.details?.gun_details}</td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-2 text-sm font-medium">Material:</td>
-                  <td className="px-4 py-2 text-sm">{popupContent.details?.material}</td>
-                </tr>
-              
-                <tr>
-                  <td className="px-4 py-2 text-sm font-medium">Frequency:</td>
-                  <td className="px-4 py-2 text-sm">{popupContent.details?.frequency}</td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-2 text-sm font-medium">Dimensions:</td>
-                  <td className="px-4 py-2 text-sm">{popupContent.details?.dimensions}</td>
-                </tr>
-                <tr className="bg-gray-50">
-                  <td className="px-4 py-2 text-sm font-medium">Protection:</td>
-                  <td className="px-4 py-2 text-sm">{popupContent.details?.protection}</td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-2 text-sm font-medium">Fast Charger:</td>
-                  <td className="px-4 py-2 text-sm">{popupContent.details?.fast_charger}</td>
-                </tr>
-               
-                <tr className="bg-gray-50">
-                  <td className="px-4 py-2 text-sm font-medium">Communication:</td>
-                  <td className="px-4 py-2 text-sm">{popupContent.details?.communication}</td>
-                </tr>
-               
-               
-                <tr>
-                  <td className="px-4 py-2 text-sm font-medium">Cable Length:</td>
-                  <td className="px-4 py-2 text-sm">{popupContent.details?.cable_length}</td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-2 text-sm font-medium">Mounting Type:</td>
-                  <td className="px-4 py-2 text-sm">{popupContent.details?.mountingtype}</td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-2 text-sm font-medium">Input Voltage:</td>
-                  <td className="px-4 py-2 text-sm">{popupContent.details?.input_voltage}</td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-2 text-sm font-medium">Output Voltage:</td>
-                  <td className="px-4 py-2 text-sm">{popupContent.details?.ouput_voltage}</td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-2 text-sm font-medium">Operating Temparature:</td>
-                  <td className="px-4 py-2 text-sm">{popupContent.details?.operatingtemps}</td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-2 text-sm font-medium">Safety Regulation:</td>
-                  <td className="px-4 py-2 text-sm">{popupContent.details?.safetyregulation}</td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-2 text-sm font-medium">Push Button:</td>
-                  <td className="px-4 py-2 text-sm">{popupContent.details?.push_button}</td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-2 text-sm font-medium">Charging Operation:</td>
-                  <td className="px-4 py-2 text-sm">{popupContent.details?.chargingoperation}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-)}
- */}
 {popupOpen && (
   <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-    <div className="bg-white p-8 rounded-lg max-w-6xl w-full flex relative h-auto shadow-lg overflow-hidden">
+    {/* <div className="bg-white p-8 rounded-lg max-w-6xl w-full flex relative h-auto shadow-lg overflow-hidden"> */}
+    <div className="bg-white p-4 sm:p-8 rounded-lg w-full sm:max-w-6xl max-w-full h-auto flex relative shadow-lg overflow-auto">
       {/* Close Button */}
       <button
         className="absolute top-4 right-4 text-3xl font-bold text-gray-600 hover:text-gray-900"
@@ -591,4 +413,3 @@ const [imageIndex, setImageIndex] = useState({});
 };
 
 export default ProductPage;
-

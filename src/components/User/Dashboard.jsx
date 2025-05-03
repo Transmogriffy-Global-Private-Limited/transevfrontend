@@ -140,118 +140,117 @@ const Dashboard = () => {
   const totalAmount = purchaseData.reduce((sum, item) => sum + item.total_purchase_amount, 0);
 
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-r from-green-50 to-green-100 text-gray-800">
-      <UserNavbar onToggleSidebar={toggleSidebar} />
-      <div className="flex flex-1">
-        <UserSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
 
-        <main className="flex-1 p-4 md:p-6 lg:p-10 overflow-y-auto bg-green rounded-tl-3xl shadow-inner">
-         
-           <div className="max-w-7xl mx-auto space-y-10">
-           <section>
-              <h2 className="text-xl font-bold text-teal-700 mb-4"> New Arrival EV Chargers</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {[
-                  {
-                    name: 'Portable EV Charger ',
-                    type: 'Home Charger and Travel Ready',
-                    color: 'green',
-                    image: DC_charger,
-                  },
-                  {
-                    name: 'Wall Mounting EV Charger',
-                    type: 'Home and Commercial Charger',
-                    color: 'blue',
-                    image: Ac_Charger,
-                  },
-                  {
-                    name: ' DC Fast Charger',
-                    type: 'Commercial Charger',
-                    color: 'red',
-                    image: newcharger,
-                  },
-                ].map((charger, index) => (
-                  <div key={index} className="bg-white p-4 rounded-lg shadow-md">
-                    <img
-                      src={charger.image}
-                      alt={charger.name}
-                      className="rounded mb-4 w-full h-[450px] object-cover"
-                    />
-                    <h4 className="font-bold text-lg">{charger.name}</h4>
-                    <p className={`text-${charger.color}-500 font-medium`}>{charger.type}</p>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-  {/* Top Stats */}
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-    <div className="bg-white p-6 rounded-xl shadow border-l-4 border-teal-500">
-      <h3 className="text-lg font-semibold">Total Product Order</h3>
-      <p className="text-3xl font-bold">{totalChargers}</p>
-    </div>
-    <div className="bg-white p-6 rounded-xl shadow border-l-4 border-yellow-400">
-      <h3 className="text-lg font-semibold">Total Spend</h3>
-      <p className="text-3xl font-bold">₹{totalAmount}</p>
-    </div>
-    <div className="bg-white p-6 rounded-xl shadow border-l-4 border-pink-500">
-      <h3 className="text-lg font-semibold">Total Order</h3>
-      <p className="text-3xl font-bold">{totalOrders}</p>
-    </div>
-    <div className="bg-white p-6 rounded-xl shadow border-l-4 border-indigo-500">
-      <h3 className="text-lg font-semibold">Avg. Usage</h3>
-      <p className="text-3xl font-bold">876 kWh</p>
-    </div>
-  </div>
-  {!loading && (
-              <div className="bg-white p-6 rounded-lg shadow-md w-full">
-                <h2 className="text-xl font-semibold text-teal-600 mb-4">Purchase Summary</h2>
-                <div className="w-full h-[300px]">
-                  <Bar
-                    data={chartData}
-                    options={{
-                      responsive: true,
-                      maintainAspectRatio: false,
-                      plugins: {
-                        legend: { display: true, position: 'top' },
-                      },
-                      scales: {
-                        y: {
-                          beginAtZero: true,
-                          ticks: { stepSize: 1 },
-                        },
-                      },
-                    }}
-                  />
+      <div className="flex flex-col min-h-screen bg-gradient-to-r from-green-50 to-green-100 text-gray-800">
+        {/* Navbar */}
+        <UserNavbar onToggleSidebar={toggleSidebar} />
+  
+        {/* Main content */}
+        <div className="flex flex-1">
+          <UserSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
+  
+          <main className="flex-1 p-6 md:p-8 lg:p-12 overflow-y-auto bg-white rounded-tl-3xl shadow-md">
+            <div className="max-w-7xl mx-auto space-y-10">
+              {/* New Arrival EV Chargers */}
+              <section>
+                <h2 className="text-xl font-bold text-teal-700 mb-4">New Arrival EV Chargers</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {[
+                    {
+                      name: 'Portable EV Charger',
+                      type: 'Home Charger and Travel Ready',
+                      color: 'green',
+                      image: DC_charger,
+                    },
+                    {
+                      name: 'Wall Mounting EV Charger',
+                      type: 'Home and Commercial Charger',
+                      color: 'blue',
+                      image: Ac_Charger,
+                    },
+                    {
+                      name: 'DC Fast Charger',
+                      type: 'Commercial Charger',
+                      color: 'red',
+                      image: newcharger,
+                    },
+                  ].map((charger, index) => (
+                    <div key={index} className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+                      <img
+                        src={charger.image}
+                        alt={charger.name}
+                        className="rounded mb-4 w-full h-[450px] object-cover"
+                      />
+                      <h4 className="font-bold text-lg">{charger.name}</h4>
+                      <p className={`text-${charger.color}-500 font-medium`}>{charger.type}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+  
+              {/* Top Stats */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="bg-white p-6 rounded-xl shadow border-l-4 border-teal-500">
+                  <h3 className="text-lg font-semibold">Total Product Order</h3>
+                  <p className="text-3xl font-bold">{totalChargers}</p>
+                </div>
+                <div className="bg-white p-6 rounded-xl shadow border-l-4 border-yellow-400">
+                  <h3 className="text-lg font-semibold">Total Spend</h3>
+                  <p className="text-3xl font-bold">₹{totalAmount}</p>
+                </div>
+                <div className="bg-white p-6 rounded-xl shadow border-l-4 border-pink-500">
+                  <h3 className="text-lg font-semibold">Total Order</h3>
+                  <p className="text-3xl font-bold">{totalOrders}</p>
+                </div>
+                <div className="bg-white p-6 rounded-xl shadow border-l-4 border-indigo-500">
+                  <h3 className="text-lg font-semibold">Avg. Usage</h3>
+                  <p className="text-3xl font-bold">876 kWh</p>
                 </div>
               </div>
-            )}
-
-
-
-            {/* Your EV Chargers */}
-           
-            {/* Purchase Chart */}
-           
-            {/* Recent Activity */}
-            <section>
-              <h2 className="text-xl font-bold text-teal-700 mb-4">Recent Activity</h2>
-              <ul className="bg-white rounded-lg shadow divide-y divide-gray-200">
-                {[
-                  'Charged 18kWh at Fast DC Charger – ₹215',
-                  'Bought Portable Charger – ₹1200',
-                  'Session completed at Wallbox – 9:30 PM',
-                ].map((item, i) => (
-                  <li key={i} className="px-4 py-3 hover:bg-gray-50">{item}</li>
-                ))}
-              </ul>
-            </section>
-            
-          </div>
-        </main>
+  
+              {/* Purchase Summary */}
+              {!loading && (
+                <div className="bg-white p-6 rounded-lg shadow-md w-full">
+                  <h2 className="text-xl font-semibold text-teal-600 mb-4">Purchase Summary</h2>
+                  <div className="w-full h-[300px]">
+                    <Bar
+                      data={chartData}
+                      options={{
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                          legend: { display: true, position: 'top' },
+                        },
+                        scales: {
+                          y: {
+                            beginAtZero: true,
+                            ticks: { stepSize: 1 },
+                          },
+                        },
+                      }}
+                    />
+                  </div>
+                </div>
+              )}
+  
+              {/* Recent Activity */}
+              <section>
+                <h2 className="text-xl font-bold text-teal-700 mb-4">Recent Activity</h2>
+                <ul className="bg-white rounded-lg shadow divide-y divide-gray-200">
+                  {[
+                    'Charged 18kWh at Fast DC Charger – ₹215',
+                    'Bought Portable Charger – ₹1200',
+                    'Session completed at Wallbox – 9:30 PM',
+                  ].map((item, i) => (
+                    <li key={i} className="px-4 py-3 hover:bg-gray-50">{item}</li>
+                  ))}
+                </ul>
+              </section>
+            </div>
+          </main>
+        </div>
       </div>
-    </div>
-  );
-};
-
-export default Dashboard;
+    );
+  };
+  
+  export default Dashboard;

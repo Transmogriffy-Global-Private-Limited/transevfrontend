@@ -56,7 +56,8 @@ function OrderHistoryPage() {
       <UserNavbar onToggleSidebar={toggleSidebar} />
       <div className="flex flex-1">
         <UserSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
-        <div className="container mx-auto p-6 pt-6 mt-10 bg-[#f0f0f0] rounded-lg ml-70">
+        {/* <div className="container mx-auto p-6 pt-6 mt-10 bg-[#f0f0f0] rounded-lg ml-70"> */}
+        <div className="w-full max-w-7xl mx-auto p-4 sm:p-6 pt-6 mt-10 bg-[#f0f0f0] rounded-lg">
           <h2 className="text-3xl font-bold mb-6 text-center text-green-700">
             Order History
           </h2>

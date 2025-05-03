@@ -359,7 +359,7 @@ const Profile = () => {
       };
       
   return (
-    <div className="min-h-screen bg-gradient-to-r from-teal-100 via-teal-100 to-teal-100 bg-cover bg-center bg-fixed">
+    <div className="min-h-screen bg-gradient-to-r from-gray-100 via-gray-100 to-gray-50 bg-cover bg-center bg-fixed">
   
     {/* User Navbar */}
     <UserNavbar onToggleSidebar={toggleSidebar} />
@@ -371,8 +371,8 @@ const Profile = () => {
       <UserSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
   
       {/* Main Content Area */}
-      <div className="flex-1 p-6 bg-teal-100 shadow-xl rounded-xl mx-4 my-6 md:mx-12 md:my-8">
-        
+      {/* <div className="flex-1 p-6 bg-gray-100 shadow-xl rounded-xl mx-4 my-6 md:mx-12 md:my-8"> */}
+      <div className="w-full p-4 sm:p-6 bg-gray-100 shadow-xl rounded-xl mx-2 my-4 sm:mx-6 sm:my-6 md:mx-12 md:my-8">
         {/* Profile Heading */}
         <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-teal-700 py-4 px-8 rounded-full shadow-md text-center">
           My Profile
@@ -382,7 +382,8 @@ const Profile = () => {
 
 
         {/* Profile Card */}
-        <div className="bg-teal rounded-2xl shadow-2xl p-8 w-full max-w-2xl space-y-6 ml-130">
+        {/* <div className="bg-teal rounded-2xl shadow-2xl p-8 w-full max-w-2xl space-y-6 ml-130"> */}
+        <div className="bg-teal rounded-2xl shadow-2xl p-4 sm:p-6 md:p-8 w-full max-w-2xl space-y-6 mx-auto my-6">
           <div className="flex flex-col items-center relative">
             {user && (
               <div className="flex justify-center mb-4">
