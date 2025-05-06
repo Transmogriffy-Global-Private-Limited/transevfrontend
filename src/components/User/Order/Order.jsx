@@ -50,14 +50,14 @@ function OrderHistoryPage() {
 
   return (
     <div
-      className="min-h-screen bg-gradient-to-r from-teal-400 via-teal-500 to-teal-700 bg-cover bg-center bg-fixed"
-      style={{ background: `url(${background})` }}
+      className="min-h-screen bg-gradient-to-r from-yellow-100 via-green-200 to-teal-200 bg-cover bg-center bg-fixed"
+      // style={{ background: `url(${background})` }}
     >
       <UserNavbar onToggleSidebar={toggleSidebar} />
       <div className="flex flex-1">
         <UserSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
         {/* <div className="container mx-auto p-6 pt-6 mt-10 bg-[#f0f0f0] rounded-lg ml-70"> */}
-        <div className="w-full max-w-7xl mx-auto p-4 sm:p-6 pt-6 mt-10 bg-[#f0f0f0] rounded-lg">
+        <div className="w-full max-w-7xl mx-auto p-4 sm:p-6 pt-6 mt-10 bg-[#f0f0f0] rounded-lg lg:ml-80">
           <h2 className="text-3xl font-bold mb-6 text-center text-green-700">
             Order History
           </h2>

@@ -140,7 +140,7 @@ const Settings = () => {
       <div className="flex">
         <UserSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
         <div className="w-full px-4 sm:px-6 lg:px-8 py-10">
-          <div className="max-w-6xl mx-auto bg-white rounded-xl shadow-lg p-6 md:p-10 flex flex-col lg:flex-row gap-10 items-center">
+          <div className="max-w-6xl mx-auto bg-white rounded-xl shadow-lg p-6 md:p-10 flex flex-col lg:flex-row gap-10 items-center lg:ml-60">
             {/* Settings Content */}
             <div className="flex-1 text-gray-800 space-y-8">
   <h2 className="text-4xl font-extrabold text-teal-600">Account Settings</h2>

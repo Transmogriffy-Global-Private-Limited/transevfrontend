@@ -552,13 +552,15 @@ const Profile = () => {
                         onClick={() => handleSetDefaultAddress(addressType)} // Pass the address type to set it as default
                         className="mt-2 bg-indigo-500 text-white py-1 px-3 rounded-lg hover:bg-indigo-600 transition-colors ml-10"
                       >
-                        Set {addressType} as Default
+                        {/* Set {addressType} as Default */}
+                        Set  as Default
                       </button>
                       <button
   onClick={() => handleDeleteAddress(addressType)}
   className="mt-2 bg-red-500 text-white py-1 px-3 rounded-lg hover:bg-red-600 transition-colors ml-20"
 >
-  Delete {addressType} Address
+  {/* Delete {addressType} Address */}
+  Delete Address
 </button>
 
                     </div>

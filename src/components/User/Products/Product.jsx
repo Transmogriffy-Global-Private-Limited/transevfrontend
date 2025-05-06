@@ -176,10 +176,13 @@ const [imageIndex, setImageIndex] = useState({});
     displayedProducts.map((product, index) => (
       <div key={index} className="flex flex-col items-center">
         <div
-          className="box bg-gray-200 p-4 rounded-lg relative cursor-pointer hover:scale-105 transform transition-all duration-300 w-[300px] h-[400px]"
+          className="box bg-gray-200 p-4 rounded-lg relative cursor-pointer hover:scale-105 transform transition-all duration-300 w-[300px] h-[400px] "
           onMouseEnter={() => setHovered(index)}
           onMouseLeave={() => setHovered(null)}
         >
+      
+ 
+
           <div className="flex justify-center items-center w-full h-3/4">
             {/* Display product image */}
             {product.image_paths?.length > 0 ? (

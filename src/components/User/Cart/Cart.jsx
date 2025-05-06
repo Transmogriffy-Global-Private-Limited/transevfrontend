@@ -351,23 +351,24 @@ const [imageIndex, setImageIndex] = useState({});
                     
     return (
         <div
-            className="min-h-screen bg-gradient-to-r from-teal-400 via-teal-500 to-teal-700 bg-cover bg-center bg-fixed"
-            style={{ background: `url(${background})` }}
+            className="min-h-screen bg-gradient-to-r from-teal-100 via-teal-100 to-teal-200 bg-cover bg-center bg-fixed"
+            
         >
             <UserNavbar onToggleSidebar={toggleSidebar} />
             <div className="flex flex-1">
                 <UserSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
                 {/* <div className="container mx-auto p-4 pt-6 mt-10 bg-[#f0f0f0] ml-55"> */}
                 <div className="w-full px-4 py-6 mt-10 bg-[#f0f0f0] sm:max-w-7xl mx-auto">
-              
-
-                    <h2 className="text-3xl font-bold mb-4 ml-150 text-green-600">Your Cart</h2>
+           <h2 className="text-3xl font-bold mb-4 ml-150 text-green-600">Your Cart</h2>
                     
                     <div className="flex flex-col">
                         <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
                             <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                          
+
                                 <div className="overflow-hidden">
                                     <table className="min-w-full">
+                                    {cartItems.length > 0 && (
                                         <thead className="bg-white border-b">
                                             <tr>
                                                 <th className="text-sm font-medium text-gray-900 px-6 py-4 text-left">Product</th>
@@ -376,57 +377,81 @@ const [imageIndex, setImageIndex] = useState({});
                                                 <th className="text-sm font-medium text-gray-900 px-6 py-4 text-left">Actions</th>
                                             </tr>
                                         </thead>
-                                        
-                                        <tbody>
-                                            {cartItems.map(item => (
-                                                <tr key={item.productid}>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                        {productDetails[item.productid] && (
-                                                            <div>
-                                                                <img
-                                                                    src={productDetails[item.productid].image_paths[imageIndex[item.productid] || 0]}
-                                                                    alt={productDetails[item.productid].name}
-                                                                    className="w-20 h-20 object-cover mr-4"
-                                                                />
-                                                                <span>{productDetails[item.productid].name}</span>
-                                                            </div>
-                                                        )}
-                                                    </td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                         <button
-                                                            className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
-                                                            onClick={() => decreaseQuantity(item.productid)}
-                                                        >-</button>
-                                                        <span className="px-3">{item.quantity}</span>
-                                                        <button
-                                                            className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
-                                                            onClick={() => increaseQuantity(item.productid)}
-                                                        >+</button>
-                                                    </td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                        ₹{item.price}
-                                                    </td>
-                                                    
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                   
-                                    <button
-  className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mt-2"
-  onClick={() => removeFromCart(item.productid)}
->
-  Remove Cart
-  <ShoppingCartIcon className="h-5 w-5 inline-block ml-2" />
-</button>
+ )}
+                                       <tbody>
+  {cartItems.length > 0 ? (
+    cartItems.map((item) => (
+      <tr key={item.productid} className="bg-white border-b">
+        {/* <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+          {productDetails[item.productid] && (
+            <div className="flex items-center space-x-4">
+              <img
+                src={productDetails[item.productid].image_paths[imageIndex[item.productid] || 0]}
+                alt={productDetails[item.productid].name}
+                className="w-20 h-20 object-cover rounded"
+              />
+              <span>{productDetails[item.productid].name}</span>
+             
+            </div>
+          )}
+        </td> */}
+<td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+  {productDetails[item.productid] && (
+    <div className="flex flex-col items-center space-y-2">
+      <img
+        src={productDetails[item.productid].image_paths[imageIndex[item.productid] || 0]}
+        alt={productDetails[item.productid].name}
+        className="w-20 h-20 object-cover rounded"
+      />
+      <span className="text-center">{productDetails[item.productid].name}</span>
+    </div>
+  )}
+</td>
 
+        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+          <div className="flex items-center">
+            <button
+              className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-3 rounded"
+              onClick={() => decreaseQuantity(item.productid)}
+            >
+              -
+            </button>
+            <span className="px-4">{item.quantity}</span>
+            <button
+              className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-3 rounded"
+              onClick={() => increaseQuantity(item.productid)}
+            >
+              +
+            </button>
+          </div>
+        </td>
 
+        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+          ₹{item.price}
+        </td>
 
-                                    
-                                </td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                        
+        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+          <button
+            className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded flex items-center"
+            onClick={() => removeFromCart(item.productid)}
+          >
+            Remove Cart
+            <ShoppingCartIcon className="h-5 w-5 ml-2" />
+          </button>
+        </td>
+      </tr>
+    ))
+  ) : (
+    <tr>
+      <td colSpan="4" className="text-center py-6 text-gray-500">
+        No items in your cart.
+      </td>
+    </tr>
+  )}
+</tbody>
+
                                     </table>
-                                    <div className="mt-6 text-right bg-white p-4 rounded shadow-lg">
+                                    <div className="mt-6 text-center bg-white p-4 rounded shadow-lg">
            
             {cartItems.length > 0 && (
     <button
@@ -438,6 +463,10 @@ const [imageIndex, setImageIndex] = useState({});
 )}
 
         </div>
+      
+   
+
+
 
         {isModalOpen && (
   <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-40">

@@ -149,7 +149,7 @@ const Dashboard = () => {
         <div className="flex flex-1">
           <UserSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
   
-          <main className="flex-1 p-6 md:p-8 lg:p-12 overflow-y-auto bg-white rounded-tl-3xl shadow-md">
+          <main className="flex-1 p-6 md:p-8 lg:p-12 overflow-y-auto bg-white rounded-tl-3xl shadow-md lg:ml-10">
             <div className="max-w-7xl mx-auto space-y-10">
               {/* New Arrival EV Chargers */}
               <section>
