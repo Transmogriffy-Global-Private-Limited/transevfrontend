@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import UserSidebar from '../User/User_sidebar';
 import UserNavbar from '../User/User_Navbar';
 import background from "../../assets/new3.jpg";
+import { useNavigate } from "react-router-dom";
 const BASE_URL_AND_PORT = "http://192.168.0.106:8000"; // Define the base URL and port
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf"; // Your API key
 const token = localStorage.getItem("auth_token"); // Retrieve the token
 
 const AddAddressForm = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     type: "",
     custom_type_name: "",
@@ -46,6 +48,7 @@ const AddAddressForm = () => {
     if (response.ok) {
       // Successfully added the address
       alert("Address added successfully!");
+      navigate("/profile");
     } else {
       // There was an error
       alert("Error occurred.");

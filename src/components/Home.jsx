@@ -638,7 +638,7 @@ function HomePage() {
     ].map((box, index) => (
       <div key={index} className="flex flex-col items-center">
         <div
-          className="box bg-gray-200 p-6 sm:p-8 md:p-10 rounded-lg relative cursor-pointer hover:scale-105 transform transition-all duration-300 w-[300px] sm:w-[400px] md:w-[450px] lg:w-[550px] h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px]"
+          className="box bg-gray-200 p-6 sm:p-8 md:p-10 rounded-lg relative cursor-pointer hover:scale-105 transform transition-all duration-300 w-[300px] sm:w-[400px] md:w-[450px] lg:w-[550px] h-[400px] sm:h-[500px] md:h-[600px] lg:h-[600px]"
           onMouseEnter={() => setHovered(index)}
           onMouseLeave={() => setHovered(null)}
         >
@@ -646,7 +646,7 @@ function HomePage() {
             <img
               src={box.image}
               alt={box.name}
-              className="w-3/4 h-3/4 object-cover rounded-lg mt-20 cursor-pointer"
+              className="w-3/4 h-4/4 object-cover rounded-lg mt-20 cursor-pointer"
               onClick={() => handlePopupOpen(box.image, box.description, box.features)}
             />
           </div>

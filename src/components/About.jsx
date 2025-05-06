@@ -35,15 +35,15 @@ function AboutUs() {
       <section className="text-center mt-[100px] sm:mt-[80px] md:mt-[100px] lg:mt-[160px] px-6 sm:px-8 md:px-12 lg:px-[50px]">
    
     
-<h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-9xl font-aeonik text-black-800 mt-10 sm:mt-16 lg:mt-20 px-4 sm:px-10 lg:px-32 xl:px-40 text-center lg:text-left ">
- 
+{/* <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-9xl font-aeonik text-black-800 mt-10 sm:mt-16 lg:mt-20 px-4 sm:px-10 lg:px-32 xl:px-40 text-center lg:text-left  "> */}
+<h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-9xl font-aeonik text-black-800 mt-10 sm:mt-16 lg:mt-20 px-4 sm:px-10 lg:px-32 xl:px-10 text-left">
 
 Facilitating fairer, <br />
  <span className="inline-block">more accessible</span>
- <span className="inline-block">EV charging</span>
+ <span className="inline-block ml-5">   EV charging</span>
 </h1>
 <h4 
-  className="text-[30px] sm:text-[35px] md:text-[40px] lg:text-[50px] font-aeonik mt-[40px] sm:mt-[60px] md:mt-[80px] lg:mt-[120px] leading-tight text-center sm:text-left"
+  className="text-[30px] sm:text-[35px] md:text-[40px] lg:text-[50px] font-aeonik mt-[40px] sm:mt-[60px] md:mt-[80px] lg:mt-[120px] leading-tight text-center sm:text-left lg:ml-11"
 >
   <span className="inline-block sm:mr-2 lg:mr-4">Setting the standard for</span><br />
   <span className="inline-block">EV charging in residential</span><br />

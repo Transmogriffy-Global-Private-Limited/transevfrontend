@@ -469,7 +469,7 @@ const [imageIndex, setImageIndex] = useState({});
 
 
         {isModalOpen && (
-  <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-40">
+  <div className="fixed inset-0 flex items-center justify-center z-50 bg-white bg-opacity-40">
     <div className="bg-white p-6 rounded-lg shadow-lg w-96">
       <h2 className="text-lg font-bold mb-4">Select Payment Method</h2>
       
@@ -478,7 +478,7 @@ const [imageIndex, setImageIndex] = useState({});
         value={globalPaymentOption}
         onChange={(e) => setGlobalPaymentOption(e.target.value)}
       >
-        <option value="Cash">Cash</option>
+        <option value="Cash">POD (Pay On Delivery)</option>
         <option value="UPI">UPI</option>
         <option value="Card">Card</option>
       </select>

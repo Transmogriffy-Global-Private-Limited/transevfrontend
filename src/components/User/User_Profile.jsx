@@ -471,7 +471,7 @@ const Profile = () => {
                 className="mt-2 sm:mt-0 p-3 border border-gray-300 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:bg-gray-100"
               />
             </div>
-            <div className="flex flex-col sm:flex-row items-center">
+            {/* <div className="flex flex-col sm:flex-row items-center">
               <label className="w-full sm:w-32 font-semibold text-gray-700">Role:</label>
               <input
                 type="text"
@@ -481,7 +481,7 @@ const Profile = () => {
                 disabled={!isEditing}
                 className="mt-2 sm:mt-0 p-3 border border-gray-300 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:bg-gray-100"
               />
-            </div>
+            </div> */}
           </div>
           <div className="flex justify-between">
             {isEditing ? (
