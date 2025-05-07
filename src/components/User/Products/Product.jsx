@@ -247,6 +247,7 @@ const [imageIndex, setImageIndex] = useState({});
                 <div className="text-center mt-4">
                   <h2 className="text-xl font-bold">{product.name}</h2>
                   <p className="text-gray-600 mt-2">{product.model}</p>
+                
                  
                   {product.quantity > 0 ? (
   <button
@@ -352,6 +353,14 @@ const [imageIndex, setImageIndex] = useState({});
           <h3 className="text-3xl font-semibold mb-4 text-blue-600">Product Name: {popupContent.name}</h3>
           <h4 className="text-3xl font-semibold mb-4 text-green-600">Model: {popupContent.model}</h4>
           <h4 className="text-3xl font-semibold mb-4 text-red-600">Price: {popupContent.price}</h4>
+          {/* <h4 className="text-2xl font-semibold mb-4 text-teal-600">Product Color: {popupContent.product_color}</h4> */}
+          <h4 className="text-2xl font-semibold text-teal-600">
+    Product Color: {popupContent.product_color}
+  </h4>
+  <div
+    className={`w-6 h-6 rounded border border-gray-300`}
+    style={{ backgroundColor: popupContent.product_color.toLowerCase() }}
+  ></div>
           {popupContent.details?.additional_details && (
             <p className="text-lg mb-4">Features: {popupContent.details.additional_details}</p>
           )}
