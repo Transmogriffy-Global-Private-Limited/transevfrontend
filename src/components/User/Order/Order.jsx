@@ -88,11 +88,7 @@ function OrderHistoryPage() {
                   <p className="text-m text-gray-600">
                     Payment Method: <span className="font-medium text-gray-800">{order.payment_option}</span>
                   </p>
-                  
-                 
-                 
-
-                  <p className="text-m text-gray-600 mt-2 md:mt-0">
+                   <p className="text-m text-gray-600 mt-2 md:mt-0">
                     Status:{" "}
                     <span
                       className={`inline-block px-3 py-1 text-s font-semibold rounded-full ${

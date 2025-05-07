@@ -235,7 +235,7 @@ const Navbar = () => {
 
       if (response.ok) {
         localStorage.removeItem("auth_token");
-        navigate("/login");
+        navigate("/");
       } else {
         console.error("Logout failed");
       }
