@@ -16,6 +16,7 @@ const AddProductPage = () => {
     model: "",
     price: "",
     quantity: "",
+    product_color:"",
     details: {
       input_voltage: "230V",
       phase: "Single",
@@ -112,6 +113,7 @@ const AddProductPage = () => {
           model: "",
           price: "",
           quantity: "",
+          product_color:"",
           details: {
             input_voltage: "230V",
             phase: "Single",
@@ -230,6 +232,18 @@ const AddProductPage = () => {
                   className="mt-2 px-4 py-2 w-full border rounded-md"
                 />
               </div>
+              <div className="mb-4">
+  <label className="block text-gray-600" htmlFor="product_color">Product Color</label>
+  <input
+    type="text"
+    id="product_color"
+    name="product_color"
+    value={product.product_color}
+    onChange={handleChange}
+    required
+    className="mt-2 px-4 py-2 w-full border rounded-md"
+  />
+</div>
 
               {/* Details Inputs */}
               <div className="space-y-4">

@@ -14,6 +14,28 @@ const Profile = () => {
   const [imageFile, setImageFile] = useState(null); 
   const [profilePicture, setProfilePicture] = useState(null);
   const [userAddresses, setUserAddresses] = useState([]);
+ 
+
+  const [showEditPopup, setShowEditPopup] = useState(false);
+  const [editingAddressData, setEditingAddressData] = useState(null);
+  const [editingAddressType, setEditingAddressType] = useState("");
+ // Handle edit button click
+ const handleEditButtonClick = (addressType, address) => {
+  setEditingAddressData(address);
+  setEditingAddressType(addressType);
+  setShowEditPopup(true);
+};
+
+// Handle input change in the edit popup
+const handleEditInputChange = (e) => {
+  const { name, value } = e.target;
+  setEditingAddressData((prevData) => ({
+    ...prevData,
+    [name]: value,
+  }));
+};
+
+
 // For displaying profile picture
   const [formData, setFormData] = useState({
     name: '',
@@ -22,7 +44,7 @@ const Profile = () => {
     phone_number: '',
     role: '',
     address: '',
-    emailVerified: false, // To track email verification status
+    email_verified: false, // To track email verification status
   });
   const [isUpdated, setIsUpdated] = useState(false); // To track if the data has been modified
   const [isImageEditing, setIsImageEditing] = useState(false); // For controlling image editing modal visibility
@@ -98,34 +120,39 @@ const Profile = () => {
     }
   };
 
-  // Set address as default based on type ('Home', 'Work', 'Other')
-  const handleSetDefaultAddress = async (addressType) => {
+  
+  const handleSetDefaultAddress = async (addressType, customTypeName = null) => {
     const token = localStorage.getItem('auth_token');
-    const updatedAddress = { is_default: true };
-
+  
+    let url;
+    if (addressType === 'Other' && customTypeName) {
+      url = `http://192.168.0.106:8000/users/address/Other/set-default?custom_name=${customTypeName}`;
+    } else {
+      url = `http://192.168.0.106:8000/users/address/${addressType}/set-default`;
+    }
+  
     try {
-        const response = await fetch(`${BASE_URL_AND_PORT}/users/address/${addressType}/set-default`, {
-            method: 'PATCH',
-            headers: {
-                Authorization: `Bearer ${token}`,
-                'API-KEY': API_KEY,
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(updatedAddress),
-        });
-
-        const data = await response.json();
-        if (response.ok) {
-            alert(`${addressType} Address set as default successfully!`);
-            fetchUserAddresses(); // Re-fetch updated addresses
-        } else {
-            console.error("Failed to set default address:", data);
-        }
+      const response = await fetch(url, {
+        method: 'PATCH',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'API-KEY': API_KEY,
+        },
+      });
+  
+      const data = await response.json();
+      if (response.ok) {
+        alert(`${addressType} address set as default.`);
+        fetchUserAddresses(); // Refresh list after change
+      } else {
+        alert('Failed to set default address: ' + (data.message || 'Unknown error'));
+      }
     } catch (error) {
-        console.error("Error setting default address:", error);
+      console.error('Error setting default address:', error);
+      alert('An error occurred while setting default address.');
     }
   };
-
+  
   // Group addresses by type
   const groupedAddresses = userAddresses.reduce((acc, address) => {
     if (!acc[address.type]) {
@@ -332,11 +359,19 @@ const Profile = () => {
       const toggleSidebar = () => {
           setSidebarOpen(!sidebarOpen);
       };
-      const handleDeleteAddress = async (addressType) => {
+     
+      const handleDeleteAddress = async (addressType, customTypeName = null) => {
         const token = localStorage.getItem('auth_token');
+        let url;
+      
+        if (addressType === 'Other' && customTypeName) {
+          url = `http://192.168.0.106:8000/users/address/Other?custom_name=${customTypeName}`;
+        } else {
+          url = `http://192.168.0.106:8000/users/address/${addressType}`;
+        }
       
         try {
-          const response = await fetch(`${BASE_URL_AND_PORT}/users/address/${addressType}`, {
+          const response = await fetch(url, {
             method: 'DELETE',
             headers: {
               Authorization: `Bearer ${token}`,
@@ -346,7 +381,15 @@ const Profile = () => {
       
           if (response.ok) {
             alert(`${addressType} address deleted successfully.`);
-            fetchUserAddresses(); // Refresh address list
+      
+            // ✅ Update the local state instead of re-fetching all
+            setUserAddresses(prevAddresses =>
+              prevAddresses.filter(addr =>
+                addressType === 'Other'
+                  ? addr.custom_type_name !== customTypeName
+                  : addr.type !== addressType
+              )
+            );
           } else {
             const data = await response.json();
             console.error("Delete failed:", data.message || "Unknown error");
@@ -354,9 +397,73 @@ const Profile = () => {
           }
         } catch (error) {
           console.error("Error deleting address:", error);
-          alert("Error occurred while deleting the address.");
+          alert("An error occurred while deleting the address.");
         }
       };
+      
+      
+      // Handle submit (Save Changes) for edited address
+  const handleSubmitEditedAddress = async () => {
+    const token = localStorage.getItem("auth_token");
+    const updatedData = { ...editingAddressData };
+
+    try {
+      // Update logic for "Other" address type
+      if (editingAddressType === "Other") {
+        const response = await fetch(
+          `http://192.168.0.106:8000/users/address/Other?custom_name=${updatedData.custom_type_name}`,
+          {
+            method: "PATCH",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+              'API-KEY': API_KEY,
+            },
+            body: JSON.stringify(updatedData),
+          }
+        );
+        const data = await response.json();
+        if (response.ok) {
+          alert("Other address updated successfully.");
+          fetchUserAddresses();
+          setShowEditPopup(false);
+        } else {
+          alert("Failed to update address: " + (data.message || "Unknown error"));
+        }
+      } else {
+        // Handle other address types
+        const response = await fetch(
+          `http://192.168.0.106:8000/users/address/${editingAddressType}`,
+          {
+            method: "PATCH",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+              'API-KEY': API_KEY,
+            },
+            body: JSON.stringify(updatedData),
+          }
+        );
+        const data = await response.json();
+        if (response.ok) {
+          alert(`${editingAddressType} address updated successfully.`);
+          fetchUserAddresses();
+          setShowEditPopup(false);
+        } else {
+          alert("Failed to update address: " + (data.message || "Unknown error"));
+        }
+      }
+    } catch (error) {
+      console.error("Error updating address:", error);
+      alert("An error occurred while updating the address.");
+    }
+  };
+
+  // Handle cancel edit popup
+  const handleCancelEdit = () => {
+    setShowEditPopup(false);
+  };
+
       
   return (
     <div className="min-h-screen bg-gradient-to-r from-gray-100 via-gray-100 to-gray-50 bg-cover bg-center bg-fixed">
@@ -548,20 +655,35 @@ const Profile = () => {
                     >
                       <p className="text-gray-600">{fullAddress}</p>
                       {address.is_default && <span className="text-green-600 font-semibold">Default</span>}
+                     
                       <button
-                        onClick={() => handleSetDefaultAddress(addressType)} // Pass the address type to set it as default
-                        className="mt-2 bg-indigo-500 text-white py-1 px-3 rounded-lg hover:bg-indigo-600 transition-colors ml-10"
-                      >
-                        {/* Set {addressType} as Default */}
-                        Set  as Default
-                      </button>
-                      <button
-  onClick={() => handleDeleteAddress(addressType)}
-  className="mt-2 bg-red-500 text-white py-1 px-3 rounded-lg hover:bg-red-600 transition-colors ml-20"
+  onClick={() =>
+    handleSetDefaultAddress(addressType, addressType === 'Other' ? address.custom_type_name : null)
+  }
+  className="mt-2 bg-indigo-500 text-white py-1 px-3 rounded-lg hover:bg-indigo-600 transition-colors ml-10"
 >
-  {/* Delete {addressType} Address */}
+  Set as Default
+</button>
+
+                      <button
+                  onClick={() => handleEditButtonClick(addressType, address)}
+                  className="mt-2 bg-yellow-500 text-white py-1 px-3 rounded-lg hover:bg-indigo-600 transition-colors lg:ml-10"
+                >
+                  Edit Address
+                </button>
+
+                   
+<button
+  onClick={() =>
+    handleDeleteAddress(addressType, addressType === 'Other' ? address.custom_type_name : null)
+  }
+  className="mt-2 bg-red-500 text-white py-1 px-3 rounded-lg hover:bg-red-600 transition-colors ml-10"
+>
   Delete Address
 </button>
+
+
+
 
                     </div>
                   );
@@ -603,8 +725,71 @@ const Profile = () => {
             </div>
           )}
 
-          {/* Update/Cancel */}
-        
+         {/* Edit Address Modal */}
+      {showEditPopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-30">
+          <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-lg">
+            <h2 className="text-xl font-semibold mb-4">Edit {editingAddressType} Address</h2>
+
+            {editingAddressData && (
+              <>
+              
+ {editingAddressType === "Other" && (
+            <div className="mb-3">
+              <label className="block text-sm font-medium text-gray-700">Custom Type Name:</label>
+              {/* Display Custom Type Name as text, not an editable field */}
+              <p className="mt-1 p-2 w-full border border-gray-300 rounded-md bg-gray-100">
+                {editingAddressData.custom_type_name || "No custom name"}
+              </p>
+            </div>
+          )}
+                {/* Address Fields */}
+                {[
+                  "house_building",
+                  "locality_street",
+                  "landmark",
+                  "city",
+                  "po_ps",
+                  "district",
+                  "state",
+                  "pin",
+                  "country"
+                ].map((field) => (
+                  <div key={field} className="mb-3">
+                    <label className="block text-sm font-medium text-gray-700 capitalize">
+                      {field.replace('_', ' ')}:
+                    </label>
+                    <input
+                      type="text"
+                      name={field}
+                      value={editingAddressData[field] || ''}
+                      onChange={handleEditInputChange}
+                      className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+                    />
+                  </div>
+                ))}
+
+                {/* Buttons */}
+                <div className="flex justify-end space-x-3 mt-4">
+                  <button
+                    onClick={handleCancelEdit}
+                    className="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={handleSubmitEditedAddress}
+                    className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                  >
+                    Save Changes
+                  </button>
+                </div>
+              </>
+            )}
+    </div>
+  </div>
+)}
+
         </div>
       </div>
     </div>

@@ -173,33 +173,34 @@ const [imageIndex, setImageIndex] = useState({});
     
   
                     const removeFromCart = async (productId) => {
-                        try {
-                          const response = await axios.post(
-                            `${BASE_URL_AND_PORT}/cart/removefromcart`,
-                            {
-                              productid: productId,
-                              user_id: userId,
+                      try {
+                        const response = await axios.post(
+                          `${BASE_URL_AND_PORT}/cart/removefromcart`,
+                          {
+                            productid: productId,
+                            user_id: userId,
+                          },
+                          {
+                            headers: {
+                              Authorization: `Bearer ${token}`,
+                              'API-KEY': API_KEY,
+                              'Content-Type': 'application/json',
                             },
-                            {
-                              headers: {
-                                Authorization: `Bearer ${token}`,
-                                'API-KEY': API_KEY,
-                                'Content-Type': 'application/json',
-                              },
-                            }
-                          );
-                      
-                          if (response.data) {
-                            alert("✅ Product removed from cart successfully!");
-                            fetchCartItems(); // Optional: reload cart
                           }
-                        } catch (error) {
-                          console.error("❌ Error removing item from cart:", error);
-                          alert("Failed to remove item from cart.");
+                        );
+                    
+                        if (response.data) {
+                          alert("✅ Product removed from cart successfully!");
+                    
+                          // ✅ Remove the item from local state instead of full reload
+                          setCartItems(prevItems => prevItems.filter(item => item.productid !== productId));
                         }
-                      };
-                      
-                  
+                      } catch (error) {
+                        console.error("❌ Error removing item from cart:", error);
+                        alert("Failed to remove item from cart.");
+                      }
+                    };
+                    
                   
                     const placeOrder = async () => {
                         try {
