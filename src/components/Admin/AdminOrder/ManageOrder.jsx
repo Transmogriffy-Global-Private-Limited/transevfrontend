@@ -176,6 +176,14 @@ const ManageOrders = () => {
                           <span className="font-medium text-gray-700">Payment:</span>{" "}
                           {order.payment_option}
                         </div>
+                        <div className="mb-2">
+  <span className="font-medium text-gray-700">Order Date:</span>{" "}
+  {new Date(order.purchase_time).toLocaleString('en-IN', {
+    dateStyle: 'medium',
+    timeStyle: 'short',
+    hour12: true,
+  })}
+</div>
 
                         <details className="mb-2">
                           <summary className="cursor-pointer text-m text-indigo-500 font-medium">

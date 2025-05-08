@@ -4,13 +4,13 @@ import Navbar from './Navbar';
 import logo from '../assets/transev logo.png';  
 import newsImage1 from '../assets/image1.png';  
 import newsImage2 from '../assets/imagee2.jpg';  
-import newsImage3 from '../assets/slide6.jpg';  
-import newsImage4 from '../assets/image1.png';  
-import newsImage5 from '../assets/imagee2.jpg';  
+import newsImage3 from '../assets/new2.jpg';  
+import newsImage4 from '../assets/holiday.jpg';  
+import newsImage5 from '../assets/nwe1.jpg';  
 import newsImage6 from '../assets/slide6.jpg';  
-import newsImage7 from '../assets/image1.png';  
-import newsImage8 from '../assets/imagee2.jpg';  
-import newsImage9 from '../assets/slide6.jpg';  
+import newsImage7 from '../assets/new.jpg';  
+import newsImage8 from '../assets/new4.png';  
+import newsImage9 from '../assets/image.png';  
 
 const newsArticles = [
   {

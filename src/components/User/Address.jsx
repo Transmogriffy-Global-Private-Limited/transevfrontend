@@ -71,8 +71,16 @@ const AddAddressForm = () => {
       <div className="flex flex-1">
         {/* Sidebar */}
         <UserSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
-        <div className="w-[40%] mx-auto mt-10 bg-white p-6 rounded-lg shadow-lg">
-
+        {/* <div className="w-[40%] mx-auto mt-10 bg-white p-6 rounded-lg shadow-lg"> */}
+        <div className="w-[40%] mx-auto mt-10 bg-white p-6 rounded-lg shadow-lg relative">
+        <button
+  type="button"
+  onClick={() => navigate("/profile")}
+  className="absolute top-2 right-2 text-gray-600 hover:text-black text-2xl font-bold"
+  title="Close"
+>
+  &times;
+</button>
       <h2 className="text-2xl font-semibold text-center mb-6">Add Address</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>

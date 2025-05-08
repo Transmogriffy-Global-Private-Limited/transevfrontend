@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import UserSidebar from '../User_sidebar';
 import UserNavbar from '../User_Navbar';
-import background from "../../../assets/new3.jpg";
+import background from "../../../assets/hotels.jpg";
 import { ShoppingCartIcon } from '@heroicons/react/solid';
 import { useNavigate } from 'react-router-dom';
 
@@ -352,14 +352,14 @@ const [imageIndex, setImageIndex] = useState({});
                     
     return (
         <div
-            className="min-h-screen bg-gradient-to-r from-teal-100 via-teal-100 to-teal-200 bg-cover bg-center bg-fixed"
+            className="min-h-screen bg-gradient-to-r from-yellow-100 via-teal-100 to-orange-100 bg-cover bg-center bg-fixed"
             
         >
             <UserNavbar onToggleSidebar={toggleSidebar} />
             <div className="flex flex-1">
                 <UserSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
                 {/* <div className="container mx-auto p-4 pt-6 mt-10 bg-[#f0f0f0] ml-55"> */}
-                <div className="w-full px-4 py-6 mt-10 bg-[#f0f0f0] sm:max-w-7xl mx-auto">
+                <div className="w-full px-4 py-6 mt-10 bg-orange sm:max-w-7xl mx-auto">
            <h2 className="text-3xl font-bold mb-4 ml-150 text-green-600">Your Cart</h2>
                     
                     <div className="flex flex-col">
@@ -470,8 +470,16 @@ const [imageIndex, setImageIndex] = useState({});
 
 
         {isModalOpen && (
-  <div className="fixed inset-0 flex items-center justify-center z-50 bg-white bg-opacity-40">
-    <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+  <div
+  className="fixed inset-0 flex items-center justify-center z-50 bg-white bg-opacity-40"
+  style={{
+    backgroundImage: `url(${background})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  }}
+>
+
+ <div className="bg-white p-6 rounded-lg shadow-lg w-96">
       <h2 className="text-lg font-bold mb-4">Select Payment Method</h2>
       
       <select

@@ -104,6 +104,17 @@ function OrderHistoryPage() {
                 <p className="text-lg text-gray-600">
                     Delivery Address: <span className="font-medium text-gray-800">{order.deliveryaddress}</span>
                   </p> 
+                  <p className="text-lg text-gray-600">
+  Order Date:{' '}
+  <span className="font-medium text-gray-800">
+    {new Date(order.purchase_time).toLocaleString('en-IN', {
+      dateStyle: 'medium',
+      timeStyle: 'short',
+      hour12: true,
+    })}
+  </span>
+</p>
+
                 <button
                   onClick={() => {
                     document.getElementById(order.order_id)?.classList.toggle("hidden");

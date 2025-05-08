@@ -754,7 +754,17 @@ const ProductEditPage = () => {
                   className="border p-2 w-full"
                 />
               </div>
-  
+              <div className="form-group mt-4">
+  <label>Color</label>
+  <input
+    type="text"
+    name="product_color"
+    value={updatedProductData?.product_color || ''}
+    onChange={handleInputChange}
+    className="border p-2 w-full"
+  />
+</div>
+
               <h3 className="text-xl font-semibold mt-4">Product Details</h3>
   
               {Object.entries({
