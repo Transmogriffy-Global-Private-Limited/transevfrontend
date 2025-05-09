@@ -7,17 +7,20 @@ const BASE_URL_AND_PORT = "http://192.168.0.106:8000";
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
 
 const ORDER_STATUS_OPTIONS = [
-  { value: "", label: "Select Status" },
+  { value: "", label: "All Orders" },
   { value: "Processing", label: "Processing" },
   { value: "Shipped", label: "Shipped" },
   { value: "Delivered", label: "Delivered" },
+  { value: "Pending", label: "Pending" },
 ];
 
 const ManageOrders = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [orders, setOrders] = useState([]);
+  const [filteredOrders, setFilteredOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState({});
+  const [selectedStatus, setSelectedStatus] = useState(""); // Added state for selected status filter
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -40,6 +43,7 @@ const ManageOrders = () => {
     }
   };
 
+  // Fetch orders data
   useEffect(() => {
     setLoading(true);
     fetch(`${BASE_URL_AND_PORT}/order/allorderdata`, {
@@ -51,7 +55,10 @@ const ManageOrders = () => {
         if (!res.ok) throw new Error("Failed to fetch orders");
         return res.json();
       })
-      .then(setOrders)
+      .then((data) => {
+        setOrders(data);
+        setFilteredOrders(data); // Set initial orders to filtered orders
+      })
       .catch((err) => {
         console.error(err);
         alert("Error fetching orders. Please try again.");
@@ -59,35 +66,46 @@ const ManageOrders = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  const handleStatusChange = async (order_id, newStatus) => {
+  // Handle status change from the dropdown or buttons
+  const handleStatusChange = (order_id, newStatus) => {
     if (!newStatus) return;
 
     setUpdating((prev) => ({ ...prev, [order_id]: true }));
 
-    try {
-      const res = await fetch(`${BASE_URL_AND_PORT}/order/statusupdate`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "API-Key": API_KEY,
-        },
-        body: JSON.stringify({ orderid: order_id, orderstatus: newStatus }),
+    fetch(`${BASE_URL_AND_PORT}/order/statusupdate`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "API-Key": API_KEY,
+      },
+      body: JSON.stringify({ orderid: order_id, orderstatus: newStatus }),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to update order status");
+        setOrders((prev) =>
+          prev.map((order) =>
+            order.order_id === order_id
+              ? { ...order, order_status: newStatus }
+              : order
+          )
+        );
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("Error updating order status. Please try again.");
+      })
+      .finally(() => {
+        setUpdating((prev) => ({ ...prev, [order_id]: false }));
       });
+  };
 
-      if (!res.ok) throw new Error("Failed to update order status");
-
-      setOrders((prev) =>
-        prev.map((order) =>
-          order.order_id === order_id
-            ? { ...order, order_status: newStatus }
-            : order
-        )
-      );
-    } catch (error) {
-      console.error(error);
-      alert("Error updating order status. Please try again.");
-    } finally {
-      setUpdating((prev) => ({ ...prev, [order_id]: false }));
+  // Filter orders based on selected status
+  const filterOrdersByStatus = (status) => {
+    setSelectedStatus(status);
+    if (status === "") {
+      setFilteredOrders(orders); // Show all orders
+    } else {
+      setFilteredOrders(orders.filter((order) => order.order_status === status));
     }
   };
 
@@ -102,17 +120,35 @@ const ManageOrders = () => {
               Manage Orders
             </h1>
 
+            {/* Filter by status */}
+            <div className="mb-6 flex justify-center gap-4">
+              {ORDER_STATUS_OPTIONS.map((option) => (
+                <button
+                  key={option.value}
+                  onClick={() => filterOrdersByStatus(option.value)}
+                  className={`px-4 py-2 rounded-md text-white ${
+                    selectedStatus === option.value
+                      ? "bg-indigo-700"
+                      : "bg-indigo-500"
+                  }`}
+                >
+                  {option.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Orders Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {loading ? (
                 <div className="flex justify-center items-center col-span-full py-10">
                   <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-indigo-500"></div>
                 </div>
-              ) : orders.length === 0 ? (
+              ) : filteredOrders.length === 0 ? (
                 <p className="col-span-full text-center text-gray-500">
-                  No orders found.
+                  No orders found for the selected status.
                 </p>
               ) : (
-                orders.map((order) => {
+                filteredOrders.map((order) => {
                   const displayStatus =
                     !order.order_status || order.order_status === "null"
                       ? "Pending"
@@ -137,6 +173,7 @@ const ManageOrders = () => {
                           </span>
                         </div>
 
+                        {/* Order Details */}
                         <div className="text-sm text-gray-600 mb-2">
                           <span className="font-medium">Order ID:</span>{" "}
                           {order.order_id}
@@ -144,39 +181,39 @@ const ManageOrders = () => {
 
                         <div className="mb-2">
                           <span className="font-medium text-gray-700">Customer:</span>{" "}
-                          {order.user_name}
-                          <br />
-                          Email:{" "}
-                          <span className="text-gray-500">{order.user_email}</span>
+                           {order.user_name}
+                           <br />
+                           Email:{" "}
+                           <span className="text-gray-500">{order.user_email}</span>
+                         </div>
+
+                         <div className="mb-2">
+                           <span className="font-medium text-gray-700">Phone:</span>{" "}
+                           {order.user_phonenumber}
+                        </div>
+
+                         <div className="mb-2">
+                           <span className="font-medium text-gray-700">Address:</span>{" "}
+                           {order.deliveryaddress || order.address}
+                         </div>
+
+                         <div className="mb-2">
+                           <span className="font-medium text-gray-700">Quantity:</span>{" "}
+                           {order.quantity_ordered}
                         </div>
 
                         <div className="mb-2">
-                          <span className="font-medium text-gray-700">Phone:</span>{" "}
-                          {order.user_phonenumber}
-                        </div>
-
-                        <div className="mb-2">
-                          <span className="font-medium text-gray-700">Address:</span>{" "}
-                          {order.deliveryaddress || order.address}
-                        </div>
-
-                        <div className="mb-2">
-                          <span className="font-medium text-gray-700">Quantity:</span>{" "}
-                          {order.quantity_ordered}
-                        </div>
-
-                        <div className="mb-2">
-                          <span className="font-medium text-gray-700">Total:</span>{" "}
-                          <span className="text-indigo-700 font-bold">
-                            ₹{order.total_amount}
-                          </span>
-                        </div>
+                           <span className="font-medium text-gray-700">Total:</span>{" "}
+                           <span className="text-indigo-700 font-bold">
+                             ₹{order.total_amount}
+                           </span>
+                         </div>
 
                         <div className="mb-2">
                           <span className="font-medium text-gray-700">Payment:</span>{" "}
-                          {order.payment_option}
-                        </div>
-                        <div className="mb-2">
+                           {order.payment_option}
+                         </div>
+                         <div className="mb-2">
   <span className="font-medium text-gray-700">Order Date:</span>{" "}
   {new Date(order.purchase_time).toLocaleString('en-IN', {
     dateStyle: 'medium',
@@ -184,7 +221,7 @@ const ManageOrders = () => {
     hour12: true,
   })}
 </div>
-
+              
                         <details className="mb-2">
                           <summary className="cursor-pointer text-m text-indigo-500 font-medium">
                             Product Details
@@ -202,32 +239,34 @@ const ManageOrders = () => {
                         </details>
                       </div>
 
-                      <div className="mt-4 flex items-center gap-2">
-                        <select
-                          className="border rounded-md px-3 py-1 text-sm focus:ring-2 focus:ring-indigo-300"
-                          value={
-                            !order.order_status || order.order_status === "null"
-                              ? ""
-                              : order.order_status
-                          }
-                          onChange={(e) =>
-                            handleStatusChange(order.order_id, e.target.value)
-                          }
-                          disabled={updating[order.order_id]}
-                        >
-                          {ORDER_STATUS_OPTIONS.map((opt) => (
-                            <option key={opt.value} value={opt.value}>
-                              {opt.label}
-                            </option>
-                          ))}
-                        </select>
-                        {updating[order.order_id] && (
-                          <span className="text-s text-gray-400 ml-2">
-                            Updating...
-                          </span>
-                        )}
+                        {/* Status Update */}
+                        <div className="mt-4 flex items-center gap-2">
+                          <select
+                            className="border rounded-md px-3 py-1 text-sm focus:ring-2 focus:ring-indigo-300"
+                            value={
+                              !order.order_status || order.order_status === "null"
+                                ? ""
+                                : order.order_status
+                            }
+                            onChange={(e) =>
+                              handleStatusChange(order.order_id, e.target.value)
+                            }
+                            disabled={updating[order.order_id]}
+                          >
+                            {ORDER_STATUS_OPTIONS.map((opt) => (
+                              <option key={opt.value} value={opt.value}>
+                                {opt.label}
+                              </option>
+                            ))}
+                          </select>
+                          {updating[order.order_id] && (
+                            <span className="text-s text-gray-400 ml-2">
+                              Updating...
+                            </span>
+                          )}
+                        </div>
                       </div>
-                    </div>
+                
                   );
                 })
               )}

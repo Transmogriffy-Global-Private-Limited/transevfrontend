@@ -323,9 +323,10 @@ const ApartmentBuildingPage = () => {
       />
     </div>
 
-    <div className="w-2/3 pl-6 flex items-center">
+     <div className="w-2/3 pl-6 flex items-center">
     <div className="flex items-center ml-100">
       <h3 className="text-5xl font-semibold  mr-100">01</h3>
+     
       <div>
       <p className="text-5xl text-black-800 mt-3 whitespace-nowrap w-full">
   Cost-efficient solutions
@@ -336,7 +337,11 @@ const ApartmentBuildingPage = () => {
         </p>
       </div>
       </div>
-      </div>
+      
+      </div> 
+     
+
+
   </div>
   <div className="border-t-2 border-gray-300 w-full mb-8"></div>
 
