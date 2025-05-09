@@ -57,19 +57,20 @@ const Sidebar = ({ isVisible = false, onClose = () => {} }) => {
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 left-0 h-full bg-[#006400] text-white z-50 shadow-md
+        className={`fixed top-0 left-0 h-full bg-[#75833F] text-white z-50 shadow-md
         transform transition-transform duration-300 ease-in-out
         ${isVisible ? "translate-x-0" : "-translate-x-full"}
         ${isExpanded ? "md:w-64" : "md:w-20"} 
         w-64 md:translate-x-0`}
       >
         {/* Header */}
-        <div className="flex justify-between items-center px-4 py-4 border-b border-gray-700">
+        {/* <div className="flex justify-between items-center px-4 py-4 border-b border-gray-700 "> */}
+        <div className="flex justify-between items-center px-4 py-4  ">
           <img
             src={logo}
             alt="Logo"
             className={`h-10 w-auto transition-all duration-200 ${
-              isExpanded ? "block" : "hidden"
+              isExpanded ? "block" : "hidden bg-white"
             }`}
           />
 

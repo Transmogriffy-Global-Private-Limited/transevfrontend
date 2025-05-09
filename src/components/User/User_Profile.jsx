@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserSidebar from '../User/User_sidebar';
 import UserNavbar from '../User/User_Navbar';
-import background from "../../assets/slider.jpg";
+import background from "../../assets/ev_charger.jpg";
+ // adjust path as needed
+
 const Profile = () => {
   const BASE_URL_AND_PORT = "http://192.168.0.106:8000"; // Define the base URL and port
   const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf"; // API Key (for demonstration purposes)
@@ -727,7 +729,14 @@ const handleEditInputChange = (e) => {
 
          {/* Edit Address Modal */}
       {showEditPopup && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-30">
+        <div
+        className="fixed inset-0 bg-white bg-opacity-50 flex justify-center items-center z-30"
+        style={{
+          backgroundImage: `url(${background})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
           <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-lg">
             <h2 className="text-xl font-semibold mb-4">Edit {editingAddressType} Address</h2>
 

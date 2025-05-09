@@ -141,9 +141,9 @@ const [imageIndex, setImageIndex] = useState({});
   return (
    
     <div
-  className="min-h-screen bg-gradient-to-r from-green-200 via-green-200 to-teal-200 bg-cover bg-center bg-fixed"
+  className="min-h-screen bg-white-to-r from-white-200 via-green-200 to-white-200 bg-cover bg-center bg-fixed"
   style={{
-    backgroundColor: "#00BFAE", // Set a solid background color
+    backgroundColor: "#FFFFFF", // Set a solid background color
   }}
 >
       {/* User Navbar */}
@@ -253,7 +253,7 @@ const [imageIndex, setImageIndex] = useState({});
   <button
     onClick={() => handleAddToCart(product.id, product.price)}
     className={`mt-4 flex items-center justify-center px-4 py-2 rounded-md ${
-      cart.includes(product.id) ? 'bg-green-500' : 'bg-pink-500'
+      cart.includes(product.id) ? 'bg-green-500' : 'bg-[#faa122]'
     } text-white hover:${
       cart.includes(product.id) ? 'bg-green-600' : 'bg-blue-600'
     }`}
@@ -337,7 +337,7 @@ const [imageIndex, setImageIndex] = useState({});
             <button
               onClick={() => handleAddToCart(popupContent.id, popupContent.price)}
               className={`mt-4 flex items-center justify-center px-4 py-2 rounded-md ${
-                cart.includes(popupContent.id) ? 'bg-green-500' : 'bg-pink-500'
+                cart.includes(popupContent.id) ? 'bg-green-500' : 'bg-[#faa122]'
               } text-white hover:${cart.includes(popupContent.id) ? 'bg-green-600' : 'bg-blue-600'}`}
             >
               <FaShoppingCart className="mr-2" />

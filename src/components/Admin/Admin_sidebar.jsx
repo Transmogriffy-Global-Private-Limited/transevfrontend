@@ -48,7 +48,7 @@ const Sidebar = () => {
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
       <div className={`fixed top-0 left-0 h-full transition-all duration-300 
-        ${isExpanded ? "w-64" : "w-20"} bg-[#006400] text-white shadow-lg z-50`}>
+        ${isExpanded ? "w-64" : "w-20"} bg-[#899D4D] text-white shadow-lg z-50`}>
 
         <div className="flex justify-between items-center px-4 py-4 border-b border-gray-700">
           <button onClick={toggleSidebar}>

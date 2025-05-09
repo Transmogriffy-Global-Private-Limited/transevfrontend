@@ -247,7 +247,7 @@ const Navbar = () => {
   const goToProfile = () => navigate("/profile");
 
   return (
-    <div className="bg-[#006400] font-sans shadow-md sticky top-0 z-50 w-full">
+    <div className="bg-[#75833F] font-sans shadow-md sticky top-0 z-50 w-full">
       <header className="flex items-center justify-between px-4 py-3 md:px-6">
         {/* Left Side: Logo and Sidebar Toggle */}
         <div className="flex items-center gap-4">

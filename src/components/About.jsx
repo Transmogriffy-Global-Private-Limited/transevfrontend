@@ -38,9 +38,11 @@ function AboutUs() {
 {/* <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-9xl font-aeonik text-black-800 mt-10 sm:mt-16 lg:mt-20 px-4 sm:px-10 lg:px-32 xl:px-40 text-center lg:text-left  "> */}
 <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-9xl font-aeonik text-black-800 mt-10 sm:mt-16 lg:mt-20 px-4 sm:px-10 lg:px-32 xl:px-10 text-left">
 
-Facilitating fairer, <br />
- <span className="inline-block">more accessible</span>
- <span className="inline-block ml-5">   EV charging</span>
+Facilitating fairer,more  <br />
+<span className="inline-block">accessible</span>
+<span className="hidden sm:inline-block sm:ml-2 md:ml-4">EV charging</span>
+
+
 </h1>
 <h4 
   className="text-[30px] sm:text-[35px] md:text-[40px] lg:text-[50px] font-aeonik mt-[40px] sm:mt-[60px] md:mt-[80px] lg:mt-[120px] leading-tight text-center sm:text-left lg:ml-11"
@@ -391,7 +393,7 @@ Facilitating fairer, <br />
                </div>
    
                
-   <div className="mt-16 sm:mt-20 md:mt-24 lg:mt-15 xl:mt-40 px-4 sm:px-6 lg:px-8">
+   {/* <div className="mt-16 sm:mt-20 md:mt-24 lg:mt-15 xl:mt-40 px-4 sm:px-6 lg:px-8">
   <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 text-left">
     EV Charging Solutions for Residential Sites and Businesses
   </h3>
@@ -402,8 +404,19 @@ Facilitating fairer, <br />
   <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
     smart EV charging solution that’s right for you.
   </p>
-</div>
-
+</div> */}
+  <div className="mt-16 sm:mt-20 md:mt-24 lg:mt-15 xl:mt-40 px-4 sm:px-6 lg:px-8">
+  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 text-left">
+    EV Charging Solutions for Residential Sites and Businesses
+  </h3>
+  <div className="mt-4 sm:mt-6">
+    <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
+      We’ll listen to your needs, identify the best approach, and then create a bespoke
+    </p>
+    <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
+      smart EV charging solution that’s right for you.
+    </p>
+  </div>
 </div>
 </div>
 </div>

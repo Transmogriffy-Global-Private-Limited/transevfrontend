@@ -148,29 +148,39 @@ const [imageIndex, setImageIndex] = useState({});
                         }
                     };
                 
-                    const decreaseQuantity = async (productId) => {
-                        try {
-                            await axios.post(
-                                `${BASE_URL_AND_PORT}/cart/decreasemethods`,
-                                {
-                                    quantity: 1,
-                                    productid: productId,
-                                    user_id: userId 
-                                },
-                                {
-                                    headers: {
-                                        'Authorization': `Bearer ${token}`,
-                                        'API-KEY': API_KEY
-                                    }
-                                }
-                            );
-                            fetchCartItems();
-                        } catch (error) {
-                            console.error('Error decreasing quantity:', error);
+                  
+    
+                    const decreaseQuantity = async (productId, currentQuantity) => {
+                      try {
+                        await axios.post(
+                          `${BASE_URL_AND_PORT}/cart/decreasemethods`,
+                          {
+                            quantity: 1,
+                            productid: productId,
+                            user_id: userId,
+                          },
+                          {
+                            headers: {
+                              Authorization: `Bearer ${token}`,
+                              'API-KEY': API_KEY,
+                            },
+                          }
+                        );
+                    
+                        if (currentQuantity === 1) {
+                          // Remove the item from UI immediately
+                          setCartItems(prevItems =>
+                            prevItems.filter(item => item.productid !== productId)
+                          );
+                        } else {
+                          // Just decrease and re-fetch
+                          fetchCartItems();
                         }
+                      } catch (error) {
+                        console.error('Error decreasing quantity:', error);
+                      }
                     };
-    
-    
+                    
   
                     const removeFromCart = async (productId) => {
                       try {
@@ -411,12 +421,15 @@ const [imageIndex, setImageIndex] = useState({});
 
         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
           <div className="flex items-center">
-            <button
-              className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-3 rounded"
-              onClick={() => decreaseQuantity(item.productid)}
-            >
-              -
-            </button>
+          
+           <button
+  className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-3 rounded"
+  onClick={() => decreaseQuantity(item.productid, item.quantity)}
+>
+  -
+</button>
+
+
             <span className="px-4">{item.quantity}</span>
             <button
               className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-3 rounded"
