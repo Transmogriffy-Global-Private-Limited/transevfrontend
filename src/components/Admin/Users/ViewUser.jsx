@@ -67,7 +67,9 @@ const UserList = () => {
       {/* Sidebar */}
       <AdminSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
 
-    <div className="container mx-auto p-4 ml-62">
+    {/* <div className="container mx-auto p-4 ml-62"> */}
+    <div className="container mx-auto p-4 md:ml-64">
+
       <h1 className="text-3xl font-semibold text-center mb-6 text-gray-800">Manage Users</h1>
 
       {loading && <p className="text-center text-lg text-gray-300">Loading...</p>}

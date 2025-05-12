@@ -160,10 +160,14 @@ const AddProductPage = () => {
       <AdminNavbar onToggleSidebar={toggleSidebar} />
       <div className="flex flex-1">
         <AdminSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
-        <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6 ml-70 w-200">
+        {/* <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6 ml-70 w-200"> */}
+        <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6 md:p-8 lg:p-12 ml-0 sm:ml-10 md:ml-20 lg:ml-70 w-full sm:w-3/4 md:w-1/2 lg:w-200">
+
           <div className="w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
             <h2 className="text-3xl font-semibold mb-6 text-center text-gray-700">Add Product</h2>
-            <div className="flex justify-center mb-6 space-x-4 ml-100">
+            {/* <div className="flex justify-center mb-6 space-x-4 ml-100"> */}
+            <div className="flex justify-center mb-6 space-x-4 ml-0 sm:ml-4 md:ml-8 lg:ml-16 xl:ml-20">
+
               <button
                 onClick={handleAllProduct}
                 className="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 transition duration-300"

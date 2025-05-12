@@ -65,8 +65,8 @@ const DelistedProductViewPage = () => {
 
   return (
     <div
-      className="min-h-screen bg-cover bg-center bg-fixed"
-      style={{ backgroundImage: `url(${backgroundImage})` }}
+      className="min-h-screen bg-cover bg-center bg-fixed bg-teal-50"
+      // style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <AdminNavbar onToggleSidebar={toggleSidebar} />
       <div className="flex flex-col md:flex-row">
@@ -76,7 +76,15 @@ const DelistedProductViewPage = () => {
         </div>
 
         {/* Main content */}
-        <div className="flex-1 p-4 sm:p-6 md:p-8 bg-white bg-opacity-90 mt-4 md:mt-8 rounded shadow-md w-full">
+        {/* <div className="flex-1 p-4 sm:p-6 md:p-8 bg-white bg-opacity-90 mt-4 md:mt-8 rounded shadow-md w-full"> */}
+  
+ <div className="flex-1 p-4 sm:p-6 md:p-8 mt-4 sm:mt-6 md:mt-8 bg-white bg-opacity-90 rounded-2xl shadow-md w-full max-w-full sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl mx-auto">
+  
+ 
+
+  
+
+
           <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 text-center md:text-left">
             Delisted Products
           </h2>
@@ -88,8 +96,11 @@ const DelistedProductViewPage = () => {
               {delistedProducts.map((product) => (
                 <div
                   key={product.id}
-                  className="border rounded-lg p-4 shadow-md bg-gray-50 hover:shadow-lg transition-shadow duration-200"
-                >
+                  // className="border rounded-lg p-4 shadow-md bg-gray-50 hover:shadow-lg transition-shadow duration-200 w-200"
+                  className="border rounded-xl p-4 shadow-md bg-gray-50 hover:shadow-lg transition-shadow duration-200 w-full sm:w-auto max-w-full sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl mx-auto">
+ 
+
+               
                   <div className="relative w-full max-w-xl mx-auto aspect-[4/3] bg-gray-200 mb-4 overflow-hidden rounded">
                     {product.image_paths?.length > 1 ? (
                       <>

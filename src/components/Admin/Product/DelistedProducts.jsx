@@ -125,8 +125,8 @@ const DelistedProductsPage = () => {
 
   return (
     <div
-      className="min-h-screen bg-gradient-to-r from-teal-400 via-teal-500 to-teal-700 bg-cover bg-center bg-fixed"
-      style={{ backgroundImage: `url(${backgroundImage})` }}
+      className="min-h-screen bg-gradient-to-r from-white-400 via-green-50 to-white-700 bg-cover bg-center bg-fixed"
+      // style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <AdminNavbar onToggleSidebar={toggleSidebar} />
 

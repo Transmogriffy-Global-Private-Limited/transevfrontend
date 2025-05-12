@@ -203,10 +203,12 @@ const Profile = () => {
       <div className="flex flex-1">
         <AdminSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
 
-        <main className="flex-grow p-6">
+        {/* <main className="flex-grow p-6"> */}
+   
           {/* <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-xl p-8 space-y-6"> */}
-          <div className="max-w-3xl mx-auto bg-gradient-to-r from-white to-blue-300 rounded-2xl shadow-xl p-8 space-y- mt-30">
- 
+       
+    {/* Your content here */}
+     <div className="w-full sm:max-w-md md:max-w-3xl mx-auto bg-gradient-to-r from-white to-blue-300 rounded-2xl shadow-xl p-4 sm:p-6 md:p-8 mt-6 sm:mt-10 md:mt-12 space-y-4 sm:space-y-6">
 
             <h2 className="text-3xl font-bold text-center text-green-700">Admin Profile</h2>
 
@@ -327,17 +329,24 @@ const Profile = () => {
                     </button>
                   </>
                 ) : (
+                  // <button
+                  //   onClick={() => setIsEditing(true)}
+                  //   className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 ml-90"
+                  // >
+                  //   Edit
+                  // </button>
                   <button
-                    onClick={() => setIsEditing(true)}
-                    className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 ml-90"
-                  >
-                    Edit
-                  </button>
+  onClick={() => setIsEditing(true)}
+  className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 ml-0 sm:ml-2 md:ml-4 lg:ml-6 xl:ml-8 mx-auto w-full sm:w-auto"
+>
+  Edit
+</button>
+
                 )}
               </div>
             </div>
           </div>
-        </main>
+    
       </div>
     </div>
   );

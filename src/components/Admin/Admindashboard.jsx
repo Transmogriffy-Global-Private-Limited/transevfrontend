@@ -146,7 +146,7 @@ const Dashboard = () => {
 
         {/* Main Content Area */}
         <main className="flex-1 p-6 lg:p-10 overflow-y-auto bg-green-50 rounded-tl-3xl shadow-inner">
-          <div className="max-w-7xl mx-auto space-y-10">
+       <div className="max-w-7xl mx-auto space-y-10">
             {/* Section Title */}
             <section>
               <h2 className="text-2xl font-bold text-teal-700 mb-6">EV Chargers Dashboard</h2>

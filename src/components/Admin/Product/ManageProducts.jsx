@@ -134,15 +134,16 @@ const ManageProductsPage = () => {
 
   return (
     <div
-      className="min-h-screen bg-gradient-to-r from-teal-400 via-teal-500 to-teal-700 bg-cover bg-center bg-fixed"
-      style={{ backgroundImage: `url(${backgroundImage})` }}
+      className="min-h-screen bg-gradient-to-r from-white-400 via-teal-100 to-white-700 bg-cover bg-center bg-fixed"
+   
     >
       <AdminNavbar onToggleSidebar={toggleSidebar} />
 
       <div className="flex flex-1">
         <AdminSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
 
-        <div className="bg-white rounded-lg shadow-lg p-6 ml-70 mt-6 w-400">
+        {/* <div className="bg-white rounded-lg shadow-lg p-6 ml-70 mt-6 w-400"> */}
+         <div className="bg-white rounded-lg shadow-lg p-6 mt-6 sm:ml-0 lg:ml-65 lg:w-4/5 w-full mx-auto ">
           <h2 className="text-3xl font-bold text-center mb-6">Manage Products</h2>
 
           {/* Search Bar */}

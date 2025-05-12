@@ -121,7 +121,8 @@ const ManageOrders = () => {
             </h1>
 
             {/* Filter by status */}
-            <div className="mb-6 flex justify-center gap-4">
+            {/* <div className="mb-6 flex justify-center gap-4"> */}
+            <div className="mb-6 flex flex-wrap justify-center gap-2 sm:gap-4">
               {ORDER_STATUS_OPTIONS.map((option) => (
                 <button
                   key={option.value}
