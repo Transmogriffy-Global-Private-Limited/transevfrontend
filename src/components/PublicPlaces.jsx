@@ -33,6 +33,7 @@ import DC04W from '../assets/DC04W.png';
 import DC04G60 from '../assets/DC04G60.png';
 import DC04G150 from '../assets/DC04G150.png';
 import AC03w from '../assets/AC03w.png';
+ import { useEffect } from 'react';
 const Hotels = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [hovered, setHovered] = useState(null);
@@ -139,7 +140,9 @@ const Hotels = () => {
       triggerOnce: true,
       threshold: 0.5,
     });
-  
+   useEffect(() => {
+      window.scrollTo(0, 0); // Ensures the page scrolls to the top whenever the page is loaded
+    }, []);
   return (
     <div className="min-h-screen bg-white-50">
       {/* Navbar Section */}

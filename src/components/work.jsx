@@ -103,7 +103,9 @@ const work = () => {
     }
   };
   const [activeImage, setActiveImage] = useState(0); // Track the active image index
-
+useEffect(() => {
+        window.scrollTo(0, 0); // Ensures the page scrolls to the top whenever the page is loaded
+      }, []);
   // Function to cycle images
   useEffect(() => {
     const interval = setInterval(() => {
@@ -127,7 +129,7 @@ const work = () => {
       triggerOnce: true,
       threshold: 0.5,
     });
-  
+   
   return (
     <div className="min-h-screen bg-white-50">
       {/* Navbar Section */}

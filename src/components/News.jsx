@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from './Navbar';  
 import logo from '../assets/transev logo.png';  
 import newsImage1 from '../assets/image1.png';  
@@ -86,8 +86,11 @@ const newsArticles = [
     link: "/trans-evs-commitment-to-sustainability"
   }
 ];
-
+ 
 function NewsPage() {
+   useEffect(() => {
+        window.scrollTo(0, 0); // Ensures the page scrolls to the top whenever the page is loaded
+      }, []);
   return (
     <div className="min-h-screen bg-white">
       {/* Navbar Section */}

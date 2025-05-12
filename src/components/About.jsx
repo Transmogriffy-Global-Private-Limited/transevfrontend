@@ -13,6 +13,7 @@ import vision from '../assets/vission.png';
 import value from '../assets/value.png';
 import { FaBolt, FaCheckCircle, FaLeaf, FaHandHoldingHeart } from 'react-icons/fa';
 import mission1 from '../assets/mission1.png';
+ import { useEffect } from 'react';
 function AboutUs() {
   const navigate = useNavigate();
   const handleButtonClick = () => {
@@ -27,6 +28,9 @@ function AboutUs() {
       navigate('/contact');  // Navigate to the Contact page
     }, 500); // Delay to allow animation to complete
   };
+   useEffect(() => {
+        window.scrollTo(0, 0); // Ensures the page scrolls to the top whenever the page is loaded
+      }, []);
   return (
    <>
       {/* Include Navbar here */}

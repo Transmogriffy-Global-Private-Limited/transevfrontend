@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import charger1 from '../assets/charger7.png';
 import charger2 from '../assets/charger2.png';
 import charger3 from '../assets/charger1.png';
-
+ import { useEffect } from 'react';
 import { FaPlus, FaMinus } from "react-icons/fa"; 
 import image from '../assets/imagee2.jpg';
 
@@ -142,7 +142,9 @@ const Fleet = () => {
       triggerOnce: true,
       threshold: 0.5,
     });
-  
+  useEffect(() => {
+     window.scrollTo(0, 0); // Ensures the page scrolls to the top whenever the page is loaded
+   }, []);
   return (
     <div className="min-h-screen bg-white-50">
       {/* Navbar Section */}

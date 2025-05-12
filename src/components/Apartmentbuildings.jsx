@@ -26,6 +26,7 @@ import AC01W from '../assets/AC01W3.png';
 import AC02P from '../assets/AC02P3.png';
 import AC02P7 from '../assets/AC02P7.4.png';
 import AC02WCH from '../assets/AC02WC&H.png';
+import { useEffect } from 'react';
 const ApartmentBuildingPage = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [hovered, setHovered] = useState(null);
@@ -141,7 +142,9 @@ const ApartmentBuildingPage = () => {
       triggerOnce: true,
       threshold: 0.5,
     });
-  
+   useEffect(() => {
+    window.scrollTo(0, 0); // Ensures the page scrolls to the top whenever the page is loaded
+  }, []);
   return (
     <div className="min-h-screen bg-white-50">
       {/* Navbar Section */}

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Navbar from './Navbar';
 import logo from '../assets/transev logo.png';
 import contactImage from '../assets/office.png';
-
+ import { useEffect } from 'react';
 const BASE_URL_AND_PORT = "http://192.168.0.106:8000";
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
 
@@ -69,7 +69,9 @@ const ContactPage = () => {
       }
     }
   };
-
+ useEffect(() => {
+    window.scrollTo(0, 0); // Ensures the page scrolls to the top whenever the page is loaded
+  }, []);
   return (
     <div className="min-h-screen bg-white">
       <Navbar />

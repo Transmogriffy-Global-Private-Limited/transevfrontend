@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar'; // Assuming you have a Navbar component
 import useCase1 from '../assets/apartmnet.jpg'; 
@@ -35,7 +35,9 @@ function SolutionsPage() {
   const handleImageClick = (link) => {
     navigate(link);
   };
-
+useEffect(() => {
+        window.scrollTo(0, 0); // Ensures the page scrolls to the top whenever the page is loaded
+      }, []);
   return (
     <>
     

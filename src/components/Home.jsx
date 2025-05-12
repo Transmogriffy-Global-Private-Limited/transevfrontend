@@ -1,4 +1,4 @@
-import React, { useState,useRef } from 'react';
+import React, { useState,useRef,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import VideoBackground from '../components/Videobackground';  // Import VideoBackground component
@@ -191,7 +191,9 @@ function HomePage() {
   const scrollRightBtn = () => {
     containerRef.current.scrollBy({ left: 400, behavior: "smooth" });
   };
-
+useEffect(() => {
+        window.scrollTo(0, 0); // Ensures the page scrolls to the top whenever the page is loaded
+      }, []);
  return (
   <div className="relative w-full overflow-x-hidden">
     <div className="relative w-full h-screen">
