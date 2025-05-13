@@ -668,12 +668,13 @@ const ApartmentBuildingPage = () => {
         
           { name: 'AC02P', description: '7.4 kW ', features: 'Rating: 3.7 kW,Portable Charger,Plug and Play', image: AC02P7 },
           { name: 'AC02WH', description: ' 7.4kW ', features: 'Rating: 7.4 kW,Single Connector,GSM/Wi-Fi/BLE/4G/Ethernet or Optional', image: AC02WCH },
+         
     ].map((box, index) => (
       <div key={index} className="flex flex-col items-center flex-shrink-0">
         <div
           className="bg-gray-200 p-4 sm:p-6 md:p-10 rounded-lg relative cursor-pointer hover:scale-105 transition-all duration-300 
           w-[250px] sm:w-[300px] md:w-[400px] lg:w-[550px] 
-          h-[350px] sm:h-[450px] md:h-[600px] lg:h-[800px]"
+          h-[350px] sm:h-[450px] md:h-[600px] lg:h-[600px]"
           onMouseEnter={() => setHovered(index)}
           onMouseLeave={() => setHovered(null)}
         >
@@ -681,7 +682,7 @@ const ApartmentBuildingPage = () => {
             <img
               src={box.image}
               alt={box.name}
-              className="w-3/4 h-3/4 object-cover rounded-lg mt-10 cursor-pointer"
+              className="w-3/4 h-4/4 object-cover rounded-lg mt-10 cursor-pointer"
               onClick={() => handlePopupOpen(box.image, box.description, box.features)}
             />
           </div>

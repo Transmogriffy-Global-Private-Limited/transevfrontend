@@ -140,9 +140,9 @@ const Dashboard = () => {
     fetchOrders();
   }, [purchaseData]);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
 
   // Prepare chart data
   const chartData = {

@@ -310,7 +310,7 @@ const Workplace = () => {
     ].map((box, index) => (
       <div key={index} className="flex flex-col items-center">
         <div
-          className="box bg-gray-200 p-6 sm:p-8 lg:p-16 rounded-lg relative cursor-pointer hover:scale-105 transform transition-all duration-300 w-[300px] sm:w-[400px] lg:w-[550px] h-[500px] sm:h-[650px] lg:h-[800px]"
+          className="box bg-gray-200 p-6 sm:p-8 lg:p-16 rounded-lg relative cursor-pointer hover:scale-105 transform transition-all duration-300 w-[300px] sm:w-[400px] lg:w-[550px] h-[500px] sm:h-[650px] lg:h-[600px]"
           onMouseEnter={() => setHovered(index)}
           onMouseLeave={() => setHovered(null)}
         >
@@ -318,7 +318,7 @@ const Workplace = () => {
             <img
               src={box.image}
               alt={box.name}
-              className="w-3/4 h-3/4 object-cover rounded-lg mt-20 cursor-pointer"
+              className="w-3/4 h-4/4 object-cover rounded-lg mt-20 cursor-pointer"
               onClick={() => handlePopupOpen(box.image, box.description, box.features)}
             />
           </div>

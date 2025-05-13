@@ -306,7 +306,7 @@ const Fleet = () => {
     </div>
 
     {/* Right Side */}
-    <div className="w-full lg:w-1/2 text-center lg:text-left px-4">
+    {/* <div className="w-full lg:w-1/2 text-center lg:text-left px-4">
   <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-6xl xl:text-7xl font-semibold leading-snug flex flex-wrap justify-center lg:justify-start">
     
     <span className="block sm:inline mb-2 sm:mb-0 sm:mr-3 whitespace-nowrap">
@@ -320,9 +320,14 @@ const Fleet = () => {
    
 
   </h2>
+</div> */}
+
+  <div className="w-full lg:w-1/2 text-center lg:text-left px-4 max-w-2xl">
+  <h2 className="text-[clamp(1.5rem,4vw,3rem)] font-semibold leading-snug">
+    Choose a Charger that fits the needs of your fleet best
+  </h2>
 </div>
 
-  
 
 
     
@@ -351,7 +356,7 @@ const Fleet = () => {
     ].map((box, index) => (
       <div key={index} className="flex flex-col items-center">
         <div
-          className="box bg-gray-200 p-6 sm:p-8 lg:p-16 rounded-lg relative cursor-pointer hover:scale-105 transform transition-all duration-300 w-[300px] sm:w-[400px] lg:w-[550px] h-[500px] sm:h-[650px] lg:h-[800px]"
+          className="box bg-gray-200 p-6 sm:p-8 lg:p-16 rounded-lg relative cursor-pointer hover:scale-105 transform transition-all duration-300 w-[300px] sm:w-[400px] lg:w-[550px] h-[500px] sm:h-[650px] lg:h-[600px]"
           onMouseEnter={() => setHovered(index)}
           onMouseLeave={() => setHovered(null)}
         >
@@ -359,7 +364,7 @@ const Fleet = () => {
             <img
               src={box.image}
               alt={box.name}
-              className="w-3/4 h-3/4 object-cover rounded-lg mt-20 cursor-pointer"
+              className="w-3/4 h-4/4 object-cover rounded-lg mt-20 cursor-pointer"
               onClick={() => handlePopupOpen(box.image, box.description, box.features)}
             />
           </div>
@@ -519,16 +524,16 @@ const Fleet = () => {
     
 
 
-     <div className="w-full h-screen bg-white flex justify-center items-center mt-10 sm:mt-20 md:mt-30 lg:mt-40">
+    <div className="w-full h-screen bg-white flex justify-center items-center mt-10 sm:mt-20 md:mt-30 lg:mt-40">
                   <div className="w-full h-full max-w-screen-3xl bg-gradient-to-r p-6 sm:p-8 md:p-10 lg:p-12">
                     <div className="w-full h-full bg-gradient-to-b from-yellow-200 via-yellow-200 to-red-300 rounded-3xl p-8 sm:p-10 md:p-12 lg:p-16 shadow-lg max-w-screen-3xl mx-auto">
-                      {/* Heading */}
+                   
                       <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-semibold text-gray-800 text-left font-aeonik">
                         <span className="mr-10 sm:mr-20 md:mr-40 lg:inline-block lg:mr-80">Ready to get</span><br />
                         <span className="sm:mr-10 md:mr-20 lg:mr-0 lg:inline-block">Started ?</span>
                       </h2>
           
-                      {/* Contact Button */}
+                 
                       <div className="flex items-center justify-start mt-10 sm:mt-12 md:mt-14 lg:mt-20">
                         <button
                           id="contact-btn"
@@ -550,7 +555,7 @@ const Fleet = () => {
                         </button>
                       </div>
           
-                      {/* Description */}
+                      
                       <div className="mt-16 sm:mt-20 md:mt-24 lg:mt-15 xl:mt-40 px-4 sm:px-6 lg:px-8">
   <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 text-left">
     EV Charging Solutions for Residential Sites and Businesses
@@ -566,7 +571,56 @@ const Fleet = () => {
 </div>
 </div>
 </div>
-</div>
+</div> 
+{/* <div className="w-full min-h-screen bg-white flex justify-center items-center px-4 py-10 sm:py-20 overflow-auto">
+  <div className="w-full max-w-[1600px] bg-gradient-to-b from-yellow-100 via-yellow-200 to-red-300 rounded-3xl shadow-lg p-6 sm:p-10 md:p-12 lg:p-20 mx-auto">
+    
+
+    <h2 className="text-[clamp(2rem,5vw,4rem)] font-semibold text-gray-800 text-left font-aeonik leading-tight">
+      <span className="block">Ready to get</span>
+      <span className="block">Started?</span>
+    </h2>
+
+ 
+    <div className="mt-10">
+      <button
+        id="contact-btn"
+        onClick={handleContactClick}
+        className="flex items-center px-6 sm:px-8 md:px-10 py-3 bg-white text-black font-semibold rounded-full hover:bg-black hover:text-white transition-all duration-300"
+      >
+        <span className="mr-4 text-[clamp(1rem,2vw,1.25rem)]">Contact Us</span>
+        <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center ml-2 hover:bg-white group transition-all duration-300">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-5 h-5 text-white group-hover:text-black transition-transform duration-300 group-hover:translate-x-1"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </div>
+      </button>
+    </div>
+
+  
+    <div className="mt-12 sm:mt-16">
+      <h3 className="text-[clamp(1.25rem,3vw,2rem)] font-bold text-gray-800 text-left">
+        EV Charging Solutions for Residential Sites and Businesses
+      </h3>
+      <div className="mt-4">
+        <p className="text-[clamp(1rem,2vw,1.125rem)] text-gray-600 leading-relaxed">
+          We’ll listen to your needs, identify the best approach, and then create a bespoke
+        </p>
+        <p className="text-[clamp(1rem,2vw,1.125rem)] text-gray-600 leading-relaxed">
+          smart EV charging solution that’s right for you.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div> */}
+
           
                 {/* Footer */}
                 <div className="bg-white-50 py-16 ml-20">

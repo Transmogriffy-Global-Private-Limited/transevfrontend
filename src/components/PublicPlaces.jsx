@@ -288,7 +288,7 @@ const Hotels = () => {
     </div>
 
     {/* Right Side */}
-    <div className="w-full lg:w-1/2 text-center lg:text-left px-4">
+    {/* <div className="w-full lg:w-1/2 text-center lg:text-left px-4">
   <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-6xl xl:text-7xl font-semibold leading-snug flex flex-wrap justify-center lg:justify-start">
     
     <span className="block sm:inline mb-2 sm:mb-0 sm:mr-3 whitespace-nowrap">
@@ -304,9 +304,27 @@ const Hotels = () => {
     </span>
 
   </h2>
+</div> */}
+
+  <div className="w-full lg:w-1/2 text-center lg:text-left px-4">
+  <h2 className="text-[clamp(1.5rem,5vw,3rem)] font-semibold leading-snug flex flex-col sm:flex-wrap justify-center lg:justify-start text-gray-800">
+    
+    <span className="mb-2 sm:mb-0 sm:mr-3 whitespace-nowrap">
+      We offer a range of compatible
+    </span>
+
+    <span className="mb-2 sm:mb-0 sm:mr-3 whitespace-nowrap">
+      charge points suitable for
+    </span>
+
+    <span className="whitespace-nowrap">
+      Public Places
+    </span>
+
+  </h2>
 </div>
 
-  
+
 
 
     
@@ -335,7 +353,7 @@ const Hotels = () => {
     ].map((box, index) => (
       <div key={index} className="flex flex-col items-center">
         <div
-          className="box bg-gray-200 p-6 sm:p-8 lg:p-16 rounded-lg relative cursor-pointer hover:scale-105 transform transition-all duration-300 w-[300px] sm:w-[400px] lg:w-[550px] h-[500px] sm:h-[650px] lg:h-[800px]"
+          className="box bg-gray-200 p-6 sm:p-8 lg:p-16 rounded-lg relative cursor-pointer hover:scale-105 transform transition-all duration-300 w-[300px] sm:w-[400px] lg:w-[550px] h-[500px] sm:h-[650px] lg:h-[600px]"
           onMouseEnter={() => setHovered(index)}
           onMouseLeave={() => setHovered(null)}
         >
@@ -343,7 +361,7 @@ const Hotels = () => {
             <img
               src={box.image}
               alt={box.name}
-              className="w-3/4 h-3/4 object-cover rounded-lg mt-20 cursor-pointer"
+              className="w-3/4 h-4/4 object-cover rounded-lg mt-20 cursor-pointer"
               onClick={() => handlePopupOpen(box.image, box.description, box.features)}
             />
           </div>
