@@ -284,11 +284,11 @@ const [imageIndex, setImageIndex] = useState({});
         )}
 
 
-{popupOpen && (
+ {popupOpen && (
   <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-    {/* <div className="bg-white p-8 rounded-lg max-w-6xl w-full flex relative h-auto shadow-lg overflow-hidden"> */}
+
     <div className="bg-white p-4 sm:p-8 rounded-lg w-full sm:max-w-6xl max-w-full h-auto flex relative shadow-lg overflow-auto">
-      {/* Close Button */}
+   
       <button
         className="absolute top-4 right-4 text-3xl font-bold text-gray-600 hover:text-gray-900"
         onClick={handlePopupClose}
@@ -297,7 +297,7 @@ const [imageIndex, setImageIndex] = useState({});
       </button>
 
       <div className="flex flex-wrap sm:flex-nowrap max-w-full overflow-hidden">
-        {/* Left - Image Section */}
+       
         <div className="w-full sm:w-1/2 p-4 relative">
           {popupContent.image_paths?.length > 0 ? (
             <div className="relative">
@@ -332,7 +332,7 @@ const [imageIndex, setImageIndex] = useState({});
             />
           )}
 
-          {/* Add to Cart or Out of Stock */}
+         
           {popupContent.quantity > 0 ? (
             <button
               onClick={() => handleAddToCart(popupContent.id, popupContent.price)}
@@ -348,12 +348,12 @@ const [imageIndex, setImageIndex] = useState({});
           )}
         </div>
 
-        {/* Right - Details Section */}
+      
         <div className="w-full sm:w-1/2 p-4">
           <h3 className="text-3xl font-semibold mb-4 text-blue-600">Product Name: {popupContent.name}</h3>
           <h4 className="text-3xl font-semibold mb-4 text-green-600">Model: {popupContent.model}</h4>
           <h4 className="text-3xl font-semibold mb-4 text-red-600">Price: {popupContent.price}</h4>
-          {/* <h4 className="text-2xl font-semibold mb-4 text-teal-600">Product Color: {popupContent.product_color}</h4> */}
+        
           <h4 className="text-2xl font-semibold text-teal-600">
     Product Color: {popupContent.product_color}
   </h4>
@@ -365,7 +365,7 @@ const [imageIndex, setImageIndex] = useState({});
             <p className="text-lg mb-4">Features: {popupContent.details.additional_details}</p>
           )}
 
-          {/* Dynamic Table */}
+          
           <div className="overflow-x-auto bg-white rounded-lg shadow-md p-6 max-h-[400px] overflow-y-auto">
             <table className="min-w-full table-auto">
               <thead>
@@ -415,7 +415,8 @@ const [imageIndex, setImageIndex] = useState({});
       </div>
     </div>
   </div>
-)}
+)} 
+
 
 
       </div>
