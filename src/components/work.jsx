@@ -24,7 +24,7 @@ import holiday from '../assets/holiday.jpg'
 import imageslide from '../assets/charge.jpg';
 import new3 from '../assets/new3.jpg';
 import { useNavigate } from 'react-router-dom';
-const work = () => {
+const Work = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [hovered, setHovered] = useState(null);
   const [popupOpen, setPopupOpen] = useState(false);
@@ -33,6 +33,7 @@ const work = () => {
   const [underlineColor, setUnderlineColor] = useState('gray');
   const [activeIndex, setActiveIndex] = useState(null);
    const [selectedText, setSelectedText] = useState(null);
+    const navigate = useNavigate();
   const handleTextClick = (item) => {
     setSelectedText(item); // Set the clicked text
   };
@@ -42,7 +43,7 @@ const work = () => {
   const handleContactClick = () => {
     navigate('/contact');
   };
-   const navigate = useNavigate();
+  
   // FAQ data
   const faqs = [
     {
@@ -776,4 +777,4 @@ useEffect(() => {
             );
           };
           
-          export default work;
+          export default Work;
