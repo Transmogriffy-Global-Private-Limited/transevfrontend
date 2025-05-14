@@ -287,39 +287,13 @@ const Hotels = () => {
       </h2>
     </div>
 
-    {/* Right Side */}
-    {/* <div className="w-full lg:w-1/2 text-center lg:text-left px-4">
-  <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-6xl xl:text-7xl font-semibold leading-snug flex flex-wrap justify-center lg:justify-start">
-    
-    <span className="block sm:inline mb-2 sm:mb-0 sm:mr-3 whitespace-nowrap">
-      We offer a range of compatible
-    </span>
+  
 
-    <span className="block sm:inline mb-2 sm:mb-0 sm:mr-3 whitespace-nowrap">
-      charge points suitable for
-    </span>
-
-    <span className="block sm:inline whitespace-nowrap" >
-      Public Places
-    </span>
-
-  </h2>
-</div> */}
-
-  <div className="w-full lg:w-1/2 text-center lg:text-left px-4">
-  <h2 className="text-[clamp(1.5rem,5vw,3rem)] font-semibold leading-snug flex flex-col sm:flex-wrap justify-center lg:justify-start text-gray-800">
-    
-    <span className="mb-2 sm:mb-0 sm:mr-3 whitespace-nowrap">
-      We offer a range of compatible
-    </span>
-
-    <span className="mb-2 sm:mb-0 sm:mr-3 whitespace-nowrap">
-      charge points suitable for
-    </span>
-
-    <span className="whitespace-nowrap">
-      Public Places
-    </span>
+  <div className="w-full lg:w-2/2 text-center lg:text-left px-4 lg:ml-48">
+  
+     <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-gray-700 mb-6">
+   
+    We offer a range of compatible charge points suitable for Public Places
 
   </h2>
 </div>
@@ -456,113 +430,75 @@ const Hotels = () => {
 </section>
 
 <div className="border-t-2 border-gray-300 w-full mb-8 mt-10"></div>
-<div className="flex flex-wrap justify-between">
-
-  {/* Row 1 */}
-  <div className="w-full sm:w-1/2 flex mb-8 ml-20">
-    {/* Left Side (Image) */}
-    <div className="w-1/3 flex justify-center items-center">
-      <img
-        src={image3} // Replace with your actual image path
-        alt="EV Charging"
-        className="w-full h-auto rounded-lg object-cover"
-      />
-    </div>
-
-    <div className="w-2/3 pl-6 flex items-center">
-    <div className="flex items-center ml-100">
-      <h3 className="text-5xl font-semibold  mr-100">01</h3>
-      <div>
-      <p className="text-5xl text-black-800 mt-3 whitespace-nowrap w-full">
-  Cost-efficient solutions
-</p>
-
-        <p className="text-gray-500 mt-2 text-lg">
-          We offer property owners fully funded solutions with no upfront capital required, ensuring cost-free installation for you and your residents.
-        </p>
-      </div>
-      </div>
-      </div>
-  </div>
-  <div className="border-t-2 border-gray-300 w-full mb-8"></div>
-
-  {/* Row 2 */}
-  <div className="w-full sm:w-1/2 flex mb-8 ml-20">
-    {/* Left Side (Image) */}
-    <div className="w-1/3 flex justify-center items-center">
-    <img
-        src={image4} // Replace with your actual image path
-        alt="EV Charging"
-        className="w-full h-auto rounded-lg object-cover"
-      />
-    </div>
-    <div className="w-2/3 pl-6 flex items-center">
-    <div className="flex items-center">
-    <h3 className="text-5xl font-semibold  ml-100">02</h3>
-      <div>
-      <p className="text-5xl text-black-800 mt-3 ml-100 whitespace-nowrap">
-  Proactive support
-</p>
-
-        <p className="text-gray-500 mt-2 ml-100 text-lg">
-        We work closely with you throughout the entire process, offering expert guidance to ensure the EV charging infrastructure meets your unique needs and goals.
-        </p>
-      </div>
-      </div>
-      </div>
-  </div>
-   
-  <div className="border-t-2 border-gray-300 w-full mb-8"></div>
-
-  {/* Row 3 */}
-  <div className="w-full sm:w-1/2 flex mb-8 ml-20">
-    {/* Left Side (Image) */}
-    <div className="w-1/3 flex justify-center items-center">
-    <img
-        src={image5} // Replace with your actual image path
-        alt="EV Charging"
-        className="w-full h-auto rounded-lg object-cover"
-      />
-    </div>
-    <div className="w-2/3 pl-6 flex items-center">
-    <div className="flex items-center">
-    <h3 className="text-5xl font-semibold  ml-100">03</h3>
-      <div>
-        <p className="text-5xl text-black-800 mt-3 ml-100 whitespace-nowrap">A fully managed service</p>
-        <p className="text-gray-500 mt-2 ml-100 text-lg">
-        We take care of all ongoing operations, eliminating the need for you to manage day-to-day tasks or invest in additional resources.
-        </p>
-      </div>
-      </div>
-      </div>
-  </div>
+<div>
+{/* ROWS START */}
+{[
+  {
+    number: "01",
+    title: " Cost-efficient solutions ",
+    desc: "   We offer property owners fully funded solutions with no upfront capital required, ensuring cost-free installation for you and your residents.",
+    img: image3,
+  },
+  {
+    number: "02",
+    title: "Proactive support ",
+    desc: "   We work closely with you throughout the entire process, offering expert guidance to ensure the EV charging infrastructure meets your unique needs and goals.",
+    img: image4,
+  },
+  {
+    number: "03",
+    title: " A fully managed service",
+    desc: "  We take care of all ongoing operations, eliminating the need for you to manage day-to-day tasks or invest in additional resources.",
+    img: image5,
+  },
+   {
+    number: "04",
+    title: " Future-proof designs",
+    desc: "TransEv installation is thoughtfully designed by our in-house design team to support rising EV ownership and evolving energy needs.",
+    img: hotels,
+  },
   
-  <div className="border-t-2 border-gray-300 w-full mb-8"></div>
+].map((item, index) => (
+  <div key={index}>
+    <div className="w-full flex flex-wrap items-start justify-center lg:justify-start mb-12 px-4 lg:px-20">
+      {/* Left Side (Image) */}
+      <div className="w-1/3 sm:w-1/4 lg:w-1/5 flex justify-center items-center mb-4 sm:mb-0">
+        <img
+          src={item.img}
+          alt={`EV Charging ${item.number}`}
+          className="w-32 h-32 sm:w-40 sm:h-40 lg:w-80 lg:h-48 rounded-lg object-cover"
+        />
+      </div>
 
-  {/* Row 4 */}
-  <div className="w-full sm:w-1/2 flex mb-8 ml-20">
-    {/* Left Side (Image) */}
-    <div className="w-1/3 flex justify-center items-center">
-    <img
-        src={hotels} // Replace with your actual image path
-        alt="EV Charging"
-        className="w-full h-auto rounded-lg object-cover"
-      />
+      {/* Right Side (Text) */}
+      <div className="w-full sm:w-3/4 lg:w-4/5 flex items-center">
+        <div className="flex flex-col sm:flex-row sm:items-start sm:pl-6 lg:pl-12">
+          {/* Number */}
+          <div className="w-full sm:w-auto flex justify-center sm:justify-start mb-2 sm:mb-0 sm:mr-6 lg:ml-60">
+            <h3 className="text-3xl sm:text-4xl font-semibold text-center sm:text-left lg:text-5xl">
+              {item.number}
+            </h3>
+          </div>
+
+          {/* Content */}
+          <div className="text-center sm:text-left sm:pr-4 lg:pr-12 lg:ml-50">
+            <p className="text-lg sm:text-2xl text-black font-semibold leading-snug mb-2 lg:text-5xl">
+              {item.title}
+            </p>
+            <p className="text-gray-500 text-sm sm:text-base lg:text-xl">
+              {item.desc}
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
-    <div className="w-2/3 pl-6 flex items-center">
-    <div className="flex items-center">
-    <h3 className="text-5xl font-semibold  ml-100">04</h3>
-      <div>
-        <p className="text-5xl text-black-800 mt-3 ml-100 whitespace-nowrap">Future-proof designs</p>
-        <p className="text-gray-500 mt-2 ml-100 text-lg">
-         TransEv installation is thoughtfully designed by our in-house design team to support rising EV ownership and evolving energy needs.
-        </p>
-      </div>
-      </div>
-      </div>
+
+    <div className="border-t-2 border-gray-300 w-full mb-8 mt-10"></div>
   </div>
-  
-  <div className="border-t-2 border-gray-300 w-full mb-8"></div>
+))}
+<div/>
+
+
 <section className="py-12 sm:py-16 lg:py-20 bg-white mx-4 sm:mx-6 lg:mx-8 rounded-lg">
   <div className="container mx-auto flex flex-col-reverse lg:flex-row justify-between items-center gap-10">
 

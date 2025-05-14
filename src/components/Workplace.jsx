@@ -273,20 +273,16 @@ const Workplace = () => {
       </h2>
     </div>
 
-    {/* Right Side */}
-    <div className="w-full sm:w-2/3 lg:w-1/2 text-center sm:text-left mt-8 sm:mt-0">
-    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-gray-800 mb-1 sm:mr-10 lg:ml-70 max-w-full">
-  <span className="whitespace-nowrap">Charge Points suitable for</span>
-  <span className="block whitespace-nowrap">workplaces and accessible to</span>
-  <span className="block whitespace-nowrap">all electric vehicle drivers.</span>
-</h2>
-
-    </div>
-
-  </div>
+    <div className="w-full sm:w-2/3 lg:w-1/2 text-center sm:text-left mt-8 sm:mt-0 mx-auto lg:ml-0">
+  <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-7xl font-semibold text-gray-800 mb-4 max-w-full">
+    <span className="whitespace-nowrap block">Charge Points suitable for</span>
+    <span className="whitespace-nowrap block">workplaces and accessible </span>
+    <span className="whitespace-nowrap block"> to all electric vehicle</span>
+    <span className="whitespace-nowrap block">drivers.</span>
+  </h2>
+</div>  
+</div>
 </section>
-
-
 <div className="flex justify-center items-center mb-8 px-4 sm:px-8 lg:px-16">
   <div
     ref={containerRef}
@@ -412,92 +408,70 @@ const Workplace = () => {
     </p>
   </div>
 </section>
+   <div className="border-t-2 border-gray-300 w-full mb-8 mt-10"></div>
+<div>
+{/* ROWS START */}
+{[
+  {
+    number: "01",
+    title: "Boost recruitment ",
+    desc: " Providing workplace charging will show your commitment to employees, increase staff satisfaction and help to attract the best future candidates..",
+    img: new1,
+  },
+  {
+    number: "02",
+    title: "Hit sustainability targets ",
+    desc: " Reducing the environmental impact of your employees’ commute will help you achieve your sustainability goals.",
+    img: new2,
+  },
+  {
+    number: "03",
+    title: " Boost your reputation",
+    desc: " With climate change high on today’s agenda, providing charge point access at your workplace demonstrates your commitment to sustainability to both customers and staff.",
+    img: image5,
+  },
+  
+].map((item, index) => (
+  <div key={index}>
+    <div className="w-full flex flex-wrap items-start justify-center lg:justify-start mb-12 px-4 lg:px-20">
+      {/* Left Side (Image) */}
+      <div className="w-1/3 sm:w-1/4 lg:w-1/5 flex justify-center items-center mb-4 sm:mb-0">
+        <img
+          src={item.img}
+          alt={`EV Charging ${item.number}`}
+          className="w-32 h-32 sm:w-40 sm:h-40 lg:w-80 lg:h-48 rounded-lg object-cover"
+        />
+      </div>
 
-<div className="border-t-2 border-gray-300 w-full mb-8 mt-10"></div>
-<div className="flex flex-wrap justify-between">
+      {/* Right Side (Text) */}
+      <div className="w-full sm:w-3/4 lg:w-4/5 flex items-center">
+        <div className="flex flex-col sm:flex-row sm:items-start sm:pl-6 lg:pl-12">
+          {/* Number */}
+          <div className="w-full sm:w-auto flex justify-center sm:justify-start mb-2 sm:mb-0 sm:mr-6 lg:ml-60">
+            <h3 className="text-3xl sm:text-4xl font-semibold text-center sm:text-left lg:text-5xl">
+              {item.number}
+            </h3>
+          </div>
 
-  {/* Row 1 */}
-  <div className="w-full sm:w-1/2 flex mb-8 ml-20">
-    {/* Left Side (Image) */}
-    <div className="w-1/3 flex justify-center items-center">
-      <img
-        src={new1} // Replace with your actual image path
-        alt="EV Charging"
-        className="w-full h-auto rounded-lg object-cover"
-      />
+          {/* Content */}
+          <div className="text-center sm:text-left sm:pr-4 lg:pr-12 lg:ml-50">
+            <p className="text-lg sm:text-2xl text-black font-semibold leading-snug mb-2 lg:text-5xl">
+              {item.title}
+            </p>
+            <p className="text-gray-500 text-sm sm:text-base lg:text-xl">
+              {item.desc}
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div className="w-2/3 pl-6 flex items-center">
-    <div className="flex items-center ml-100">
-      <h3 className="text-5xl font-semibold  mr-100">01</h3>
-      <div>
-      <p className="text-5xl text-black-800 mt-3 whitespace-nowrap w-full">
- 
-Boost recruitment
-</p>
-
-        <p className="text-gray-500 mt-2 text-lg">
-        Providing workplace charging will show your commitment to employees, increase staff satisfaction and help to attract the best future candidates.
-        </p>
-      </div>
-      </div>
-      </div>
+    <div className="border-t-2 border-gray-300 w-full mb-8 mt-10"></div>
   </div>
-  <div className="border-t-2 border-gray-300 w-full mb-8"></div>
+))}
+<div/>
 
-  {/* Row 2 */}
-  <div className="w-full sm:w-1/2 flex mb-8 ml-20">
-    {/* Left Side (Image) */}
-    <div className="w-1/3 flex justify-center items-center">
-    <img
-        src={new2} // Replace with your actual image path
-        alt="EV Charging"
-        className="w-full h-auto rounded-lg object-cover"
-      />
-    </div>
-    <div className="w-2/3 pl-6 flex items-center">
-    <div className="flex items-center">
-    <h3 className="text-5xl font-semibold  ml-100">02</h3>
-      <div>
-      <p className="text-5xl text-black-800 mt-3 ml-100 whitespace-nowrap">
- 
-Hit sustainability targets
-</p>
 
-        <p className="text-gray-500 mt-2 ml-100 text-lg">
-        Reducing the environmental impact of your employees’ commute will help you achieve your sustainability goals.
-        </p>
-      </div>
-      </div>
-      </div>
-  </div>
-   
-  <div className="border-t-2 border-gray-300 w-full mb-8"></div>
-
-  {/* Row 3 */}
-  <div className="w-full sm:w-1/2 flex mb-8 ml-20">
-    {/* Left Side (Image) */}
-    <div className="w-1/3 flex justify-center items-center">
-    <img
-        src={image5} // Replace with your actual image path
-        alt="EV Charging"
-        className="w-full h-auto rounded-lg object-cover"
-      />
-    </div>
-    <div className="w-2/3 pl-6 flex items-center">
-    <div className="flex items-center">
-    <h3 className="text-5xl font-semibold  ml-100">03</h3>
-      <div>
-        <p className="text-5xl text-black-800 mt-3 ml-100 whitespace-nowrap">
-        Boost your reputation</p>
-        <p className="text-gray-500 mt-2 ml-100 text-lg">
-        With climate change high on today’s agenda, providing charge point access at your workplace demonstrates your commitment to sustainability to both customers and staff.
-        </p>
-      </div>
-      </div>
-      </div>
-  </div>
-  <div className="border-t-2 border-gray-300 w-full mb-8"></div>
 
 <section className="py-12 sm:py-16 lg:py-20 bg-white mx-4 sm:mx-6 lg:mx-8 rounded-lg">
   <div className="container mx-auto flex flex-col-reverse lg:flex-row justify-between items-center gap-10">
