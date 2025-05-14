@@ -416,10 +416,7 @@ const [imageIndex, setImageIndex] = useState({});
     </div>
   </div>
 )} 
-
-
-
-      </div>
+ </div>
     </div>
     </div>
   );
