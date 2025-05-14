@@ -27,6 +27,7 @@ import AC02P from '../assets/AC02P3.png';
 import AC02P7 from '../assets/AC02P7.4.png';
 import AC02WCH from '../assets/AC02WC&H.png';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 const ApartmentBuildingPage = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [hovered, setHovered] = useState(null);
@@ -35,17 +36,10 @@ const ApartmentBuildingPage = () => {
   const [underlineWidth, setUnderlineWidth] = useState(0);
   const [underlineColor, setUnderlineColor] = useState('gray');
   const [activeIndex, setActiveIndex] = useState(null);
-  const handleContactClick = () => {
-    // Get the button element by id
-    const button = document.getElementById('contact-btn');
-    
-    // Add background color change on button click
-    button.classList.add('bg-yellow-500'); // Add a background color
-
-    // After a small delay (for animation), navigate to the contact page
-    setTimeout(() => {
-      navigate('/contact');  // Navigate to the Contact page
-    }, 500); // Delay to allow animation to complete
+   const navigate = useNavigate();
+  
+   const handleContactClick = () => {
+    navigate('/contact');
   };
   // FAQ data
   const faqs = [
@@ -653,9 +647,11 @@ const ApartmentBuildingPage = () => {
 
 <section className="py-12 sm:py-16 lg:py-20 bg-white-100 w-full px-6 lg:px-20">
   <div className="container mx-auto text-left mb-10">
-    <h2 className="text-2xl sm:text-xl lg:text-2xl font-semibold mb-4">
+ <h2 className="text-2xl sm:text-xl lg:text-2xl font-semibold mb-4">
       Frequently Asked Questions
-    </h2>
+    </h2> 
+    
+
     <div className="border-t-2 border-gray-300 w-full mb-10"></div>
   </div>
 
@@ -829,7 +825,7 @@ const ApartmentBuildingPage = () => {
               <div className="mb-8 sm:mb-0">
                 <h5 className="text-lg font-semibold mb-5">Navigation</h5>
                 <ul className="space-y-2">
-                  <li><a href="/solutions" className="text-gray hover:underline text-lg">Solutions</a></li>
+                  <li><a href="/solution" className="text-gray hover:underline text-lg">Solutions</a></li>
                   <li><a href="/contact" className="text-gray hover:underline text-lg">Contact</a></li>
                   <li><a href="/careers" className="text-gray hover:underline text-lg">Careers</a></li>
                   <li><a href="/residents" className="text-gray hover:underline text-lg">Residents</a></li>

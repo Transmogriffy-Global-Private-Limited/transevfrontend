@@ -1,7 +1,10 @@
 import React from 'react';
 import { FaCar, FaCalendarCheck, FaMapMarkerAlt, FaDollarSign, FaClipboardCheck } from 'react-icons/fa';
-
+import { useEffect } from 'react';
 const ParkingManagementPage = () => {
+  useEffect(() => {
+     window.scrollTo(0, 0); // Ensures the page scrolls to the top whenever the page is loaded
+   }, []);
   return (
     <div className="bg-gray-50">
 

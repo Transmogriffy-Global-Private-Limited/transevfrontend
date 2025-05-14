@@ -221,7 +221,7 @@ function NewsPage() {
             <div className="mb-8 sm:mb-0">
               <h5 className="text-lg font-semibold mb-5">Navigation</h5>
               <ul className="space-y-2">
-                <li><a href="/solutions" className="text-gray hover:underline">Solutions</a></li>
+                <li><a href="/solution" className="text-gray hover:underline">Solutions</a></li>
                 <li><a href="/contact" className="text-gray hover:underline">Contact</a></li>
                 <li><a href="/careers" className="text-gray hover:underline">Careers</a></li>
                 <li><a href="/residents" className="text-gray hover:underline">Residents</a></li>

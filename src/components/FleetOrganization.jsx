@@ -26,6 +26,7 @@ import AC03W22 from '../assets/AC03W22.png';
 import DC04W from '../assets/DC04W.png';
 import DC04G60 from '../assets/DC04G60.png';
 import DC04G150 from '../assets/DC04G150.png';
+import { useNavigate } from 'react-router-dom';
 const Fleet = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [hovered, setHovered] = useState(null);
@@ -34,17 +35,10 @@ const Fleet = () => {
   const [underlineWidth, setUnderlineWidth] = useState(0);
   const [underlineColor, setUnderlineColor] = useState('gray');
   const [activeIndex, setActiveIndex] = useState(null);
-  const handleContactClick = () => {
-    // Get the button element by id
-    const button = document.getElementById('contact-btn');
-    
-    // Add background color change on button click
-    button.classList.add('bg-yellow-500'); // Add a background color
-
-    // After a small delay (for animation), navigate to the contact page
-    setTimeout(() => {
-      navigate('/contact');  // Navigate to the Contact page
-    }, 500); // Delay to allow animation to complete
+     const navigate = useNavigate();
+  
+   const handleContactClick = () => {
+    navigate('/contact');
   };
   // FAQ data
   const faqs = [
@@ -692,7 +686,7 @@ const Fleet = () => {
                         <div className="mb-8 sm:mb-0">
                           <h5 className="text-lg font-semibold mb-5">Navigation</h5>
                           <ul className="space-y-2">
-                            <li><a href="/solutions" className="text-gray hover:underline text-lg">Solutions</a></li>
+                            <li><a href="/solution" className="text-gray hover:underline text-lg">Solutions</a></li>
                             <li><a href="/contact" className="text-gray hover:underline text-lg">Contact</a></li>
                             <li><a href="/careers" className="text-gray hover:underline text-lg">Careers</a></li>
                             <li><a href="/residents" className="text-gray hover:underline text-lg">Residents</a></li>

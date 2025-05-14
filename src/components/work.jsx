@@ -23,6 +23,7 @@ import image8 from '../assets/slide6.jpg';
 import holiday from '../assets/holiday.jpg'
 import imageslide from '../assets/charge.jpg';
 import new3 from '../assets/new3.jpg';
+import { useNavigate } from 'react-router-dom';
 const work = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [hovered, setHovered] = useState(null);
@@ -35,19 +36,13 @@ const work = () => {
   const handleTextClick = (item) => {
     setSelectedText(item); // Set the clicked text
   };
-  const images = [imageslide, image4,new3];
-  const handleContactClick = () => {
-    // Get the button element by id
-    const button = document.getElementById('contact-btn');
     
-    // Add background color change on button click
-    button.classList.add('bg-yellow-500'); // Add a background color
-
-    // After a small delay (for animation), navigate to the contact page
-    setTimeout(() => {
-      navigate('/contact');  // Navigate to the Contact page
-    }, 500); // Delay to allow animation to complete
+  const images = [imageslide, image4,new3];
+  // 
+  const handleContactClick = () => {
+    navigate('/contact');
   };
+   const navigate = useNavigate();
   // FAQ data
   const faqs = [
     {
@@ -701,7 +696,7 @@ useEffect(() => {
                         <div className="mb-8 sm:mb-0">
                           <h5 className="text-lg font-semibold mb-5">Navigation</h5>
                           <ul className="space-y-2">
-                            <li><a href="/solutions" className="text-gray hover:underline text-lg">Solutions</a></li>
+                            <li><a href="/solution" className="text-gray hover:underline text-lg">Solutions</a></li>
                             <li><a href="/contact" className="text-gray hover:underline text-lg">Contact</a></li>
                             <li><a href="/careers" className="text-gray hover:underline text-lg">Careers</a></li>
                             <li><a href="/residents" className="text-gray hover:underline text-lg">Residents</a></li>

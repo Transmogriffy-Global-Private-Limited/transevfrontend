@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { useEffect } from 'react';
 const SchoolManagementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -10,7 +10,9 @@ const SchoolManagementPage = () => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-
+useEffect(() => {
+     window.scrollTo(0, 0); // Ensures the page scrolls to the top whenever the page is loaded
+   }, []);
   return (
     <div className="bg-gray-50 text-gray-900">
      

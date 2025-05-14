@@ -1,6 +1,7 @@
 import React from "react";
 import { FaCog, FaChartLine, FaDollarSign, FaSyncAlt, FaUserShield,FaUsers, FaPlug,FaCreditCard } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from 'react';
 
 const ChargingManagementPage = () => {
   const navigate = useNavigate();
@@ -8,7 +9,9 @@ const ChargingManagementPage = () => {
   const handleContactClick = () => {
     navigate("/contact"); // Navigate to contact page for inquiries
   };
-
+ useEffect(() => {
+     window.scrollTo(0, 0); // Ensures the page scrolls to the top whenever the page is loaded
+   }, []);
   return (
     <div className="bg-gray-50">
 

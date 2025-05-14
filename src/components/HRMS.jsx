@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaPhoneAlt, FaEnvelope, FaUserShield, FaRegLightbulb } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-
+import { useEffect } from 'react';
 const HRMSPage = () => {
   const navigate = useNavigate();
   const [showDemoForm, setShowDemoForm] = useState(false);
@@ -24,7 +24,9 @@ const HRMSPage = () => {
     alert("Demo request submitted!");
     setShowDemoForm(false);
   };
-
+useEffect(() => {
+     window.scrollTo(0, 0); // Ensures the page scrolls to the top whenever the page is loaded
+   }, []);
   return (
     <div className="bg-gray-100">
       {/* Hero Section */}

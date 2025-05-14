@@ -254,7 +254,7 @@ const ContactPage = () => {
           <div>
             <h5 className="text-base sm:text-lg font-semibold mb-4">Navigation</h5>
             <ul className="space-y-2 text-sm sm:text-base">
-              <li><a href="/solutions" className="hover:underline">Solutions</a></li>
+              <li><a href="/solution" className="hover:underline">Solutions</a></li>
               <li><a href="/contact" className="hover:underline">Contact</a></li>
               <li><a href="/careers" className="hover:underline">Careers</a></li>
               <li><a href="/residents" className="hover:underline">Residents</a></li>

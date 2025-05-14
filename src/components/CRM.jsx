@@ -1,14 +1,16 @@
 import React from "react";
 import { FaUsers, FaChartLine, FaDatabase, FaPhoneAlt, FaFileInvoice, FaTasks, FaComments, FaUserCog } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-
+import { useEffect } from 'react';
 const CRMPage = () => {
   const navigate = useNavigate();
 
   const handleContactClick = () => {
     navigate("/contact");
   };
-
+useEffect(() => {
+     window.scrollTo(0, 0); // Ensures the page scrolls to the top whenever the page is loaded
+   }, []);
   return (
     <div className="bg-gray-50">
       {/* Hero Section */}

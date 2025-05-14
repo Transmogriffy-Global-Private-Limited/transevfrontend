@@ -1,6 +1,6 @@
 import { FaShoppingCart, FaGift, FaTruck, FaUsers, FaClipboardList, FaStore } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";  // Import useNavigate hook
-
+import { useEffect } from 'react';
 const EcommercePage = () => {
   const navigate = useNavigate();  // Initialize the navigate function
 
@@ -8,7 +8,9 @@ const EcommercePage = () => {
   const handleContactClick = () => {
     navigate('/contact');  // Redirect to the contact page
   };
-
+useEffect(() => {
+     window.scrollTo(0, 0); // Ensures the page scrolls to the top whenever the page is loaded
+   }, []);
   return (
     <div className="bg-gray-50">
 

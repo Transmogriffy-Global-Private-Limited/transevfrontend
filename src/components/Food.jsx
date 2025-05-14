@@ -1,14 +1,16 @@
 import React from 'react';
 import { FaHamburger, FaPizzaSlice, FaConciergeBell, FaUtensils, FaUsers, FaMapMarkedAlt, FaSearch, FaRegClock, FaCreditCard, FaRegComment, FaChartBar, FaTag, FaCommentDots } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-
+import { useEffect } from 'react';
 const FoodDeliveryPage = () => {
   const navigate = useNavigate();
 
   const handleContactClick = () => {
     navigate("/contact");
   };
-
+useEffect(() => {
+     window.scrollTo(0, 0); // Ensures the page scrolls to the top whenever the page is loaded
+   }, []);
   return (
     <div className="bg-gray-50">
       {/* Hero Section */}
