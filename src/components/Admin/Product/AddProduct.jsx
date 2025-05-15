@@ -156,7 +156,7 @@ const AddProductPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-teal-400 via-teal-500 to-teal-700 bg-cover bg-center bg-fixed" style={{ backgroundImage: `url(${backgroundImage})` }}>
+    <div className="min-h-screen bg-gradient-to-r from-green-50 via-green-60 to-green-80 bg-cover bg-center bg-fixed" >
       <AdminNavbar onToggleSidebar={toggleSidebar} />
       <div className="flex flex-1">
         <AdminSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
