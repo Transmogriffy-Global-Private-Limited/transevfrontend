@@ -65,8 +65,8 @@ const ProductViewPage = () => {
 
   return (
     <div
-      className="min-h-screen bg-gradient-to-r from-teal-400 via-teal-500 to-teal-700 bg-fixed bg-cover bg-center"
-      style={{ backgroundImage: `url(${backgroundImage})` }}
+      className="min-h-screen bg-gradient-to-r from-white-100 via-white-100 to-white-50 bg-fixed bg-cover bg-center"
+      // style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <AdminNavbar onToggleSidebar={toggleSidebar} />
 

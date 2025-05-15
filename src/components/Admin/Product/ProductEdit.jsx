@@ -685,15 +685,16 @@ const ProductEditPage = () => {
 
   return (
     <div
-      className="min-h-screen bg-gradient-to-r from-teal-400 via-teal-500 to-teal-700 bg-cover bg-center bg-fixed"
-      style={{ backgroundImage: `url(${backgroundImage})` }}
+      className="min-h-screen bg-gradient-to-r from-white-100 via-white-500 to-white-700 bg-cover bg-center bg-fixed"
+      // style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <AdminNavbar onToggleSidebar={toggleSidebar} />
       <div className="flex flex-1">
         <AdminSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
         {/* <div className="product-edit-page bg-white ml-80 w-200 mt-8"> */}
-        <div className="product-edit-page bg-white ml-0 sm:ml-4 md:ml-8 lg:ml-16 xl:ml-20 w-full sm:w-auto md:w-[400px] lg:w-[500px] mt-8">
-
+        {/* <div className="product-edit-page bg-white ml-0 sm:ml-4 md:ml-8 lg:ml-16 xl:ml-20 w-full sm:w-auto md:w-[400px] lg:w-[500px] mt-8 "> */}
+  <div className="flex justify-center w-200 mt-8 bg-white lg:ml-150">
+      {/* <div className="product-edit-page bg-white w-full sm:w-auto md:w-[400px] lg:w-[500px] px-6 py-8 rounded shadow-md"></div> */}
           <div className="container mx-auto p-6">
             <button
               onClick={() => navigate(-1)}
