@@ -535,7 +535,7 @@ const ApartmentBuildingPage = () => {
     onScroll={handleScroll}
   >
     {[
-      { name: 'AC01W', description: '3.3 kW', features: 'Rating: 3.3 kW,Single Connector,GSM/Wi-Fi/BLE', image: AC01W,details: {
+      { name: 'AC01W', description: '3.3 kW', features: 'Model No:TE-AC-01W-3.3,Rating: 3.3 kW,Single Connector,GSM/Wi-Fi/BLE', image: AC01W,details: {
           'Dimensions':'WxDxH (310 mm x 220 mm x 90 mm)',
           'Rated Power': '3.3 kW',
           'Input Voltage': '200V - 265V AC',
@@ -549,7 +549,7 @@ const ApartmentBuildingPage = () => {
           'Safety':'CE',
          'Mounting': 'Wall Mounted',}},  
         
-          { name: 'AC02P', description: '7.4 kW ', features: 'Rating: 3.7 kW,Portable Charger,Plug and Play', image: AC02P7,details: {
+          { name: 'AC02P', description: '7.4 kW ', features: 'Model No:TE-AC-02P- 7.4,Rating: 3.7 kW,Portable Charger,Plug and Play', image: AC02P7,details: {
          'Dimensions':'WxDxH (85 mm x 55 mm x 200 mm)',
           'Rated Power': '3.7 kW',
           'Input Voltage': '230V AC(100-265V)',
@@ -562,7 +562,7 @@ const ApartmentBuildingPage = () => {
           'Mechanical Protection':'IP66',
           'Safety':'CE,UkCA',
          'Mounting': 'Portable',}},
-          { name: 'AC02WH', description: ' 7.4kW ', features: 'Rating: 7.4 kW,Single Connector,GSM/Wi-Fi/BLE/4G/Ethernet or Optional', image: AC02WCH ,details: {
+          { name: 'AC02WH', description: ' 7.4kW ', features: 'Model No:TE-AC-02W-7.4 H,Rating: 7.4 kW,Single Connector,GSM/Wi-Fi/BLE/4G/Ethernet or Optional', image: AC02WCH ,details: {
          'Dimensions':'WxDxH (278 mm x 152 mm x 360 mm)',
           'Rated Power': '7.4 kW',
           'Input Voltage': '230V AC',
@@ -920,8 +920,8 @@ const ApartmentBuildingPage = () => {
             </div>
 
             <div className="w-1/2 p-4">
-              <h3 className="text-2xl font-semibold mb-4">Product Description</h3>
-              <p>{popupContent.description}</p>
+              {/* <h3 className="text-2xl font-semibold mb-4">Product Description</h3>
+              <p>{popupContent.description}</p> */}
               <h3 className="text-2xl font-semibold mb-4 mt-6">Features</h3>
               <div className="flex flex-col space-y-2 mt-2">
     {popupContent.features.split(',').map((feature, index) => (

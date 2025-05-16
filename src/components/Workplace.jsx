@@ -30,7 +30,7 @@ import AC02P from '../assets/AC02P3.png';
 import AC02P7 from '../assets/AC02P7.4.png';
 import AC02WCH from '../assets/AC02WC&H.png';
 import AC03W7 from '../assets/AC03W7.png';
-import AC03W22 from '../assets/Ac03W2.png';
+import AC03W22 from '../assets/Ac03W3.png';
 import DC04W from '../assets/DC04W.png';
 import DC04G60 from '../assets/DC04G60.png';
 import DC04G150 from '../assets/DC04G150.png';
@@ -290,7 +290,7 @@ const Workplace = () => {
     onScroll={handleScroll}
   >
     {[ 
-       { name: 'AC01W', description: '3.3 kW', features: 'Rating: 3.3 kW,Single Connector,GSM/Wi-Fi/BLE', image: AC01W,details: {
+       { name: 'AC01W', description: '3.3 kW', features: 'Model No:TE-AC-01W-3.3,Rating: 3.3 kW,Single Connector,GSM/Wi-Fi/BLE', image: AC01W,details: {
           'Dimensions':'WxDxH (310 mm x 220 mm x 90 mm)',
           'Rated Power': '3.3 kW',
           'Input Voltage': '200V - 265V AC',
@@ -303,7 +303,7 @@ const Workplace = () => {
           'Mechanical Protection':'IP54',
           'Safety':'CE',
          'Mounting': 'Wall Mounted',}},  
-    { name: 'DC04W', description: '30 kW', features: 'Rating:30 kW,Single Gun,Ethernet | Wi-fi|4G', image: DC04W,details: {
+    { name: 'DC04W', description: '30 kW', features: 'Model No:TE-DC-04W-30,Rating:30 kW,Single Gun,Ethernet | Wi-fi|4G', image: DC04W,details: {
          'Dimensions':'WxDxH (459 mm x 346 mm x 734 mm)',
           'Rated Power': '30 kW',
           'Input Voltage': '304-456V AC',
@@ -316,7 +316,7 @@ const Workplace = () => {
           'Mechanical Protection':'IP54',
           'Safety':'CE',
          'Mounting': 'Wall Mount,Stand column,Portable wheeled',}},
-         { name: 'DC04G', description: ' 60 kW ', features: 'Rating:60 kW,High Speed Charging,OCPP1.6J Or Latest | RFID', image: DC04G60,details: {
+         { name: 'DC04G', description: ' 60 kW ', features: 'Model No:TE-DC-04G-60,Rating:60 kW,High Speed Charging,OCPP1.6J Or Latest | RFID', image: DC04G60,details: {
           'Dimensions':'WxDxH (730 mm x 500 mm x 1500 mm)',
           'Rated Power': '60 kW',
           'Input Voltage': '304V - 456V AC',
@@ -329,7 +329,7 @@ const Workplace = () => {
           'Mechanical Protection':'IP54',
           'Safety':'CE',
          'Mounting': 'Ground/Floor Mounting',}},
-         { name: 'DC04G', description: '150 kW', features: 'Rating:150 kW,High Speed Charging,OCPP1.6J Or Latest | RFID', image: DC04G150,details: {
+         { name: 'DC04G', description: '150 kW', features: 'Model No:TE-DC-04G-150,Rating:150 kW,High Speed Charging,OCPP1.6J Or Latest | RFID', image: DC04G150,details: {
            'Dimensions':'WxDxH (1150 mm x 625 mm x 2000 mm)',
           'Rated Power': '150 kW',
           'Input Voltage': '304V - 456V AC',
@@ -342,7 +342,7 @@ const Workplace = () => {
           'Mechanical Protection':'IP54',
           'Safety':'CE',
          'Mounting': 'Wall Mounted',}},
-           { name: 'AC03W', description: '7.4 kW', features: 'Rating: 7.4 kW,Single Connector,GSM/Wi-Fi/BLE/4G', image: AC03W7,
+           { name: 'AC03W', description: '7.4 kW', features: 'Model No:TE-AC-03W-7.4,Rating: 7.4 kW,Single Connector,GSM/Wi-Fi/BLE/4G', image: AC03W7,
            details: {
          'Dimensions':'WxDxH (195 mm x 110 mm x 320 mm)',
           'Rated Power': '7.4 kW',
@@ -356,7 +356,7 @@ const Workplace = () => {
           'Mechanical Protection':'IP54',
           'Safety':'CE,Eichrecht,MID,SGS',
          'Mounting': 'Wall or floor using a pedestal',}},
-               { name: 'AC03W', description: ' 22 kW', features: 'Rating: 22 kW,Single Connector,GSM/Wi-Fi/BLE/4G', image: AC03W22 ,details: {
+               { name: 'AC03W', description: ' 22 kW', features: 'Model No:TE-AC-03W-22,Rating: 22 kW,Single Connector,GSM/Wi-Fi/BLE/4G', image: AC03W22 ,details: {
          'Dimensions':'WxDxH (195 mm x 110 mm x 320 mm)',
           'Rated Power': '22 kW',
           'Input Voltage': '320V - 480V AC',
@@ -798,8 +798,8 @@ const Workplace = () => {
                      </div>
          
                      <div className="w-1/2 p-4">
-                       <h3 className="text-2xl font-semibold mb-4">Product Description</h3>
-                       <p>{popupContent.description}</p>
+                       {/* <h3 className="text-2xl font-semibold mb-4">Product Description</h3>
+                       <p>{popupContent.description}</p> */}
                        <h3 className="text-2xl font-semibold mb-4 mt-6">Features</h3>
                        <div className="flex flex-col space-y-2 mt-2">
              {popupContent.features.split(',').map((feature, index) => (

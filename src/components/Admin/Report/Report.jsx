@@ -164,47 +164,43 @@ const AdminDashboard = () => {
 
           {/* Contact Submissions Section */}
           <section className="mb-6">
-            <h2 className="text-xl font-semibold mb-4">📞 Contact Submissions</h2>
-            <button
-              onClick={() => setShowAllContacts(!showAllContacts)}
-              className="mb-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-            >
-              {showAllContacts ? 'Hide Contacts' : 'Show All Contacts'}
-            </button>
+  <h2 className="text-xl font-semibold mb-4">📞 Contact Submissions</h2>
+  <button
+    onClick={() => setShowAllContacts(!showAllContacts)}
+    className="mb-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+  >
+    {showAllContacts ? 'Hide Contacts' : 'Show All Contacts'}
+  </button>
 
-            <div className="overflow-x-auto bg-white rounded-lg shadow-md max-w-full">
-              <table className="min-w-[800px] table-auto text-sm w-full">
-                <thead className="bg-gray-200">
-                  <tr>
-                    <th className="px-4 py-2 text-left">Name</th>
-                    <th className="px-4 py-2 text-left">Email</th>
-                    {/* <th className="px-4 py-2 text-left">Company</th>
-                    <th className="px-4 py-2 text-left">Site</th>
-                    <th className="px-4 py-2 text-left">Address</th>
-                    <th className="px-4 py-2 text-left">City</th>
-                    <th className="px-4 py-2 text-left">Post Code</th> */}
-                    <th className="px-4 py-2 text-left">Telephone</th>
-                    <th className="px-4 py-2 text-left">Message</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {displayedContacts.map((contact) => (
-                    <tr key={contact.id} className="border-t">
-                      <td className="px-4 py-2">{contact.firstname} {contact.lastname}</td>
-                      <td className="px-4 py-2">{contact.email}</td>
-                      {/* <td className="px-4 py-2">{contact.company}</td>
-                      <td className="px-4 py-2">{contact.yoursite}</td>
-                      <td className="px-4 py-2">{contact.address}</td>
-                      <td className="px-4 py-2">{contact.city}</td>
-                      <td className="px-4 py-2">{contact.postcode}</td> */}
-                      <td className="px-4 py-2">{contact.telephone}</td>
-                      <td className="px-4 py-2">{contact.message}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </section>
+  <div className="overflow-x-auto bg-white rounded-lg shadow-md max-w-full">
+    <table className="min-w-[800px] table-auto text-sm w-full">
+      <thead className="bg-gray-200">
+        <tr>
+          <th className="px-4 py-2 text-left">Name</th>
+          <th className="px-4 py-2 text-left">Email</th>
+          <th className="px-4 py-2 text-left">Telephone</th>
+          <th className="px-4 py-2 text-left">Message</th>
+        </tr>
+      </thead>
+      <tbody>
+        {([...displayedContacts]
+          .reverse() // Make newest on top
+          .slice(0, showAllContacts ? displayedContacts.length : 5) // Show top 5 or all
+        ).map((contact) => (
+          <tr key={contact.id} className="border-t">
+            <td className="px-4 py-2">{contact.firstname} {contact.lastname}</td>
+            <td className="px-4 py-2">{contact.email}</td>
+            <td className="px-4 py-2">{contact.telephone}</td>
+            <td className="px-4 py-2">{contact.message}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+               
+          
         </div>
       </div>
     </div>

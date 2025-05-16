@@ -1090,7 +1090,7 @@ import AC02P from '../assets/AC02P3.png';
 import AC02P7 from '../assets/AC02P7.4.png';
 import AC02WCH from '../assets/AC02WC&H.png';
 import AC03W7 from '../assets/AC03W7.png';
-import AC03W22 from '../assets/Ac03W2.png';
+import AC03W22 from '../assets/Ac03W3.png';
 import DC04W from '../assets/DC04W.png';
 import DC04G60 from '../assets/DC04G60.png';
 import DC04G150 from '../assets/DC04G150.png';
@@ -1693,7 +1693,7 @@ const totalDuration = slideDuration * totalSlides; // total animation cycle
     onScroll={handleScroll}
   >
    {[
-      { name: 'AC01W', description: '3.3 kW', features: 'Rating: 3.3 kW,Single Connector,GSM/Wi-Fi/BLE',
+      { name: 'AC01W', description: '3.3 kW ', features: 'Model No:TE-AC-01W-3.3,Rating: 3.3 kW,Single Connector,GSM/Wi-Fi/BLE',
          image: AC01W,details: {
           'Dimensions':'WxDxH (310 mm x 220 mm x 90 mm)',
           'Rated Power': '3.3 kW',
@@ -1708,7 +1708,7 @@ const totalDuration = slideDuration * totalSlides; // total animation cycle
           'Safety':'CE',
          'Mounting': 'Wall Mounted',}},
          
-      { name: 'AC02P', description: '3.7 kW ', features: 'Rating: 3.7 kW,Portable Charger,Plug and Play', image:AC02P,details: {
+      { name: 'AC02P', description: '3.7 kW ', features: 'Model No:Model No:TE-AC-02P-3.7,Rating: 3.7 kW,Portable Charger,Plug and Play', image:AC02P,details: {
          'Dimensions':'WxDxH (85 mm x 55 mm x 200 mm)',
           'Rated Power': '3.7 kW',
           'Input Voltage': '230V AC(100-265V)',
@@ -1721,7 +1721,7 @@ const totalDuration = slideDuration * totalSlides; // total animation cycle
           'Mechanical Protection':'IP66',
           'Safety':'CE,UkCA',
          'Mounting': 'Portable',}},
-      { name: 'AC02P', description: '7.4 kW ', features: 'Rating: 3.7 kW,Portable Charger,Plug and Play', image: AC02P7,details: {
+      { name: 'AC02P', description: '7.4 kW ', features: 'Model No:TE-AC-02P- 7.4,Rating: 3.7 kW,Portable Charger,Plug and Play', image: AC02P7,details: {
           'Dimensions':'WxDxH (120 mm x 110 mm x 320 mm)',
           'Rated Power': '7.4 kW',
           'Input Voltage': '230V AC(100-265V)',
@@ -1729,12 +1729,12 @@ const totalDuration = slideDuration * totalSlides; // total animation cycle
           'Output Current':'6 A - 32 A',
           'Output charging Outlet ':'IEC/EN 62196-2,IP54',
           'Operating Temperature':'-30°C to +50°C',
-          'Connectivity':'Plug In, Wireless DLB/Solar compatible,RFID-Wi-Fi-Bluetooth-App',
-          'Charging Operation':'Plug and Play,RFID-Wi-Fi-Bluetooth-App',
+          'Connectivity':'Plug In, Wireless DLB/Solar compatible',
+          'Charging Operation':'Plug and Play',
           'Mechanical Protection':'IP65',
           'Safety':'CE,UKCA',
          'Mounting': 'Wall Mounted & Portable',}},
-      { name: 'AC02W C & H', description: ' 7.4kW ', features: 'Rating: 7.4 kW,Single Connector,GSM/Wi-Fi/BLE/4G/Ethernet or Optional', 
+      { name: 'AC02W C & H', description: ' 7.4kW ', features: 'Model No:TE-AC-02W-7.4C & H,Rating: 7.4 kW,Single Connector,GSM/Wi-Fi/BLE/4G/Ethernet or Optional', 
        image: AC02WCH , details: {
          'Dimensions':'WxDxH (278 mm x 152 mm x 360 mm)',
           'Rated Power': '7.4 kW',
@@ -1744,11 +1744,11 @@ const totalDuration = slideDuration * totalSlides; // total animation cycle
           'Output charging Outlet ':'Type 2 Socket,IEC/EN 62196-2,IP54',
           'Operating Temperature':'-25°C to +55°C',
           'Connectivity':'Wi-Fi, 4 G, Bluetooth,DLB,Ethernet',
-          'Charging Operation':'Plug and Play',
+          'Charging Operation':'RFID authentication,App based authentication,Plug and Play',
           'Mechanical Protection':'IP65',
           'Safety':'CE,UKCA,CB,RCM',
          'Mounting': 'Wall / Pole Mount',}},
-      { name: 'AC03W', description: '7.4 kW', features: 'Rating: 7.4 kW,Single Connector,GSM/Wi-Fi/BLE/4G', image: AC03W7,details: {
+      { name: 'AC03W', description: '7.4 kW', features: 'Model No:TE-AC-03W-7.4,Rating: 7.4 kW,Single Connector,GSM/Wi-Fi/BLE/4G', image: AC03W7,details: {
          'Dimensions':'WxDxH (195 mm x 110 mm x 320 mm)',
           'Rated Power': '7.4 kW',
           'Input Voltage': '184V - 276V AC',
@@ -1761,7 +1761,7 @@ const totalDuration = slideDuration * totalSlides; // total animation cycle
           'Mechanical Protection':'IP54',
           'Safety':'CE,Eichrecht,MID,SGS',
          'Mounting': 'Wall or floor using a pedestal',}},
-      { name: 'AC03W', description: ' 22 kW', features: 'Rating: 22 kW,Single Connector,GSM/Wi-Fi/BLE/4G', image: AC03W22,details: {
+      { name: 'AC03W', description: ' 22 kW', features: 'Model No:TE-AC-03W-22,Rating: 22 kW,Single Connector,GSM/Wi-Fi/BLE/4G', image: AC03W22,details: {
          'Dimensions':'WxDxH (195 mm x 110 mm x 320 mm)',
           'Rated Power': '22 kW',
           'Input Voltage': '320V - 480V AC',
@@ -1774,7 +1774,7 @@ const totalDuration = slideDuration * totalSlides; // total animation cycle
           'Mechanical Protection':'IP54',
           'Safety':'CE,Eichrecht,MID,SGS',
          'Mounting': 'Wall or floor using a pedestal',}},
-      { name: 'DC04W', description: '30 kW', features: 'Rating:30 kW,Single Gun,Ethernet | Wi-fi|4G', image: DC04W,details: {
+      { name: 'DC04W', description: '30 kW', features: 'Model No:TE-DC-04W-30,Rating:30 kW,Single Gun,Ethernet | Wi-fi|4G', image: DC04W,details: {
          'Dimensions':'WxDxH (459 mm x 346 mm x 734 mm)',
           'Rated Power': '30 kW',
           'Input Voltage': '304-456V AC',
@@ -1787,7 +1787,7 @@ const totalDuration = slideDuration * totalSlides; // total animation cycle
           'Mechanical Protection':'IP54',
           'Safety':'CE',
          'Mounting': 'Wall Mount,Stand column,Portable wheeled',}},
-      { name: 'DC04G', description: ' 60 kW ', features: 'Rating:60 kW,High Speed Charging,OCPP1.6J Or Latest | RFID', image: DC04G60,details: {
+      { name: 'DC04G', description: ' 60 kW ', features: 'Model No:TE-DC-04G-60,Rating:60 kW,High Speed Charging,OCPP1.6J Or Latest | RFID', image: DC04G60,details: {
           'Dimensions':'WxDxH (730 mm x 500 mm x 1500 mm)',
           'Rated Power': '60 kW',
           'Input Voltage': '304V - 456V AC',
@@ -1800,13 +1800,13 @@ const totalDuration = slideDuration * totalSlides; // total animation cycle
           'Mechanical Protection':'IP54',
           'Safety':'CE',
          'Mounting': 'Ground/Floor Mounting',}},
-      { name: 'DC04G', description: '150 kW', features: 'Rating:150 kW,High Speed Charging,OCPP1.6J Or Latest | RFID', image: DC04G150, details: {
+      { name: 'DC04G', description: '150 kW', features: 'Model No:TE-DC-04G-150,Rating:150 kW,High Speed Charging,OCPP1.6J Or Latest | RFID', image: DC04G150, details: {
            'Dimensions':'WxDxH (1150 mm x 625 mm x 2000 mm)',
           'Rated Power': '150 kW',
           'Input Voltage': '304V - 456V AC',
           'Number of Output':'2 or 3',
           'Output Current':'250 A',
-          'Output charging Outlet ':'ccs2 DC connectors,BS EN 62196,IP55',
+          'Output charging Outlet ':'CCS2 DC connectors,BS EN 62196,IP55',
           'Operating Temperature':'-35°C to +60°C',
           'Connectivity':'Wi-Fi, GSM,Bluetooth,LED Indication',
           'Charging Operation':'QR code based/Scan code / App based authentication',
@@ -2196,8 +2196,13 @@ const totalDuration = slideDuration * totalSlides; // total animation cycle
 
       <div className="w-1/2 p-4 overflow-y-auto max-h-[80vh]">
         {/* Product Description */}
-        <h3 className="text-2xl font-semibold mb-4">Product Description</h3>
+        {/* <h3 className="text-2xl font-semibold mb-4">Product Description</h3>
         <p>{popupContent.description}</p>
+        */}
+
+
+
+   
  {/* Features */}
         <h3 className="text-2xl font-semibold mb-4 mt-6">Features</h3>
        <div className="flex flex-col space-y-2 mt-2">

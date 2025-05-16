@@ -112,7 +112,7 @@ const AdminSidebar = ({ isVisible = false, onClose = () => {} }) => {
           <SidebarLink
             icon={<FaChartLine />}
             to="/admin/report"
-            label="Analytics"
+            label="Analytics & Contacts"
             showText={isExpanded}
           />
             <SidebarLink
