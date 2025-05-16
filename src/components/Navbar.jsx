@@ -530,9 +530,13 @@ function Navbar() {
           >
             About Us
           </div>
+            <Link to="/industrialsupport" className="hover:underline">
+           Industrial Support
+          </Link>
           <Link to="/news" className="hover:underline">
             News
           </Link>
+
           <Link
             to="/login"
             onClick={() => setIsMenuOpen(false)}
