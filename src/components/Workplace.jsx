@@ -30,7 +30,7 @@ import AC02P from '../assets/AC02P3.png';
 import AC02P7 from '../assets/AC02P7.4.png';
 import AC02WCH from '../assets/AC02WC&H.png';
 import AC03W7 from '../assets/AC03W7.png';
-import AC03W22 from '../assets/AC03W22.png';
+import AC03W22 from '../assets/Ac03W2.png';
 import DC04W from '../assets/DC04W.png';
 import DC04G60 from '../assets/DC04G60.png';
 import DC04G150 from '../assets/DC04G150.png';
@@ -83,20 +83,20 @@ const Workplace = () => {
   ];
 
   const [popupContent, setPopupContent] = useState({
-    image: '',
-    description: '',
-    features: ''
-  });
-
-  const handlePopupOpen = (image, description, features) => {
-    setPopupContent({ image, description, features });
-    setPopupOpen(true);
-  };
-
-  const handlePopupClose = () => {
-    setPopupOpen(false);
-  };
-
+      image: '',
+      description: '',
+      details: {},
+      features: ''
+    });
+    
+    const handlePopupOpen = (image, description, features, details) => {
+      setPopupContent({ image, description, details, features });
+      setPopupOpen(true);
+    };
+    
+    const handlePopupClose = () => {
+      setPopupOpen(false);
+    };
   const handleBuyNowClick = () => {
     // Handle login or any other logic for "Buy Now"
     // Redirecting to login page for now (you can change this logic based on your app)
@@ -290,12 +290,85 @@ const Workplace = () => {
     onScroll={handleScroll}
   >
     {[ 
-       { name: 'AC01W', description: '3.3 kW', features: 'Rating: 3.3 kW,Single Connector,GSM/Wi-Fi/BLE', image: AC01W  },
-    { name: 'DC04W', description: '30 kW', features: 'Rating:30 kW,Single Gun,Ethernet | Wi-fi|4G', image: DC04W },
-         { name: 'DC04G', description: ' 60 kW ', features: 'Rating:60 kW,High Speed Charging,OCPP1.6J Or Latest | RFID', image: DC04G60 },
-         { name: 'DC04G', description: '150 kW', features: 'Rating:150 kW,High Speed Charging,OCPP1.6J Or Latest | RFID', image: DC04G150 },
-           { name: 'AC03W', description: '7.4 kW', features: 'Rating: 7.4 kW,Single Connector,GSM/Wi-Fi/BLE/4G', image: AC03W7 },
-               { name: 'AC03W', description: ' 22 kW', features: 'Rating: 22 kW,Single Connector,GSM/Wi-Fi/BLE/4G', image: AC03W22 },
+       { name: 'AC01W', description: '3.3 kW', features: 'Rating: 3.3 kW,Single Connector,GSM/Wi-Fi/BLE', image: AC01W,details: {
+          'Dimensions':'WxDxH (310 mm x 220 mm x 90 mm)',
+          'Rated Power': '3.3 kW',
+          'Input Voltage': '200V - 265V AC',
+          'Number of Output':'1',
+          'Output Current':'16 A',
+          'Output charging Outlet ':'IS/IEC 60309-1:2002',
+          'Operating Temperature':'-5°C to +55°C',
+          'Connectivity':'Wi-Fi, GSM,Bluetooth,LED Indication',
+          'Charging Operation':'QR code based/Scan code / App based authentication',
+          'Mechanical Protection':'IP54',
+          'Safety':'CE',
+         'Mounting': 'Wall Mounted',}},  
+    { name: 'DC04W', description: '30 kW', features: 'Rating:30 kW,Single Gun,Ethernet | Wi-fi|4G', image: DC04W,details: {
+         'Dimensions':'WxDxH (459 mm x 346 mm x 734 mm)',
+          'Rated Power': '30 kW',
+          'Input Voltage': '304-456V AC',
+          'Number of Output':'1',
+          'Output Current':'100 A',
+          'Output charging Outlet ':'Single output ccs1/ccs2 connector',
+          'Operating Temperature':'-20°C to +60°C',
+          'Connectivity':'Ethernet,4G,Wireless Network',
+          'Charging Operation':'RFID card,Scan QR code,Mobile App',
+          'Mechanical Protection':'IP54',
+          'Safety':'CE',
+         'Mounting': 'Wall Mount,Stand column,Portable wheeled',}},
+         { name: 'DC04G', description: ' 60 kW ', features: 'Rating:60 kW,High Speed Charging,OCPP1.6J Or Latest | RFID', image: DC04G60,details: {
+          'Dimensions':'WxDxH (730 mm x 500 mm x 1500 mm)',
+          'Rated Power': '60 kW',
+          'Input Voltage': '304V - 456V AC',
+          'Number of Output':'2',
+          'Output Current':'200 A',
+          'Output charging Outlet ':'ccs2 DC connectors,BS EN 62196,IP55',
+          'Operating Temperature':'-20°C to +60°C',
+          'Connectivity':'Ethernet,4G,Wireless Network',
+          'Charging Operation':'RFID card,Scan QR code,Mobile App',
+          'Mechanical Protection':'IP54',
+          'Safety':'CE',
+         'Mounting': 'Ground/Floor Mounting',}},
+         { name: 'DC04G', description: '150 kW', features: 'Rating:150 kW,High Speed Charging,OCPP1.6J Or Latest | RFID', image: DC04G150,details: {
+           'Dimensions':'WxDxH (1150 mm x 625 mm x 2000 mm)',
+          'Rated Power': '150 kW',
+          'Input Voltage': '304V - 456V AC',
+          'Number of Output':'2 or 3',
+          'Output Current':'250 A',
+          'Output charging Outlet ':'ccs2 DC connectors,BS EN 62196,IP55',
+          'Operating Temperature':'-35°C to +60°C',
+          'Connectivity':'Wi-Fi, GSM,Bluetooth,LED Indication',
+          'Charging Operation':'QR code based/Scan code / App based authentication',
+          'Mechanical Protection':'IP54',
+          'Safety':'CE',
+         'Mounting': 'Wall Mounted',}},
+           { name: 'AC03W', description: '7.4 kW', features: 'Rating: 7.4 kW,Single Connector,GSM/Wi-Fi/BLE/4G', image: AC03W7,
+           details: {
+         'Dimensions':'WxDxH (195 mm x 110 mm x 320 mm)',
+          'Rated Power': '7.4 kW',
+          'Input Voltage': '184V - 276V AC',
+          'Number of Output':'1',
+          'Output Current':'32 A',
+          'Output charging Outlet ':'Type 2 socket',
+          'Operating Temperature':'-35°C to +50°C',
+          'Connectivity':'Wi-Fi, Ethernet(RJ45),Bluetooth,RS485,4G',
+          'Charging Operation':'RFID authentication,QR code based,App based authentication',
+          'Mechanical Protection':'IP54',
+          'Safety':'CE,Eichrecht,MID,SGS',
+         'Mounting': 'Wall or floor using a pedestal',}},
+               { name: 'AC03W', description: ' 22 kW', features: 'Rating: 22 kW,Single Connector,GSM/Wi-Fi/BLE/4G', image: AC03W22 ,details: {
+         'Dimensions':'WxDxH (195 mm x 110 mm x 320 mm)',
+          'Rated Power': '22 kW',
+          'Input Voltage': '320V - 480V AC',
+          'Number of Output':'1',
+          'Output Current':'32 A',
+          'Output charging Outlet ':'Type 2 socket',
+          'Operating Temperature':'-35°C to +50°C',
+          'Connectivity':'Wi-Fi, Ethernet(RJ45),Bluetooth,RS485,4G',
+          'Charging Operation':'RFID authentication,QR code based,App based authentication',
+          'Mechanical Protection':'IP54',
+          'Safety':'CE,Eichrecht,MID,SGS',
+         'Mounting': 'Wall or floor using a pedestal',}},
     ].map((box, index) => (
       <div key={index} className="flex flex-col items-center">
         <div
@@ -308,7 +381,7 @@ const Workplace = () => {
               src={box.image}
               alt={box.name}
               className="w-3/4 h-4/4 object-cover rounded-lg mt-20 cursor-pointer"
-              onClick={() => handlePopupOpen(box.image, box.description, box.features)}
+              onClick={() => handlePopupOpen(box.image, box.description, box.features,box.details)}
             />
           </div>
 
@@ -323,7 +396,7 @@ const Workplace = () => {
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              onClick={() => handlePopupOpen(box.image, box.description, box.features)}
+              onClick={() => handlePopupOpen(box.image, box.description, box.features,box.details)}
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
@@ -705,35 +778,52 @@ const Workplace = () => {
          </div>
    
          {/* FAQ Popup */}
-         {popupOpen && (
-           <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-             <div className="bg-white p-8 rounded-lg max-w-6xl w-full flex relative h-auto">
-               {/* Close Button */}
-               <button
-                 className="absolute top-4 right-4 text-3xl font-bold text-gray-600 hover:text-gray-900"
-                 onClick={handlePopupClose}
-               >
-                 &times; {/* "×" represents the close/cross icon */}
-               </button>
-   
-               <div className="w-1/2 p-4">
-                 <img
-                   src={popupContent.image}
-                   alt="Popup"
-                   className="w-full h-auto object-contain rounded-lg"  // Ensuring the image stays contained and fully visible
-                 />
+          {popupOpen && (
+                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                   <div className="bg-white p-8 rounded-lg max-w-6xl w-full flex relative h-auto">
+                     {/* Close Button */}
+                     <button
+                       className="absolute top-4 right-4 text-3xl font-bold text-gray-600 hover:text-gray-900"
+                       onClick={handlePopupClose}
+                     >
+                       &times; {/* "×" represents the close/cross icon */}
+                     </button>
+         
+                     <div className="w-1/2 p-4">
+                       <img
+                         src={popupContent.image}
+                         alt="Popup"
+                         className="w-full h-auto object-contain rounded-lg"  // Ensuring the image stays contained and fully visible
+                       />
+                     </div>
+         
+                     <div className="w-1/2 p-4">
+                       <h3 className="text-2xl font-semibold mb-4">Product Description</h3>
+                       <p>{popupContent.description}</p>
+                       <h3 className="text-2xl font-semibold mb-4 mt-6">Features</h3>
+                       <div className="flex flex-col space-y-2 mt-2">
+             {popupContent.features.split(',').map((feature, index) => (
+               <div key={index} className="text-md text-gray-700">
+                 {feature.trim()}
                </div>
-   
-               <div className="w-1/2 p-4">
-                 <h3 className="text-2xl font-semibold mb-4">Product Description</h3>
-                 <p>{popupContent.description}</p>
-                 <h3 className="text-2xl font-semibold mb-4 mt-6">Features</h3>
-                 <div className="flex flex-col space-y-2 mt-2">
-    {popupContent.features.split(',').map((feature, index) => (
-      <div key={index} className="text-md text-gray-700">
-        {feature.trim()}
-      </div>
-    ))}
+             ))}
+             <h3 className="text-2xl font-semibold mt-6 mb-4">Technical Specifications</h3>
+         
+         {popupContent.details && (
+           <div className="w-full max-h-60 overflow-y-auto">
+             <table className="min-w-full text-sm sm:text-base text-left text-gray-800 border border-gray-300">
+               <tbody>
+                 {Object.entries(popupContent.details).map(([key, value], index) => (
+                   <tr key={index} className="border-b border-gray-200">
+                     <td className="py-2 px-4 font-medium bg-gray-100 whitespace-nowrap">{key}</td>
+                     <td className="py-2 px-4">{value}</td>
+                   </tr>
+                 ))}
+               </tbody>
+             </table>
+           </div>
+         )}
+         
   </div>
                  {/* Buy Now Button */}
                  <button

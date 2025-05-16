@@ -93,14 +93,15 @@ const ApartmentBuildingPage = () => {
   const [popupContent, setPopupContent] = useState({
     image: '',
     description: '',
+    details: {},
     features: ''
   });
-
-  const handlePopupOpen = (image, description, features) => {
-    setPopupContent({ image, description, features });
+  
+  const handlePopupOpen = (image, description, features, details) => {
+    setPopupContent({ image, description, details, features });
     setPopupOpen(true);
   };
-
+  
   const handlePopupClose = () => {
     setPopupOpen(false);
   };
@@ -534,11 +535,46 @@ const ApartmentBuildingPage = () => {
     onScroll={handleScroll}
   >
     {[
-      { name: 'AC01W', description: '3.3 kW', features: 'Rating: 3.3 kW,Single Connector,GSM/Wi-Fi/BLE', image: AC01W  },
+      { name: 'AC01W', description: '3.3 kW', features: 'Rating: 3.3 kW,Single Connector,GSM/Wi-Fi/BLE', image: AC01W,details: {
+          'Dimensions':'WxDxH (310 mm x 220 mm x 90 mm)',
+          'Rated Power': '3.3 kW',
+          'Input Voltage': '200V - 265V AC',
+          'Number of Output':'1',
+          'Output Current':'16 A',
+          'Output charging Outlet ':'IS/IEC 60309-1:2002',
+          'Operating Temperature':'-5°C to +55°C',
+          'Connectivity':'Wi-Fi, GSM,Bluetooth,LED Indication',
+          'Charging Operation':'QR code based/Scan code / App based authentication',
+          'Mechanical Protection':'IP54',
+          'Safety':'CE',
+         'Mounting': 'Wall Mounted',}},  
         
-          { name: 'AC02P', description: '7.4 kW ', features: 'Rating: 3.7 kW,Portable Charger,Plug and Play', image: AC02P7 },
-          { name: 'AC02WH', description: ' 7.4kW ', features: 'Rating: 7.4 kW,Single Connector,GSM/Wi-Fi/BLE/4G/Ethernet or Optional', image: AC02WCH },
-         
+          { name: 'AC02P', description: '7.4 kW ', features: 'Rating: 3.7 kW,Portable Charger,Plug and Play', image: AC02P7,details: {
+         'Dimensions':'WxDxH (85 mm x 55 mm x 200 mm)',
+          'Rated Power': '3.7 kW',
+          'Input Voltage': '230V AC(100-265V)',
+          'Number of Output':'1',
+          'Output Current':'8 A - 16 A',
+          'Output charging Outlet ':'IEC/EN 62196-2,IP54',
+          'Operating Temperature':'-30°C to +50°C',
+          'Connectivity':'Plug In',
+          'Charging Operation':'Plug and Play',
+          'Mechanical Protection':'IP66',
+          'Safety':'CE,UkCA',
+         'Mounting': 'Portable',}},
+          { name: 'AC02WH', description: ' 7.4kW ', features: 'Rating: 7.4 kW,Single Connector,GSM/Wi-Fi/BLE/4G/Ethernet or Optional', image: AC02WCH ,details: {
+         'Dimensions':'WxDxH (278 mm x 152 mm x 360 mm)',
+          'Rated Power': '7.4 kW',
+          'Input Voltage': '230V AC',
+          'Number of Output':'1',
+          'Output Current':'32 A',
+          'Output charging Outlet ':'Type 2 Socket,IEC/EN 62196-2,IP54',
+          'Operating Temperature':'-25°C to +55°C',
+          'Connectivity':'Wi-Fi, 4 G, Bluetooth,DLB,Ethernet',
+          'Charging Operation':'Plug and Play',
+          'Mechanical Protection':'IP65',
+          'Safety':'CE,UKCA,CB,RCM',
+         'Mounting': 'Wall / Pole Mount',}},
     ].map((box, index) => (
       <div key={index} className="flex flex-col items-center flex-shrink-0">
         <div
@@ -553,7 +589,7 @@ const ApartmentBuildingPage = () => {
               src={box.image}
               alt={box.name}
               className="w-3/4 h-4/4 object-cover rounded-lg mt-10 cursor-pointer"
-              onClick={() => handlePopupOpen(box.image, box.description, box.features)}
+              onClick={() => handlePopupOpen(box.image, box.description, box.features,box.details)}
             />
           </div>
 
@@ -568,7 +604,7 @@ const ApartmentBuildingPage = () => {
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              onClick={() => handlePopupOpen(box.image, box.description, box.features)}
+              onClick={() => handlePopupOpen(box.image, box.description, box.features,box.details)}
             >
               <path
                 strokeLinecap="round"
@@ -893,6 +929,23 @@ const ApartmentBuildingPage = () => {
         {feature.trim()}
       </div>
     ))}
+    <h3 className="text-2xl font-semibold mt-6 mb-4">Technical Specifications</h3>
+
+{popupContent.details && (
+  <div className="w-full max-h-60 overflow-y-auto">
+    <table className="min-w-full text-sm sm:text-base text-left text-gray-800 border border-gray-300">
+      <tbody>
+        {Object.entries(popupContent.details).map(([key, value], index) => (
+          <tr key={index} className="border-b border-gray-200">
+            <td className="py-2 px-4 font-medium bg-gray-100 whitespace-nowrap">{key}</td>
+            <td className="py-2 px-4">{value}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+)}
+
   </div>
               {/* Buy Now Button */}
               <button
