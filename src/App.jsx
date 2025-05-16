@@ -47,7 +47,9 @@ import Ecom from './components/Ecom';
 import Park from './components/Park';
 import Food from './components/Food';
 import CRM from './components/CRM';
-
+import Privacy from './components/PrivacyStatement';
+import Terms from './components/TermsandConditions';
+import IndustrialSupport from './components/IndustriesSupport';
 
 
 
@@ -101,14 +103,10 @@ function App() {
         <Route path="/park" element={<Park/>} /> 
         <Route path="/food" element={<Food/>} /> 
         <Route path="/crm" element={<CRM/>} /> 
-         
-         
-  
-       
-     
-       
-       
-      </Routes>
+        <Route path="/privacy-policy" element={<Privacy/>} /> 
+        <Route path="/terms-conditions" element={<Terms/>} /> 
+         <Route path="/industrialsupport" element={<IndustrialSupport/>} /> 
+         </Routes>
     </Router>
   );
 }

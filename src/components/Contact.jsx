@@ -183,7 +183,18 @@ const ContactPage = () => {
                   onChange={handleCheckboxChange}
                   className="w-5 h-5"
                 />
-                <label htmlFor="privacy" className="ml-2 text-gray-900 text-sm sm:text-base">I agree with the privacy statement</label>
+                {/* <label htmlFor="privacy" className="ml-2 text-gray-900 text-sm sm:text-base">I agree with the privacy statement</label> */}
+             <label htmlFor="privacy" className="ml-2 text-gray-900 text-sm sm:text-base">
+  I agree with the
+  <a
+    href="privacy-policy"  // Replace with the actual link to your privacy page
+    className="text-blue-500 hover:text-blue-700 group inline ml-2"
+  >
+    <span className="group-hover:underline">privacy statement</span>
+  </a>
+</label>
+
+
               </div>
               {formErrors.privacy && <p className="text-sm text-red-500 mb-4">{formErrors.privacy}</p>}
 
@@ -257,7 +268,7 @@ const ContactPage = () => {
               <li><a href="/solution" className="hover:underline">Solutions</a></li>
               <li><a href="/contact" className="hover:underline">Contact</a></li>
               <li><a href="/careers" className="hover:underline">Careers</a></li>
-              <li><a href="/residents" className="hover:underline">Residents</a></li>
+              <li><a href="/solutions/home-and-housing-societies" className="hover:underline">Residents</a></li>
             </ul>
           </div>
 

@@ -1419,7 +1419,7 @@ const totalDuration = slideDuration * totalSlides; // total animation cycle
    
  <>
  
-<style>{`
+ <style>{`
   @keyframes fadeInOut {
     0%, 100% {
       opacity: 0;
@@ -1483,7 +1483,8 @@ const totalDuration = slideDuration * totalSlides; // total animation cycle
       </div>
     ))}
   </div>
-</div>
+</div> 
+
 
 
   {/* Right: Text Content */}
@@ -2138,8 +2139,8 @@ const totalDuration = slideDuration * totalSlides; // total animation cycle
         <ul className="space-y-2">
           <li><a href="/solution" className="text-gray hover:underline text-lg">Solutions</a></li>
           <li><a href="/contact" className="text-gray hover:underline text-lg">Contact</a></li>
-          <li><a href="/careers" className="text-gray hover:underline text-lg">Careers</a></li>
-          <li><a href="/residents" className="text-gray hover:underline text-lg">Residents</a></li>
+          <li><a href="/about" className="text-gray hover:underline text-lg">About</a></li>
+          <li><a href="/solutions/home-and-housing-societies" className="text-gray hover:underline text-lg">Residents</a></li>
         </ul>
       </div>
 

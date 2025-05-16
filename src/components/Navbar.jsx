@@ -375,7 +375,11 @@ function Navbar() {
                 About Us
               </Link>
             </div>
-
+<div onMouseEnter={() => setPopupType(null)}>
+              <Link to="/industrialsupport" className="hover:underline">
+              Industrial Support
+              </Link>
+            </div>
             <div onMouseEnter={() => setPopupType(null)}>
               <Link to="/news" className="hover:underline">
                 News

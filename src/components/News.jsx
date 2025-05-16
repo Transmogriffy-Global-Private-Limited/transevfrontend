@@ -223,8 +223,8 @@ function NewsPage() {
               <ul className="space-y-2">
                 <li><a href="/solution" className="text-gray hover:underline">Solutions</a></li>
                 <li><a href="/contact" className="text-gray hover:underline">Contact</a></li>
-                <li><a href="/careers" className="text-gray hover:underline">Careers</a></li>
-                <li><a href="/residents" className="text-gray hover:underline">Residents</a></li>
+                <li><a href="/about" className="text-gray hover:underline">About</a></li>
+                <li><a href="/solutions/home-and-housing-societies" className="text-gray hover:underline">Residents</a></li>
               </ul>
             </div>
 
