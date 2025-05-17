@@ -173,7 +173,7 @@ import { FaBars } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../User/User_sidebar";
 import logo from '../../assets/log.png'
-
+import { Link } from "react-router-dom";
 const BASE_URL_AND_PORT = "http://192.168.0.106:8000";
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
 
@@ -254,11 +254,13 @@ const Navbar = () => {
           <button onClick={toggleSidebar} className="text-white md:hidden">
             <FaBars size={24} />
           </button>
+          <Link to="/dashboard">
           <img
             src={logo}
             alt="TransEV Logo"
             className="h-8 sm:h-10 ml-2 sm:ml-20"
           />
+          </Link>
         </div>
 
         {/* Right Side: User Info and Dropdown */}

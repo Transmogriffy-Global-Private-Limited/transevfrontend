@@ -1550,7 +1550,7 @@ const totalDuration = slideDuration * totalSlides; // total animation cycle
 
 
       <p className="text-base sm:text-lg md:text-lg mt-4 animate-slide-up-text max-w-full md:max-w-[95%] xl:max-w-[700px]">
-        Backed by the UK Government's Charging Infrastructure 
+        Backed  Charging Infrastructure 
         Investment Fund (CIIF), Energy Park brings you a team of highly 
         trained professionals.
       </p>

@@ -66,6 +66,7 @@ const Sidebar = ({ isVisible = false, onClose = () => {} }) => {
         {/* Header */}
         {/* <div className="flex justify-between items-center px-4 py-4 border-b border-gray-700 "> */}
         <div className="flex justify-between items-center px-4 py-4  ">
+            <Link to="/dashboard">
           <img
             src={logo}
             alt="Logo"
@@ -73,7 +74,7 @@ const Sidebar = ({ isVisible = false, onClose = () => {} }) => {
               isExpanded ? "block" : "hidden bg-white"
             }`}
           />
-
+</Link>
           {/* Desktop toggle button */}
           {/* <button
             onClick={() => setIsExpanded((prev) => !prev)}
