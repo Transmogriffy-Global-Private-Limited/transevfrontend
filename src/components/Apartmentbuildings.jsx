@@ -5,7 +5,7 @@ import logo from '../assets/transev logo.png'; // Use appropriate path for logo 
 import background from '../assets/apartmnet.jpg';
 import yourImage from '../assets/new.jpg';
 import { useInView } from 'react-intersection-observer';
-import car from '../assets/car1.jpg'
+import car1 from '../assets/car1.png'
 import charger1 from '../assets/charger7.png';
 import charger2 from '../assets/charger2.png';
 import charger3 from '../assets/charger1.png';
@@ -52,7 +52,7 @@ const ApartmentBuildingPage = () => {
     {
       question: "What is the process for installing a Community EV charger?",
       answer:
-        "The association at the housing society or the admin team at the workplace can raise a request on the TransEV website. TransEv installs compatible EV chargers. Various business models, including zero capex, are available for customers to choose from.",
+        "The association at the housing society or the admin team at the workplace can raise a request on the TransEV website. TransEV installs compatible EV chargers. Various  models are available for customers to choose from.",
     },
     {
       question: "How long does it take to charge an EV at home?",
@@ -62,7 +62,7 @@ const ApartmentBuildingPage = () => {
     {
       question: "What are the costs associated with installing and using a Community EV charger?",
       answer:
-        "The cost of the various models of offering community charges differs depending on the business model chosen. In the capex model, the customer procures the charger and related infrastructure. In the opex model, TransEV incurs all expenses related to the charger and power infrastructure. ",
+        "The cost of the various models of offering community charges differs depending on the model chosen.",
     },
     {
       question: "Can multiple residents in a housing society share EV charging stations?",
@@ -77,7 +77,7 @@ const ApartmentBuildingPage = () => {
     {
       question: "How do I monitor the electricity consumption of my Community EV charger?",
       answer:
-        "All community EV chargers are hosted on the TransEV EZ Charge App, and charging fees is automatically debited from the wallet.",
+        "All our community EV chargers and their statuses should be accessible to the admin of the housing society or workplace. The admin can monitor the consumption and status of the chargers through the TransEV app.",
     },
     {
       question: "What safety measures should I take when charging my EV at home?",
@@ -87,7 +87,7 @@ const ApartmentBuildingPage = () => {
     {
       question: "Who do I contact for support or maintenance of my Community EV charger?",
       answer:
-        "TransEV has a 24-hour call center. Customers can call 18008332233 for support or email for maintenance services.  ",
+        "TransEV has a 24-hour call center. Customers can call 033-4601-5366 for support or email for maintenance services.  ",
     },
   ];
 
@@ -150,12 +150,12 @@ const ApartmentBuildingPage = () => {
 {/* Funded Solutions Section */}
 <section className="bg-white-100 py-16 sm:py-20 px-4 sm:px-8 lg:px-32">
   <h2 className="text-left text-4xl sm:text-6xl md:text-7xl lg:text-9xl font-aeonik text-black-800 mt-10 lg:mt-20">
-    Funded solutions<br />
+  Customizable Solutions<br />
     <span className="block mt-2">for Home and Housing Societies</span>
   </h2>
 
   <div className="relative mt-12 sm:mt-16 text-left">
-    <button className="relative inline-flex items-center justify-center px-6 sm:px-10 py-3 sm:py-4 bg-orange-300 text-white font-semibold rounded-full group transition-all duration-300 ease-in-out">
+    <button className="relative inline-flex items-center justify-center px-6 sm:px-10 py-3 sm:py-4 bg-yellow-300 text-white font-semibold rounded-full group transition-all duration-300 ease-in-out">
       {/* "Contact us" text */}
       <Link to="/contact">
   <span className="transition-all duration-300 ease-in-out cursor-pointer">
@@ -186,31 +186,14 @@ const ApartmentBuildingPage = () => {
   {/* Left Text Block */}
   <div className="w-full lg:w-1/2">
     <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-gray-800 leading-tight">
-      Future-proof your sites with <br />
-      our fully funded and <br />
-      managed EV charging <br />
-      solutions.
+      Future-proof your sites with<br/>
+our customizable and modular EV charging
+solutions.
     </h3>
   </div>
 
   {/* Right Explore Link */}
-  <div className="w-full lg:w-1/2 text-left lg:text-right mt-8 lg:mt-20">
-    <a
-      href="#explore"
-      className="text-xl sm:text-2xl font-semibold text-black-500 hover:underline inline-flex items-center"
-    >
-      Explore
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="w-5 sm:w-6 h-5 sm:h-6 text-black-500 ml-2"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-      </svg>
-    </a>
-  </div>
+  
 </section>
 
 
@@ -232,24 +215,15 @@ const ApartmentBuildingPage = () => {
   {/* Left Side */}
   <div className="w-full lg:w-1/2 flex flex-col justify-center min-h-[600px] lg:pr-10 mb-10 lg:mb-0">
     <h2 className="text-3xl sm:text-5xl lg:text-7xl font-semibold text-black mb-6">
-      Cost-free installation <br /> and management
+    Hassle-free <br/>installation & management
     </h2>
-
-    <p className="text-base sm:text-lg lg:text-xl font-semibold text-gray-700 mb-6">
-      <a
-        href="/contact"
-        className="text-blue-600 hover:underline hover:text-blue-800"
-      >
-        Ready to get started? Contact us
-      </a>
-    </p>
 
     <div className="text-gray-400">
       <h3 className="text-lg sm:text-xl font-semibold mb-2 text-black">
         Meet growing tenant demand
       </h3>
       <p className="text-base sm:text-lg lg:text-xl font-semibold mt-4">
-        With EV ownership on the rise, having access to reliable, low-cost EV
+        With EV ownership on the rise, having access to reliable EV
         charging at home is set to become an essential requirement for tenants.
         For property owners, preparing for this growing demand now will help to
         future-proof your sites, increase their marketability, and boost your
@@ -257,20 +231,18 @@ const ApartmentBuildingPage = () => {
       </p>
 
       <h3 className="text-lg sm:text-xl font-semibold mt-6 text-black">
-        A funded solution
+        Ease all around
       </h3>
       <p className="text-base sm:text-lg lg:text-xl font-semibold mt-4">
-        We remove many of the financial and operational barriers to large-scale
-        EV infrastructure investment for residential landlords by offering a
-        fully funded, maintained, and managed EV charging solution.
+       We facilitate EV infrastructure investments for residential landlords by offering a customizable, effortlessly maintaiable, and managed EV charging solution.
       </p>
 
       <p className="text-base sm:text-lg lg:text-xl font-semibold mt-6">
         <a
           href="/contact"
-          className="text-gray-500 hover:underline hover:text-gray-700"
+          className="text-blue-500 hover:underline hover:text-green-700"
         >
-          Contact us to find out more about our funded solutions.
+          Contact us to know more.
         </a>
       </p>
     </div>
@@ -291,7 +263,7 @@ const ApartmentBuildingPage = () => {
   {/* Left Side */}
   <div className="w-full lg:w-1/2 lg:pr-10 mb-8 lg:mb-0">
     <h2 className="text-3xl sm:text-4xl lg:text-6xl font-semibold text-black mt-6 sm:mt-10 lg:mt-20 mb-4">
-      What our funded approach <br /> delivers:
+      What we  offer:
     </h2>
   </div>
 
@@ -316,38 +288,32 @@ const ApartmentBuildingPage = () => {
 {[
   {
     number: "01",
-    title: "Cost-efficient solutions ",
-    desc: "We offer property owners fully funded solutions with no upfront capital required, ensuring cost-free installation for you and your residents.",
-    img: image3,
-  },
-  {
-    number: "02",
     title: "Proactive support ",
     desc: "We work closely with you throughout the entire process, offering expert guidance to ensure the EV charging infrastructure meets your unique needs and goals.",
     img: image4,
   },
   {
-    number: "03",
-    title: "A fully managed service ",
-    desc: "We take care of all ongoing operations, eliminating the need for you to manage day-to-day tasks or invest in additional resources.",
+    number: "02",
+    title: "We manage, you relax",
+    desc: "We take care of the charging infrastructure, including installation, maintenance, and testing, so you can focus on what you do best.",
     img: image5,
   },
   {
-    number: "04",
+    number: "03",
     title: "Future-proof designs ",
-    desc: "TransEv installation is thoughtfully designed by our in-house design team to support rising EV ownership and evolving energy needs.",
+    desc: "TransEV installations are thoughtfully designed, supporting rising EV ownership and evolving energy needs.",
     img: hotels,
   },
   {
-    number: "05",
+    number: "04",
     title: "Added value ",
     desc: "Installing uniform EV charging infrastructure will add value to your sites and boost their appeal to future tenants.",
     img: image6,
   },
   {
-    number: "06",
-    title: "Guaranteed expertise ",
-    desc: "TransEv is backed by the UK Government's Charging Infrastructure Investment Fund (CIIF) and brings together a team of highly trained professionals to deliver best-in-class EV charging solutions.",
+    number: "05",
+    title: "Reliable hands",
+    desc: "TransEV is suppoted by a reliable team, making sure your EV infrastructure is always in good hands.",
     img: yourImage,
   },
 ].map((item, index) => (
@@ -421,26 +387,20 @@ const ApartmentBuildingPage = () => {
 {[
   {
     number: "01",
-    title: "Low-cost charging ",
-    desc: "  Your residents will receive competitive home charging pricing without any costs for installation, maintenance or testing.",
-    img: image,
-  },
-  {
-    number: "02",
     title: "Convenience and flexibility ",
     desc: "  With EV charging on their doorstep, residents will have the freedom to charge their vehicle at home whenever they need to.",
     img: yourImage,
   },
   {
-    number: "03",
+    number: "02",
     title: "Fast, efficient charging",
     desc: " With charging up to 22kW, residents can relax knowing that their vehicle will charge quickly and efficiently.",
     img: image7,
   },
   {
-    number: "04",
-    title: " Good accessibility ",
-    desc: " Our charge points are proactively maintained with any faults detected and fixed quickly, keeping them accessible and ready to use.",
+    number: "03",
+    title: " Good accessibility, Great reliability ",
+    desc: "We make sure that we keep the EV infrastructure up and running on your call, so that your residents don't feel the hitch",
     img: image8,
   },
   
@@ -486,10 +446,10 @@ const ApartmentBuildingPage = () => {
 <section
   className="relative bg-cover bg-center rounded-lg 
              w-full sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-[97%] 
-             h-[300px] sm:h-[450px] md:h-[550px] lg:h-[400px] xl:h-[750px] 
+             h-[300px] sm:h-[450px] md:h-[550px] lg:h-[400px] xl:h-[980px] 
              mx-auto px-4 sm:px-8 md:px-12 lg:px-16 mt-8 sm:mt-12 lg:mt-16 xl:mt-50"
   style={{
-    backgroundImage: `url(${car})`,
+    backgroundImage: `url(${car1})`,
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',   // Ensures the image covers the container
     backgroundPosition: 'center',  // Centers the image
@@ -503,15 +463,19 @@ const ApartmentBuildingPage = () => {
     
     {/* Left Side */}
     <div className="lg:w-1/2 text-center lg:text-left">
-      <h2 className="text-xl font-semibold mb-4">
+      {/* <h2 className="text-xl font-semibold mb-4">
         Take a look at the products we can <br /> install for your residents
-      </h2>
+      </h2> */}
+      <h2 className="text-xl sm:text-2xl md:text-2xl lg:text-3xl font-semibold mb-4">
+  Take a look at the products we can <br /> install for your residents
+</h2>
+
     </div>
 
-    {/* Right Side */}
-    <div className="w-full lg:w-2/3 xl:w-3/4">
+    {/* Right Side */} 
+    <div className="w-full lg:w-2/3 xl:w-3/4 lg:ml-20">
   <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold mb-6 text-center lg:text-left max-w-full mt-6 lg:mt-0 leading-tight">
-    We offer a range of compatible charge points suitable for home and housing societies
+    We offer a range of compatible charge points suitable for home and housing
   </h2>
 </div>
 
@@ -775,20 +739,6 @@ const ApartmentBuildingPage = () => {
               </button>
             </div>
 
-            {/* Description */}
-            <div className="mt-16 sm:mt-20 md:mt-24 lg:mt-15 xl:mt-40 px-4 sm:px-6 lg:px-8">
-  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 text-left">
-    EV Charging Solutions for Residential Sites and Businesses
-  </h3>
-  <div className="mt-4 sm:mt-6">
-    <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-      We’ll listen to your needs, identify the best approach, and then create a bespoke
-    </p>
-    <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-      smart EV charging solution that’s right for you.
-    </p>
-  </div>
-</div>
 </div>
 </div>
 </div>
@@ -813,7 +763,7 @@ const ApartmentBuildingPage = () => {
 
             <div className="text-3xl sm:text-5xl font-semibold text-gray-800">
               <a
-                href="mailto:enquiries@energy-park.co.uk"
+                href="mailto:tgwbin@gmail.com"
                 className="relative inline-block hover:text-black-500"
               >
                 <span className="hover:underline transition-all duration-300 mt-2">tgwbin@gmail.com</span>
@@ -828,12 +778,12 @@ const ApartmentBuildingPage = () => {
             {/* First Section - Experts and Client Portal */}
             <div className="w-full sm:w-1/3 mb-8 sm:mb-0">
               <h4 className="text-xl sm:text-xl font-semibold mb-4">
-                Experts in smart EV charging solutions <br />
-                for residential sites and businesses.
+               Pioneers in smart EV charging solutions <br />
+              
               </h4>
 
               <a
-                href="/client-portal"
+                href="#"
                 className="inline-flex items-center px-6 py-3 bg-black text-white font-semibold rounded-full transition-all duration-300 hover:bg-yellow-500 hover:text-black hover:scale-105"
               >
                 <span>Client portal</span>
@@ -865,7 +815,7 @@ const ApartmentBuildingPage = () => {
                   <li><a href="/solution" className="text-gray hover:underline text-lg">Solutions</a></li>
                   <li><a href="/contact" className="text-gray hover:underline text-lg">Contact</a></li>
                   <li><a href="/about" className="text-gray hover:underline text-lg">About</a></li>
-                  <li><a href="/solutions/home-and-housing-societies" className="text-gray hover:underline text-lg">Residents</a></li>
+                
                 </ul>
               </div>
 
@@ -885,9 +835,7 @@ const ApartmentBuildingPage = () => {
                 <ul className="space-y-2">
                   <li><a href="/terms-conditions" className="text-gray hover:underline text-lg">Terms & Conditions</a></li>
                   <li><a href="/privacy-policy" className="text-gray hover:underline text-lg">Privacy Policy</a></li>
-                  <li><a href="#" className="text-gray hover:underline text-lg">Modern Slavery Policy</a></li>
-                  <li><a href="#" className="text-gray hover:underline text-lg">ESG Policy</a></li>
-                  <li><a href="#" className="text-gray hover:underline text-lg">Sustainability Policy</a></li>
+                
                 </ul>
               </div>
             </div>
@@ -895,7 +843,7 @@ const ApartmentBuildingPage = () => {
 
           {/* Footer Bottom Section */}
           <div className="text-center mt-8 text-lg lg:mr-300">
-            <p>&copy; TransEv 2025. All Rights Reserved.</p>
+            <p>&copy; TransEV 2025. All Rights Reserved.</p>
           </div>
         </footer>
       </div>

@@ -1,7 +1,7 @@
 
 import React, { useState,useRef} from 'react';
 import Navbar from './Navbar';  
-import logo from '../assets/transev logo.png'; // Use appropriate path for logo image
+import logo from '../assets/TransEV logo.png'; // Use appropriate path for logo image
 import background from '../assets/apartmnet.jpg';
 import yourImage from '../assets/new.jpg';
 import { useInView } from 'react-intersection-observer';
@@ -51,12 +51,12 @@ const Fleet = () => {
     {
       question: "What are the different types of EV charging solutions available for fleets?",
       answer:
-        "Dedicated Hubs: TransEV creates a dedicated hub at the fleet owner’s location or at a TransEv location, offering charging as a service exclusively to the fleet customer Shared Hubs: TransEV creates a common hub with chargers of different capacities, available to fleet customers based on their requirements Public Charging Solutions for Fleets: TransEV’s extensive network of public EV chargers can be used by fleet customers for last-mile charging, reducing vehicle dry run",
+        "Dedicated Hubs: TransEV creates a dedicated hub at the fleet owner’s location or at a TransEV location, offering charging as a service exclusively to the fleet customer Shared Hubs: TransEV creates a common hub with chargers of different capacities, available to fleet customers based on their requirements Public Charging Solutions for Fleets: TransEV’s extensive network of public EV chargers can be used by fleet customers for last-mile charging, reducing vehicle dry run",
     },
     {
       question: "What is the process for setting up fleet charging infrastructure?",
       answer:
-        "TransEv offers end-to-end charging infrastructure services. The fleet operator shares their current and future requirements, signs the agreement, and TransEV handles the rest. ",
+        "TransEV offers end-to-end charging infrastructure services. The fleet operator shares their current and future requirements, signs the agreement, and TransEV handles the rest. ",
     },
     {
       question: "How can I manage the charging schedule for my fleet to ensure operational efficiency?",
@@ -86,7 +86,7 @@ const Fleet = () => {
     {
       question: "How do I ensure the safety and reliability of my fleet's charging infrastructure?",
       answer:
-        "TransEv follows all required central and state government safety guidelines while deploying and operating charging hubs. There is continuous and proactive maintenance to ensure reliability of the charging infrastructure . ",
+        "TransEV follows all required central and state government safety guidelines while deploying and operating charging hubs. There is continuous and proactive maintenance to ensure reliability of the charging infrastructure . ",
     },
     
   ];
@@ -151,8 +151,8 @@ const Fleet = () => {
 <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-9xl font-aeonik text-black-800 mt-10 sm:mt-16 lg:mt-20 px-4 sm:px-10 lg:px-32 xl:px-40 text-center lg:text-left">
  
 
-    Fleet Organization <br />
-    <span className="inline-block">Charging solutions</span>
+    Charging Solutions <br />
+    <span className="inline-block">for Fleets</span>
   </h2>
 
   <div className="flex justify-center lg:justify-start mt-12 sm:mt-16 px-4 sm:px-10 lg:px-32 xl:px-40">
@@ -188,14 +188,14 @@ const Fleet = () => {
 
 
 {/* Right side - Explore Link */}
-<div className="w-full lg:w-1/2 text-center lg:text-right mt-6 lg:mt-20">
+{/* <div className="w-full lg:w-1/2 text-center lg:text-right mt-6 lg:mt-20">
   <a href="#explore" className="text-lg sm:text-xl lg:text-2xl font-semibold text-black-500 hover:underline inline-flex items-center justify-center lg:justify-end">
     Explore
     <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 sm:w-6 sm:h-6 text-black-500 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
     </svg>
   </a>
-</div>
+</div> */}
 
 </section>
     
@@ -220,15 +220,7 @@ const Fleet = () => {
             Fast and reliable<br /> charging for your<br />  fleet operations.
             </h2>
         
-            <p className="text-base sm:text-lg md:text-xl font-semibold text-gray-700 mb-6 mt-20">
-              <a
-                href="/contact"
-                className="text-black hover:underline hover:text-blue-800 "
-              >
-                Ready to get started? Contact us
-              </a>
-            </p>
-        
+           
             {/* Content Sections */}
             <div className="text-gray-400 space-y-10 mb-20">
               <div>
@@ -240,6 +232,14 @@ const Fleet = () => {
                 </p>
              
               </div>
+         <p className="text-base sm:text-lg md:text-xl font-semibold text-gray-700 mb-6 mt-20">
+              <a
+                href="/contact"
+                className="text-blue-900 hover:underline hover:text-green-800 "
+              >
+                Ready to get started? Contact us
+              </a>
+            </p>
         
              
             </div>
@@ -301,22 +301,7 @@ const Fleet = () => {
       </h2>
     </div>
 
-    {/* Right Side */}
-    {/* <div className="w-full lg:w-1/2 text-center lg:text-left px-4">
-  <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-6xl xl:text-7xl font-semibold leading-snug flex flex-wrap justify-center lg:justify-start">
-    
-    <span className="block sm:inline mb-2 sm:mb-0 sm:mr-3 whitespace-nowrap">
-    Choose a Charger that fits
-    </span>
-
-    <span className="block sm:inline mb-2 sm:mb-0 sm:mr-3 whitespace-nowrap">
-    the needs of your fleet best
-    </span>
-
    
-
-  </h2>
-</div> */}
 
   <div className="w-full lg:w-1/2 text-center lg:text-left px-4 max-w-2xl">
   <h2 className="text-[clamp(1.5rem,4vw,3rem)] font-semibold leading-snug">
@@ -586,71 +571,11 @@ const Fleet = () => {
                         </button>
                       </div>
           
-                      
-                      <div className="mt-16 sm:mt-20 md:mt-24 lg:mt-15 xl:mt-40 px-4 sm:px-6 lg:px-8">
-  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 text-left">
-    EV Charging Solutions for Residential Sites and Businesses
-  </h3>
-  <div className="mt-4 sm:mt-6">
-    <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-      We’ll listen to your needs, identify the best approach, and then create a bespoke
-    </p>
-    <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-      smart EV charging solution that’s right for you.
-    </p>
-  </div>
-</div>
+
 </div>
 </div>
 </div> 
-{/* <div className="w-full min-h-screen bg-white flex justify-center items-center px-4 py-10 sm:py-20 overflow-auto">
-  <div className="w-full max-w-[1600px] bg-gradient-to-b from-yellow-100 via-yellow-200 to-red-300 rounded-3xl shadow-lg p-6 sm:p-10 md:p-12 lg:p-20 mx-auto">
-    
 
-    <h2 className="text-[clamp(2rem,5vw,4rem)] font-semibold text-gray-800 text-left font-aeonik leading-tight">
-      <span className="block">Ready to get</span>
-      <span className="block">Started?</span>
-    </h2>
-
- 
-    <div className="mt-10">
-      <button
-        id="contact-btn"
-        onClick={handleContactClick}
-        className="flex items-center px-6 sm:px-8 md:px-10 py-3 bg-white text-black font-semibold rounded-full hover:bg-black hover:text-white transition-all duration-300"
-      >
-        <span className="mr-4 text-[clamp(1rem,2vw,1.25rem)]">Contact Us</span>
-        <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center ml-2 hover:bg-white group transition-all duration-300">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-5 h-5 text-white group-hover:text-black transition-transform duration-300 group-hover:translate-x-1"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-          </svg>
-        </div>
-      </button>
-    </div>
-
-  
-    <div className="mt-12 sm:mt-16">
-      <h3 className="text-[clamp(1.25rem,3vw,2rem)] font-bold text-gray-800 text-left">
-        EV Charging Solutions for Residential Sites and Businesses
-      </h3>
-      <div className="mt-4">
-        <p className="text-[clamp(1rem,2vw,1.125rem)] text-gray-600 leading-relaxed">
-          We’ll listen to your needs, identify the best approach, and then create a bespoke
-        </p>
-        <p className="text-[clamp(1rem,2vw,1.125rem)] text-gray-600 leading-relaxed">
-          smart EV charging solution that’s right for you.
-        </p>
-      </div>
-    </div>
-
-  </div>
-</div> */}
 
           
                 {/* Footer */}
@@ -674,7 +599,7 @@ const Fleet = () => {
           
                       <div className="text-3xl sm:text-5xl font-semibold text-gray-800">
                         <a
-                          href="mailto:enquiries@energy-park.co.uk"
+                          href="mailto:tgwbin@gmail.com"
                           className="relative inline-block hover:text-black-500"
                         >
                           <span className="hover:underline transition-all duration-300 mt-2">tgwbin@gmail.com</span>
@@ -689,12 +614,12 @@ const Fleet = () => {
                       {/* First Section - Experts and Client Portal */}
                       <div className="w-full sm:w-1/3 mb-8 sm:mb-0">
                         <h4 className="text-xl sm:text-xl font-semibold mb-4">
-                          Experts in smart EV charging solutions <br />
-                          for residential sites and businesses.
+                          Pioneers in smart EV charging solutions <br />
+                         
                         </h4>
           
                         <a
-                          href="/client-portal"
+                          href="#"
                           className="inline-flex items-center px-6 py-3 bg-black text-white font-semibold rounded-full transition-all duration-300 hover:bg-yellow-500 hover:text-black hover:scale-105"
                         >
                           <span>Client portal</span>
@@ -726,7 +651,7 @@ const Fleet = () => {
                             <li><a href="/solution" className="text-gray hover:underline text-lg">Solutions</a></li>
                             <li><a href="/contact" className="text-gray hover:underline text-lg">Contact</a></li>
                             <li><a href="/about" className="text-gray hover:underline text-lg">About</a></li>
-                            <li><a href="/solutions/home-and-housing-societies" className="text-gray hover:underline text-lg">Residents</a></li>
+                          
                           </ul>
                         </div>
           
@@ -746,9 +671,7 @@ const Fleet = () => {
                           <ul className="space-y-2">
                             <li><a href="/terms-conditions" className="text-gray hover:underline text-lg">Terms & Conditions</a></li>
                             <li><a href="/privacy-policy" className="text-gray hover:underline text-lg">Privacy Policy</a></li>
-                            <li><a href="#" className="text-gray hover:underline text-lg">Modern Slavery Policy</a></li>
-                            <li><a href="#" className="text-gray hover:underline text-lg">ESG Policy</a></li>
-                            <li><a href="#" className="text-gray hover:underline text-lg">Sustainability Policy</a></li>
+                           
                           </ul>
                         </div>
                       </div>
@@ -756,7 +679,7 @@ const Fleet = () => {
           
                     {/* Footer Bottom Section */}
                     <div className="text-center mt-8 text-lg lg:mr-300">
-                      <p>&copy; TransEv 2025. All Rights Reserved.</p>
+                      <p>&copy; TransEV 2025. All Rights Reserved.</p>
                     </div>
                   </footer>
                 </div>

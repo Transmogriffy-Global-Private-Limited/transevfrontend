@@ -15,15 +15,15 @@ import logos from '../assets/up.png'
 const newsArticles = [
   {
     id: 1,
-    title: "Energy Savers Week: How EV ownership can help you save energy and money",
+    title: "E-Rickshaws Drive EV Sales increase in West Bengal",
     date: "April 2, 2025",
-    description: "TransEv has launched a new renewable energy initiative, aiming to reduce carbon emissions and power thousands of homes with sustainable energy sources.",
+    description: "TransEV has launched a new renewable energy initiative, aiming to reduce carbon emissions and power thousands of homes with sustainable energy sources.",
     image: newsImage1,
     link: "/energy-savers-week-how-ev-ownership-can-help-you-save-energy-and-money"
   },
   {
     id: 2,
-    title: "EV charging explained: Everything you need to know to stay powered up",
+    title: "Electric vehicles make an impact: EV sales soar at the start of New Year",
     date: "March 28, 2025",
     description: "Scientists at Energy Park have developed a new solar technology that promises to boost the energy efficiency of solar panels by 20%, setting a new industry standard.",
     image: newsImage2,
@@ -31,7 +31,7 @@ const newsArticles = [
   },
   {
     id: 3,
-    title: "3 tips for getting the most out of your EV during the festive period",
+    title: "Kolkata to Get India’s Largest EV Charging Hub, Second Biggest Globally",
     date: "March 22, 2025",
     description: "A strategic partnership between Energy Park and GreenTech will expand the network of electric vehicle charging stations across the country.",
     image: newsImage3,
@@ -39,9 +39,9 @@ const newsArticles = [
   },
   {
     id: 4,
-    title: "The top 5 EV myths debunked",
+    title: "India world's largest 3 wheeler EV market - 2nd year in a row - factors behind driving the surge",
     date: "March 15, 2025",
-    description: "TransEv is exploring the possibility of constructing a large wind farm that could provide clean energy to thousands of homes.",
+    description: "TransEV is exploring the possibility of constructing a large wind farm that could provide clean energy to thousands of homes.",
     image: newsImage4,
     link: "/the-top-5-ev-myths-debunked"
   },
@@ -49,13 +49,13 @@ const newsArticles = [
     id: 5,
     title: "Inclusive EV Charging: PAS 1899 and the Future of Accessibility ",
     date: "March 10, 2025",
-    description: "TransEv has begun a new initiative to promote sustainable building practices in residential and commercial properties.",
+    description: "TransEV has begun a new initiative to promote sustainable building practices in residential and commercial properties.",
     image: newsImage5,
     link: "/making-ev-charging-accessible-for-all-a-look-at-pas-1899-and-the-future-of-inclusive-ev-infrastructure"
   },
   {
     id: 6,
-    title: "What to Consider When Installing EV Charging at an Apartment Building",
+    title: "India Leads Electric Three-Wheeler Market",
     date: "March 5, 2025",
     description: "A new smart grid technology is being implemented by Energy Park, which promises to enhance the efficiency of power distribution across cities.",
     image: newsImage6,
@@ -65,7 +65,7 @@ const newsArticles = [
     id: 7,
     title: "5 Reasons to Install EV Charge Points at your Apartment Building",
     date: "February 25, 2025",
-    description: "TransEv plans to expand its network of electric vehicle charging stations to 50 new locations nationwide.",
+    description: "TransEV plans to expand its network of electric vehicle charging stations to 50 new locations nationwide.",
     image: newsImage7,
     link: "/5-reasons-to-install-ev-charge-points-at-your-apartment-building"
   },
@@ -73,7 +73,7 @@ const newsArticles = [
     id: 8,
     title: "Solar Power Storage: The Future of Clean Energy",
     date: "February 20, 2025",
-    description: "TransEv is working on a new solar power storage solution that will help store excess energy generated during the day for use at night.",
+    description: "TransEV is working on a new solar power storage solution that will help store excess energy generated during the day for use at night.",
     image: newsImage8,
     link: "/solar-power-storage-the-future-of-clean-energy"
   },
@@ -81,7 +81,7 @@ const newsArticles = [
     id: 9,
     title: "TransEv’s Commitment to Sustainability",
     date: "February 15, 2025",
-    description: "TransEv is continuing its efforts to reduce its environmental impact and promote sustainability across all its operations.",
+    description: "TransEV is continuing its efforts to reduce its environmental impact and promote sustainability across all its operations.",
     image: newsImage9,
     link: "/trans-evs-commitment-to-sustainability"
   }
@@ -100,7 +100,7 @@ function NewsPage() {
       {/* Latest News Section */}
       <section className="py-16 px-4 md:px-16">
         <h1 className="text-4xl sm:text-5xl lg:text-9xl font-bold text-black mt-12">Latest news</h1>
-        <p className="mt-5 text-xl sm:text-2xl text-gray-500">All the latest news and articles from TransEv.</p>
+        <p className="mt-5 text-xl sm:text-2xl text-gray-500">All the latest news and articles from TransEV.</p>
       </section>
 
       <section className="px-4 md:px-16 py-10">
@@ -166,7 +166,7 @@ function NewsPage() {
       <div className="bg-white py-16 mt-10">
         <div className="container mx-auto flex justify-between items-center px-8">
           <div className="flex items-center space-x-4">
-            <img src={logos} alt="TransEv Logo" className="w-32 h-32" />
+            <img src={logos} alt="TransEV Logo" className="w-32 h-32" />
           </div>
 
           <div className="text-right">
@@ -191,10 +191,10 @@ function NewsPage() {
           {/* First Section */}
           <div className="w-full sm:w-1/3 mb-8 sm:mb-0">
             <h4 className="text-xl font-semibold mb-4">
-              Experts in smart EV charging solutions <br/>  for residential sites and businesses.
+             Pioneers in smart EV charging solutions <br/> 
             </h4>
             <a
-              href="/client-portal"
+              href="#"
               className="inline-flex items-center px-6 py-3 bg-black text-white font-semibold rounded-full transition-all duration-300 hover:bg-yellow-500 hover:text-black"
             >
               <span>Client portal</span>
@@ -224,7 +224,7 @@ function NewsPage() {
                 <li><a href="/solution" className="text-gray hover:underline">Solutions</a></li>
                 <li><a href="/contact" className="text-gray hover:underline">Contact</a></li>
                 <li><a href="/about" className="text-gray hover:underline">About</a></li>
-                <li><a href="/solutions/home-and-housing-societies" className="text-gray hover:underline">Residents</a></li>
+               
               </ul>
             </div>
 
@@ -242,9 +242,7 @@ function NewsPage() {
               <ul className="space-y-2">
                 <li><a href="/terms-conditions" className="text-gray hover:underline">Terms & Conditions</a></li>
                 <li><a href="/privacy-policy" className="text-gray hover:underline">Privacy Policy</a></li>
-                <li><a href="/modern-slavery-policy" className="text-gray hover:underline">Modern Slavery Policy</a></li>
-                <li><a href="/esg-policy" className="text-gray hover:underline">ESG Policy</a></li>
-                <li><a href="/sustainability-policy" className="text-gray hover:underline">Sustainability Policy</a></li>
+               
               </ul>
             </div>
           </div>
@@ -252,7 +250,7 @@ function NewsPage() {
 
         {/* Footer Bottom Section */}
         <div className="text-center mt-8 text-lg sm:mr-4 md:mr-8 lg:mr-16 xl:mr-300">
-  <p>&copy; TransEv 2025. All Rights Reserved.</p>
+  <p>&copy; TransEV 2025. All Rights Reserved.</p>
 </div>
 
       </footer>

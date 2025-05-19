@@ -90,16 +90,16 @@ const ContactPage = () => {
           {/* Left Content */}
           <div className="lg:w-1/2 flex flex-col space-y-6">
             <p className="text-xl md:text-2xl font-semibold text-gray-700">
-              If you have any questions or you'd like to find out more about our services, please get in touch.
+              If you have any question or you'd like to find out more about our services, please get in touch.
             </p>
 
             <div className="text-base md:text-lg">
               <h4 className="font-bold mb-2">Contact Details:</h4>
               <p className="text-gray-600 mb-2">Office Address:</p>
               <p className="text-gray-600 mb-2">
-                MANI CASADONA, UNIT - 10 ES06, IIF/04, STREET NO.372, ACTION AREA-11F, NEWTOWN, RAJARHAT, KOLKATA - 700156, WEST BENGAL, INDIA
+                MANI CASADONA, UNIT - 10ES6, IIF/04, STREET NO.372, ACTION AREA-IIF, NEWTOWN, RAJARHAT, KOLKATA - 700156, WEST BENGAL, INDIA
               </p>
-              <p className="text-gray-600 mb-2">Landmark: OPPOSITE ECOSPACE BUSINESS PARK</p>
+              <p className="text-gray-600 mb-2">LANDMARK: OPPOSITE ECOSPACE BUSINESS PARK</p>
               <p className="text-bold-900 mb-2">Tel: 033-4601 5366 / +91 79080 03488</p>
               <p className="text-bold-900">Email: <a href="mailto:tgwbin@gmail.com" className="underline">tgwbin@gmail.com</a></p>
             </div>
@@ -164,7 +164,7 @@ const ContactPage = () => {
 
               {/* Message Textarea */}
               <div className="mb-5">
-                <label htmlFor="message" className="block text-gray-900 font-medium mb-1">Please tell us a bit about your site*</label>
+                <label htmlFor="message" className="block text-gray-900 font-medium mb-1">Please tell us a bit about your requirements*</label>
                 <textarea
                   id="message"
                   value={formData.message}
@@ -244,8 +244,8 @@ const ContactPage = () => {
          {/* Left description */}
          <div className="lg:w-1/3">
            <h4 className="text-lg sm:text-xl font-semibold mb-4">
-             Experts in smart EV charging solutions<br />
-             for residential sites and businesses.
+            Pioneers in smart EV charging solutions<br />
+            
            </h4>
            <a
             href="#"
@@ -269,7 +269,7 @@ const ContactPage = () => {
               <li><a href="/solution" className="hover:underline">Solutions</a></li>
               <li><a href="/contact" className="hover:underline">Contact</a></li>
               <li><a href="/about" className="hover:underline">About</a></li>
-              <li><a href="/solutions/home-and-housing-societies" className="hover:underline">Residents</a></li>
+            
             </ul>
           </div>
 
@@ -289,10 +289,7 @@ const ContactPage = () => {
             <ul className="space-y-2 text-sm sm:text-base">
               <li><a href="/terms-conditions" className="hover:underline">Terms & Conditions</a></li>
               <li><a href="/privacy-policy" className="hover:underline">Privacy Policy</a></li>
-              <li><a href="#" className="hover:underline">Modern Slavery Policy</a></li>
-              <li><a href="#" className="hover:underline">  ESG Policy</a></li>
-            
-              <li><a href="#" className="hover:underline">Sustainability Policy</a></li>
+             
 
             </ul>
           </div>
@@ -301,7 +298,7 @@ const ContactPage = () => {
 
       {/* Bottom Line */}
       <div className="mt-10 text-center text-gray-500 text-sm sm:text-base">
-        <p>&copy; TransEv 2025. All Rights Reserved.</p>
+        <p>&copy; TransEV 2025. All Rights Reserved.</p>
       </div>
     </footer>
   </div>

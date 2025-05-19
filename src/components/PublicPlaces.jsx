@@ -59,12 +59,12 @@ const Hotels = () => {
     {
       question: "How much does it cost to install an EV charging station in a public space?",
       answer:
-        "The cost of installing an EV charging station in a public space varies based on factors like the type of charger (Level 2 or DC fast charger), the electrical infrastructure required, and the location. It's best to consult with an expert for a detailed quote based on your space and requirements.",
+        "The cost of installing an EV charging station in a public space varies based on factors like the type of charger, the electrical infrastructure required, and the location. You can connect with us for a detailed quote.",
     },
     {
       question: "What types of EV chargers are suitable for public spaces?",
       answer:
-        "For public spaces, we recommend Level 2 chargers, which offer a balance between speed and affordability. DC fast chargers are ideal for high-traffic areas where users may need to charge quickly, but they come with a higher installation cost.",
+        "DC fast chargers are ideal for high-traffic areas where users may need to charge quickly, but they come with a higher installation cost.",
     },
     {
       question: "Do I need to make my space accessible for EV chargers?",
@@ -74,7 +74,7 @@ const Hotels = () => {
     {
       question: "How can I monitor the usage of public charging stations?",
       answer:
-        "You can use an EV charger management platform that provides real-time monitoring, usage statistics, and payment tracking. These systems help you keep track of charging station activity and ensure smooth operation.",
+        "You can use our EV charger management platform that provides real-time monitoring, usage statistics, and payment tracking. Our systems help you keep track of charging station activity and ensure smooth operation.",
     },
     {
       question: "Are there any incentives for installing EV chargers in public spaces?",
@@ -184,21 +184,21 @@ const Hotels = () => {
   <div className="w-full lg:w-1/2 text-center lg:text-left">
   <h3 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-black mb-6 leading-tight">
     Attract visitors with <br />
-    convenient EV charge point <br />
+    convenient EV charging <br />
     access in public spaces.
   </h3>
 </div>
 
 
   {/* Right side - Explore Link */}
-  <div className="w-full lg:w-1/2 text-center lg:text-right mt-6 lg:mt-20">
+  {/* <div className="w-full lg:w-1/2 text-center lg:text-right mt-6 lg:mt-20">
     <a href="#explore" className="text-lg sm:text-xl lg:text-2xl font-semibold text-black-500 hover:underline inline-flex items-center justify-center lg:justify-end">
       Explore
       <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 sm:w-6 sm:h-6 text-black-500 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
       </svg>
     </a>
-  </div>
+  </div> */}
 
 </section>
 
@@ -223,14 +223,7 @@ const Hotels = () => {
         We take care of the<br /> details so you don't <br /> have to worry.
         </h2>
     
-        <p className="text-base sm:text-lg md:text-xl font-semibold text-gray-700 mb-6 mt-20">
-          <a
-            href="/contact"
-            className="text-black hover:underline hover:text-blue-800 "
-          >
-            Ready to get started? Contact us
-          </a>
-        </p>
+       
     
         {/* Content Sections */}
         <div className="text-gray-400 space-y-10 mb-20">
@@ -252,10 +245,18 @@ const Hotels = () => {
             </h3>
             <p className="text-base sm:text-lg font-semibold">
             Every public space is unique with different visitor needs, so we create a
-            tailored solution that fits the specific requirements of your location.
-            Whether it's the size of the space, the number of visitors, or future plans for expansion, we’ll help you choose the best EV charging solution for your public place.
+            tailored solution that fits the specific requirements of the location.
+            Whether it's the size of the space, the footfall, or future plans for expansion, we’ll help you choose the best EV charging solution for the location.
             </p>
           </div>
+           <p className="text-base sm:text-lg md:text-xl font-semibold text-gray-700 mb-6 mt-20">
+          <a
+            href="/contact"
+            className="text-blue-900 hover:underline hover:text-green-800 "
+          >
+            Ready to get started? Contact us
+          </a>
+        </p>
         </div>
       </div>
     
@@ -279,7 +280,7 @@ const Hotels = () => {
     <div className="w-full lg:w-1/2 text-center lg:text-left px-4">
       <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold mb-4">
         Take a look at the products we can <br />
-        install at your hotel for charging
+        install for public spaces.
       </h2>
     </div>
 
@@ -289,7 +290,7 @@ const Hotels = () => {
   
      <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-gray-700 mb-6">
    
-    We offer a range of compatible charge points suitable for Public Places
+    We offer a range of compatible charge points for public spaces.
 
   </h2>
 </div>
@@ -491,26 +492,20 @@ const Hotels = () => {
 {[
   {
     number: "01",
-    title: " Cost-efficient solutions ",
-    desc: "   We offer property owners fully funded solutions with no upfront capital required, ensuring cost-free installation for you and your residents.",
-    img: image3,
-  },
-  {
-    number: "02",
     title: "Proactive support ",
     desc: "   We work closely with you throughout the entire process, offering expert guidance to ensure the EV charging infrastructure meets your unique needs and goals.",
     img: image4,
   },
   {
-    number: "03",
-    title: " A fully managed service",
-    desc: "  We take care of all ongoing operations, eliminating the need for you to manage day-to-day tasks or invest in additional resources.",
+    number: "02",
+    title: " Effortless management",
+    desc: "  We take care of all ongoing operations, eliminating the need for you to micromanage the infrastructure.",
     img: image5,
   },
    {
-    number: "04",
+    number: "03",
     title: " Future-proof designs",
-    desc: "TransEv installation is thoughtfully designed by our in-house design team to support rising EV ownership and evolving energy needs.",
+    desc: "Each TransEV installation is thoughtfully designed by our in-house design team to support rising EV ownership and evolving energy needs.",
     img: hotels,
   },
   
@@ -669,19 +664,7 @@ const Hotels = () => {
                  </div>
      
                  {/* Description */}
-                 <div className="mt-16 sm:mt-20 md:mt-24 lg:mt-15 xl:mt-40 px-4 sm:px-6 lg:px-8">
-  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 text-left">
-    EV Charging Solutions for Residential Sites and Businesses
-  </h3>
-  <div className="mt-4 sm:mt-6">
-    <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-      We’ll listen to your needs, identify the best approach, and then create a bespoke
-    </p>
-    <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-      smart EV charging solution that’s right for you.
-    </p>
-  </div>
-</div>
+            
 </div>
 </div>
 </div>
@@ -706,7 +689,7 @@ const Hotels = () => {
      
                  <div className="text-3xl sm:text-5xl font-semibold text-gray-800">
                    <a
-                     href="mailto:enquiries@energy-park.co.uk"
+                     href="mailto:tgwbin@gmail.com"
                      className="relative inline-block hover:text-black-500"
                    >
                      <span className="hover:underline transition-all duration-300 mt-2">tgwbin@gmail.com</span>
@@ -721,12 +704,12 @@ const Hotels = () => {
                  {/* First Section - Experts and Client Portal */}
                  <div className="w-full sm:w-1/3 mb-8 sm:mb-0">
                    <h4 className="text-xl sm:text-xl font-semibold mb-4">
-                     Experts in smart EV charging solutions <br />
-                     for residential sites and businesses.
+                    Pioneers in smart EV charging solutions <br />
+                     
                    </h4>
      
                    <a
-                     href="/client-portal"
+                     href="#"
                      className="inline-flex items-center px-6 py-3 bg-black text-white font-semibold rounded-full transition-all duration-300 hover:bg-yellow-500 hover:text-black hover:scale-105"
                    >
                      <span>Client portal</span>
@@ -758,7 +741,7 @@ const Hotels = () => {
                        <li><a href="/solution" className="text-gray hover:underline text-lg">Solutions</a></li>
                        <li><a href="/contact" className="text-gray hover:underline text-lg">Contact</a></li>
                        <li><a href="/about" className="text-gray hover:underline text-lg">About</a></li>
-                       <li><a href="/solutions/home-and-housing-societies" className="text-gray hover:underline text-lg">Residents</a></li>
+                   
                      </ul>
                    </div>
      
@@ -778,9 +761,7 @@ const Hotels = () => {
                      <ul className="space-y-2">
                        <li><a href="/terms-conditions" className="text-gray hover:underline text-lg">Terms & Conditions</a></li>
                        <li><a href="/privacy-policy" className="text-gray hover:underline text-lg">Privacy Policy</a></li>
-                       <li><a href="/modern-slavery-policy" className="text-gray hover:underline text-lg">Modern Slavery Policy</a></li>
-                       <li><a href="/esg-policy" className="text-gray hover:underline text-lg">ESG Policy</a></li>
-                       <li><a href="/sustainability-policy" className="text-gray hover:underline text-lg">Sustainability Policy</a></li>
+                       
                      </ul>
                    </div>
                  </div>
@@ -788,7 +769,7 @@ const Hotels = () => {
      
                {/* Footer Bottom Section */}
                <div className="text-center mt-8 text-lg lg:mr-300">
-                 <p>&copy; TransEv 2025. All Rights Reserved.</p>
+                 <p>&copy; TransEV 2025. All Rights Reserved.</p>
                </div>
              </footer>
            </div>

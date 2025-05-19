@@ -46,7 +46,12 @@ import logo1 from '../assets/logo1.png';
 import red from '../assets/red.png';
 import slid from '../assets/slid.png';
 import { FaArrowRight } from 'react-icons/fa';
-import logos from '../assets/up.png'
+import logos from '../assets/up.png';
+import Thunder from '../assets/Thunder.gif';
+import c1 from '../assets/c4.png';
+import c3 from '../assets/c3.png';
+import c4 from '../assets/c1.png';
+import c5 from '../assets/cc1.png';
 function HomePage() {
   const navigate = useNavigate();
   const [hovered, setHovered] = useState(null);
@@ -80,13 +85,11 @@ const handlePopupClose = () => {
 
 
   const handleBuyNowClick = () => {
-    // Handle login or any other logic for "Buy Now"
-    // Redirecting to login page for now (you can change this logic based on your app)
+  
     window.location.href = '/login'; // Redirect to login page
   };
-  // const containerRef = useRef(null);
-  // const imageSources = [slider1, slider2, slider3, slider4, slider5, slider6];
-  const sliderImages = [red,slider2, slider5, newslide, slider4, slid];
+  
+  const sliderImages = [red,c1, c3, c5,c4, slid];
   const smallImages = [eo,zaptec, easee, ctek, garo, schneider];
   
   
@@ -141,13 +144,13 @@ const handlePopupClose = () => {
   };
   const handleSectionClick = (section) => {
     // Navigate to the corresponding page based on the section clicked
-    if (section === 'Home and Housing Societies') {
+    if (section === 'Homes & Housing') {
       navigate('/solutions/home-and-housing-societies'); // Navigate to a specific route for Apartment buildings
-    } else if (section === 'Office and Workplace') {
+    } else if (section === 'Workplaces') {
       navigate('/solutions/office-and-workplace');
     } else if (section === 'Public Places') {
       navigate('/solutions/public-places');
-    } else if (section === 'Fleet Organizations') {
+    } else if (section === 'Fleets') {
       navigate('/solutions/fleet-organization');
     }
   };
@@ -214,12 +217,26 @@ const totalDuration = slideDuration * totalSlides; // total animation cycle
         
         <h1 className="font-aeonik text-4xl sm:text-5xl md:text-6xl lg:text-8xl leading-tight tracking-wide">
           <div>
-            <span>Unleash the Power,</span>{' '}
-            <span className="text-white-500">Charge</span>
-          </div>
-          <div className="pl-[0.1em]">
-            <span className="text-white-300">Beyond</span> Boundaries
-          </div>
+            <span></span>{' '}
+           
+       <div className="text-white font-semibold ml-2.5">
+  {/* Top Line: Charge + Icon */}
+  <div className="inline-flex items-center text-4xl sm:text-6xl md:text-8xl lg:text-8xl">
+    Charge
+    <img
+      src={Thunder}
+      alt="Charger"
+      className="ml-2 h-[1em] w-auto object-contain align-middle"
+    />
+  </div>
+
+  {/* Bottom Line: Beyond Boundaries */}
+  <div className="mt-2 text-4xl sm:text-6xl md:text-8xl lg:text-8xl">
+    Beyond <span className="text-white">Boundaries</span>
+  </div>
+</div>
+
+</div>
         </h1>
 
         {/* Button */}
@@ -245,31 +262,12 @@ const totalDuration = slideDuration * totalSlides; // total animation cycle
 
         </div>
 
-        {/* Paragraph */}
-      <p className="text-3xl sm:text-2xl md:text-6xl lg:text-4xl xl:text-5xl text-white mt-8 text-center sm:text-left">
-          <span className="block mb-2 sm:mb-4">Powering peace of mind</span>
-          <span className="block mb-2 sm:mb-4">through tailored EV charging</span>
-          <span className="block mb-4 sm:mb-8">solutions.</span>
-          <span className="text-xl text-white cursor-pointer inline-flex items-center mt-4 sm:mt-0 ml-670 sm:ml-8 md:ml-670 lg:ml-400 justify-end">
-    Explore
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-6 h-6 ml-3 text-white"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M19 15l-7 7-7-7"
-      />
-    </svg>
-  </span>
+      
+       {/* <p className="text-3xl sm:text-2xl md:text-6xl lg:text-4xl xl:text-5xl text-white mt-8 text-center sm:text-left">
+          <span className="block mb-2 sm:mb-4">Custom EV Solutions</span>
+        
 
-        </p>  
-    
+        </p>  */}
 
 
       </div>
@@ -281,11 +279,13 @@ const totalDuration = slideDuration * totalSlides; // total animation cycle
 
 <div className="flex flex-col lg:flex-row justify-between p-8 sm:p-16 mt-10 bg-white">
   <div className="w-full lg:w-2/3 pr-8 mb-8 lg:mb-0"> {/* Added padding-right and margin-bottom for spacing */}
-    <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal leading-tight max-w-screen-lg mx-auto">
-      Future-proof your residential <br />
-      site or business with our <br />
-      <span className="font-normal">scalable EV charging solutions.</span>
-    </h2>
+    
+    <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal font-aeonik leading-tight max-w-screen-lg mx-auto">
+  Be Ready <br />
+  For the Future with our <br />
+  <span className="font-normal">scalable EV charging solutions.</span>
+</h2>
+
   </div>
   
   <div className="w-full lg:w-1/4">
@@ -298,16 +298,16 @@ const totalDuration = slideDuration * totalSlides; // total animation cycle
  <div className="p-16">
  
   <h3 className="text-2xl font-bold text-left">
-    Charging solutions for
+    We provide charging solutions for:
   </h3>
 </div>
  
  <div className="space-y-0 bg-white pl-4 pr-4 sm:pl-8 sm:pr-8">
   {[
-    'Home and Housing Societies',
-    'Office and Workplace',
+    'Homes & Housing',
+    'Workplaces',
     'Public Places',
-    'Fleet Organizations',
+    'Fleets',
   ].map((section, index) => (
     <div
       key={index}
@@ -482,13 +482,10 @@ const totalDuration = slideDuration * totalSlides; // total animation cycle
     {/* Pair 2 */}
     <div className="pair pair-2 absolute top-0 left-0">
       <h2 className="text-xl sm:text-xl md:text-xl font-bold animate-slide-up-text  whitespace-nowrap">
-        Ongoing management and maintenance
+        Effortless management and maintenance
       </h2>
       <p className="text-base sm:text-lg md:text-lg mt-4 animate-slide-up-text max-w-full md:max-w-[95%] xl:max-w-[700px]">
-        We can take care of all ongoing operations, including 
-        maintenance and customer service, so there's no need for your 
-        day-to-day involvement.
-      </p>
+We provide effortless management and maintainance, so you can focus on what matters most      </p>
     </div>
 
     {/* Pair 3 */}
@@ -497,16 +494,15 @@ const totalDuration = slideDuration * totalSlides; // total animation cycle
         Leaders in residential EV charging solutions
       </h2>  */}
     <h2 className="text-xl sm:text-xl md:text-xl font-bold animate-slide-up-text  whitespace-nowrap">
-  Leaders in residential EV charging <br/>solutions
+  Pioneers in residential EV charging <br/>solutions
 </h2>
 
 
 
       <p className="text-base sm:text-lg md:text-lg mt-4 animate-slide-up-text max-w-full md:max-w-[95%] xl:max-w-[700px]">
-        Backed  Charging Infrastructure 
-        Investment Fund (CIIF), Energy Park brings you a team of highly 
-        trained professionals.
-      </p>
+        TransEV brings you a team of highly 
+        trained professionals. Stay easy knowing that your charging infrastructure is in reliable hands.
+        </p>
     </div>
   </div>
 </div>
@@ -584,8 +580,11 @@ const totalDuration = slideDuration * totalSlides; // total animation cycle
   Smart EV Charging Solutions
 </h2>
 <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl xl:text-7xl font-aeonik mt-2 lg:mt-4">
-  For residential sites and businesses
+  For residentials, businesses, and more
 </h2>
+{/* <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl xl:text-7xl font-aeonik mt-2 lg:mt-4">
+ & more
+</h2> */}
 
 
 
@@ -621,12 +620,19 @@ const totalDuration = slideDuration * totalSlides; // total animation cycle
  
 <div className="mt-20 sm:mt-32 lg:mt-40 text-right px-4 sm:px-8 md:px-16 mb-10">
   <div>
-    <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-aeonik leading-tight">
-      We Offer a range of charge
-    </h3>
-    <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl xl:text-7xl font-aeonik mt-2 sm:mt-4 mr-35">
-      Points to choose from.
-    </h3>
+  
+<div className="text-center sm:text-left">
+  <h3 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-aeonik leading-tight">
+    We Offer a range of charge
+  </h3>
+
+  <h3 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-aeonik mt-2 sm:mt-4 leading-snug">
+    Points to choose from.
+  </h3>
+</div>
+
+
+
   </div>
 </div>
 
@@ -857,14 +863,14 @@ const totalDuration = slideDuration * totalSlides; // total animation cycle
     We Partner With the best.
   </div> */}
 <div class="text-xl sm:text-xl md:text-2xl lg:text-5xl font-aeonik font-bold mb-4 sm:mb-0 mr-10 text-center sm:text-left">
-  We Partner With the Best.
+  We Partner Big
 </div>
 
  
   <div class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-aeonik text-center sm:text-left">
-    Working with leading
-    <span class="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl mt-2">equipment manufacturers gives</span>
-    <span class="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl mt-2">us access to a wide range of</span>
+    Working with manufacturers
+    <span class="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl mt-2">who are ahead of the curve</span>
+    <span class="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl mt-2">gives us access to a wide range of</span>
     <span class="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl mt-2">hardware solutions.</span>
   </div>
 </div>
@@ -945,29 +951,9 @@ const totalDuration = slideDuration * totalSlides; // total animation cycle
      
     </div>
 
-    {/* Right Section */}
-   <div className="mt-6 pb-8 px-4">
-  {/* Heading Section */}
-  <div className="flex flex-wrap justify-between">
-    
-    <div className="text-xl sm:text-2xl lg:text-2xl font-aeonik text-left font-semibold mr-0 sm:mr-40 lg:mr-140">
-      <h2>
-        EV Charging Solutions for Residential Sites and Businesses
-      </h2>
-    </div>
-  </div>
-
-  {/* Description Section */}
-  
-  <div className="mt-4 sm:mt-6 lg:mt-8 text-xl text-left text-gray-500 font-aeonik">
-  We work with a select group of leading equipment manufacturers, <br />
-  so we have access to a wide range of hardware solutions. <br />
-  This means we can always find the best fit for your project.
+ 
 </div>
-
-</div>
-</div>
-</div>
+</div> 
 
 
 <div className="w-full h-screen bg-white flex justify-center items-center mt-10 sm:mt-20 md:mt-30 lg:mt-40">
@@ -1004,20 +990,7 @@ const totalDuration = slideDuration * totalSlides; // total animation cycle
 </div>
 
 
-      {/* Description */}
-      <div className="mt-16 sm:mt-20 md:mt-24 lg:mt-15 xl:mt-40 px-4 sm:px-6 lg:px-8">
-  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 text-left">
-    EV Charging Solutions for Residential Sites and Businesses
-  </h3>
-  <div className="mt-4 sm:mt-6">
-    <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-      We’ll listen to your needs, identify the best approach, and then create a bespoke
-    </p>
-    <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-      smart EV charging solution that’s right for you.
-    </p>
-  </div>
-</div>
+     
 </div>
 </div>
 </div>
@@ -1044,7 +1017,7 @@ const totalDuration = slideDuration * totalSlides; // total animation cycle
 
       <div className="text-3xl sm:text-5xl font-semibold text-gray-800">
         <a
-          href="mailto:enquiries@energy-park.co.uk"
+          href="mailto:tgwbin@gmail.com"
           className="relative inline-block hover:text-black-500"
         >
           <span className="hover:underline transition-all duration-300 mt-2 ">tgwbin@gmail.com</span>
@@ -1061,8 +1034,7 @@ const totalDuration = slideDuration * totalSlides; // total animation cycle
     {/* First Section - Experts and Client Portal */}
     <div className="w-full sm:w-1/3 mb-8 sm:mb-0">
       <h4 className="text-xl sm:text-xl font-semibold mb-4">
-        Experts in smart EV charging solutions <br />
-        for residential sites and businesses.
+        Pioneers in smart EV charging solutions <br />
       </h4>
 
       <a
@@ -1098,7 +1070,6 @@ const totalDuration = slideDuration * totalSlides; // total animation cycle
           <li><a href="/solution" className="text-gray hover:underline text-lg">Solutions</a></li>
           <li><a href="/contact" className="text-gray hover:underline text-lg">Contact</a></li>
           <li><a href="/about" className="text-gray hover:underline text-lg">About</a></li>
-          <li><a href="/solutions/home-and-housing-societies" className="text-gray hover:underline text-lg">Residents</a></li>
         </ul>
       </div>
 
@@ -1118,9 +1089,6 @@ const totalDuration = slideDuration * totalSlides; // total animation cycle
         <ul className="space-y-2">
           <li><a href="/terms-conditions" className="text-gray hover:underline text-lg">Terms & Conditions</a></li>
           <li><a href="/privacy-policy" className="text-gray hover:underline text-lg">Privacy Policy</a></li>
-          <li><a href="#" className="text-gray hover:underline text-lg">Modern Slavery Policy</a></li>
-          <li><a href="#" className="text-gray hover:underline text-lg">ESG Policy</a></li>
-          <li><a href="#" className="text-gray hover:underline text-lg">Sustainability Policy</a></li>
         </ul>
       </div>
     </div>
@@ -1130,7 +1098,7 @@ const totalDuration = slideDuration * totalSlides; // total animation cycle
   <div className="text-center mt-8 text-lg lg:mr-300">
  
 
-    <p>&copy; TransEv 2025. All Rights Reserved.</p>
+    <p>&copy; TransEV 2025. All Rights Reserved.</p>
   </div>
 </footer>
 </div>

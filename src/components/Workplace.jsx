@@ -59,17 +59,17 @@ const Workplace = () => {
     {
       question: "What types of EV charging solutions are available for businesses?",
       answer:
-        "There are diverse range of chargers available. Below are details. Public Chargers: Accessible to all EV owners with investment done by TransEv Semi-Public Chargers: Available to specific groups like employees or residents at places such as workplaces, hotels, and apartment complexes.Captive Chargers: Dedicated to specific customers with charger purchased by the customers. The charger can be onboarded on the Tata Power EZ Charge App against a charge.",
+        "There are diverse range of chargers available. Contact us to know more about the best solution for your business. You can also check above for more details.",
     },
     {
       question: " What is the process for installing EV charging stations at my business?",
       answer:
-        "Customers can fill out our lead form with the required details, which are then forwarded to the relevant team members. Our team will promptly reach out to discuss and propose suitable solutions based on your specific requirements. ",
+        "Customers can reach out to us through our 'Contact Us' porrtal with the required details, which would then be forwarded to the relevant team members. Our team will promptly reach out to discuss and propose suitable solutions based on your specific requirements. ",
     },
     {
       question: "How long does the installation process take?",
       answer:
-        "It depends on the location & type of solution chosen. Generally it takes 6-8 weeks.",
+        "It very much depends on the location & type of solution chosen. Generally it may take about 6-8 weeks.",
     },
     {
       question: "What are the costs associated with installing and maintaining EV charging stations?",
@@ -79,7 +79,7 @@ const Workplace = () => {
     {
       question: "What kind of support and maintenance services are available for business charging stations?",
       answer:
-        "TransEV has a 24-hour call center. Customers can call 18008332233 for support or email for maintenance services.",
+        "We are open to listen 24/7. Customers can call 033-4601-5366 for support or email for maintenance services.",
     },
   ];
 
@@ -177,14 +177,7 @@ const Workplace = () => {
   </div>
 
   {/* Right Side - Button/Link */}
-  <div className="w-full lg:w-1/2 text-left lg:text-right mt-6 lg:mt-0">
-    <a href="#explore" className="text-lg sm:text-xl md:text-2xl font-semibold text-black-500 hover:underline inline-flex items-center">
-      Explore
-      <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 sm:w-6 sm:h-6 text-black-500 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-      </svg>
-    </a>
-  </div>
+  
 
 </section>
 
@@ -209,14 +202,7 @@ const Workplace = () => {
       We’ll identify and <br /> install the best <br /> solution for you.
     </h2>
 
-    <p className="text-base sm:text-lg md:text-xl font-semibold text-gray-700 mb-6 mt-20">
-      <a
-        href="/contact"
-        className="text-black hover:underline hover:text-blue-800 "
-      >
-        Ready to get started? Contact us
-      </a>
-    </p>
+   
 
     {/* Content Sections */}
     <div className="text-gray-400 space-y-10 mb-20">
@@ -234,7 +220,7 @@ const Workplace = () => {
 
       <div>
         <h3 className="text-lg sm:text-xl font-semibold text-black mb-2">
-          A funded solution
+          Customized Solutions
         </h3>
         <p className="text-base sm:text-lg font-semibold">
           No two organisations’ EV charge point requirements are the same,
@@ -243,6 +229,14 @@ const Workplace = () => {
           plans to upscale in the future.
         </p>
       </div>
+       <p className="text-base sm:text-lg md:text-xl font-semibold text-gray-700 mb-6 mt-20">
+      <a
+        href="/contact"
+        className="text-blue-800 hover:underline hover:text-green-800 "
+      >
+        Ready to get started? Contact us
+      </a>
+    </p>
     </div>
   </div>
 
@@ -269,10 +263,10 @@ const Workplace = () => {
 
     <div className="w-full sm:w-2/3 lg:w-1/2 text-center sm:text-left mt-8 sm:mt-0 mx-auto lg:ml-0">
   <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-7xl font-semibold text-gray-800 mb-4 max-w-full">
-    <span className="whitespace-nowrap block">Charge Points suitable for</span>
-    <span className="whitespace-nowrap block">workplaces and accessible </span>
-    <span className="whitespace-nowrap block"> to all electric vehicle</span>
-    <span className="whitespace-nowrap block">drivers.</span>
+    <span className="whitespace-nowrap block">Accessible chargepoints</span>
+    {/* <span className="whitespace-nowrap block">Suitable</span> */}
+    <span className="whitespace-nowrap block"> Across Organizations</span>
+    {/* <span className="whitespace-nowrap block">drivers.</span> */}
   </h2>
 </div>  
 </div>
@@ -654,19 +648,7 @@ const Workplace = () => {
                </div>
    
                
-   <div className="mt-16 sm:mt-20 md:mt-24 lg:mt-15 xl:mt-40 px-4 sm:px-6 lg:px-8">
-  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 text-left">
-    EV Charging Solutions for Residential Sites and Businesses
-  </h3>
-  <div className="mt-4 sm:mt-6">
-    <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-      We’ll listen to your needs, identify the best approach, and then create a bespoke
-    </p>
-    <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-      smart EV charging solution that’s right for you.
-    </p>
-  </div>
-</div>
+  
 </div>
 </div>
 </div>
@@ -691,7 +673,7 @@ const Workplace = () => {
    
                <div className="text-3xl sm:text-5xl font-semibold text-gray-800">
                  <a
-                   href="mailto:enquiries@energy-park.co.uk"
+                   href="mailto:tgwbin@gmail.com"
                    className="relative inline-block hover:text-black-500"
                  >
                    <span className="hover:underline transition-all duration-300 mt-2">tgwbin@gmail.com</span>
@@ -706,12 +688,12 @@ const Workplace = () => {
                {/* First Section - Experts and Client Portal */}
                <div className="w-full sm:w-1/3 mb-8 sm:mb-0">
                  <h4 className="text-xl sm:text-xl font-semibold mb-4">
-                   Experts in smart EV charging solutions <br />
-                   for residential sites and businesses.
+                 Pioneers in smart EV charging solutions <br />
+                   
                  </h4>
    
                  <a
-                   href="/client-portal"
+                   href="#"
                    className="inline-flex items-center px-6 py-3 bg-black text-white font-semibold rounded-full transition-all duration-300 hover:bg-yellow-500 hover:text-black hover:scale-105"
                  >
                    <span>Client portal</span>
@@ -743,7 +725,7 @@ const Workplace = () => {
                      <li><a href="/solution" className="text-gray hover:underline text-lg">Solutions</a></li>
                      <li><a href="/contact" className="text-gray hover:underline text-lg">Contact</a></li>
                      <li><a href="/about" className="text-gray hover:underline text-lg">About</a></li>
-                     <li><a href="/solutions/home-and-housing-societies" className="text-gray hover:underline text-lg">Residents</a></li>
+                    
                    </ul>
                  </div>
    
@@ -763,9 +745,7 @@ const Workplace = () => {
                    <ul className="space-y-2">
                      <li><a href="/terms-conditions" className="text-gray hover:underline text-lg">Terms & Conditions</a></li>
                      <li><a href="/privacy-policy" className="text-gray hover:underline text-lg">Privacy Policy</a></li>
-                     <li><a href="/modern-slavery-policy" className="text-gray hover:underline text-lg">Modern Slavery Policy</a></li>
-                     <li><a href="/esg-policy" className="text-gray hover:underline text-lg">ESG Policy</a></li>
-                     <li><a href="/sustainability-policy" className="text-gray hover:underline text-lg">Sustainability Policy</a></li>
+                    
                    </ul>
                  </div>
                </div>
@@ -773,7 +753,7 @@ const Workplace = () => {
    
              {/* Footer Bottom Section */}
              <div className="text-center mt-8 text-lg lg:mr-300">
-               <p>&copy; TransEv 2025. All Rights Reserved.</p>
+               <p>&copy; TransEV 2025. All Rights Reserved.</p>
              </div>
            </footer>
          </div>

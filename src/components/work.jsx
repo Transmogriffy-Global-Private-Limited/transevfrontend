@@ -161,14 +161,14 @@ useEffect(() => {
   
   
   {/* Right side - Explore Link */}
-  <div className="w-full lg:w-1/2 text-center lg:text-right mt-6 lg:mt-20">
+  {/* <div className="w-full lg:w-1/2 text-center lg:text-right mt-6 lg:mt-20">
     <a href="#explore" className="text-lg sm:text-xl lg:text-2xl font-semibold text-black-500 hover:underline inline-flex items-center justify-center lg:justify-end">
       Explore
       <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 sm:w-6 sm:h-6 text-black-500 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
       </svg>
     </a>
-  </div>
+  </div> */}
   
   </section>
       
@@ -189,14 +189,14 @@ useEffect(() => {
   <div className="flex flex-col lg:flex-row justify-between mt-20 lg:mt-40 px-4 sm:px-8 lg:px-20 gap-10">
   
   {/* Left Side */}
-  <div className="w-full lg:w-1/2 text-xl">
+  <div className="w-full lg:w-1/2 text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
     <p className="font-semibold text-gray-800">How we work:</p>
   </div>
 
   {/* Right Side */}
   <div className="w-full lg:w-1/2 px-4 sm:px-6 lg:px-0 text-center lg:text-left text-2xl sm:text-3xl lg:text-5xl font-bold leading-snug">
   <p>
-    We’ll always be on hand to <br />
+    We’ll  be on hand to <br />
     manage and maintain the <br />
     charge points on your behalf, <br />
     and we’ll be there to install <br />
@@ -423,7 +423,7 @@ useEffect(() => {
     <p className="text-base sm:text-lg mt-4 animate-slide-up-text w-full max-w-[600px] text-gray-600">
       Our experienced team will listen carefully to the requirements <br />
       of your end-users and what you’re looking to achieve by <br />
-      installing EV charge points.
+      installing EV charger points.
     </p>
   </div>
 
@@ -432,18 +432,15 @@ useEffect(() => {
     <h2 className="text-xl sm:text-2xl font-bold animate-slide-up-text">We Do Our Research</h2>
     <p className="text-base sm:text-lg mt-4 animate-slide-up-text w-full max-w-[600px] text-gray-600">
       Our team will carry out a full site visit and complete a review of <br />
-      the electricity supply to calculate the capacity available for <br />
-      charge points.
+      the amenities and resources to evaluate for the charging infrastructure
     </p>
   </div>
 
   {/* Third */}
   <div className="pair pair-3 relative lg:absolute top-0 left-0 mb-16 lg:mb-0">
-    <h2 className="text-xl sm:text-2xl font-bold animate-slide-up-text">We Create a Bespoke Design</h2>
+    <h2 className="text-xl sm:text-2xl font-bold animate-slide-up-text">We Create a Customised Approach</h2>
     <p className="text-base sm:text-lg mt-4 animate-slide-up-text w-full max-w-[600px] text-gray-600">
-      Based on our conversations and site visit, we’ll create a <br />
-      scheme design that meets the needs of your site and end- <br />
-      users.
+      Based on our conversations and site visit, we’ll go forward with a flexible approach that aims to meet the needs of your site and end-users.
     </p>
   </div>
 </div>
@@ -523,9 +520,7 @@ useEffect(() => {
     <div className="flex flex-col items-start px-4 sm:px-8 lg:p-16 mt-10">
   {/* Main heading */}
   <h2 className="text-3xl sm:text-5xl lg:text-7xl font-aeonik mb-8 leading-tight">
-  We follow a 6-step process to <br className="hidden sm:block" />
-  guide you through your EV <br className="hidden sm:block" />
-  journey.
+ The Journey from consulation to installation can be grouped into roughly 6 steps:
 </h2>
 
 
@@ -535,17 +530,17 @@ useEffect(() => {
       {
         step: "01",
         title: "Consultancy",
-        desc: "We listen to your objectives and understand your residents’ needs.",
+        desc: "We listen to your objectives and understand your needs.",
       },
       {
         step: "02",
         title: "Survey and scheme design",
-        desc: "We carry out a detailed site survey and create a bespoke plan tailored to your needs.",
+        desc: "We carry out a detailed site survey and create a flexible approach tailored to your needs.",
       },
       {
         step: "03",
         title: "Installation",
-        desc: "We project manage the charge point installation, liaising with sub-contractors on your behalf.",
+        desc: "We project manage the charge point installation.",
       },
       {
         step: "04",
@@ -610,20 +605,7 @@ useEffect(() => {
                         </button>
                       </div>
           
-                      {/* Description */}
-                      <div className="mt-16 sm:mt-20 md:mt-24 lg:mt-15 xl:mt-40 px-4 sm:px-6 lg:px-8">
-  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 text-left">
-    EV Charging Solutions for Residential Sites and Businesses
-  </h3>
-  <div className="mt-4 sm:mt-6">
-    <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-      We’ll listen to your needs, identify the best approach, and then create a bespoke
-    </p>
-    <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-      smart EV charging solution that’s right for you.
-    </p>
-  </div>
-</div>
+                 
 </div>
 </div>
 </div>
@@ -649,7 +631,7 @@ useEffect(() => {
           
                       <div className="text-3xl sm:text-5xl font-semibold text-gray-800">
                         <a
-                          href="mailto:enquiries@energy-park.co.uk"
+                          href="mailto:tgwbin@gmail.com"
                           className="relative inline-block hover:text-black-500"
                         >
                           <span className="hover:underline transition-all duration-300 mt-2">tgwbin@gmail.com</span>
@@ -664,8 +646,8 @@ useEffect(() => {
                       {/* First Section - Experts and Client Portal */}
                       <div className="w-full sm:w-1/3 mb-8 sm:mb-0">
                         <h4 className="text-xl sm:text-xl font-semibold mb-4">
-                          Experts in smart EV charging solutions <br />
-                          for residential sites and businesses.
+                          Pioneers in smart EV charging solutions <br />
+                       
                         </h4>
           
                         <a
@@ -701,7 +683,7 @@ useEffect(() => {
                             <li><a href="/solution" className="text-gray hover:underline text-lg">Solutions</a></li>
                             <li><a href="/contact" className="text-gray hover:underline text-lg">Contact</a></li>
                             <li><a href="/about" className="text-gray hover:underline text-lg">About</a></li>
-                            <li><a href="/solutions/home-and-housing-societies" className="text-gray hover:underline text-lg">Residents</a></li>
+                         
                           </ul>
                         </div>
           
@@ -721,9 +703,7 @@ useEffect(() => {
                           <ul className="space-y-2">
                             <li><a href="/terms-conditions" className="text-gray hover:underline text-lg">Terms & Conditions</a></li>
                             <li><a href="/privacy-policy" className="text-gray hover:underline text-lg">Privacy Policy</a></li>
-                            <li><a href="#" className="text-gray hover:underline text-lg">Modern Slavery Policy</a></li>
-                            <li><a href="#" className="text-gray hover:underline text-lg">ESG Policy</a></li>
-                            <li><a href="#" className="text-gray hover:underline text-lg">Sustainability Policy</a></li>
+                            
                           </ul>
                         </div>
                       </div>
@@ -731,7 +711,7 @@ useEffect(() => {
           
                     {/* Footer Bottom Section */}
                     <div className="text-center mt-8 text-lg lg:mr-300">
-                      <p>&copy; TransEv 2025. All Rights Reserved.</p>
+                      <p>&copy; TransEV 2025. All Rights Reserved.</p>
                     </div>
                   </footer>
                 </div>

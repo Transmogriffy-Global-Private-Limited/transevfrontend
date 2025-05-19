@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import slide1 from '../assets/slide2.jpg';
+import slide1 from '../assets/c4.png';
 import slide2 from '../assets/ev_charger.jpg';
-import slide3 from '../assets/slide1.jpg';
-import slide4 from '../assets/slide5.jpg';
-import about1 from '../assets/slide4.jpg';
-import about2 from '../assets/slide1.jpg';
+import slide3 from '../assets/public.png';
+import slide4 from '../assets/c3.png';
+import about1 from '../assets/c2.png';
+import about2 from '../assets/imagee2.jpg';
 import logos from '../assets/up.png';
 
 function Navbar() {
@@ -118,11 +118,8 @@ function Navbar() {
                 About Us
               </Link>
             </div>
-<div onMouseEnter={() => setPopupType(null)}>
-              <Link to="/industrialsupport" className="hover:underline">
-              Industrial Support
-              </Link>
-            </div>
+
+           
             <div onMouseEnter={() => setPopupType(null)}>
               <Link to="/news" className="hover:underline">
                 News
@@ -273,9 +270,9 @@ function Navbar() {
           >
             About Us
           </div>
-            <Link to="/industrialsupport" className="hover:underline">
+            {/* <Link to="/industrialsupport" className="hover:underline">
            Industrial Support
-          </Link>
+          </Link> */}
           <Link to="/news" className="hover:underline">
             News
           </Link>

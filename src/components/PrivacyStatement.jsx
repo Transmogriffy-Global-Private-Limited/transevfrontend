@@ -2,13 +2,14 @@
 import React from "react";
 import Navbar from "../components/Navbar"; // Import the Navbar
 import logo from '../assets/transev logo.png';
+import logos from '../assets/up.png'
 const PrivacyPolicy = () => {
   return (
     <div className="bg-gray-50 min-h-screen flex flex-col">
       <Navbar /> {/* Add Navbar */}
 
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-4xl mx-auto my-6">
-        <h1 className="text-4xl font-semibold text-center text-gray-900 mb-6">
+        <h1 className="text-4xl font-semibold text-center text-gray-900 mb-6 mt-20">
           Privacy Policy
         </h1>
 
@@ -137,7 +138,7 @@ const PrivacyPolicy = () => {
     
     {/* Logo Section */}
     <div className="flex items-center space-x-4 mb-6 sm:mb-0">
-      <img src={logo} alt="Company Logo" className="w-32 h-32" />
+      <img src={logos} alt="Company Logo" className="w-32 h-32" />
     </div>
 
     {/* Contact Section */}
@@ -153,7 +154,7 @@ const PrivacyPolicy = () => {
 
       <div className="text-3xl sm:text-5xl font-semibold text-gray-800">
         <a
-          href="mailto:enquiries@energy-park.co.uk"
+          href="mailto:tgwbin@gmail.com"
           className="relative inline-block hover:text-black-500"
         >
           <span className="hover:underline transition-all duration-300 mt-2 ">tgwbin@gmail.com</span>
@@ -167,12 +168,12 @@ const PrivacyPolicy = () => {
           {/* First Section - Experts and Client Portal */}
           <div className="w-full sm:w-1/3 mb-8 sm:mb-0">
             <h4 className="text-xl sm:text-xl font-semibold mb-4">
-              Experts in smart EV charging solutions <br />
-              for residential sites and businesses.
+              Pioneers in smart EV charging solutions <br />
+              
             </h4>
 
             <a
-              href="/client-portal"
+              href="#"
               className="inline-flex items-center px-6 py-3 bg-black text-white font-semibold rounded-full transition-all duration-300 hover:bg-yellow-500 hover:text-black hover:scale-105"
             >
               <span>Client portal</span>
@@ -204,7 +205,7 @@ const PrivacyPolicy = () => {
                 <li><a href="/solution" className="text-gray hover:underline text-lg">Solutions</a></li>
                 <li><a href="/contact" className="text-gray hover:underline text-lg">Contact</a></li>
                 <li><a href="/careers" className="text-gray hover:underline text-lg">Careers</a></li>
-                <li><a href="/solutions/home-and-housing-societies" className="text-gray hover:underline text-lg">Residents</a></li>
+             
               </ul>
             </div>
 
@@ -224,9 +225,7 @@ const PrivacyPolicy = () => {
               <ul className="space-y-2">
                 <li><a href="/terms-conditions" className="text-gray hover:underline text-lg">Terms & Conditions</a></li>
                 <li><a href="/privacy-policy" className="text-gray hover:underline text-lg">Privacy Policy</a></li>
-                <li><a href="/modern-slavery-policy" className="text-gray hover:underline text-lg">Modern Slavery Policy</a></li>
-                <li><a href="/esg-policy" className="text-gray hover:underline text-lg">ESG Policy</a></li>
-                <li><a href="/sustainability-policy" className="text-gray hover:underline text-lg">Sustainability Policy</a></li>
+             
               </ul>
             </div>
           </div>
@@ -234,7 +233,7 @@ const PrivacyPolicy = () => {
 
         {/* Footer Bottom Section */}
         <div className="text-center mt-8 text-lg lg:mr-300">
-          <p>&copy; TransEv 2025. All Rights Reserved.</p>
+          <p>&copy; TransEV 2025. All Rights Reserved.</p>
         </div>
       </footer>
     </div>

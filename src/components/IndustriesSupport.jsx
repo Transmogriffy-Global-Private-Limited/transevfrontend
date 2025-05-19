@@ -39,7 +39,7 @@ const IndustrialSupport = () => {
       {/* Industry Solutions Section */}
       <section className="py-20 px-10 bg-gradient-to-r from-blue-100 via-blue-50 to-white">
         <h2 className="text-4xl font-semibold text-gray-800 text-center mb-12">
-          We provide solutions for industries
+          Our Other Solutions:
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -153,20 +153,8 @@ const IndustrialSupport = () => {
                     </button>
                   </div>
       
-                  {/* Description */}
-                  <div className="mt-16 sm:mt-20 md:mt-24 lg:mt-15 xl:mt-40 px-4 sm:px-6 lg:px-8">
-        <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 text-left">
-          EV Charging Solutions for Residential Sites and Businesses
-        </h3>
-        <div className="mt-4 sm:mt-6">
-          <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-            We’ll listen to your needs, identify the best approach, and then create a bespoke
-          </p>
-          <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-            smart EV charging solution that’s right for you.
-          </p>
-        </div>
-      </div>
+                
+     
       </div>
       </div>
       </div>
@@ -206,12 +194,12 @@ const IndustrialSupport = () => {
                   {/* First Section - Experts and Client Portal */}
                   <div className="w-full sm:w-1/3 mb-8 sm:mb-0">
                     <h4 className="text-xl sm:text-xl font-semibold mb-4">
-                      Experts in smart EV charging solutions <br />
-                      for residential sites and businesses.
+                     Pioneers in smart EV charging solutions <br />
+                 
                     </h4>
       
                     <a
-                      href="/client-portal"
+                      href="#"
                       className="inline-flex items-center px-6 py-3 bg-black text-white font-semibold rounded-full transition-all duration-300 hover:bg-yellow-500 hover:text-black hover:scale-105"
                     >
                       <span>Client portal</span>
@@ -243,7 +231,7 @@ const IndustrialSupport = () => {
                         <li><a href="/solution" className="text-gray hover:underline text-lg">Solutions</a></li>
                         <li><a href="/contact" className="text-gray hover:underline text-lg">Contact</a></li>
                         <li><a href="/about" className="text-gray hover:underline text-lg">About</a></li>
-                        <li><a href="/solutions/home-and-housing-societies" className="text-gray hover:underline text-lg">Residents</a></li>
+                       
                       </ul>
                     </div>
       
@@ -263,9 +251,7 @@ const IndustrialSupport = () => {
                       <ul className="space-y-2">
                         <li><a href="/terms-conditions" className="text-gray hover:underline text-lg">Terms & Conditions</a></li>
                         <li><a href="/privacy-policy" className="text-gray hover:underline text-lg">Privacy Policy</a></li>
-                        <li><a href="/modern-slavery-policy" className="text-gray hover:underline text-lg">Modern Slavery Policy</a></li>
-                        <li><a href="/esg-policy" className="text-gray hover:underline text-lg">ESG Policy</a></li>
-                        <li><a href="/sustainability-policy" className="text-gray hover:underline text-lg">Sustainability Policy</a></li>
+                       
                       </ul>
                     </div>
                   </div>
@@ -273,7 +259,7 @@ const IndustrialSupport = () => {
       
                 {/* Footer Bottom Section */}
                 <div className="text-center mt-8 text-lg lg:mr-300">
-                  <p>&copy; TransEv 2025. All Rights Reserved.</p>
+                  <p>&copy; TransEV 2025. All Rights Reserved.</p>
                 </div>
               </footer>
             </div>

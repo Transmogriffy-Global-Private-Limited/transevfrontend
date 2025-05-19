@@ -52,17 +52,16 @@ Facilitating fairer,more  <br />
 <h4 
   className="text-[30px] sm:text-[35px] md:text-[40px] lg:text-[50px] font-aeonik mt-[40px] sm:mt-[60px] md:mt-[80px] lg:mt-[120px] leading-tight text-center sm:text-left lg:ml-11"
 >
-  <span className="inline-block sm:mr-2 lg:mr-4">Setting the standard for</span><br />
-  <span className="inline-block">EV charging in residential</span><br />
-  <span className="inline-block sm:mr-2 lg:mr-12">locations.</span>
+  <span className="inline-block sm:mr-2 lg:mr-4">Striving to make</span><br />
+  <span className="inline-block">EV charging</span><br />
+  <span className="inline-block sm:mr-2 lg:mr-12">fairer and accessible.</span>
 </h4>
 
 
 
 
 <div className="text-center sm:text-right mt-8 flex items-center justify-center sm:justify-end mb-10">
-  <span className="text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px] mr-2">Explore</span>
-  <FaArrowDown className="text-[16px] sm:text-[20px] md:text-[25px] lg:text-[30px] text-gray-800 animate-bounce" />
+
 </div>
 
  <section
@@ -90,16 +89,16 @@ Facilitating fairer,more  <br />
 
 
     <p className="text-base sm:text-lg md:text-xl text-gray-500 mb-6 lg:mb-12">
-      At TransEv, we believe EV ownership should be an option for everyone, regardless of where you live.
+      At TransEV, we believe EV ownership should be an option for everyone, regardless of where you live.
     </p>
     <p className="text-base sm:text-lg md:text-xl text-gray-500 mb-6 lg:mb-12">
-      But today, due to the challenges of getting EV charging infrastructure into communal car parks, residents of apartment buildings often have no access to EV charging facilities at home, or they’re paying higher public charging rates.
+      But today, due to the challenges of getting EV charging infrastructure into communal car parks, residents of apartment buildings often have no access to EV charging facilities at home.
     </p>
     <p className="text-base sm:text-lg md:text-xl text-gray-500 mb-6 lg:mb-12">
-      So, we’re on a mission to change things by rolling out our funded EV charging solutions in the communal car parks of apartment buildings across the UK.
+      We aim to change that. With our services, we aim to promote and make EV charging more accessible, leading to a greater EV uptake hopefully a greener future.
     </p>
     <p className="text-base sm:text-lg md:text-xl text-gray-500 lg:mb-12">
-      And if you own an EV, we think you should also have access to reliable EV charging facilities when you’re staying away from home, so we also want to improve charge point access at holiday parks and hotels.
+      And if you own an EV, we think you should also have access to reliable EV charging facilities when you’re staying away from home, so we also want to improve charge point across spaces as well.
     </p>
   </div>
 
@@ -137,30 +136,30 @@ Facilitating fairer,more  <br />
 
     <Link to="/how-we-work">
       <h4 className="text-xl sm:text-2xl font-bold text-gray-800 mb-10 lg:mb-20 group cursor-pointer inline-block lg:ml-60">
-        How we do it
+        Want to know how? Find out.
         <span className="block h-[2px] bg-gray-800 mt-2 w-full"></span>
       </h4>
     </Link>
    
-    {/* Paragraph 1 */}
-    <p className="text-xl text-gray-500 mb-6 sm:mb-8 lg:ml-20">
+
+    {/* <p className="text-xl text-gray-500 mb-6 sm:mb-8 lg:ml-20">
       <span className="font-medium text-gray-500">For <span className="font-medium text-black">residential landlords</span>, we remove many of the financial and</span> <br />
       <span className="font-medium text-gray-500 ">operational barriers to large-scale EV infrastructure investment by</span> <br />
       <span className="font-medium text-gray-500 ">offering a fully funded, maintained, and managed EV charging solution.</span>
     </p>
 
-    {/* Paragraph 2 */}
+
     <p className="text-xl text-gray-700 mb-6 sm:mb-8 lg:ml-20">
       <span className="font-medium text-gray-500 ">Our funded solutions are financed by the Charging Infrastructure</span> <br />
       <span className="font-medium text-gray-500 ">Investment Fund (CIIF), which is sponsored by the UK Government.</span>
     </p>
 
-    {/* Paragraph 3 */}
+  
     <p className="text-xl text-gray-700 ml-4 sm:ml-8 lg:ml-20 ">
       <span className="font-medium text-gray-500 ml-2">For <span className="font-medium text-black">destination operators</span>, we offer smart EV charging solutions that</span> <br />
       <span className="font-medium text-gray-500 ">meet the growing demand for reliable EV charging facilities at hotels</span> <br />
       <span className="font-medium text-gray-500 mr-10"> and holiday parks.</span>
-    </p>
+    </p> */}
 
   </div>
 </section>
@@ -171,7 +170,7 @@ Facilitating fairer,more  <br />
     <div className="text-left">
       <h2 className="text-3xl font-bold text- mb-4">Our Mission</h2>
       <p className="text-lg text-gray-700">
-        Promoting the adoption of green technology and contributing to the growth of society by providing sustainable energy solutions. Also, it aspires to play an instrumental role in reducing pollution in the country by encouraging the use of Electric Vehicles.
+        Promoting the adoption of green technology and contributing to the growth of society by providing sustainable energy solutions. Also, we aspire to play an instrumental role in reducing pollution in the country by encouraging the use of Electric Vehicles.
       </p>
     </div>
     <div className="flex justify-center">
@@ -235,7 +234,7 @@ Facilitating fairer,more  <br />
 
         {/* Right Side - Why People Love Us */}
         <div className="text-left">
-          <h3 className="text-6xl font-bold text-black mb-8">Why TransEv?</h3>
+          <h3 className="text-6xl font-bold text-black mb-8">Why TransEV?</h3>
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8">
             <div className="flex items-center space-x-3">
               <FaBolt className="text-yellow-500 text-3xl" />
@@ -260,7 +259,7 @@ Facilitating fairer,more  <br />
 
 <section className="py-20 px-10 bg-gradient-to-r from-blue-100 via-blue-50 to-white">
 
-<h2 className="text-4xl font-semibold text-gray-800 text-center mb-12"> We provide solutions for industries</h2>
+<h2 className="text-4xl font-semibold text-gray-800 text-center mb-12"> Our other solutions</h2>
 
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
 
@@ -398,31 +397,8 @@ Facilitating fairer,more  <br />
                </div>
    
                
-   {/* <div className="mt-16 sm:mt-20 md:mt-24 lg:mt-15 xl:mt-40 px-4 sm:px-6 lg:px-8">
-  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 text-left">
-    EV Charging Solutions for Residential Sites and Businesses
-  </h3>
-  <div className="mt-4 sm:mt-6 lg:mr-12 max-w-3xl">
-  <p className="text-base sm:text-lg text-gray-600 leading-relaxed whitespace-nowrap">
-    We’ll listen to your needs, identify the best approach, and then create a bespoke
-  </p>
-  <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-    smart EV charging solution that’s right for you.
-  </p>
-</div> */}
-  <div className="mt-16 sm:mt-20 md:mt-24 lg:mt-15 xl:mt-40 px-4 sm:px-6 lg:px-8">
-  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 text-left">
-    EV Charging Solutions for Residential Sites and Businesses
-  </h3>
-  <div className="mt-4 sm:mt-6">
-    <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-      We’ll listen to your needs, identify the best approach, and then create a bespoke
-    </p>
-    <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-      smart EV charging solution that’s right for you.
-    </p>
-  </div>
-</div>
+   
+  
 </div>
 </div>
 </div>
@@ -447,7 +423,7 @@ Facilitating fairer,more  <br />
           
                       <div className="text-3xl sm:text-5xl font-semibold text-gray-800">
                         <a
-                          href="mailto:enquiries@energy-park.co.uk"
+                          href="mailto:tgwbin@gmail.com"
                           className="relative inline-block hover:text-black-500"
                         >
                           <span className="hover:underline transition-all duration-300 mt-2">tgwbin@gmail.com</span>
@@ -462,12 +438,12 @@ Facilitating fairer,more  <br />
                       {/* First Section - Experts and Client Portal */}
                       <div className="w-full sm:w-1/3 mb-8 sm:mb-0 ">
                         <h4 className="text-xl sm:text-xl font-semibold mb-4">
-                          Experts in smart EV charging solutions <br />
-                          for residential sites and businesses.
+                         Pioneers in smart EV charging solutions <br />
+                        
                         </h4>
           
                         <a
-                          href="/client-portal"
+                          href="#"
                           className="inline-flex items-center px-6 py-3 bg-black text-white font-semibold rounded-full transition-all duration-300 hover:bg-yellow-500 hover:text-black hover:scale-105"
                         >
                           <span>Client portal</span>
@@ -499,7 +475,7 @@ Facilitating fairer,more  <br />
                             <li><a href="/solution" className="text-gray hover:underline text-lg">Solutions</a></li>
                             <li><a href="/contact" className="text-gray hover:underline text-lg">Contact</a></li>
                             <li><a href="/about" className="text-gray hover:underline text-lg">About</a></li>
-                            <li><a href="/solutions/home-and-housing-societies" className="text-gray hover:underline text-lg">Residents</a></li>
+                        
                           </ul>
                         </div>
           
@@ -519,9 +495,7 @@ Facilitating fairer,more  <br />
                           <ul className="space-y-2">
                             <li><a href="/terms-conditions" className="text-gray hover:underline text-lg">Terms & Conditions</a></li>
                             <li><a href="/privacy-policy" className="text-gray hover:underline text-lg">Privacy Policy</a></li>
-                            <li><a href="/modern-slavery-policy" className="text-gray hover:underline text-lg">Modern Slavery Policy</a></li>
-                            <li><a href="/esg-policy" className="text-gray hover:underline text-lg">ESG Policy</a></li>
-                            <li><a href="/sustainability-policy" className="text-gray hover:underline text-lg">Sustainability Policy</a></li>
+                           
                           </ul>
                         </div>
                       </div>
@@ -529,7 +503,7 @@ Facilitating fairer,more  <br />
           
                     {/* Footer Bottom Section */}
                     <div className="text-center mt-8 text-lg lg:mr-300">
-                      <p>&copy; TransEv 2025. All Rights Reserved.</p>
+                      <p>&copy; TransEV 2025. All Rights Reserved.</p>
                     </div>
                   </footer>
                 </div>

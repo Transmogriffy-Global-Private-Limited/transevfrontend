@@ -6,7 +6,7 @@ import useCase2 from '../assets/holiday.jpg';
 import useCase3 from '../assets/hotels.jpg'; 
 import useCase4 from '../assets/workplace.jpg'; 
 import logo from '../assets/transev logo.png'; // Assuming you have a logo image
-
+import logos from '../assets/up.png'
 function SolutionsPage() {
   const navigate = useNavigate();
   const [hovered, setHovered] = useState(null); // Track which image is hovered
@@ -114,7 +114,7 @@ useEffect(() => {
     {/* Left Side: Logo */}
     <div className="flex justify-center md:justify-start">
       <img
-        src={logo}
+        src={logos}
         alt="Company Logo"
         className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32"
       />
@@ -136,7 +136,7 @@ useEffect(() => {
       {/* Email */}
       <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-gray-800">
         <a
-          href="mailto:enquiries@energy-park.co.uk"
+          href="mailto:tgwbin@gmail.com"
           className="hover:text-black transition-all duration-300"
         >
           <span className="hover:underline ">tgwbin@gmail.com</span>
@@ -157,8 +157,8 @@ useEffect(() => {
     <div className="flex flex-col md:flex-row justify-between items-center md:items-start">
       <div className="w-full md:w-1/3 text-center md:text-left mb-6 md:mb-0">
         <h4 className="text-xl font-semibold mb-4">
-          Experts in smart EV charging solutions <br />
-          for residential sites and businesses.
+          Pioneers in smart EV charging solutions <br />
+        
         </h4>
 
         {/* Client Portal Button */}
@@ -226,7 +226,7 @@ useEffect(() => {
     </div>
 
     <div className="flex justify-center items-center mt-8 text-lg lg:mr-[1060px]">
-  <p>&copy; TransEv 2025. All Rights Reserved.</p>
+  <p>&copy; TransEV 2025. All Rights Reserved.</p>
 </div>
 
 
