@@ -28,6 +28,7 @@ import AC02P7 from '../assets/AC02P7.4.png';
 import AC02WCH from '../assets/AC02WC&H.png';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import logos from '../assets/up.png'
 const ApartmentBuildingPage = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [hovered, setHovered] = useState(null);
@@ -51,17 +52,17 @@ const ApartmentBuildingPage = () => {
     {
       question: "What is the process for installing a Community EV charger?",
       answer:
-        "The association at the housing society or the admin team at the workplace can raise a request on the Tata Power website. Tata Power installs compatible EV chargers. Various business models, including zero capex, are available for customers to choose from.",
+        "The association at the housing society or the admin team at the workplace can raise a request on the TransEV website. TransEv installs compatible EV chargers. Various business models, including zero capex, are available for customers to choose from.",
     },
     {
       question: "How long does it take to charge an EV at home?",
       answer:
-        "Charging time depends on the charger speed and battery size of the car. For example, a 30kWh vehicle with a 7.4kW charger generally takes 4 hours to charge..",
+        "Charging time depends on the charger speed and battery size of the car. For example, a 30kWh vehicle with a 7.4kW charger generally takes 4 hours to charge.",
     },
     {
       question: "What are the costs associated with installing and using a Community EV charger?",
       answer:
-        "The cost of the various models of offering community charges differs depending on the business model chosen. In the capex model, the customer procures the charger and related infrastructure. In the opex model, Tata Power incurs all expenses related to the charger and power infrastructure. .",
+        "The cost of the various models of offering community charges differs depending on the business model chosen. In the capex model, the customer procures the charger and related infrastructure. In the opex model, TransEV incurs all expenses related to the charger and power infrastructure. ",
     },
     {
       question: "Can multiple residents in a housing society share EV charging stations?",
@@ -76,17 +77,17 @@ const ApartmentBuildingPage = () => {
     {
       question: "How do I monitor the electricity consumption of my Community EV charger?",
       answer:
-        "All community EV chargers are hosted on the Tata Power EZ Charge App, and charging fees is automatically debited from the wallet..",
+        "All community EV chargers are hosted on the TransEV EZ Charge App, and charging fees is automatically debited from the wallet.",
     },
     {
       question: "What safety measures should I take when charging my EV at home?",
       answer:
-        "Tata Power ensures all necessary safety measures and compliance with state guidelines during deployment. ",
+        "TransEV ensures all necessary safety measures and compliance with state guidelines during deployment. ",
     },
     {
       question: "Who do I contact for support or maintenance of my Community EV charger?",
       answer:
-        "Tata Power has a 24-hour call center. Customers can call 18008332233 for support or email for maintenance services.  ",
+        "TransEV has a 24-hour call center. Customers can call 18008332233 for support or email for maintenance services.  ",
     },
   ];
 
@@ -796,7 +797,7 @@ const ApartmentBuildingPage = () => {
         <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center px-8">
           {/* Logo Section */}
           <div className="flex items-center space-x-4 mb-6 sm:mb-0">
-            <img src={logo} alt="Company Logo" className="w-32 h-32" />
+            <img src={logos} alt="Company Logo" className="w-32 h-32" />
           </div>
 
           {/* Contact Section */}
@@ -884,9 +885,9 @@ const ApartmentBuildingPage = () => {
                 <ul className="space-y-2">
                   <li><a href="/terms-conditions" className="text-gray hover:underline text-lg">Terms & Conditions</a></li>
                   <li><a href="/privacy-policy" className="text-gray hover:underline text-lg">Privacy Policy</a></li>
-                  <li><a href="/modern-slavery-policy" className="text-gray hover:underline text-lg">Modern Slavery Policy</a></li>
-                  <li><a href="/esg-policy" className="text-gray hover:underline text-lg">ESG Policy</a></li>
-                  <li><a href="/sustainability-policy" className="text-gray hover:underline text-lg">Sustainability Policy</a></li>
+                  <li><a href="#" className="text-gray hover:underline text-lg">Modern Slavery Policy</a></li>
+                  <li><a href="#" className="text-gray hover:underline text-lg">ESG Policy</a></li>
+                  <li><a href="#" className="text-gray hover:underline text-lg">Sustainability Policy</a></li>
                 </ul>
               </div>
             </div>

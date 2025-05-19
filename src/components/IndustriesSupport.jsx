@@ -3,11 +3,15 @@ import { FaPlus, FaMinus } from "react-icons/fa";
 import Navbar from './Navbar';
 import { Link } from "react-router-dom";
 import logo from '../assets/transev logo.png';
+import { useNavigate } from 'react-router-dom';
+import logos from '../assets/up.png'
 const IndustrialSupport = () => {
+    const navigate = useNavigate();
   const [activeIndex, setActiveIndex] = useState(null);
  const handleContactClick = () => {
     navigate('/contact');
   };
+
   return (
     <div className="min-h-screen bg-gray-50">
      
@@ -171,7 +175,7 @@ const IndustrialSupport = () => {
               <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center px-8">
                 {/* Logo Section */}
                 <div className="flex items-center space-x-4 mb-6 sm:mb-0">
-                  <img src={logo} alt="Company Logo" className="w-32 h-32" />
+                  <img src={logos} alt="Company Logo" className="w-32 h-32" />
                 </div>
       
                 {/* Contact Section */}

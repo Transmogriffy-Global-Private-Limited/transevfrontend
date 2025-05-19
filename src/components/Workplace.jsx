@@ -36,6 +36,7 @@ import DC04G60 from '../assets/DC04G60.png';
 import DC04G150 from '../assets/DC04G150.png';
 import { useNavigate } from 'react-router-dom';
  import { useEffect } from 'react';
+ import logos from '../assets/up.png'
 const Workplace = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [hovered, setHovered] = useState(null);
@@ -78,7 +79,7 @@ const Workplace = () => {
     {
       question: "What kind of support and maintenance services are available for business charging stations?",
       answer:
-        "Tata Power has a 24-hour call center. Customers can call 18008332233 for support or email for maintenance services.",
+        "TransEV has a 24-hour call center. Customers can call 18008332233 for support or email for maintenance services.",
     },
   ];
 
@@ -674,7 +675,7 @@ const Workplace = () => {
            <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center px-8">
              {/* Logo Section */}
              <div className="flex items-center space-x-4 mb-6 sm:mb-0">
-               <img src={logo} alt="Company Logo" className="w-32 h-32" />
+               <img src={logos} alt="Company Logo" className="w-32 h-32" />
              </div>
    
              {/* Contact Section */}

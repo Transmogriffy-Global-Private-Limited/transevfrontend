@@ -76,7 +76,7 @@ function OrderHistoryPage() {
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-yellow-100 via-green-200 to-teal-100 bg-cover bg-center bg-fixed">
+    <div className="min-h-screen bg-gradient-to-r from-yellow-50 via-green-50 to-white-100 bg-cover bg-center bg-fixed">
       <UserNavbar onToggleSidebar={toggleSidebar} />
       <div className="flex flex-1">
         <UserSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />

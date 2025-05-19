@@ -11,7 +11,7 @@ import newsImage6 from '../assets/slide6.jpg';
 import newsImage7 from '../assets/new.jpg';  
 import newsImage8 from '../assets/new4.png';  
 import newsImage9 from '../assets/image.png';  
-
+import logos from '../assets/up.png'
 const newsArticles = [
   {
     id: 1,
@@ -47,7 +47,7 @@ const newsArticles = [
   },
   {
     id: 5,
-    title: "Making EV Charging Accessible for All: A Look at PAS 1899 and the Future of Inclusive EV Infrastructure ",
+    title: "Inclusive EV Charging: PAS 1899 and the Future of Accessibility ",
     date: "March 10, 2025",
     description: "TransEv has begun a new initiative to promote sustainable building practices in residential and commercial properties.",
     image: newsImage5,
@@ -166,7 +166,7 @@ function NewsPage() {
       <div className="bg-white py-16 mt-10">
         <div className="container mx-auto flex justify-between items-center px-8">
           <div className="flex items-center space-x-4">
-            <img src={logo} alt="TransEv Logo" className="w-32 h-32" />
+            <img src={logos} alt="TransEv Logo" className="w-32 h-32" />
           </div>
 
           <div className="text-right">

@@ -3,6 +3,7 @@ import Navbar from './Navbar';
 import logo from '../assets/transev logo.png';
 import contactImage from '../assets/office.png';
  import { useEffect } from 'react';
+ import logos from '../assets/up.png'
 const BASE_URL_AND_PORT = "http://192.168.0.106:8000";
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
 
@@ -216,7 +217,7 @@ const ContactPage = () => {
           <div className="flex flex-col lg:flex-row justify-between items-center">
             {/* Left Side: Logo */}
             <div className="flex items-center space-x-4 mb-8 lg:mb-0">
-              <img src={logo} alt="Company Logo" className="w-32 h-32" />
+              <img src={logos} alt="Company Logo" className="w-32 h-32" />
             </div>
 
             {/* Right Side: Phone and Email */}
@@ -247,7 +248,7 @@ const ContactPage = () => {
              for residential sites and businesses.
            </h4>
            <a
-            href="/client-portal"
+            href="#"
             className="inline-flex items-center px-6 py-3 bg-black text-white font-semibold rounded-full hover:bg-yellow-500 hover:text-black transition-all duration-300 mt-6"
           >
             <span>Client portal</span>
@@ -267,7 +268,7 @@ const ContactPage = () => {
             <ul className="space-y-2 text-sm sm:text-base">
               <li><a href="/solution" className="hover:underline">Solutions</a></li>
               <li><a href="/contact" className="hover:underline">Contact</a></li>
-              <li><a href="/careers" className="hover:underline">Careers</a></li>
+              <li><a href="/about" className="hover:underline">About</a></li>
               <li><a href="/solutions/home-and-housing-societies" className="hover:underline">Residents</a></li>
             </ul>
           </div>
@@ -288,10 +289,10 @@ const ContactPage = () => {
             <ul className="space-y-2 text-sm sm:text-base">
               <li><a href="/terms-conditions" className="hover:underline">Terms & Conditions</a></li>
               <li><a href="/privacy-policy" className="hover:underline">Privacy Policy</a></li>
-              <li><a href="/modern-slavery-policy" className="hover:underline">Modern Slavery Policy</a></li>
-              <li><a href="/modern-slavery-policy" className="hover:underline">  ESG Policy</a></li>
+              <li><a href="#" className="hover:underline">Modern Slavery Policy</a></li>
+              <li><a href="#" className="hover:underline">  ESG Policy</a></li>
             
-              <li><a href="/modern-slavery-policy" className="hover:underline">Sustainability Policy</a></li>
+              <li><a href="#" className="hover:underline">Sustainability Policy</a></li>
 
             </ul>
           </div>

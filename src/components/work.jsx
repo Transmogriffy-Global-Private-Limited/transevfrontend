@@ -24,6 +24,7 @@ import holiday from '../assets/holiday.jpg'
 import imageslide from '../assets/charge.jpg';
 import new3 from '../assets/new3.jpg';
 import { useNavigate } from 'react-router-dom';
+import logos from '../assets/up.png'
 const Work = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [hovered, setHovered] = useState(null);
@@ -632,7 +633,7 @@ useEffect(() => {
                   <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center px-8">
                     {/* Logo Section */}
                     <div className="flex items-center space-x-4 mb-6 sm:mb-0">
-                      <img src={logo} alt="Company Logo" className="w-32 h-32" />
+                      <img src={logos} alt="Company Logo" className="w-32 h-32" />
                     </div>
           
                     {/* Contact Section */}
@@ -668,7 +669,7 @@ useEffect(() => {
                         </h4>
           
                         <a
-                          href="/client-portal"
+                          href="#"
                           className="inline-flex items-center px-6 py-3 bg-black text-white font-semibold rounded-full transition-all duration-300 hover:bg-yellow-500 hover:text-black hover:scale-105"
                         >
                           <span>Client portal</span>
@@ -720,9 +721,9 @@ useEffect(() => {
                           <ul className="space-y-2">
                             <li><a href="/terms-conditions" className="text-gray hover:underline text-lg">Terms & Conditions</a></li>
                             <li><a href="/privacy-policy" className="text-gray hover:underline text-lg">Privacy Policy</a></li>
-                            <li><a href="/modern-slavery-policy" className="text-gray hover:underline text-lg">Modern Slavery Policy</a></li>
-                            <li><a href="/esg-policy" className="text-gray hover:underline text-lg">ESG Policy</a></li>
-                            <li><a href="/sustainability-policy" className="text-gray hover:underline text-lg">Sustainability Policy</a></li>
+                            <li><a href="#" className="text-gray hover:underline text-lg">Modern Slavery Policy</a></li>
+                            <li><a href="#" className="text-gray hover:underline text-lg">ESG Policy</a></li>
+                            <li><a href="#" className="text-gray hover:underline text-lg">Sustainability Policy</a></li>
                           </ul>
                         </div>
                       </div>

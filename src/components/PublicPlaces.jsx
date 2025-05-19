@@ -35,6 +35,7 @@ import DC04G150 from '../assets/DC04G150.png';
 import AC03w from '../assets/AC03w.png';
  import { useEffect } from 'react';
  import { useNavigate } from 'react-router-dom';
+ import logos from '../assets/up.png'
 const Hotels = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [hovered, setHovered] = useState(null);
@@ -689,7 +690,7 @@ const Hotels = () => {
              <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center px-8">
                {/* Logo Section */}
                <div className="flex items-center space-x-4 mb-6 sm:mb-0">
-                 <img src={logo} alt="Company Logo" className="w-32 h-32" />
+                 <img src={logos} alt="Company Logo" className="w-32 h-32" />
                </div>
      
                {/* Contact Section */}

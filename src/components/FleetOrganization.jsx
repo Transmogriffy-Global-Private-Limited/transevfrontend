@@ -27,6 +27,7 @@ import DC04W from '../assets/DC04W.png';
 import DC04G60 from '../assets/DC04G60.png';
 import DC04G150 from '../assets/DC04G150.png';
 import { useNavigate } from 'react-router-dom';
+import logos from '../assets/up.png'
 const Fleet = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [hovered, setHovered] = useState(null);
@@ -50,12 +51,12 @@ const Fleet = () => {
     {
       question: "What are the different types of EV charging solutions available for fleets?",
       answer:
-        "Dedicated Hubs: Tata Power creates a dedicated hub at the fleet owner’s location or at a Tata Power location, offering charging as a service exclusively to the fleet customer Shared Hubs: Tata Power creates a common hub with chargers of different capacities, available to fleet customers based on their requirements Public Charging Solutions for Fleets: Tata Power’s extensive network of public EV chargers can be used by fleet customers for last-mile charging, reducing vehicle dry run",
+        "Dedicated Hubs: TransEV creates a dedicated hub at the fleet owner’s location or at a TransEv location, offering charging as a service exclusively to the fleet customer Shared Hubs: TransEV creates a common hub with chargers of different capacities, available to fleet customers based on their requirements Public Charging Solutions for Fleets: TransEV’s extensive network of public EV chargers can be used by fleet customers for last-mile charging, reducing vehicle dry run",
     },
     {
       question: "What is the process for setting up fleet charging infrastructure?",
       answer:
-        "TransEv offers end-to-end charging infrastructure services. The fleet operator shares their current and future requirements, signs the agreement, and Tata Power handles the rest. ",
+        "TransEv offers end-to-end charging infrastructure services. The fleet operator shares their current and future requirements, signs the agreement, and TransEV handles the rest. ",
     },
     {
       question: "How can I manage the charging schedule for my fleet to ensure operational efficiency?",
@@ -65,7 +66,7 @@ const Fleet = () => {
     {
       question: "Are there specific EV chargers recommended for fleet operations?",
       answer:
-        "Vehicle OEMs recommend charging protocols compatible with their vehicles. Tata Power deploys chargers that fulfil the vehicle's charging requirements, such as CCS2 (DC Fast) and Type-2 (AC) charging standards for most EV cars.  ",
+        "Vehicle OEMs recommend charging protocols compatible with their vehicles. TransEV deploys chargers that fulfil the vehicle's charging requirements, such as CCS2 (DC Fast) and Type-2 (AC) charging standards for most EV cars.  ",
     },
     {
       question: "What are the benefits of using a centralized charging management system for my fleet?",
@@ -75,17 +76,17 @@ const Fleet = () => {
     {
       question: "How can fleet electrification contribute to my company's sustainability goals?",
       answer:
-        "Electric vehicles offer cleaner, more efficient, and sustainable transportation solutions with zero tailpipe emissions, fuel cost savings, and rapid technological advancements. This transition aligns with environmental goals and provides economic advantages. . ",
+        "Electric vehicles offer cleaner, more efficient, and sustainable transportation solutions with zero tailpipe emissions, fuel cost savings, and rapid technological advancements. This transition aligns with environmental goals and provides economic advantages. ",
     },
     {
       question: "What kind of maintenance is required for fleet EV charging stations?",
       answer:
-        "EV charging infrastructure requires maintenance based on the hub's size. Tata Power provides end-to-end service, taking care of all maintenance requirements.  ",
+        "EV charging infrastructure requires maintenance based on the hub's size. TransEV provides end-to-end service, taking care of all maintenance requirements.  ",
     },
     {
       question: "How do I ensure the safety and reliability of my fleet's charging infrastructure?",
       answer:
-        "TransEv follows all required central and state government safety guidelines while deploying and operating charging hubs. There is continuous and proactive maintenance to ensure reliability of the charging infrastructure . . ",
+        "TransEv follows all required central and state government safety guidelines while deploying and operating charging hubs. There is continuous and proactive maintenance to ensure reliability of the charging infrastructure . ",
     },
     
   ];
@@ -657,7 +658,7 @@ const Fleet = () => {
                   <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center px-8">
                     {/* Logo Section */}
                     <div className="flex items-center space-x-4 mb-6 sm:mb-0">
-                      <img src={logo} alt="Company Logo" className="w-32 h-32" />
+                      <img src={logos} alt="Company Logo" className="w-32 h-32" />
                     </div>
           
                     {/* Contact Section */}
@@ -745,9 +746,9 @@ const Fleet = () => {
                           <ul className="space-y-2">
                             <li><a href="/terms-conditions" className="text-gray hover:underline text-lg">Terms & Conditions</a></li>
                             <li><a href="/privacy-policy" className="text-gray hover:underline text-lg">Privacy Policy</a></li>
-                            <li><a href="/modern-slavery-policy" className="text-gray hover:underline text-lg">Modern Slavery Policy</a></li>
-                            <li><a href="/esg-policy" className="text-gray hover:underline text-lg">ESG Policy</a></li>
-                            <li><a href="/sustainability-policy" className="text-gray hover:underline text-lg">Sustainability Policy</a></li>
+                            <li><a href="#" className="text-gray hover:underline text-lg">Modern Slavery Policy</a></li>
+                            <li><a href="#" className="text-gray hover:underline text-lg">ESG Policy</a></li>
+                            <li><a href="#" className="text-gray hover:underline text-lg">Sustainability Policy</a></li>
                           </ul>
                         </div>
                       </div>

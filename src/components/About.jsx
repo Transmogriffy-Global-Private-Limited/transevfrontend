@@ -14,6 +14,7 @@ import value from '../assets/value.png';
 import { FaBolt, FaCheckCircle, FaLeaf, FaHandHoldingHeart } from 'react-icons/fa';
 import mission1 from '../assets/mission1.png';
  import { useEffect } from 'react';
+ import logos from '../assets/up.png'
 function AboutUs() {
   const navigate = useNavigate();
   const handleButtonClick = () => {
@@ -430,7 +431,7 @@ Facilitating fairer,more  <br />
                   <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center px-8">
                     {/* Logo Section */}
                     <div className="flex items-center space-x-4 mb-6 sm:mb-0">
-                      <img src={logo} alt="Company Logo" className="w-32 h-32" />
+                      <img src={logos} alt="Company Logo" className="w-32 h-32" />
                     </div>
           
                     {/* Contact Section */}

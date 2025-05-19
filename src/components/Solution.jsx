@@ -73,27 +73,9 @@ useEffect(() => {
         onMouseEnter={() => setHovered(index)} // Hover effect
         onMouseLeave={() => setHovered(null)} // Reset hover state
       />
-      <span className="mt-[10px] text-lg sm:text-2xl md:text-3xl font-semibold">{solutionCaptions[index]}</span>
+      <span className="mt-[20px] text-lg sm:text-2xl md:text-3xl font-semibold">{solutionCaptions[index]}</span>
 
-      {/* Hovered Right Arrow Icon (Yellow Circle) */}
-      <div
-        className={`absolute bottom-5 sm:bottom-10 right-10 transform -translate-x-1/2 -translate-y-1/2 bg-yellow-300 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex justify-center items-center transition-opacity duration-300 ${
-          hovered === index ? 'opacity-100 scale-100' : 'opacity-0 scale-0'
-        }`}
-        onClick={() => handleImageClick(caseLinks[solutionCaptions[index]])} // Clicking the circle navigates to a page based on caption
-        onMouseEnter={() => setHoveredCircle(index)} // Handle hover on circle
-        onMouseLeave={() => setHoveredCircle(null)} // Reset hover state
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-6 h-6 text-black transition-transform duration-300"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-        </svg>
-      </div>
+    
     </div>
   ))}
 </div>
@@ -107,35 +89,17 @@ useEffect(() => {
         <img
           src={image}
           alt={`Use Case ${index + 3}`}
-          className="w-full h-[300px] sm:h-[400px] lg:h-[600px] xl:h-[700px] rounded-lg shadow-md transition-transform duration-300 transform group-hover:scale-105"
+          className="w-full h-[300px] sm:h-[400px] lg:h-[600px] xl:h-[700px] rounded-lg shadow-md transition-transform duration-300 transform group-hover:scale-105 "
           onClick={() => handleImageClick(caseLinks[solutionCaptions[index + 2]])}
           onMouseEnter={() => setHovered(index + 2)}
           onMouseLeave={() => setHovered(null)}
         />
 
-        {/* Yellow Circle Icon inside image */}
-        <div
-          className={`absolute top-[96%] right-6 sm:right-10 transform translate-y-[-50%] bg-yellow-300 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex justify-center items-center transition-opacity duration-300 ${
-            hovered === index + 2 ? 'opacity-100 scale-100' : 'opacity-0 scale-0'
-          }`}
-          onClick={() => handleImageClick(caseLinks[solutionCaptions[index + 2]])}
-          onMouseEnter={() => setHoveredCircle(index + 2)}
-          onMouseLeave={() => setHoveredCircle(null)}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-6 h-6 text-black transition-transform duration-300"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-          </svg>
-        </div>
+        
       </div>
 
       {/* Caption */}
-      <span className="mt-[10px] text-lg sm:text-2xl md:text-3xl font-semibold">
+      <span className="mt-[20px] text-lg sm:text-2xl md:text-3xl font-semibold">
         {solutionCaptions[index + 2]}
       </span>
     </div>
