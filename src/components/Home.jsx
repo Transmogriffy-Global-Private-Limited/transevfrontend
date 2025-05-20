@@ -962,7 +962,7 @@ We provide effortless management and maintainance, so you can focus on what matt
 </div> 
 
 
-{/* <div className="w-full h-screen bg-white flex justify-center items-center mt-10 sm:mt-20 md:mt-30 lg:mt-40"> */}
+
 <div className="w-full h-[500px] sm:h-screen bg-white flex justify-center items-center mt-10 sm:mt-20 md:mt-30 lg:mt-40">
   <div className="w-full h-full max-w-screen-3xl bg-gradient-to-r p-6 sm:p-8 md:p-10 lg:p-12"> 
     <div className="w-full h-full bg-gradient-to-b from-yellow-200 via-yellow-200 to-red-300 rounded-3xl p-8 sm:p-10 md:p-12 lg:p-16 shadow-lg max-w-screen-3xl mx-auto">
@@ -1130,9 +1130,11 @@ We provide effortless management and maintainance, so you can focus on what matt
   </div>
 </footer>
 </div>
-   {popupOpen && (
+   
+{popupOpen && (
   <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-    <div className="bg-white p-8 rounded-lg max-w-6xl w-full flex relative h-auto">
+    <div className="bg-white p-4 sm:p-8 rounded-lg max-w-6xl w-full flex flex-col sm:flex-row relative h-auto max-h-[90vh] overflow-y-auto">
+      
       {/* Close Button */}
       <button
         className="absolute top-4 right-4 text-3xl font-bold text-gray-600 hover:text-gray-900"
@@ -1141,53 +1143,46 @@ We provide effortless management and maintainance, so you can focus on what matt
         &times;
       </button>
 
-    <div className="w-1/2 p-4 mt-30">
+      {/* Image */}
+      <div className="w-full sm:w-1/2 p-2 sm:p-4">
         <img
           src={popupContent.image}
           alt="Popup"
-          className="w-full h-auto object-contain rounded-lg "
+          className="w-full h-auto object-contain rounded-lg"
         />
-      </div> 
-   
-
-
-      <div className="w-1/2 p-4 overflow-y-auto max-h-[80vh]">
-        {/* Product Description */}
-      
-{/* Features */}
-        <h3 className="text-2xl font-semibold mb-4 mt-6">Features</h3>
-       <div className="flex flex-col space-y-2 mt-2">
-     {popupContent.features.split(',').map((feature, index) => (
-      <div key={index} className="text-md text-gray-700">
-        {feature.trim()}
       </div>
-    ))}
-       
-<h3 className="text-2xl font-semibold mt-6 mb-4">Technical Specifications</h3>
 
-{popupContent.details && (
-  <div className="w-full overflow-x-auto">
-    <table className="min-w-[400px] text-sm sm:text-base text-left text-gray-800 border border-gray-300">
-      <tbody>
-        {Object.entries(popupContent.details).map(([key, value], index) => (
-          <tr key={index} className="border-b border-gray-200">
-            <td className="py-2 px-4 font-medium bg-gray-100 whitespace-nowrap">{key}</td>
-            <td className="py-2 px-4">{value}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-)}  
+      {/* Text and Table Section */}
+      <div className="w-full sm:w-1/2 p-2 sm:p-4 overflow-y-auto max-h-[80vh]">
+        <h3 className="text-2xl font-semibold mb-4 mt-6">Features</h3>
+        <div className="flex flex-col space-y-2 mt-2">
+          {popupContent.features.split(',').map((feature, index) => (
+            <div key={index} className="text-md text-gray-700">
+              {feature.trim()}
+            </div>
+          ))}
+        </div>
 
+        <h3 className="text-2xl font-semibold mt-6 mb-4">Technical Specifications</h3>
 
-   </div>    
-       
-
+        {popupContent.details && (
+          <div className="w-full overflow-x-auto mx-auto">
+            <table className="min-w-[300px] text-sm sm:text-base text-left text-gray-800 border border-gray-300 mx-auto">
+              <tbody>
+                {Object.entries(popupContent.details).map(([key, value], index) => (
+                  <tr key={index} className="border-b border-gray-200">
+                    <td className="py-2 px-4 font-medium bg-gray-100 whitespace-nowrap">{key}</td>
+                    <td className="py-2 px-4">{value}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
 
         {/* Buy Now Button */}
         <button
-          className="mt-4 bg-blue-500 text-white px-6 py-2 rounded-full"
+          className="mt-6 bg-blue-500 text-white px-6 py-2 rounded-full"
           onClick={handleBuyNowClick}
         >
           Buy Now

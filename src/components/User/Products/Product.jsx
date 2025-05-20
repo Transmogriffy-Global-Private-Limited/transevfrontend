@@ -284,7 +284,7 @@ const [imageIndex, setImageIndex] = useState({});
         )}
 
 
- {popupOpen && (
+ {/* {popupOpen && (
   <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
 
     <div className="bg-white p-4 sm:p-8 rounded-lg w-full sm:max-w-6xl max-w-full h-auto flex relative shadow-lg overflow-auto">
@@ -415,7 +415,137 @@ const [imageIndex, setImageIndex] = useState({});
       </div>
     </div>
   </div>
-)} 
+)}  */}
+{popupOpen && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+    <div className="bg-white p-4 sm:p-8 rounded-lg w-full sm:max-w-6xl max-w-full h-auto flex relative shadow-lg overflow-auto">
+   
+      <button
+        className="absolute top-4 right-4 text-3xl font-bold text-gray-600 hover:text-gray-900"
+        onClick={handlePopupClose}
+      >
+        &times;
+      </button>
+
+      <div className="flex flex-wrap sm:flex-nowrap max-w-full overflow-hidden">
+       
+        <div className="w-full sm:w-1/2 p-4 relative">
+          {popupContent.image_paths?.length > 0 ? (
+            <div className="relative">
+              <img
+                src={popupContent.image_paths[popupImageIndex]}
+                alt={popupContent.name}
+                className="w-full h-auto object-contain rounded-lg shadow-md cursor-pointer"
+                onClick={toggleImagePopup}
+              />
+              {popupContent.image_paths.length > 1 && (
+                <>
+                  <button
+                    onClick={goToPrevImageInPopup}
+                    className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full"
+                  >
+                    &#60;
+                  </button>
+                  <button
+                    onClick={goToNextImageInPopup}
+                    className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full"
+                  >
+                    &#62;
+                  </button>
+                </>
+              )}
+            </div>
+          ) : (
+            <img
+              src="https://via.placeholder.com/150"
+              alt={popupContent.name}
+              className="w-full h-auto object-contain rounded-lg shadow-md"
+            />
+          )}
+
+          {popupContent.quantity > 0 ? (
+            <button
+              onClick={() => handleAddToCart(popupContent.id, popupContent.price)}
+              className={`mt-4 flex items-center justify-center px-4 py-2 rounded-md ${
+                cart.includes(popupContent.id) ? 'bg-green-500' : 'bg-[#faa122]'
+              } text-white hover:${cart.includes(popupContent.id) ? 'bg-green-600' : 'bg-blue-600'}`}
+            >
+              <FaShoppingCart className="mr-2" />
+              {cart.includes(popupContent.id) ? 'Added to Cart' : 'Add to Cart'}
+            </button>
+          ) : (
+            <div className="mt-4 text-red-600 font-semibold">No Stock Available</div>
+          )}
+        </div>
+
+        <div className="w-full sm:w-1/2 p-4">
+          <h3 className="text-3xl font-semibold mb-4 text-blue-600">Product Name: {popupContent.name}</h3>
+          <h4 className="text-3xl font-semibold mb-4 text-green-600">Model: {popupContent.model}</h4>
+          <h4 className="text-3xl font-semibold mb-4 text-red-600">Price: {popupContent.price}</h4>
+        
+          <h4 className="text-2xl font-semibold text-teal-600">
+            Product Color: {popupContent.product_color}
+          </h4>
+          <div
+            className={`w-6 h-6 rounded border border-gray-300`}
+            style={{ backgroundColor: popupContent.product_color.toLowerCase() }}
+          ></div>
+
+          {popupContent.details?.additional_details && (
+            <p className="text-lg mb-4">Features: {popupContent.details.additional_details}</p>
+          )}
+
+          <div className="overflow-x-auto bg-white rounded-lg shadow-md p-6 max-h-[400px] overflow-y-auto">
+            <table className="min-w-full table-auto">
+              <thead>
+                <tr className="bg-gray-100">
+                  <th className="px-4 py-2 text-left text-sm font-semibold">Detail</th>
+                  <th className="px-4 py-2 text-left text-sm font-semibold">Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[ 
+                  ['phase', 'Phase'],
+                  ['cooling', 'Cooling'],
+                  ['rated_power', 'Rated Power'],
+                  ['ingress_protection', 'Ingress Protection'],
+                  ['current', 'Current'],
+                  ['display', 'Display'],
+                  ['gun_type', 'Gun Type'],
+                  ['gun_details', 'Gun Details'],
+                  ['material', 'Material'],
+                  ['frequency', 'Frequency'],
+                  ['dimensions', 'Dimensions'],
+                  ['protection', 'Protection'],
+                  ['fast_charger', 'Fast Charger'],
+                  ['communication', 'Communication'],
+                  ['cable_length', 'Cable Length'],
+                  ['mountingtype', 'Mounting Type'],
+                  ['input_voltage', 'Input Voltage'],
+                  ['ouput_voltage', 'Output Voltage'],
+                  ['operatingtemps', 'Operating Temperature'],
+                  ['safetyregulation', 'Safety Regulation'],
+                  ['push_button', 'Push Button'],
+                  ['chargingoperation', 'Charging Operation'],
+                ].map(([key, label], index) => {
+                  const value = popupContent.details?.[key];
+                  if (!value || value === 'N/A') return null;
+                  return (
+                    <tr key={key} className={index % 2 === 0 ? 'bg-gray-50' : ''}>
+                      <td className="px-4 py-2 text-sm font-medium">{label}</td>
+                      <td className="px-4 py-2 text-sm">{value}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+
  </div>
     </div>
     </div>
