@@ -6,7 +6,9 @@ import useCase2 from '../assets/holiday.jpg';
 import useCase3 from '../assets/hotels.jpg'; 
 import useCase4 from '../assets/workplace.jpg'; 
 import logo from '../assets/transev logo.png'; // Assuming you have a logo image
-import logos from '../assets/up.png'
+import logos from '../assets/up.png';
+import { FaTwitter, FaInstagram, FaFacebook } from 'react-icons/fa';
+import logo1 from '../assets/tv.png';
 function SolutionsPage() {
   const navigate = useNavigate();
   const [hovered, setHovered] = useState(null); // Track which image is hovered
@@ -114,7 +116,7 @@ useEffect(() => {
     {/* Left Side: Logo */}
     <div className="flex justify-center md:justify-start">
       <img
-        src={logos}
+        src={logo1}
         alt="Company Logo"
         className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32"
       />
@@ -163,7 +165,7 @@ useEffect(() => {
 
         {/* Client Portal Button */}
         <a
-          href="/client-portal"
+          href="#"
           className="inline-flex items-center px-6 py-3 bg-black text-white font-semibold rounded-full transition-all duration-300 hover:bg-yellow-500 hover:text-black hover:scale-105 mt-4"
         >
           <span>Client portal</span>
@@ -197,7 +199,7 @@ useEffect(() => {
             <li><a href="/solutions" className="text-gray hover:underline text-lg">Solutions</a></li>
             <li><a href="/contact" className="text-gray hover:underline text-lg">Contact</a></li>
             <li><a href="/about" className="text-gray hover:underline text-lg">About</a></li>
-            <li><a href="/solutions/home-and-housing-societies" className="text-gray hover:underline text-lg">Residents</a></li>
+           
           </ul>
         </div>
 
@@ -205,9 +207,28 @@ useEffect(() => {
         <div className="w-full md:w-auto">
           <h5 className="text-lg font-semibold mb-5">Follow us</h5>
           <ul className="space-y-2">
-            <li><a href="/linkedin" className="text-gray hover:underline text-lg">LinkedIn</a></li>
-            <li><a href="/instagram" className="text-gray hover:underline text-lg">Instagram</a></li>
-            <li><a href="/facebook" className="text-gray hover:underline text-lg">Facebook</a></li>
+               <li>
+              <a
+                href="https://x.com/transevIN?t=yJ30BdH5D7TME1ZZQiQisw&s=09"
+                className="text-gray hover:underline text-lg"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  width="28"
+                  height="28"
+                >
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+                </svg>
+              </a>
+            </li>
+                     <li><a href="https://www.instagram.com/__transmogrify__?igsh=MWRzY25tc2wzMnk1ag==" className="text-gray hover:underline text-lg"> <FaInstagram color="#E1306C" size={28} /></a></li>
+                     <li><a href="https://www.facebook.com/share/1NvgEQvwxG/" className="text-gray hover:underline text-lg"> <FaFacebook color="#1877F2" size={28} /></a></li>
           </ul>
         </div>
 
@@ -217,9 +238,7 @@ useEffect(() => {
           <ul className="space-y-2">
             <li><a href="/terms-conditions" className="text-gray hover:underline text-lg">Terms & Conditions</a></li>
             <li><a href="/privacy-policy" className="text-gray hover:underline text-lg">Privacy Policy</a></li>
-            <li><a href="/modern-slavery-policy" className="text-gray hover:underline text-lg">Modern Slavery Policy</a></li>
-            <li><a href="/esg-policy" className="text-gray hover:underline text-lg">ESG Policy</a></li>
-            <li><a href="/sustainability-policy" className="text-gray hover:underline text-lg">Sustainability Policy</a></li>
+          
           </ul>
         </div>
       </div>

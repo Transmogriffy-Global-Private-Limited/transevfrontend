@@ -33,7 +33,7 @@ import logo from '../assets/transev logo.png';
 import woman from '../assets/woman.jpg';
 import car from '../assets/car.jpg';
 import mobile from '../assets/mobile.jpg';
-import AC01W from '../assets/AC01W3.png';
+import AC01W from '../assets/newac01w.png';
 import AC02P from '../assets/AC02P3.png';
 import AC02P7 from '../assets/AC02P7.4.png';
 import AC02WCH from '../assets/AC02WC&H.png';
@@ -42,7 +42,7 @@ import AC03W22 from '../assets/Ac03W3.png';
 import DC04W from '../assets/DC04W.png';
 import DC04G60 from '../assets/DC04G60.png';
 import DC04G150 from '../assets/DC04G150.png';
-import logo1 from '../assets/logo1.png';
+import logo1 from '../assets/tv.png';
 import red from '../assets/red.png';
 import slid from '../assets/slid.png';
 import { FaArrowRight } from 'react-icons/fa';
@@ -52,6 +52,9 @@ import c1 from '../assets/c4.png';
 import c3 from '../assets/c3.png';
 import c4 from '../assets/c1.png';
 import c5 from '../assets/cc1.png';
+import mob from '../assets/transev.jpg';
+import x from '../assets/x.png';
+import { FaTwitter, FaInstagram, FaFacebook } from 'react-icons/fa';
 function HomePage() {
   const navigate = useNavigate();
   const [hovered, setHovered] = useState(null);
@@ -155,7 +158,7 @@ const handlePopupClose = () => {
     }
   };
   const images = [charger1 , charger2, charger3, charger4 , charger5 , charger6 , charger7 , charger8 ];
- const imagezoom = [car,woman,mobile,slid]
+ const imagezoom = [car,woman,mob,slid]
  const containerRef = useRef(null);
 
   const scrollLeft = () => {
@@ -219,9 +222,9 @@ const totalDuration = slideDuration * totalSlides; // total animation cycle
           <div>
             <span></span>{' '}
            
-       <div className="text-white font-semibold ml-2.5">
+       <div className="text-white font-semibold ml-2.5 mt-10">
   {/* Top Line: Charge + Icon */}
-  <div className="inline-flex items-center text-4xl sm:text-6xl md:text-8xl lg:text-8xl">
+  <div className="inline-flex items-center text-4xl sm:text-6xl md:text-8xl lg:text-9xl">
     Charge
     <img
       src={Thunder}
@@ -231,7 +234,7 @@ const totalDuration = slideDuration * totalSlides; // total animation cycle
   </div>
 
   {/* Bottom Line: Beyond Boundaries */}
-  <div className="mt-2 text-4xl sm:text-6xl md:text-8xl lg:text-8xl">
+  <div className="mt-2 text-4xl sm:text-6xl md:text-8xl lg:text-9xl">
     Beyond <span className="text-white">Boundaries</span>
   </div>
 </div>
@@ -281,10 +284,13 @@ const totalDuration = slideDuration * totalSlides; // total animation cycle
   <div className="w-full lg:w-2/3 pr-8 mb-8 lg:mb-0"> {/* Added padding-right and margin-bottom for spacing */}
     
     <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal font-aeonik leading-tight max-w-screen-lg mx-auto">
-  Be Ready <br />
+  Be <span className="text-red-400 font-semibold">Ready</span> <br />
   For the Future with our <br />
-  <span className="font-normal">scalable EV charging solutions.</span>
-</h2>
+  <span className="font-normal">Scalable <span className="text-green-400 font-semibold">EV</span> Charging Solutions.</span>
+</h2> 
+
+
+
 
   </div>
   
@@ -623,7 +629,7 @@ We provide effortless management and maintainance, so you can focus on what matt
   
 <div className="text-center sm:text-left">
   <h3 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-aeonik leading-tight">
-    We Offer a range of charge
+    We offer a range of charge
   </h3>
 
   <h3 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-aeonik mt-2 sm:mt-4 leading-snug">
@@ -956,7 +962,8 @@ We provide effortless management and maintainance, so you can focus on what matt
 </div> 
 
 
-<div className="w-full h-screen bg-white flex justify-center items-center mt-10 sm:mt-20 md:mt-30 lg:mt-40">
+{/* <div className="w-full h-screen bg-white flex justify-center items-center mt-10 sm:mt-20 md:mt-30 lg:mt-40"> */}
+<div className="w-full h-[500px] sm:h-screen bg-white flex justify-center items-center mt-10 sm:mt-20 md:mt-30 lg:mt-40">
   <div className="w-full h-full max-w-screen-3xl bg-gradient-to-r p-6 sm:p-8 md:p-10 lg:p-12"> 
     <div className="w-full h-full bg-gradient-to-b from-yellow-200 via-yellow-200 to-red-300 rounded-3xl p-8 sm:p-10 md:p-12 lg:p-16 shadow-lg max-w-screen-3xl mx-auto">
       
@@ -1001,7 +1008,7 @@ We provide effortless management and maintainance, so you can focus on what matt
     
     {/* Logo Section */}
     <div className="flex items-center space-x-4 mb-6 sm:mb-0">
-      <img src={logos} alt="Company Logo" className="w-32 h-32" />
+      <img src={logo1} alt="Company Logo" className="w-32 h-32" />
     </div>
 
     {/* Contact Section */}
@@ -1077,9 +1084,30 @@ We provide effortless management and maintainance, so you can focus on what matt
       <div className="mb-8 sm:mb-0">
         <h5 className="text-lg font-semibold mb-5">Follow us</h5>
         <ul className="space-y-2">
-          <li><a href="/linkedin" className="text-gray hover:underline text-lg">LinkedIn</a></li>
-          <li><a href="/instagram" className="text-gray hover:underline text-lg">Instagram</a></li>
-          <li><a href="/facebook" className="text-gray hover:underline text-lg">Facebook</a></li>
+          
+        <li>
+              <a
+                href="https://x.com/transevIN?t=yJ30BdH5D7TME1ZZQiQisw&s=09"
+                className="text-gray hover:underline text-lg"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  width="28"
+                  height="28"
+                >
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+                </svg>
+              </a>
+            </li>
+
+          <li><a href="https://www.instagram.com/__transmogrify__?igsh=MWRzY25tc2wzMnk1ag==" className="text-gray hover:underline text-lg"> <FaInstagram color="#E1306C" size={28} /></a></li>
+          <li><a href="https://www.facebook.com/share/1NvgEQvwxG/" className="text-gray hover:underline text-lg"> <FaFacebook color="#1877F2" size={28} /></a></li>
         </ul>
       </div>
 
@@ -1113,24 +1141,20 @@ We provide effortless management and maintainance, so you can focus on what matt
         &times;
       </button>
 
-      <div className="w-1/2 p-4">
+    <div className="w-1/2 p-4 mt-30">
         <img
           src={popupContent.image}
           alt="Popup"
           className="w-full h-auto object-contain rounded-lg "
         />
-      </div>
+      </div> 
+   
+
 
       <div className="w-1/2 p-4 overflow-y-auto max-h-[80vh]">
         {/* Product Description */}
-        {/* <h3 className="text-2xl font-semibold mb-4">Product Description</h3>
-        <p>{popupContent.description}</p>
-        */}
-
-
-
-   
- {/* Features */}
+      
+{/* Features */}
         <h3 className="text-2xl font-semibold mb-4 mt-6">Features</h3>
        <div className="flex flex-col space-y-2 mt-2">
      {popupContent.features.split(',').map((feature, index) => (
@@ -1154,11 +1178,12 @@ We provide effortless management and maintainance, so you can focus on what matt
       </tbody>
     </table>
   </div>
-)}
+)}  
 
 
+   </div>    
        
-  </div>
+
 
         {/* Buy Now Button */}
         <button

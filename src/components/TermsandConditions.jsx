@@ -1,7 +1,9 @@
 import React from 'react';
 import Navbar from "../components/Navbar"; // Import the Navbar
 import logo from '../assets/transev logo.png';
-import logos from '../assets/up.png'
+import logos from '../assets/up.png';
+import { FaTwitter, FaInstagram, FaFacebook } from 'react-icons/fa';
+import logo1 from '../assets/tv.png';
 const TermsConditions = () => {
   return (
     <div className="bg-white text-gray-900">
@@ -10,7 +12,7 @@ const TermsConditions = () => {
 
       {/* Main Content */}
       <div className="container mx-auto px-4 py-10">
-        <h1 className="text-4xl font-extrabold text-blue-900 mb-6">Agreement to Terms</h1>
+        <h1 className="text-4xl font-extrabold text-blue-900 mb-10 mt-30">Agreement to Terms</h1>
         <p className="text-lg text-gray-800 mb-6">
           These Terms and Conditions constitute a legally binding agreement made between you, whether personally or on behalf of an entity (“you”) and TRANSMOGRIFFY GLOBAL PRIVATE LIMITED (“we,” “us” or “our”), concerning your access to and use of our mobile application TRANSEV. You agree that by accessing the Application, you have read, understood, and agree to be bound by all of these Terms and Conditions Use.
         </p>
@@ -46,7 +48,7 @@ const TermsConditions = () => {
          
          {/* Logo Section */}
          <div className="flex items-center space-x-4 mb-6 sm:mb-0">
-           <img src={logos} alt="Company Logo" className="w-32 h-32" />
+           <img src={logo1} alt="Company Logo" className="w-32 h-32" />
          </div>
      
          {/* Contact Section */}
@@ -121,9 +123,28 @@ const TermsConditions = () => {
                  <div className="mb-8 sm:mb-0">
                    <h5 className="text-lg font-semibold mb-5">Follow us</h5>
                    <ul className="space-y-2">
-                     <li><a href="/linkedin" className="text-gray hover:underline text-lg">LinkedIn</a></li>
-                     <li><a href="/instagram" className="text-gray hover:underline text-lg">Instagram</a></li>
-                     <li><a href="/facebook" className="text-gray hover:underline text-lg">Facebook</a></li>
+                      <li>
+                     <a
+                       href="https://x.com/transevIN?t=yJ30BdH5D7TME1ZZQiQisw&s=09"
+                       className="text-gray hover:underline text-lg"
+                     >
+                       <svg
+                         xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         strokeWidth="2"
+                         strokeLinecap="round"
+                         strokeLinejoin="round"
+                         width="28"
+                         height="28"
+                       >
+                         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+                       </svg>
+                     </a>
+                   </li>
+                              <li><a href="https://www.instagram.com/__transmogrify__?igsh=MWRzY25tc2wzMnk1ag==" className="text-gray hover:underline text-lg"> <FaInstagram color="#E1306C" size={28} /></a></li>
+                              <li><a href="https://www.facebook.com/share/1NvgEQvwxG/" className="text-gray hover:underline text-lg"> <FaFacebook color="#1877F2" size={28} /></a></li>
                    </ul>
                  </div>
      

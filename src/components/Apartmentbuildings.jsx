@@ -19,16 +19,19 @@ import image4 from '../assets/car1.jpg';
 import image5 from '../assets/ev.jpg';
 import hotels from '../assets/hotels.jpg';
 import image6 from '../assets/slide4.jpg';
-import image7 from '../assets/slide1.jpg';
+import image7 from '../assets/red.png';
 import image8 from '../assets/slide6.jpg';
 import image9 from '../assets/slide5.jpg';
-import AC01W from '../assets/AC01W3.png';
+import AC01W from '../assets/newac01w.png';
 import AC02P from '../assets/AC02P3.png';
 import AC02P7 from '../assets/AC02P7.4.png';
 import AC02WCH from '../assets/AC02WC&H.png';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import logos from '../assets/up.png'
+import logos from '../assets/up.png';
+import { FaTwitter, FaInstagram, FaFacebook } from 'react-icons/fa';
+import tr from '../assets/tr.png' ;
+import logo1 from '../assets/tv.png';
 const ApartmentBuildingPage = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [hovered, setHovered] = useState(null);
@@ -389,7 +392,7 @@ solutions.
     number: "01",
     title: "Convenience and flexibility ",
     desc: "  With EV charging on their doorstep, residents will have the freedom to charge their vehicle at home whenever they need to.",
-    img: yourImage,
+    img: tr,
   },
   {
     number: "02",
@@ -708,7 +711,7 @@ solutions.
   </div>
 </section>
 
-<div className="w-full h-screen bg-white flex justify-center items-center mt-10 sm:mt-20 md:mt-30 lg:mt-40">
+<div className="w-full h-[500px] sm:h-screen bg-white flex justify-center items-center mt-10 sm:mt-20 md:mt-30 lg:mt-40">
         <div className="w-full h-full max-w-screen-3xl bg-gradient-to-r p-6 sm:p-8 md:p-10 lg:p-12">
           <div className="w-full h-full bg-gradient-to-b from-yellow-200 via-yellow-200 to-red-300 rounded-3xl p-8 sm:p-10 md:p-12 lg:p-16 shadow-lg max-w-screen-3xl mx-auto">
             {/* Heading */}
@@ -747,7 +750,7 @@ solutions.
         <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center px-8">
           {/* Logo Section */}
           <div className="flex items-center space-x-4 mb-6 sm:mb-0">
-            <img src={logos} alt="Company Logo" className="w-32 h-32" />
+            <img src={logo1} alt="Company Logo" className="w-32 h-32" />
           </div>
 
           {/* Contact Section */}
@@ -823,9 +826,28 @@ solutions.
               <div className="mb-8 sm:mb-0">
                 <h5 className="text-lg font-semibold mb-5">Follow us</h5>
                 <ul className="space-y-2">
-                  <li><a href="/linkedin" className="text-gray hover:underline text-lg">LinkedIn</a></li>
-                  <li><a href="/instagram" className="text-gray hover:underline text-lg">Instagram</a></li>
-                  <li><a href="/facebook" className="text-gray hover:underline text-lg">Facebook</a></li>
+                  <li>
+                 <a
+                   href="https://x.com/transevIN?t=yJ30BdH5D7TME1ZZQiQisw&s=09"
+                   className="text-gray hover:underline text-lg"
+                 >
+                   <svg
+                     xmlns="http://www.w3.org/2000/svg"
+                     viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     strokeWidth="2"
+                     strokeLinecap="round"
+                     strokeLinejoin="round"
+                     width="28"
+                     height="28"
+                   >
+                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+                   </svg>
+                 </a>
+               </li>
+                          <li><a href="https://www.instagram.com/__transmogrify__?igsh=MWRzY25tc2wzMnk1ag==" className="text-gray hover:underline text-lg"> <FaInstagram color="#E1306C" size={28} /></a></li>
+                          <li><a href="https://www.facebook.com/share/1NvgEQvwxG/" className="text-gray hover:underline text-lg"> <FaFacebook color="#1877F2" size={28} /></a></li>
                 </ul>
               </div>
 

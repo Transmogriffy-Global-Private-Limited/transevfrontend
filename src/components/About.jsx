@@ -14,10 +14,25 @@ import value from '../assets/value.png';
 import { FaBolt, FaCheckCircle, FaLeaf, FaHandHoldingHeart } from 'react-icons/fa';
 import mission1 from '../assets/mission1.png';
  import { useEffect } from 'react';
- import logos from '../assets/up.png'
+ import logos from '../assets/up.png';
+ import { FaTwitter, FaInstagram, FaFacebook } from 'react-icons/fa';
+ import transevImage from '../assets/transev.jpg';
+ import logo1 from '../assets/tv.png';
 function AboutUs() {
   const navigate = useNavigate();
   const handleButtonClick = () => {
+    // Get the button element by id
+    const button = document.getElementById('contact-btn');
+    
+    // Add background color change on button click
+    button.classList.add('bg-yellow-500'); // Add a background color
+
+    // After a small delay (for animation), navigate to the contact page
+    setTimeout(() => {
+      navigate('/contact');  // Navigate to the Contact page
+    }, 500); // Delay to allow animation to complete
+  };
+   const handleContactClick = () => {
     // Get the button element by id
     const button = document.getElementById('contact-btn');
     
@@ -226,7 +241,7 @@ Facilitating fairer,more  <br />
         {/* Left Side - Our Vision */}
         <div className="text-left">
         <h2 className="text-3xl font-bold text-black mb-4">
-  Our vision is to create a <br/><span className="text-green-500">sustainable future</span>.
+  Our vision is to create a <br/><span className="text-green-500">sustainable future</span>
 </h2>
 
         
@@ -234,7 +249,11 @@ Facilitating fairer,more  <br />
 
         {/* Right Side - Why People Love Us */}
         <div className="text-left">
-          <h3 className="text-6xl font-bold text-black mb-8">Why TransEV?</h3>
+       
+           <h3 className="text-4xl sm:text-5xl md:text-6xl font-bold text-black mb-8">
+  Why <span className="text-orange-400">Trans</span><span className="text-green-500">EV</span>
+</h3>
+
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8">
             <div className="flex items-center space-x-3">
               <FaBolt className="text-yellow-500 text-3xl" />
@@ -256,6 +275,46 @@ Facilitating fairer,more  <br />
         </div>
       </div>
     </section>
+<section class="flex flex-col md:flex-row items-center gap-10 px-6 py-16 bg-white">
+
+  <div class="w-full md:w-1/2">
+   <img
+  src={transevImage}  // Image import for React or the actual file path for HTML
+  alt="Transev EV Charging"
+  className="rounded-lg shadow-lg w-full h-auto object-cover"
+/>
+
+  </div>
+
+  <div class="w-full md:w-1/2 text-center md:text-left">
+    <h2 class="text-4xl lg:text-5xl font-bold text-gray-800 mb-6 leading-tight">
+      <span class="text-orange-400">Trans</span><span class="text-green-500">EV</span> – Smart Charging at Your Fingertips
+    </h2>
+    <p class="text-xl text-gray-700 mb-5">
+      With the <strong><span class="text-orange-400">Trans</span><span class="text-green-500">EV</span> app</strong>, you can:
+    </p>
+    <ul class="text-lg lg:text-xl text-gray-700 list-disc list-inside mb-6 space-y-2">
+      <li>Book EV charging slots in advance</li>
+      <li>Track how long the vehicle has been charging</li>
+      <li>See real-time billing after charging</li>
+      <li>Receive alerts when charging is complete</li>
+        <li>Find nearby chargers</li>
+         <li>Quick Payment</li>
+    </ul>
+    <p class="text-xl text-gray-700 mb-6">
+      Everything is designed to give you full control and transparency over your EV charging experience.
+    </p>
+    {/* <a href="https://play.google.com/store/apps/details?id=com.transev.evcharging" class="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold text-lg lg:text-xl px-6 py-3 rounded-md transition duration-300">
+      Explore the App
+    </a> */}
+    <a href="https://play.google.com/store/apps/details?id=com.transev.evcharging" class="inline-block text-white font-semibold text-lg lg:text-xl px-6 py-3 rounded-md bg-gradient-to-r from-orange-600 via-pink-300 to-green-700 hover:from-green-700 hover:to-green-800 transition duration-300">
+  Explore the App
+</a>
+
+  </div>
+</section>
+
+
 
 <section className="py-20 px-10 bg-gradient-to-r from-blue-100 via-blue-50 to-white">
 
@@ -365,40 +424,43 @@ Facilitating fairer,more  <br />
 </div>
 </section>
 
-<div className="w-full h-screen bg-white flex justify-center items-center mt-10 sm:mt-20 md:mt-30 lg:mt-40">
-           <div className="w-full h-full max-w-screen-3xl bg-gradient-to-r p-6 sm:p-8 md:p-10 lg:p-12">
-             <div className="w-full h-full bg-gradient-to-b from-yellow-200 via-yellow-200 to-red-300 rounded-3xl p-8 sm:p-10 md:p-12 lg:p-16 shadow-lg max-w-screen-3xl mx-auto">
-               {/* Heading */}
-               <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-semibold text-gray-800 text-left font-aeonik">
-                 <span className="mr-10 sm:mr-20 md:mr-40 lg:inline-block lg:mr-80">Ready to get</span><br />
-                 <span className="sm:mr-10 md:mr-20 lg:mr-0 lg:inline-block">Started ?</span>
-               </h2>
-   
-               {/* Contact Button */}
-               <div className="flex items-center justify-start mt-10 sm:mt-12 md:mt-14 lg:mt-20">
-                 <button
-                   id="contact-btn"
-                   onClick={handleButtonClick}
-                   className="flex items-center justify-center px-8 sm:px-10 md:px-12 py-4 bg-white text-black font-semibold rounded-full transition-all duration-300 hover:bg-black hover:text-white w-auto h-auto"
-                 >
-                   <span className="mr-4 sm:mr-6 text-lg">Contact Us</span>
-                   <div className="w-8 sm:w-10 h-8 sm:h-10 bg-black rounded-full flex items-center justify-center transition-all duration-300 group-hover:bg-white ml-4">
-                     <svg
-                       xmlns="http://www.w3.org/2000/svg"
-                       className="w-5 sm:w-6 h-5 sm:h-6 text-white transition-transform duration-300 group-hover:text-black group-hover:translate-x-1"
-                       fill="none"
-                       viewBox="0 0 24 24"
-                       stroke="currentColor"
-                     >
-                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                     </svg>
-                   </div>
-                 </button>
-               </div>
-   
-               
-   
-  
+<div className="w-full h-[500px] sm:h-screen bg-white flex justify-center items-center mt-10 sm:mt-20 md:mt-30 lg:mt-40">
+  <div className="w-full h-full max-w-screen-3xl bg-gradient-to-r p-6 sm:p-8 md:p-10 lg:p-12"> 
+     <div className="w-full h-full bg-gradient-to-b from-yellow-200 via-yellow-200 to-red-300 rounded-3xl p-8 sm:p-10 md:p-12 lg:p-20 shadow-lg max-w-screen-3xl mx-auto">
+    
+
+      
+      {/* Heading */}
+      <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-semibold text-gray-800 text-left font-aeonik">
+  <span className="mr-10 sm:mr-20 md:mr-40 lg:inline-block lg:mr-80">Ready to get</span><br />
+  <span className="sm:mr-10 md:mr-20 lg:mr-0 lg:inline-block">Started ?</span>
+</h2>
+
+      
+      {/* Contact Button */}
+      <div className="flex items-center justify-start mt-10 sm:mt-12 md:mt-14 lg:mt-20">
+  <button
+    id="contact-btn"
+    onClick={handleContactClick}
+    className="flex items-center justify-center px-8 sm:px-10 md:px-12 py-4 bg-white text-black font-semibold rounded-full transition-all duration-300 hover:bg-black hover:text-white w-auto h-auto"
+  >
+    <span className="mr-4 sm:mr-6 text-lg">Contact Us</span>
+    <div className="w-8 sm:w-10 h-8 sm:h-10 bg-black rounded-full flex items-center justify-center transition-all duration-300 group-hover:bg-white ml-4">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-5 sm:w-6 h-5 sm:h-6 text-white transition-transform duration-300 group-hover:text-black group-hover:translate-x-1"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+      </svg>
+    </div>
+  </button>
+</div>
+
+
+     
 </div>
 </div>
 </div>
@@ -407,7 +469,7 @@ Facilitating fairer,more  <br />
                   <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center px-8">
                     {/* Logo Section */}
                     <div className="flex items-center space-x-4 mb-6 sm:mb-0">
-                      <img src={logos} alt="Company Logo" className="w-32 h-32" />
+                      <img src={logo1} alt="Company Logo" className="w-32 h-32" />
                     </div>
           
                     {/* Contact Section */}
@@ -483,9 +545,28 @@ Facilitating fairer,more  <br />
                         <div className="mb-8 sm:mb-0">
                           <h5 className="text-lg font-semibold mb-5">Follow us</h5>
                           <ul className="space-y-2">
-                            <li><a href="/linkedin" className="text-gray hover:underline text-lg">LinkedIn</a></li>
-                            <li><a href="/instagram" className="text-gray hover:underline text-lg">Instagram</a></li>
-                            <li><a href="/facebook" className="text-gray hover:underline text-lg">Facebook</a></li>
+                           <li>
+                          <a
+                            href="https://x.com/transevIN?t=yJ30BdH5D7TME1ZZQiQisw&s=09"
+                            className="text-gray hover:underline text-lg"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              width="28"
+                              height="28"
+                            >
+                              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+                            </svg>
+                          </a>
+                        </li>
+                                    <li><a href="https://www.instagram.com/__transmogrify__?igsh=MWRzY25tc2wzMnk1ag==" className="text-gray hover:underline text-lg"> <FaInstagram color="#E1306C" size={28} /></a></li>
+                                    <li><a href="https://www.facebook.com/share/1NvgEQvwxG/" className="text-gray hover:underline text-lg"> <FaFacebook color="#1877F2" size={28} /></a></li>
                           </ul>
                         </div>
           

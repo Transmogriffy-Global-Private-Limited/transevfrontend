@@ -4,86 +4,88 @@ import Navbar from './Navbar';
 import logo from '../assets/transev logo.png';  
 import newsImage1 from '../assets/image1.png';  
 import newsImage2 from '../assets/imagee2.jpg';  
-import newsImage3 from '../assets/new2.jpg';  
+import newsImage3 from '../assets/new3.jpg';  
 import newsImage4 from '../assets/holiday.jpg';  
 import newsImage5 from '../assets/nwe1.jpg';  
-import newsImage6 from '../assets/slide6.jpg';  
-import newsImage7 from '../assets/new.jpg';  
+import newsImage6 from '../assets/c4.png';  
+import newsImage7 from '../assets/c1.png';  
 import newsImage8 from '../assets/new4.png';  
 import newsImage9 from '../assets/image.png';  
-import logos from '../assets/up.png'
+import logos from '../assets/up.png';
+import logo1 from '../assets/tv.png';
+import { FaTwitter, FaInstagram, FaFacebook } from 'react-icons/fa';
 const newsArticles = [
   {
     id: 1,
     title: "E-Rickshaws Drive EV Sales increase in West Bengal",
-    date: "April 2, 2025",
-    description: "TransEV has launched a new renewable energy initiative, aiming to reduce carbon emissions and power thousands of homes with sustainable energy sources.",
+    date: "April 2, 2024",
+    description: "A total of 1,25,531 electric vehicles, including battery-operated ones, were registered in Bengal till Dec 2024.",
     image: newsImage1,
-    link: "/energy-savers-week-how-ev-ownership-can-help-you-save-energy-and-money"
+    link: "#"
   },
   {
     id: 2,
     title: "Electric vehicles make an impact: EV sales soar at the start of New Year",
     date: "March 28, 2025",
-    description: "Scientists at Energy Park have developed a new solar technology that promises to boost the energy efficiency of solar panels by 20%, setting a new industry standard.",
+    description: "The electric wave has reached Calcutta, and the city is slowly but surely adopting battery-electric vehicles (BEVs) as a mode of transport.",
     image: newsImage2,
-    link: "/ev-charging-explained-everything-you-need-to-know-to-stay-powered-up"
+    link: "#"
   },
   {
     id: 3,
     title: "Kolkata to Get India’s Largest EV Charging Hub, Second Biggest Globally",
     date: "March 22, 2025",
-    description: "A strategic partnership between Energy Park and GreenTech will expand the network of electric vehicle charging stations across the country.",
+    description: "It will be the second-largest EV charging hub in the world with 300 chargers, he said, adding that China has the largest facility housing 650 chargers at a single location",
     image: newsImage3,
-    link: "/3-tips-for-getting-the-most-out-of-your-ev-during-the-festive-period"
+    link: "#"
   },
   {
     id: 4,
     title: "India world's largest 3 wheeler EV market - 2nd year in a row - factors behind driving the surge",
     date: "March 15, 2025",
-    description: "TransEV is exploring the possibility of constructing a large wind farm that could provide clean energy to thousands of homes.",
+    description: "It will be the second-largest EV charging hub in the world with 300 chargers, he said, adding that China has the largest facility housing 650 chargers at a single location.",
     image: newsImage4,
-    link: "/the-top-5-ev-myths-debunked"
+    link: "#"
   },
   {
     id: 5,
-    title: "Inclusive EV Charging: PAS 1899 and the Future of Accessibility ",
+    title: "Bengal records 1.2L e-vehicles, govt offers tax cut for green transport ",
     date: "March 10, 2025",
-    description: "TransEV has begun a new initiative to promote sustainable building practices in residential and commercial properties.",
+    description: "To further incentivise the adoption of electric vehicles, the state's transport department would offer reduced tax rattes for EVs, making it more affordable for individuals as well as businesses.",
     image: newsImage5,
-    link: "/making-ev-charging-accessible-for-all-a-look-at-pas-1899-and-the-future-of-inclusive-ev-infrastructure"
+    link: "#"
   },
   {
     id: 6,
     title: "India Leads Electric Three-Wheeler Market",
     date: "March 5, 2025",
-    description: "A new smart grid technology is being implemented by Energy Park, which promises to enhance the efficiency of power distribution across cities.",
+    description: "A new smart grid technology is being implemented by Energy Park, which promises to enhance the efficiency of power distribution across citieWith over 90% of both conventional and electric 3W sales coming from China and India combined, the market is extremely concentrated.",
     image: newsImage6,
-    link: "/what-to-consider-when-installing-ev-charging-at-an-apartment-building"
+    link: "#"
   },
   {
     id: 7,
-    title: "5 Reasons to Install EV Charge Points at your Apartment Building",
-    date: "February 25, 2025",
-    description: "TransEV plans to expand its network of electric vehicle charging stations to 50 new locations nationwide.",
+    title: "EV dilemma: Pragmatic Indian buyers fight between reliability and novelty",
+    date: "Friday May 16, 2025",
+    description: "Reliability remains at the heart of automotive decision-making in India. For many, automobiles are long-term investments, and consumers seek assurance in areas like EV battery life, driving range, and service accessibility",
     image: newsImage7,
-    link: "/5-reasons-to-install-ev-charge-points-at-your-apartment-building"
+    link: "#"
   },
   {
     id: 8,
-    title: "Solar Power Storage: The Future of Clean Energy",
+    title: "Going electric: On India and the electric vehicle space",
     date: "February 20, 2025",
-    description: "TransEV is working on a new solar power storage solution that will help store excess energy generated during the day for use at night.",
+    description: "India’s decision to exempt import duties on 35 capital goods used in the manufacture of electric vehicle (EV) batteries and 28 items used in the making of mobile phone batteries is a welcome step toward boosting domestic manufacturing and clean technology adoption.",
     image: newsImage8,
-    link: "/solar-power-storage-the-future-of-clean-energy"
+    link: "#"
   },
   {
     id: 9,
-    title: "TransEv’s Commitment to Sustainability",
+    title: "Trends in electric car markets – Global EV Outlook 2025 – Analysis",
     date: "February 15, 2025",
-    description: "TransEV is continuing its efforts to reduce its environmental impact and promote sustainability across all its operations.",
+    description: "Global electric car sales exceeded 17 million in 2024.More than 20% of new cars sold worldwide were electric.Electric car sales topped 17 million worldwide in 2024, rising by more than 25%.",
     image: newsImage9,
-    link: "/trans-evs-commitment-to-sustainability"
+    link: "#"
   }
 ];
  
@@ -166,7 +168,7 @@ function NewsPage() {
       <div className="bg-white py-16 mt-10">
         <div className="container mx-auto flex justify-between items-center px-8">
           <div className="flex items-center space-x-4">
-            <img src={logos} alt="TransEV Logo" className="w-32 h-32" />
+            <img src={logo1} alt="TransEV Logo" className="w-32 h-32" />
           </div>
 
           <div className="text-right">
@@ -231,9 +233,28 @@ function NewsPage() {
             <div className="mb-8 sm:mb-0">
               <h5 className="text-lg font-semibold mb-5">Follow us</h5>
               <ul className="space-y-2">
-                <li><a href="/linkedin" className="text-gray hover:underline">LinkedIn</a></li>
-                <li><a href="/instagram" className="text-gray hover:underline">Instagram</a></li>
-                <li><a href="/facebook" className="text-gray hover:underline">Facebook</a></li>
+                 <li>
+                <a
+                  href="https://x.com/transevIN?t=yJ30BdH5D7TME1ZZQiQisw&s=09"
+                  className="text-gray hover:underline text-lg"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    width="28"
+                    height="28"
+                  >
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+                  </svg>
+                </a>
+              </li>
+                                             <li><a href="https://www.instagram.com/__transmogrify__?igsh=MWRzY25tc2wzMnk1ag==" className="text-gray hover:underline text-lg"> <FaInstagram color="#E1306C" size={28} /></a></li>
+                                             <li><a href="https://www.facebook.com/share/1NvgEQvwxG/" className="text-gray hover:underline text-lg"> <FaFacebook color="#1877F2" size={28} /></a></li>
               </ul>
             </div>
 

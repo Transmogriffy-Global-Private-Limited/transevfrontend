@@ -6,7 +6,8 @@ import contactImage from '../assets/office.png';
  import logos from '../assets/up.png'
 const BASE_URL_AND_PORT = "http://192.168.0.106:8000";
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
-
+import { FaTwitter, FaInstagram, FaFacebook } from 'react-icons/fa';
+import logo1 from '../assets/tv.png';
 const ContactPage = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [formErrors, setFormErrors] = useState({});
@@ -25,54 +26,64 @@ const ContactPage = () => {
 
   const handleCheckboxChange = () => setIsChecked(!isChecked);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
 
-    const errors = {};
-    const requiredFields = ['firstname', 'lastname', 'email', 'message'];
+const handleSubmit = async (event) => {
+  event.preventDefault();
 
-    // Validating required fields
-    requiredFields.forEach((field) => {
-      if (!formData[field]) errors[field] = `${field} is required`;
-    });
+  const errors = {};
+  const requiredFields = ['firstname', 'lastname', 'email', 'message'];
 
-    // Validating privacy checkbox
-    if (!isChecked) errors.privacy = 'You must agree with the privacy statement';
+  requiredFields.forEach((field) => {
+    if (!formData[field]) errors[field] = `${field} is required`;
+  });
 
-    setFormErrors(errors);
+  if (!isChecked) errors.privacy = 'You must agree with the privacy statement';
 
-    if (Object.keys(errors).length === 0) {
-      try {
-        // Sending form data to the backend in the specified format
-        const res = await fetch(`${BASE_URL_AND_PORT}/contact/contactus`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'API-KEY': API_KEY,
-          },
-          body: JSON.stringify({
-            firstname: formData.firstname,
-            lastname: formData.lastname,
-            telephone: formData.telephone,
-            email: formData.email,
-            message: formData.message,
-          }),
+  setFormErrors(errors);
+
+  if (Object.keys(errors).length === 0) {
+    try {
+      const res = await fetch(`${BASE_URL_AND_PORT}/contact/contactus`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'API-KEY': API_KEY,
+        },
+        body: JSON.stringify({
+          firstname: formData.firstname,
+          lastname: formData.lastname,
+          telephone: formData.telephone,
+          email: formData.email,
+          message: formData.message,
+        }),
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        alert('Message sent successfully! We will get back to you soon.');
+        
+        // Reset the form
+        setFormData({
+          firstname: '',
+          lastname: '',
+          telephone: '',
+          email: '',
+          message: '',
         });
-
-        const data = await res.json();
-        if (res.ok) {
-          alert('Message sent successfully! We will get back to you soon.');
-        } else {
-          alert('Submission failed: ' + (data.message || 'Unknown error'));
-        }
-      } catch (error) {
-        alert('Network error: ' + error.message);
+        setIsChecked(false);
+        setFormErrors({});
+        window.scrollTo(0, 0);
+      } else {
+        alert('Submission failed: ' + (data.message || 'Unknown error'));
       }
+    } catch (error) {
+      alert('Network error: ' + error.message);
     }
-  };
- useEffect(() => {
-    window.scrollTo(0, 0); // Ensures the page scrolls to the top whenever the page is loaded
-  }, []);
+  }
+};
+useEffect(() => {
+     window.scrollTo(0, 0); // Ensures the page scrolls to the top whenever the page is loaded
+   }, []);
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
@@ -217,7 +228,7 @@ const ContactPage = () => {
           <div className="flex flex-col lg:flex-row justify-between items-center">
             {/* Left Side: Logo */}
             <div className="flex items-center space-x-4 mb-8 lg:mb-0">
-              <img src={logos} alt="Company Logo" className="w-32 h-32" />
+              <img src={logo1} alt="Company Logo" className="w-32 h-32" />
             </div>
 
             {/* Right Side: Phone and Email */}
@@ -277,9 +288,28 @@ const ContactPage = () => {
           <div>
             <h5 className="text-base sm:text-lg font-semibold mb-4">Follow us</h5>
             <ul className="space-y-2 text-sm sm:text-base">
-              <li><a href="/linkedin" className="hover:underline">LinkedIn</a></li>
-              <li><a href="/instagram" className="hover:underline">Instagram</a></li>
-              <li><a href="/facebook" className="hover:underline">Facebook</a></li>
+               <li>
+              <a
+                href="https://x.com/transevIN?t=yJ30BdH5D7TME1ZZQiQisw&s=09"
+                className="text-gray hover:underline text-lg"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  width="28"
+                  height="28"
+                >
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+                </svg>
+              </a>
+            </li>
+                       <li><a href="https://www.instagram.com/__transmogrify__?igsh=MWRzY25tc2wzMnk1ag==" className="text-gray hover:underline text-lg"> <FaInstagram color="#E1306C" size={28} /></a></li>
+                       <li><a href="https://www.facebook.com/share/1NvgEQvwxG/" className="text-gray hover:underline text-lg"> <FaFacebook color="#1877F2" size={28} /></a></li>
             </ul>
           </div>
 

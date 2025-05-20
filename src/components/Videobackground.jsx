@@ -10,7 +10,7 @@ import car3Video from '../assets/car3.mp4';
 function VideoBackground() {
   const [videoIndex, setVideoIndex] = useState(0);
 
-  const videos = [ car2Video,carVideo,car3Video];
+  const videos = [ car3Video,car2Video,carVideo];
   // const videos =[background];
 
   // Cycle through the videos every 8 seconds
