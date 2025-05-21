@@ -96,7 +96,7 @@ const Navbar = () => {
         </div>
 <div className="flex justify-center items-center space-x-8 bg-[#75833F] py-3">
      
-     <div className="w-full flex justify-center md:justify-end lg:ml-300">
+     <div className="w-full flex justify-center md:justify-end lg:ml-330">
   <Link 
     to="/" 
     className="text-white text-lg flex items-center gap-2 hover:underline"

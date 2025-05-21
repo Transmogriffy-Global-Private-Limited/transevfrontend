@@ -295,7 +295,7 @@ const handleBuyNowClick = () => {
   <div className="w-full lg:w-2/3 pr-8 mb-8 lg:mb-0"> {/* Added padding-right and margin-bottom for spacing */}
     
     <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal font-aeonik leading-tight max-w-screen-lg mx-auto">
-  Be <span className="text-red-400 font-semibold">Ready</span> <br />
+  Be <span className="text-orange-400 font-semibold">Ready</span> <br />
   For the Future with our <br />
   <span className="font-normal">Scalable <span className="text-green-400 font-semibold">EV</span> Charging Solutions.</span>
 </h2> 

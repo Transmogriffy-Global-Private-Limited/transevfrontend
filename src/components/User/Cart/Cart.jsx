@@ -500,7 +500,7 @@ const [imageIndex, setImageIndex] = useState({});
         value={globalPaymentOption}
         onChange={(e) => setGlobalPaymentOption(e.target.value)}
       >
-        <option value="Cash">POD (Pay On Delivery)</option>
+        {/* <option value="Cash">POD (Pay On Delivery)</option> */}
         <option value="UPI">UPI</option>
         <option value="Card">Card</option>
       </select>

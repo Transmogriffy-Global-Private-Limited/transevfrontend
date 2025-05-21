@@ -7,7 +7,7 @@ import slide4 from '../assets/c3.png';
 import about1 from '../assets/c2.png';
 import about2 from '../assets/imagee2.jpg';
 import logos from '../assets/up.png';
-
+import {  FaHome,FaUserCircle } from "react-icons/fa"; 
 function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -118,7 +118,25 @@ const BASE_URL_AND_PORT = "https://api.static.ev.transev.site";
     setTimeout(() => navigate('/contact'), 500);
   };
 
+const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isConfirmLogout, setIsConfirmLogout] = useState(false);
+ 
 
+  // Function to toggle dropdown visibility
+  const toggleDropdown = () => {
+    setIsDropdownOpen((prev) => !prev);
+  };
+
+  // Open confirmation dialog for logout
+  const confirmLogout = () => {
+    setIsConfirmLogout(true);
+    setIsDropdownOpen(false);  // Close the dropdown when logout is confirmed
+  };
+
+  // Close confirmation dialog
+  const cancelLogout = () => {
+    setIsConfirmLogout(false);
+  };
 const handleLogout = async () => {
   const token = localStorage.getItem("auth_token");
   if (!token) return;
@@ -183,13 +201,14 @@ const handleLogout = async () => {
           {isLoggedIn ? (
             <>
               <Link to="/dashboard">
-                <img
+                {/* <img
                   src={userData?.profile_picture || "https://via.placeholder.com/40"}
                   alt="User"
                   className="w-10 h-10 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-18 lg:h-18 xl:w-12 xl:h-12 object-cover cursor-pointer rounded-full border-2 border-gray-300"
-                />
+                /> */}
+                <FaUserCircle size={30} color="black" />
               </Link>
-              <button onClick={handleLogout} className="hover:underline font-medium text-base">Logout</button>
+              {/* <button onClick={handleLogout} className="hover:underline font-medium text-base">Logout</button> */}
             </>
           ) : (
             <Link to="/login" className="hover:underline font-medium text-base">Login</Link>
