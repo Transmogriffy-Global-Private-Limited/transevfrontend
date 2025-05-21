@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import loginImage from "../../assets/new3.jpg";
+import { HiEye, HiEyeOff } from "react-icons/hi"; // Importing eye icons from react-icons
 
 const BASE_URL = "https://api.static.ev.transev.site";
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
@@ -15,6 +16,7 @@ const LoginPage = () => {
   const [authToken, setAuthToken] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false); // State for password visibility toggle
 
   const navigate = useNavigate();
 
@@ -137,13 +139,10 @@ const LoginPage = () => {
         <div className="bg-teal-600 text-white py-4 mb-6 rounded-t-lg">
           <h2 className="text-3xl font-bold text-center">Login</h2>
           {showSuccessPopup && (
-        
-          <div className="bg-white p-2 rounded-lg shadow-md text-center">
-            <h2 className="text-2xl font-bold text-green-600">Login Successful!</h2>
-          
-          </div>
-       
-      )}
+            <div className="bg-white p-2 rounded-lg shadow-md text-center">
+              <h2 className="text-2xl font-bold text-green-600">Login Successful!</h2>
+            </div>
+          )}
         </div>
 
         {!showOtpForm ? (
@@ -160,10 +159,10 @@ const LoginPage = () => {
                 required
               />
             </div>
-            <div className="mb-4">
+            <div className="mb-4 relative">
               <label className="block text-gray-700">Password</label>
               <input
-                type="password"
+                type={passwordVisible ? "text" : "password"} // Toggle between text and password
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
@@ -171,6 +170,12 @@ const LoginPage = () => {
                 className="w-full p-3 border border-gray-300 rounded"
                 required
               />
+              <div
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer mt-3"
+                onClick={() => setPasswordVisible(!passwordVisible)} // Toggle password visibility
+              >
+                {passwordVisible ? <HiEyeOff size={24} /> : <HiEye size={24} />} {/* Eye icon */}
+              </div>
             </div>
             {error && <div className="text-red-500 mb-4">{error}</div>}
             <button
@@ -235,9 +240,6 @@ const LoginPage = () => {
           </form>
         )}
       </div>
-
-    
-     
     </div>
   );
 };

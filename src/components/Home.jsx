@@ -87,10 +87,7 @@ const handlePopupClose = () => {
 };
 
 
-  const handleBuyNowClick = () => {
-  
-    window.location.href = '/login'; // Redirect to login page
-  };
+ 
   
   const sliderImages = [red,c1, c3, c5,c4, slid];
   const smallImages = [eo,zaptec, easee, ctek, garo, schneider];
@@ -208,7 +205,21 @@ useEffect(() => {
       }, []);
       const slideDuration = 3; // seconds
 const totalSlides = imagezoom.length;
-const totalDuration = slideDuration * totalSlides; // total animation cycle
+const totalDuration = slideDuration * totalSlides; 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+useEffect(() => {
+  const token = localStorage.getItem('auth_token');
+  setIsLoggedIn(!!token);
+}, []);
+
+const handleBuyNowClick = () => {
+  if (isLoggedIn) {
+    navigate('/products');
+  } else {
+    navigate('/login');
+  }
+};// total animation cycle
  return (
   <div className="relative w-full overflow-x-hidden">
     <div className="relative w-full h-screen">

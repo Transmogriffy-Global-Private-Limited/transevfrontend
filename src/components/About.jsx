@@ -465,7 +465,7 @@ Facilitating fairer,more  <br />
 </div>
 </div>
   {/* Footer */}
-                <div className="bg-white-50 py-16 ml-20">
+                <div className="bg-white-50 py-16 ml-8">
                   <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center px-8">
                     {/* Logo Section */}
                     <div className="flex items-center space-x-4 mb-6 sm:mb-0">
@@ -541,16 +541,12 @@ Facilitating fairer,more  <br />
                           </ul>
                         </div>
           
-                        {/* Follow Us Links */}
-                        <div className="mb-8 sm:mb-0">
-                          <h5 className="text-lg font-semibold mb-5">Follow us</h5>
-                          <ul className="space-y-2">
-                           <li>
-                          <a
-                            href="https://x.com/transevIN?t=yJ30BdH5D7TME1ZZQiQisw&s=09"
-                            className="text-gray hover:underline text-lg"
-                          >
-                            <svg
+                       
+                        <div className="mb-8 sm:mb-0 text-center sm:text-left">
+  <h5 className="text-lg font-semibold mb-5">Follow us</h5>
+  <ul className="space-y-2 inline-block sm:block">
+    <li>
+      <a href="https://x.com/transevIN?t=yJ30BdH5D7TME1ZZQiQisw&s=09" className="text-gray-600 hover:text-blue-500"> <svg
                               xmlns="http://www.w3.org/2000/svg"
                               viewBox="0 0 24 24"
                               fill="none"
@@ -562,13 +558,17 @@ Facilitating fairer,more  <br />
                               height="28"
                             >
                               <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
-                            </svg>
-                          </a>
-                        </li>
-                                    <li><a href="https://www.instagram.com/__transmogrify__?igsh=MWRzY25tc2wzMnk1ag==" className="text-gray hover:underline text-lg"> <FaInstagram color="#E1306C" size={28} /></a></li>
-                                    <li><a href="https://www.facebook.com/share/1NvgEQvwxG/" className="text-gray hover:underline text-lg"> <FaFacebook color="#1877F2" size={28} /></a></li>
-                          </ul>
-                        </div>
+                            </svg></a>
+    </li>
+    <li>
+      <a href="https://www.instagram.com/__transmogrify__?igsh=MWRzY25tc2wzMnk1ag==" className="text-gray-600 hover:text-blue-500"><FaInstagram color="#E1306C" size={28}/></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/share/1NvgEQvwxG/" className="text-gray-600 hover:text-blue-500"><FaFacebook color="#1877F2" size={28} /></a>
+    </li>
+  </ul>
+</div>
+
           
                         {/* Legal Links */}
                         <div>

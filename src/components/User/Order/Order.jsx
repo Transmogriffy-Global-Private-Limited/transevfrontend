@@ -71,9 +71,48 @@ function OrderHistoryPage() {
     };
 
     fetchOrderHistory();
-  }, [authReady]); // Only trigger after authReady is true
+  }, [authReady]);
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
+
+  const handleCancelOrder = async (orderId) => {
+  const token = localStorage.getItem("auth_token");
+
+  if (!token) {
+    alert("Please login first");
+    return;
+  }
+
+  try {
+    const response = await axios.post(
+      `${BASE_URL_AND_PORT}/order/cancelorder?order_id=${orderId}`, // Pass order_id as a query parameter
+      {},
+      {
+        headers: {
+          "API-KEY": API_KEY,
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (response.status === 200) {
+      alert("Order successfully canceled!");
+      setOrderHistory((prevOrders) =>
+        prevOrders.map((order) =>
+          order.order_id === orderId
+            ? { ...order, order_status: "canceled" }
+            : order
+        )
+      );
+    } else {
+      alert("Failed to cancel the order. Please try again.");
+    }
+  } catch (error) {
+    console.error("Error canceling the order:", error);
+    alert("Failed to cancel the order. Please try again.");
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-yellow-50 via-green-50 to-white-100 bg-cover bg-center bg-fixed">
@@ -117,16 +156,20 @@ function OrderHistoryPage() {
                       className={`inline-block px-3 py-1 text-s font-semibold rounded-full ${
                         order.order_status === "null"
                           ? "bg-yellow-200 text-yellow-800"
+                          : order.order_status === "pending"
+                          ? "bg-yellow-200 text-yellow-800"
+                          : order.order_status === "canceled"
+                          ? "bg-red-200 text-red-800"
                           : "bg-green-200 text-green-800"
                       }`}
                     >
-                      {order.order_status === "null" ? "Order Confirm" : order.order_status}
+                      {order.order_status === "null" ? "Order Placed" : order.order_status}
                     </span>
                   </p>
                 </div>
                 <p className="text-lg text-gray-600">
                   Delivery Address: <span className="font-medium text-gray-800">{order.deliveryaddress}</span>
-                </p> 
+                </p>
                 <p className="text-lg text-gray-600">
                   Order Date:{" "}
                   <span className="font-medium text-gray-800">
@@ -160,6 +203,16 @@ function OrderHistoryPage() {
                     ))}
                   </ul>
                 </div>
+
+                {/* Show Cancel Button for null and pending statuses only */}
+                {["null", "pending"].includes(order.order_status) && (
+                  <button
+                    onClick={() => handleCancelOrder(order.order_id)}
+                    className="mt-4 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full text-sm font-semibold transition ml-2"
+                  >
+                    Cancel Order
+                  </button>
+                )}
               </div>
             ))
           ) : (
@@ -172,6 +225,3 @@ function OrderHistoryPage() {
 }
 
 export default OrderHistoryPage;
-
-
-

@@ -553,3 +553,4 @@ const [imageIndex, setImageIndex] = useState({});
 };
 
 export default ProductPage;
+

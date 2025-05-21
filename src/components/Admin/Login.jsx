@@ -188,12 +188,12 @@ const LoginPage = () => {
               )}
             </button>
             <div className="text-center mt-4">
-              <p>
+              {/* <p>
                 Don’t have an account?{" "}
                 <Link to="/admin/signup" className="text-teal-600">
                   Sign Up
                 </Link>
-              </p>
+              </p> */}
               <p className="mt-2">
                 <Link to="/admin/forgot-password" className="text-teal-600">
                   Forgot Password?
@@ -243,3 +243,4 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
+

@@ -107,11 +107,7 @@ const Hotels = () => {
        setPopupOpen(false);
      };
 
-  const handleBuyNowClick = () => {
-    // Handle login or any other logic for "Buy Now"
-    // Redirecting to login page for now (you can change this logic based on your app)
-    window.location.href = '/login'; // Redirect to login page
-  };
+  
   const containerRef = useRef(null); // Ref to handle scrolling
 
   const handleArrowClick = (direction) => {
@@ -141,6 +137,20 @@ const Hotels = () => {
    useEffect(() => {
       window.scrollTo(0, 0); // Ensures the page scrolls to the top whenever the page is loaded
     }, []);
+      const [isLoggedIn, setIsLoggedIn] = useState(false);
+    
+    useEffect(() => {
+      const token = localStorage.getItem('auth_token');
+      setIsLoggedIn(!!token);
+    }, []);
+    
+    const handleBuyNowClick = () => {
+      if (isLoggedIn) {
+        navigate('/products');
+      } else {
+        navigate('/login');
+      }
+    };
   return (
     <div className="min-h-screen bg-white-50">
       {/* Navbar Section */}
@@ -671,7 +681,7 @@ const Hotels = () => {
 </div>
 </div>
            {/* Footer */}
-           <div className="bg-white-50 py-16 ml-20">
+           <div className="bg-white-50 py-16 mx-auto sm:ml-6 ">
              <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center px-8">
                {/* Logo Section */}
                <div className="flex items-center space-x-4 mb-6 sm:mb-0">
