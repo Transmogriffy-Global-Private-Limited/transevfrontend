@@ -4,7 +4,7 @@
 // import { useNavigate } from "react-router-dom";
 // import Sidebar from "../User/User_sidebar";
 // import logo from '../../assets/log.png'
-// const BASE_URL_AND_PORT = "http://192.168.0.106:8000";
+// const BASE_URL_AND_PORT = "https://api.static.ev.transev.site";
 // const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
 
 // const Navbar = () => {
@@ -174,7 +174,7 @@ import { useNavigate } from "react-router-dom";
 import Sidebar from "../User/User_sidebar";
 import logo from '../../assets/log.png'
 import { Link } from "react-router-dom";
-const BASE_URL_AND_PORT = "http://192.168.0.106:8000";
+const BASE_URL_AND_PORT = "https://api.static.ev.transev.site";
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
 
 const Navbar = () => {

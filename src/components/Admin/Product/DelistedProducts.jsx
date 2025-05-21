@@ -5,7 +5,7 @@ import backgroundImage from '../../../assets/workplace.jpg';
 import AdminNavbar from '../Admin_navbar';
 import AdminSidebar from "../Admin_sidebar";
 
-const BASE_URL_AND_PORT = 'http://192.168.0.106:8000';
+const BASE_URL_AND_PORT = 'https://api.static.ev.transev.site';
 const API_KEY = 'mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf';
 
 const DelistedProductsPage = () => {

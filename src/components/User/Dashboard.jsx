@@ -16,7 +16,7 @@ import Ac_Charger from '../../assets/walmount.png'; // Imported AC Charger image
 import DC_charger from '../../assets/portable.png'; // Imported DC Charger image
 import newcharger from '../../assets/DC60.png'; // Imported new charger image
 
-const BASE_URL_AND_PORT = 'http://192.168.0.106:8000';
+const BASE_URL_AND_PORT = 'https://api.static.ev.transev.site';
 const API_KEY = 'mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);

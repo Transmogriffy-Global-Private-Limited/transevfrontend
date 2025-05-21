@@ -5,7 +5,7 @@ import UserNavbar from "../../User/User_Navbar";
 import background from "../../../assets/slider.jpg";
 import chargerImage from "../../../assets/tf13.png"; // ✅ Your charger image
 
-const BASE_URL_AND_PORT = "http://192.168.0.106:8000";
+const BASE_URL_AND_PORT = "https://api.static.ev.transev.site";
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
 
 const api = axios.create({

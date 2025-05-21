@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"; // Hook for navigation after suc
 import AdminNavbar from '../Admin_navbar'; // Assuming you have a Navbar component
 import AdminSidebar from "../Admin_sidebar"; // Assuming you have a Sidebar component
 import backgroundImage from '../../../assets/workplace.jpg'; // Import the local image
-const BASE_URL_AND_PORT = "http://192.168.0.106:8000"; // Define the base URL and port
+const BASE_URL_AND_PORT = "https://api.static.ev.transev.site"; // Define the base URL and port
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf"; // Define the API key
 
 const AddProductPage = () => {

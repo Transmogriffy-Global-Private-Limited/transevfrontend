@@ -6,7 +6,7 @@ import background from "../../assets/ev_charger.jpg";
  // adjust path as needed
 
 const Profile = () => {
-  const BASE_URL_AND_PORT = "http://192.168.0.106:8000"; // Define the base URL and port
+  const BASE_URL_AND_PORT = "https://api.static.ev.transev.site"; // Define the base URL and port
   const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf"; // API Key (for demonstration purposes)
   const [user, setUser] = useState(null);
   const [newImage, setNewImage] = useState(null); // Store the new uploaded image
@@ -128,9 +128,9 @@ const handleEditInputChange = (e) => {
   
     let url;
     if (addressType === 'Other' && customTypeName) {
-      url = `http://192.168.0.106:8000/users/address/Other/set-default?custom_name=${customTypeName}`;
+      url = `https://api.static.ev.transev.site/users/address/Other/set-default?custom_name=${customTypeName}`;
     } else {
-      url = `http://192.168.0.106:8000/users/address/${addressType}/set-default`;
+      url = `https://api.static.ev.transev.site/users/address/${addressType}/set-default`;
     }
   
     try {
@@ -367,9 +367,9 @@ const handleEditInputChange = (e) => {
         let url;
       
         if (addressType === 'Other' && customTypeName) {
-          url = `http://192.168.0.106:8000/users/address/Other?custom_name=${customTypeName}`;
+          url = `https://api.static.ev.transev.site/users/address/Other?custom_name=${customTypeName}`;
         } else {
-          url = `http://192.168.0.106:8000/users/address/${addressType}`;
+          url = `https://api.static.ev.transev.site/users/address/${addressType}`;
         }
       
         try {
@@ -413,7 +413,7 @@ const handleEditInputChange = (e) => {
       // Update logic for "Other" address type
       if (editingAddressType === "Other") {
         const response = await fetch(
-          `http://192.168.0.106:8000/users/address/Other?custom_name=${updatedData.custom_type_name}`,
+          `https://api.static.ev.transev.site/users/address/Other?custom_name=${updatedData.custom_type_name}`,
           {
             method: "PATCH",
             headers: {
@@ -435,7 +435,7 @@ const handleEditInputChange = (e) => {
       } else {
         // Handle other address types
         const response = await fetch(
-          `http://192.168.0.106:8000/users/address/${editingAddressType}`,
+          `https://api.static.ev.transev.site/users/address/${editingAddressType}`,
           {
             method: "PATCH",
             headers: {

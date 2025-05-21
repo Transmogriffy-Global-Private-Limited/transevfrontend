@@ -179,7 +179,7 @@ const IndustrialSupport = () => {
       
                   <div className="text-3xl sm:text-5xl font-semibold text-gray-800">
                     <a
-                      href="mailto:enquiries@energy-park.co.uk"
+                      href="mailto:tgwbin@gmail.com"
                       className="relative inline-block hover:text-black-500"
                     >
                       <span className="hover:underline transition-all duration-300 mt-2">tgwbin@gmail.com</span>

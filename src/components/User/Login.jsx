@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import loginImage from "../../assets/new3.jpg";
 
-const BASE_URL = "http://192.168.0.106:8000";
+const BASE_URL = "https://api.static.ev.transev.site";
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
 
 const LoginPage = () => {
