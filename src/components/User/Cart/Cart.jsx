@@ -472,7 +472,7 @@ const [imageIndex, setImageIndex] = useState({});
         className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded shadow"
         onClick={() => setIsModalOpen(true)}
     >
-        Order Place
+         Place Order
     </button>
 )}
 

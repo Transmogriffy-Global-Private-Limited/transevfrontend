@@ -8,6 +8,7 @@ import about1 from '../assets/c2.png';
 import about2 from '../assets/imagee2.jpg';
 import logos from '../assets/up.png';
 import {  FaHome,FaUserCircle } from "react-icons/fa"; 
+import { jwtDecode } from "jwt-decode";
 function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -25,19 +26,46 @@ const BASE_URL_AND_PORT = "https://api.static.ev.transev.site";
   const solutionCaptions = ['Home and Housing Societies', 'Office and Workplace', 'Public Places', 'Fleet Organization'];
   const aboutCaptions = ['Who we are', 'How we work'];
 
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 100);
-    window.addEventListener('scroll', handleScroll);
+  // useEffect(() => {
+  //   const handleScroll = () => setIsScrolled(window.scrollY > 100);
+  //   window.addEventListener('scroll', handleScroll);
 
-    if (token) {
+  //   if (token) {
+  //     setIsLoggedIn(true);
+  //     fetchUserProfile(token);
+  //   } else {
+  //     setIsLoggedIn(false);
+  //   }
+
+  //   return () => window.removeEventListener('scroll', handleScroll);
+  // }, [token]);
+  useEffect(() => {
+  const handleScroll = () => setIsScrolled(window.scrollY > 100);
+  window.addEventListener('scroll', handleScroll);
+
+  if (token) {
+    const loginTimestamp = parseInt(localStorage.getItem('login_timestamp'), 10);
+    const currentTime = Date.now();
+    const diffDays = (currentTime - loginTimestamp) / (1000 * 60 * 60 * 24   ); // ms to days
+
+    if (diffDays > 365) {
+      handleLogout(); // Expired - remove token and user data
+      // ❌ Don't navigate
+      setIsLoggedIn(false); // Show logged-out navbar
+      setUserData(null);
+      setToken(null);
+    } else {
       setIsLoggedIn(true);
       fetchUserProfile(token);
-    } else {
-      setIsLoggedIn(false);
     }
+  } else {
+    setIsLoggedIn(false);
+  }
 
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [token]);
+  return () => window.removeEventListener('scroll', handleScroll);
+}, [token]);
+
+
 
   const fetchUserProfile = async (token) => {
     try {

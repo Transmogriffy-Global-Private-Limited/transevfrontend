@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState,useEffect} from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import loginImage from "../../assets/new3.jpg";
 import { HiEye, HiEyeOff } from "react-icons/hi"; // Importing eye icons from react-icons
+// ✅ Correct
 
 const BASE_URL = "https://api.static.ev.transev.site";
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
@@ -33,7 +34,17 @@ const LoginPage = () => {
       console.error("Error decoding token:", err);
     }
   };
+ useEffect(() => {
+    const token = localStorage.getItem("auth_token");
+    const loginTimestamp = parseInt(localStorage.getItem("login_timestamp"), 10);
+    const currentTime = Date.now();
 
+    if (token && loginTimestamp && (currentTime - loginTimestamp) < 365 * 24 * 60 * 60 * 1000 ) {
+      navigate("/dashboard");
+    }
+  }, [navigate]);
+
+ 
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "otp_code") {
@@ -63,6 +74,8 @@ const LoginPage = () => {
       if (authorizationHeader?.startsWith("Bearer ")) {
         const token = authorizationHeader.substring(7);
         localStorage.setItem("auth_token", token);
+        
+      localStorage.setItem("login_timestamp", Date.now()); // ✅ Store login time
         setAuthToken(token);
         decodeAndStoreUser(token);
       }

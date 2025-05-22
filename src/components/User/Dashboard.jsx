@@ -215,7 +215,7 @@ const [sidebarOpen, setSidebarOpen] = useState(true);
             </section>
 
             {/* Top Stats */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 ">
               <div className="bg-white p-6 rounded-xl shadow border-l-4 border-teal-500">
                 <h3 className="text-lg font-semibold">Total Product Order</h3>
                 <p className="text-3xl font-bold">{totalChargers}</p>
@@ -228,10 +228,7 @@ const [sidebarOpen, setSidebarOpen] = useState(true);
                 <h3 className="text-lg font-semibold">Total Order</h3>
                 <p className="text-3xl font-bold">{totalOrders}</p>
               </div>
-              <div className="bg-white p-6 rounded-xl shadow border-l-4 border-indigo-500">
-                <h3 className="text-lg font-semibold">Avg. Usage</h3>
-                <p className="text-3xl font-bold">876 kWh</p>
-              </div>
+           
             </div>
 
             {/* Purchase Summary */}

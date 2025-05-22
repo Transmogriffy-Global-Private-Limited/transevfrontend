@@ -498,9 +498,18 @@ const handleBuyNowClick = () => {
 
     {/* Pair 2 */}
     <div className="pair pair-2 absolute top-0 left-0">
-      <h2 className="text-xl sm:text-xl md:text-xl font-bold animate-slide-up-text  whitespace-nowrap">
+      {/* <h2 className="text-xl sm:text-xl md:text-xl font-bold animate-slide-up-text  whitespace-nowrap">
         Effortless management and maintenance
-      </h2>
+      </h2> */}
+      <h2 className="text-xl sm:text-xl md:text-xl font-bold animate-slide-up-text">
+  <span className="block sm:hidden">
+    Effortless management and<br />  maintenance
+  </span>
+  <span className="hidden sm:inline whitespace-nowrap">
+    Effortless management and maintenance
+  </span>
+</h2>
+
       <p className="text-base sm:text-lg md:text-lg mt-4 animate-slide-up-text max-w-full md:max-w-[95%] xl:max-w-[700px]">
 We provide effortless management and maintainance, so you can focus on what matters most      </p>
     </div>
