@@ -83,9 +83,11 @@ const Navbar = () => {
       <header className="flex items-center justify-between px-4 py-3 md:px-6">
         {/* Left Side: Logo and Sidebar Toggle */}
         <div className="flex items-center gap-4">
-          <button onClick={toggleSidebar} className="text-white md:hidden">
+         <button onClick={toggleSidebar} className="text-white md:hidden">
             <FaBars size={24} />
-          </button>
+          </button> 
+       
+
           <Link to="/dashboard">
           <img
             src={logo}
@@ -96,20 +98,25 @@ const Navbar = () => {
         </div>
 <div className="flex justify-center items-center space-x-8 bg-[#75833F] py-3">
      
-     <div className="w-full flex justify-center md:justify-end lg:ml-330">
-  <Link 
-    to="/" 
-    className="text-white text-lg flex items-center gap-2 hover:underline"
-  >
-    <FaHome size={20} />
-  </Link>
+    
+<div className="w-full flex justify-center md:justify-end">
+  <div className="w-full max-w-screen-xl px-4 flex justify-end">
+    <Link 
+      to="/" 
+      className="text-white text-lg flex items-center gap-2 hover:underline xl:ml-250 lg:mr-[-200]"
+    >
+      <FaHome size={20} />
+    </Link>
+  </div>
 </div>
 
 
 
       </div>
         {/* Right Side: User Info and Dropdown */}
-        <div className="flex items-center gap-3">
+         <div className="flex items-center gap-3"> 
+   
+
           <span className="hidden md:inline-block text-white text-lg lg:text-xl">
             Hello, {userData?.name || "User"}
           </span>
@@ -140,9 +147,11 @@ const Navbar = () => {
                   Logout
                 </button>
               </div>
+         
             )}
           </div>
         </div>
+      
       </header>
 
       {/* Sidebar for Mobile */}

@@ -22,7 +22,7 @@ const API_KEY = 'mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf';
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const Dashboard = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  
   const [purchaseData, setPurchaseData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [totalOrders, setTotalOrders] = useState(0); // New state for total orders
@@ -162,9 +162,11 @@ const Dashboard = () => {
 
   const totalChargers = purchaseData.reduce((sum, item) => sum + item.total_items_purchased, 0);
   const totalAmount = purchaseData.reduce((sum, item) => sum + item.total_purchase_amount, 0);
+const [sidebarOpen, setSidebarOpen] = useState(true);
+
 
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-r from-green-50 to-green-100 text-gray-800">
+    <div className="flex flex-col min-h-screen bg-gradient-to-r from-white-50 to-white-100 text-gray-800">
       {/* Navbar */}
       <UserNavbar onToggleSidebar={toggleSidebar} />
 
@@ -172,8 +174,8 @@ const Dashboard = () => {
       <div className="flex flex-1">
         <UserSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
 
-        <main className="flex-1 p-6 md:p-8 lg:p-12 overflow-y-auto bg-white rounded-tl-3xl shadow-md lg:ml-10">
-          <div className="max-w-7xl mx-auto space-y-10">
+      <main className="flex-1 p-6 md:p-8 lg:p-12 overflow-y-auto bg-white rounded-tl-3xl shadow-md lg:mr-50 xl:ml-55"> 
+    <div className="max-w-7xl mx-auto space-y-10">
             {/* New Arrival EV Chargers */}
             <section>
               <h2 className="text-xl font-bold text-teal-700 mb-4">New Arrival EV Chargers</h2>

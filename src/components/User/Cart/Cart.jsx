@@ -362,7 +362,7 @@ const [imageIndex, setImageIndex] = useState({});
                     
     return (
         <div
-            className="min-h-screen bg-gradient-to-r from-yellow-100 via-teal-100 to-orange-100 bg-cover bg-center bg-fixed"
+            className="min-h-screen bg-gradient-to-r from-white-100 via-white-100 to-white-100 bg-cover bg-center bg-fixed"
             
         >
             <UserNavbar onToggleSidebar={toggleSidebar} />
@@ -493,14 +493,14 @@ const [imageIndex, setImageIndex] = useState({});
 >
 
  <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-      <h2 className="text-lg font-bold mb-4">Select Payment Method</h2>
+      {/* <h2 className="text-lg font-bold mb-4">Select Payment Method</h2>
       
       <select
         className="w-full border px-4 py-2 rounded mb-4"
         value={globalPaymentOption}
         onChange={(e) => setGlobalPaymentOption(e.target.value)}
       >
-        {/* <option value="Cash">POD (Pay On Delivery)</option> */}
+        <option value="Cash">POD (Pay On Delivery)</option>
         <option value="UPI">UPI</option>
         <option value="Card">Card</option>
       </select>
@@ -513,13 +513,13 @@ const [imageIndex, setImageIndex] = useState({});
           Cancel
         </button>
 
-        {/* ✅ Show Confirm button with label based on payment option */}
+     
         {globalPaymentOption === "Cash" ? (
           <button
             className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             onClick={() => {
               setIsModalOpen(false);
-              placeOrder(); // Directly place order without payment
+              placeOrder(); 
             }}
           >
             Confirm Order
@@ -529,15 +529,49 @@ const [imageIndex, setImageIndex] = useState({});
             className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
             onClick={() => {
               setIsModalOpen(false);
-              placeOrder(); // Razorpay for UPI / Card
+              placeOrder(); 
             }}
           >
             Confirm & Pay
           </button>
-        )}
-      </div>
-    </div>
+        )} */}
+        <h2 className="text-lg font-bold mb-4">Select Payment Method</h2>
+  
+ 
+ <select
+    className="w-full border px-4 py-2 rounded mb-4"
+    value={globalPaymentOption}
+    onChange={(e) => setGlobalPaymentOption(e.target.value)}
+  >
+    <option value="">Select Payment Option</option>
+    <option value="UPI">UPI</option>
+    <option value="Card">Card</option>
+  </select>
+  <div className="flex justify-end gap-4">
+    <button
+      className="bg-gray-300 hover:bg-gray-400 text-black font-bold py-2 px-4 rounded"
+      onClick={() => setIsModalOpen(false)}
+    >
+      Cancel
+    </button>
+
+    {/* Show Confirm button with label based on payment option */}
+    {globalPaymentOption === "UPI" || globalPaymentOption === "Card" ? (
+      <button
+        className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+        onClick={() => {
+          setIsModalOpen(false);
+          placeOrder(); // Razorpay for UPI / Card
+        }}
+      >
+        Confirm & Pay
+      </button>
+    ) : null}
   </div>
+</div>
+      </div>
+  //   </div>
+  // </div>
 )}
 
 

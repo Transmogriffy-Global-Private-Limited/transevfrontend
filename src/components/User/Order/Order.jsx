@@ -75,7 +75,9 @@ function OrderHistoryPage() {
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
-  const handleCancelOrder = async (orderId) => {
+
+
+const handleCancelOrder = async (orderId) => {
   const token = localStorage.getItem("auth_token");
 
   if (!token) {
@@ -85,8 +87,8 @@ function OrderHistoryPage() {
 
   try {
     const response = await axios.post(
-      `${BASE_URL_AND_PORT}/order/cancelorder?order_id=${orderId}`, // Pass order_id as a query parameter
-      {},
+      `${BASE_URL_AND_PORT}/order/cancelorder`,
+      { order_id: orderId }, // ✅ Corrected: order_id in body
       {
         headers: {
           "API-KEY": API_KEY,
@@ -112,7 +114,6 @@ function OrderHistoryPage() {
     alert("Failed to cancel the order. Please try again.");
   }
 };
-
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-yellow-50 via-green-50 to-white-100 bg-cover bg-center bg-fixed">

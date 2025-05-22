@@ -84,7 +84,7 @@ const Sidebar = ({ isVisible = false, onClose = () => {} }) => {
           </button> */}
 <button
   onClick={() => setIsExpanded((prev) => !prev)}
-  className="hidden md:block text-white"
+  className="hidden md:block text-white lg:mr-10" 
 >
   {isExpanded ? <FaAngleDoubleLeft size={20} /> : <FaBars size={20} />}
 </button>
