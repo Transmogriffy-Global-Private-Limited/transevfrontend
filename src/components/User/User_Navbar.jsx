@@ -6,6 +6,7 @@ import Sidebar from "../User/User_sidebar";
 import logo from '../../assets/log.png'
 import { Link } from "react-router-dom";
 import {  FaHome } from "react-icons/fa"; 
+
 const BASE_URL_AND_PORT = "https://api.static.ev.transev.site";
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
 
@@ -99,16 +100,16 @@ const Navbar = () => {
 <div className="flex justify-center items-center space-x-8 bg-[#75833F] py-3">
      
     
-<div className="w-full flex justify-center md:justify-end">
+{/* <div className="w-full flex justify-center md:justify-end">
   <div className="w-full max-w-screen-xl px-4 flex justify-end">
     <Link 
       to="/" 
-      className="text-white text-lg flex items-center gap-2 hover:underline xl:ml-250 lg:mr-[-200]"
+      className="text-white text-lg flex items-center gap-2 hover:underline xl:ml-250 lg:mr-[-200] "
     >
       <FaHome size={20} />
     </Link>
   </div>
-</div>
+</div> */}
 
 
 

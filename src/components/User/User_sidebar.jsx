@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaBars, FaAngleDoubleLeft } from "react-icons/fa";
-
+import { MdDashboard } from 'react-icons/md';
 import {
   FaHome,
   FaBox,
@@ -98,7 +98,7 @@ const Sidebar = ({ isVisible = false, onClose = () => {} }) => {
         {/* Navigation */}
         <ul className="mt-4 space-y-1 px-2">
           <SidebarLink
-            icon={<FaHome />}
+            icon={<MdDashboard />}
             to="/dashboard"
             label="Dashboard"
             showText={isExpanded}
@@ -140,6 +140,12 @@ const Sidebar = ({ isVisible = false, onClose = () => {} }) => {
             icon={<FaCog />}
             to="/setting"
             label="Settings"
+            showText={isExpanded}
+          />
+           <SidebarLink
+            icon={<FaHome />}
+            to="/"
+            label=" Return to Home"
             showText={isExpanded}
           />
         </ul>
