@@ -340,7 +340,7 @@ Facilitating fairer,more  <br />
         <span role="img" aria-label="Education">🎓</span>
       </div>
       <h3 className="text-xl font-semibold text-gray-800 group-hover:text-blue-600">Smart Administrative Platform for Educational Institutions</h3>
-      <p className="text-gray-500 mt-2">Online Learning Platform</p>
+      <p className="text-gray-500 mt-2">School Management System</p>
     </Link>
   </div>
 
@@ -372,7 +372,7 @@ Facilitating fairer,more  <br />
       <div className="text-6xl mb-4 text-gray-700">
         <span role="img" aria-label="CMS">📄</span>
       </div>
-      <h3 className="text-xl font-semibold text-gray-800 group-hover:text-blue-600">PowerFlow Management</h3>
+      <h3 className="text-xl font-semibold text-gray-800 group-hover:text-blue-600">Charger Management</h3>
       <p className="text-gray-500 mt-2">Charging Management System</p>
     </Link>
   </div>

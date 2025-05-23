@@ -13,7 +13,8 @@ function OrderHistoryPage() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [loading, setLoading] = useState(true);
   const [authReady, setAuthReady] = useState(false);
-
+const [cancelOrderId, setCancelOrderId] = useState(null);
+const [customReason, setCustomReason] = useState("");
   // Wait for DOM to fully load before accessing localStorage
   useEffect(() => {
     const init = async () => {
@@ -76,32 +77,61 @@ function OrderHistoryPage() {
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
 
-
-const handleCancelOrder = async (orderId) => {
+const handleCancelOrder = async () => {
   const token = localStorage.getItem("auth_token");
 
-  if (!token) {
-    alert("Please login first");
+  const isOtherSelected = cancelReason === "Other";
+  const isCustomReasonValid = customReason.trim() !== "";
+
+  // Validate inputs
+  if (!token || !cancelOrderId || cancelReason === "" || (isOtherSelected && !isCustomReasonValid)) {
+    alert("Please select or enter a reason before submitting.");
     return;
   }
+
+  const payload = {
+    order_id: cancelOrderId,
+    reasonforcancel: isOtherSelected ? "other" : cancelReason,
+    otherreasonforcancel: isOtherSelected ? customReason.trim() : ""
+  };
 
   try {
     const response = await axios.post(
       `${BASE_URL_AND_PORT}/order/cancelorder`,
-      { order_id: orderId }, // ✅ Corrected: order_id in body
+      payload,
       {
         headers: {
           "API-KEY": API_KEY,
           Authorization: `Bearer ${token}`,
-        },
+        }
       }
     );
 
+    // ✅ Success response
     if (response.status === 200) {
       alert("Order successfully canceled!");
+
+      // Update frontend order status
       setOrderHistory((prevOrders) =>
         prevOrders.map((order) =>
-          order.order_id === orderId
+          order.order_id === cancelOrderId
+            ? { ...order, order_status: "canceled" }
+            : order
+        )
+      );
+    }
+
+  } catch (error) {
+    console.error("Error canceling the order:", error);
+
+    // ✅ Handle already canceled message
+    if (error.response?.data?.message?.includes("already been canceled")) {
+      alert("This order has already been canceled.");
+
+      // Optionally update UI to reflect canceled status
+      setOrderHistory((prevOrders) =>
+        prevOrders.map((order) =>
+          order.order_id === cancelOrderId
             ? { ...order, order_status: "canceled" }
             : order
         )
@@ -109,12 +139,23 @@ const handleCancelOrder = async (orderId) => {
     } else {
       alert("Failed to cancel the order. Please try again.");
     }
-  } catch (error) {
-    console.error("Error canceling the order:", error);
-    alert("Failed to cancel the order. Please try again.");
+  } finally {
+    // Always reset cancel form
+    setCancelOrderId(null);
+    setCancelReason("");
+    setCustomReason("");
   }
 };
 
+
+const cancellationReasons = [
+    "Too much delay delivery",
+    "Found a better price elsewhere",
+    "Changed my mind",
+    "Other"
+  ];
+    const [cancelReason, setCancelReason] = useState("");
+  const [cancelFormVisible, setCancelFormVisible] = useState(false);
   return (
     <div className="min-h-screen bg-gradient-to-r from-yellow-50 via-green-50 to-white-100 bg-cover bg-center bg-fixed">
       <UserNavbar onToggleSidebar={toggleSidebar} />
@@ -205,21 +246,94 @@ const handleCancelOrder = async (orderId) => {
                   </ul>
                 </div>
 
-                {/* Show Cancel Button for null and pending statuses only */}
-                {["null", "pending"].includes(order.order_status) && (
-                  <button
-                    onClick={() => handleCancelOrder(order.order_id)}
-                    className="mt-4 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full text-sm font-semibold transition ml-2"
-                  >
-                    Cancel Order
-                  </button>
-                )}
-              </div>
-            ))
-          ) : (
-            <p className="text-center text-lg font-medium text-gray-600">No orders found.</p>
-          )}
-        </div>
+          
+     {/* Cancel Section */}
+{["null", "pending"].includes(order.order_status) && (
+  <>
+    {/* Cancel Button */}
+    {cancelOrderId !== order.order_id && (
+      <button
+        onClick={() => setCancelOrderId(order.order_id)}
+        className="mt-4 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full text-sm sm:text-base font-semibold transition ml-0 sm:ml-2"
+      >
+        Cancel Order
+      </button>
+    )}
+
+    {/* Cancel Popup Form */}
+    {cancelOrderId === order.order_id && (
+      <div className="mt-4 bg-white p-4 rounded-lg shadow-md relative w-full max-w-xl mx-auto sm:mx-0">
+        {/* Close button */}
+        <button
+          onClick={() => {
+            setCancelOrderId(null);
+            setCancelReason("");
+            setCustomReason("");
+          }}
+          className="absolute top-2 right-2 text-gray-500 hover:text-red-500 text-xl font-bold"
+          aria-label="Close"
+        >
+          &times;
+        </button>
+
+        <h4 className="text-lg sm:text-xl font-semibold mb-3 text-gray-800">
+          Please select a reason for cancellation:
+        </h4>
+
+        {/* Dropdown */}
+        <select
+          value={cancelReason}
+          onChange={(e) => setCancelReason(e.target.value)}
+          className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg text-sm sm:text-base"
+        >
+          <option value="">Select a reason</option>
+          {cancellationReasons.map((reason, index) => (
+            <option key={index} value={reason}>
+              {reason}
+            </option>
+          ))}
+        </select>
+
+        {/* Custom Reason Field */}
+        {cancelReason === "Other" && (
+          <div className="mt-3 w-full">
+            <label
+              htmlFor="customReason"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              Custom Reason
+            </label>
+            <input
+              id="customReason"
+              type="text"
+              placeholder="Please specify your reason"
+              value={customReason}
+              onChange={(e) => setCustomReason(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none text-sm sm:text-base"
+            />
+          </div>
+        )}
+
+        {/* Submit Button */}
+        <button
+          onClick={handleCancelOrder}
+          className="mt-4 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full text-sm sm:text-base font-semibold transition w-full sm:w-auto"
+        >
+          Submit Cancellation
+        </button>
+      </div>
+    )}
+  </>
+)}
+
+    </div>
+  ))
+) : (
+  <p className="text-center text-lg font-medium text-gray-600 py-10">
+    No orders found.
+  </p>
+)}
+ </div>
       </div>
     </div>
   );

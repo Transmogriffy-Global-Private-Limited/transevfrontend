@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AdminSidebar from "../Admin_sidebar";
 import AdminNavbar from "../Admin_navbar";
-
+import { flushSync } from 'react-dom';
 const BASE_URL_AND_PORT = "https://api.static.ev.transev.site";
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
 
@@ -10,7 +10,7 @@ const ORDER_STATUS_OPTIONS = [
   { value: "Processing", label: "Processing" },
   { value: "Shipped", label: "Shipped" },
   { value: "Delivered", label: "Delivered" },
-  { value: "Pending", label: "Pending" },
+  { value: "Accepted", label: "Accepted" },
    { value: "null", label: "OrderPlaced" },
 ];
 
@@ -21,21 +21,22 @@ const ManageOrders = () => {
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState({});
   const [selectedStatus, setSelectedStatus] = useState("");
-
+ const [showCanceledOrders, setShowCanceledOrders] = useState(false);
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
 
   const statusColor = (status) => {
     switch (status) {
+      case "Accepted":
+        return "bg-orange-100 text-red-800";
       case "Processing":
         return "bg-yellow-100 text-yellow-800";
       case "Shipped":
         return "bg-blue-100 text-blue-800";
       case "Delivered":
         return "bg-green-100 text-green-800";
-      case "Pending":
-        return "bg-red-100 text-red-800";
+      
         case "Order Placed":
         return "bg-green-100 text-green-800"; 
       default:
@@ -97,6 +98,11 @@ const ManageOrders = () => {
       });
   };
 
+
+
+
+
+
   const handleCancelOrder = async (orderId) => {
     setUpdating((prev) => ({ ...prev, [orderId]: true }));
 
@@ -127,14 +133,22 @@ const ManageOrders = () => {
     }
   };
 
-  const filterOrdersByStatus = (status) => {
-    setSelectedStatus(status);
-    if (status === "") {
-      setFilteredOrders(orders);
-    } else {
-      setFilteredOrders(orders.filter((order) => order.order_status === status));
-    }
-  };
+  
+const filterOrdersByStatus = (status) => {
+  setSelectedStatus(status);
+
+  if (!status) {
+    // if status is empty or falsy, reset filter
+    setFilteredOrders(orders);
+  } else {
+    const lowerStatus = status.toLowerCase();
+    setFilteredOrders(
+      orders.filter(
+        (order) => order.order_status?.toLowerCase() === lowerStatus
+      )
+    );
+  }
+};
 
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-r from-green-50 to-green-100 text-gray-800">
@@ -161,6 +175,18 @@ const ManageOrders = () => {
                   {option.label}
                 </button>
               ))}
+          <button
+            onClick={() => {
+              setShowCanceledOrders((prev) => !prev);
+              setSelectedStatus(""); // reset status filter if needed
+            }}
+            className={`px-4 py-2 rounded-md text-white ${
+              showCanceledOrders ? "bg-red-700" : "bg-red-500"
+            }`}
+          >
+            {showCanceledOrders ? "Hide Canceled Orders" : "Canceled Orders"}
+          </button>
+             
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -258,87 +284,112 @@ const ManageOrders = () => {
                         </details>
                       </div>
 
-                      <div className="mt-4 flex flex-wrap gap-2 items-center">
-                        <select
-                          className="border rounded-md px-3 py-1 text-sm focus:ring-2 focus:ring-indigo-300"
-                          value={
-                            !order.order_status || order.order_status === "null"
-                              ? ""
-                              : order.order_status
-                          }
-                          onChange={(e) => handleStatusChange(order.order_id, e.target.value)}
-                          disabled={updating[order.order_id]}
-                        >
-                          {ORDER_STATUS_OPTIONS.map((opt) => (
-                            <option key={opt.value} value={opt.value}>
-                              {opt.label}
-                            </option>
-                          ))}
-                        </select>
+                     {/* Show dropdown only if order is NOT canceled */}
+{order.order_status?.toLowerCase() !== "canceled" && (
+  <div className="mt-4 flex flex-wrap gap-2 items-center">
+    <select
+      className="border rounded-md px-3 py-1 text-sm focus:ring-2 focus:ring-indigo-300"
+      value={
+        !order.order_status || order.order_status === "null"
+          ? ""
+          : order.order_status
+      }
+      onChange={(e) => handleStatusChange(order.order_id, e.target.value)}
+      disabled={updating[order.order_id]}
+    >
+      {ORDER_STATUS_OPTIONS.map((opt) => (
+        <option key={opt.value} value={opt.value}>
+          {opt.label}
+        </option>
+      ))}
+    </select>
 
-                        {/* {(!order.order_status || order.order_status.toLowerCase() === "pending") && (
-                          <button
-                            className="px-4 py-1 text-sm bg-red-500 text-white rounded-md hover:bg-red-600"
-                            onClick={() => handleCancelOrder(order.order_id)}
-                            disabled={updating[order.order_id]}
-                          >
-                            Cancel Order
-                          </button>
-                        )} */}
+    {updating[order.order_id] && (
+      <span className="text-sm text-gray-400 ml-2">Updating...</span>
+    )}
+  </div>
+)}
 
-                        {updating[order.order_id] && (
-                          <span className="text-sm text-gray-400 ml-2">Updating...</span>
-                        )}
                       </div>
-                    </div>
+                  
                   );
                 })
               )}
-            </div>
-
-            {/* Cancelled Orders Section */}
-            <div className="mt-12">
-              <h2 className="text-2xl font-semibold text-red-700 mb-4 text-center">Canceled Orders</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {orders.filter(order => order.order_status?.toLowerCase() === "canceled").length === 0 ? (
-                  <p className="col-span-full text-center text-gray-500">No canceled orders.</p>
-                ) : (
-                  orders
-                    .filter(order => order.order_status?.toLowerCase() === "canceled")
-                    .map((order) => (
-                      <div
-                        key={order.order_id}
-                        className="bg-white border border-red-200 rounded-xl shadow-lg p-6"
-                      >
-                        <div className="flex justify-between items-center mb-2">
-                          <h3 className="text-lg font-semibold text-red-700">
-                            {order.product_name} ({order.product_model})
-                          </h3>
-                          <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-xs font-semibold">
-                            Canceled
-                          </span>
-                        </div>
-                        <p className="text-sm text-gray-600 mb-1">
-                          <strong>Order ID:</strong> {order.order_id}
-                        </p>
-                        <p className="text-sm text-gray-600 mb-1">
-                          <strong>Customer:</strong> {order.user_name}
-                        </p>
-                        <p className="text-sm text-gray-600 mb-1">
-                          <strong>Email:</strong> {order.user_email}
-                        </p>
-                        <p className="text-sm text-gray-600 mb-1">
-                          <strong>Total:</strong> ₹{order.total_amount}
-                        </p>
+            </div> 
+ 
+           
+          {/* Canceled Orders Section - show only if toggled */}
+        {showCanceledOrders && (
+          <div className="mt-12">
+            <h2 className="text-2xl font-semibold text-red-700 mb-4 text-center">
+              Canceled Orders
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {orders.filter(
+                (order) => order.order_status?.toLowerCase() === "canceled"
+              ).length === 0 ? (
+                <p className="col-span-full text-center text-gray-500">
+                  No canceled orders.
+                </p>
+              ) : (
+                orders
+                  .filter((order) => order.order_status?.toLowerCase() === "canceled")
+                  .map((order) => (
+                    <div
+                      key={order.order_id}
+                      className="bg-white border border-red-200 rounded-xl shadow-lg p-6"
+                    >
+                      <div className="flex justify-between items-center mb-2">
+                        <h3 className="text-lg font-semibold text-red-700">
+                          {order.product_name} ({order.product_model})
+                        </h3>
+                        <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-xs font-semibold">
+                          Canceled
+                        </span>
                       </div>
-                    ))
-                )}
+                      <p className="text-sm text-gray-600 mb-1">
+                        <strong>Order ID:</strong> {order.order_id}
+                      </p>
+                      <p className="text-sm text-gray-600 mb-1">
+                        <strong>Customer:</strong> {order.user_name}
+                      </p>
+                      <p className="text-sm text-gray-600 mb-1">
+                        <strong>Email:</strong> {order.user_email}
+                      </p>
+                      <p className="text-sm text-gray-600 mb-1">
+                        <strong>Total:</strong> ₹{order.total_amount}
+                      </p>
+
+                      {order.reasonforcancel && order.reasonforcancel !== "other" && (
+                        <p className="text-sm text-black-600 font-medium mt-3">
+                          <strong>Cancellation Reason:</strong> {order.reasonforcancel}
+                        </p>
+                      )}
+
+                      {order.reasonforcancel === "other" && order.otherreasonforcancel && (
+                        <>
+                          <p className="text-sm text-black-600 font-medium mt-3">
+                            <strong>Cancellation Reason:</strong> Other
+                          </p>
+                          <p className="text-sm text-gray-700 mt-1 ml-2 italic">
+                            &ldquo;{order.otherreasonforcancel}&rdquo;
+                          </p>
+                        </>
+                      )}
+                    </div>
+                  ))
+              )}
+            </div>
+          </div>
+        )}
+               
+          
+           
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+     
   );
 };
 

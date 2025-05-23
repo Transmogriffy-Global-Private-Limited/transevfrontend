@@ -88,7 +88,14 @@ const LoginPage = () => {
         setTimeout(() => navigate("/dashboard"), 1500);
       } else {
         const data = await response.json();
+        // setError(data.message || "Login failed.");
+         // ✅ Specific handling for invalid credentials
+      if (response.status === 401 || response.status === 400 ) {
+        setError("Invalid credentials. Please check your email and password.");
+      } else {
         setError(data.message || "Login failed.");
+      }
+    
       }
     } catch (err) {
       console.error("Login error:", err);

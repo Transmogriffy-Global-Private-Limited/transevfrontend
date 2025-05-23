@@ -370,8 +370,11 @@ const [imageIndex, setImageIndex] = useState({});
                 <UserSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
                 {/* <div className="container mx-auto p-4 pt-6 mt-10 bg-[#f0f0f0] ml-55"> */}
                 <div className="w-full px-4 py-6 mt-10 bg-orange sm:max-w-7xl mx-auto">
-           <h2 className="text-3xl font-bold mb-4 ml-150 text-green-600">Your Cart</h2>
-                    
+          
+                   <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-green-600 text-center sm:text-left lg:text-center">
+  Your Cart
+</h2>
+ 
                     <div className="flex flex-col">
                         <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
                             <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
@@ -581,7 +584,7 @@ const [imageIndex, setImageIndex] = useState({});
     <h3 className="font-semibold text-xl text-gray-800">Delivery Address</h3>
     <button
       onClick={() => navigate('/profile')}
-      className="text-sm text-blue-600 hover:text-blue-800 underline"
+      className="text-sm text-blue-600 hover:text-blue-800 underline "
     >
       Change
     </button>
