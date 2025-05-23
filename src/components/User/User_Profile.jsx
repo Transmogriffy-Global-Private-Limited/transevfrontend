@@ -219,20 +219,27 @@ const handleEditInputChange = (e) => {
         body: formData, // Sending the file as form data
       });
 
-      if (response.ok) {
-        fetchProfilePicture(); // Refresh the profile picture after successful upload
-        setSuccessMessage("Profile picture uploaded successfully!"); // Display success message
-        setError(""); // Clear any previous errors
+  
+   if (response.ok) {
+      fetchProfilePicture(); // Refresh the profile picture after successful upload
+      setSuccessMessage("Profile picture uploaded successfully!");
+      setError(""); // Clear any previous error
+    } else {
+      const data = await response.json();
+      // Show backend error if provided
+      if (data?.detail) {
+        setError(data.detail);
       } else {
-        setError("Failed to upload profile picture");
-        setSuccessMessage(""); // Clear success message if error occurs
+        setError("Failed to upload profile picture.");
       }
-    } catch (error) {
-      console.error("Error uploading profile picture:", error);
-      setError("An error occurred while uploading the profile picture.");
-      setSuccessMessage(""); // Clear success message if error occurs
+      setSuccessMessage(""); // Clear success message if an error occurs
     }
-  };
+  } catch (error) {
+    console.error("Error uploading profile picture:", error);
+    setError("An error occurred while uploading the profile picture.");
+    setSuccessMessage(""); // Clear success message if error occurs
+  }
+};
 
   // Handle form input changes
   const handleChange = (e) => {
