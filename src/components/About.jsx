@@ -304,10 +304,11 @@ Facilitating fairer,more  <br />
     <p class="text-xl text-gray-700 mb-6">
       Everything is designed to give you full control and transparency over your EV charging experience.
     </p>
-    {/* <a href="https://play.google.com/store/apps/details?id=com.transev.evcharging" class="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold text-lg lg:text-xl px-6 py-3 rounded-md transition duration-300">
-      Explore the App
-    </a> */}
-    <a href="https://play.google.com/store/apps/details?id=com.transev.evcharging" class="inline-block text-white font-semibold text-lg lg:text-xl px-6 py-3 rounded-md bg-gradient-to-r from-orange-600 via-pink-300 to-green-700 hover:from-green-700 hover:to-green-800 transition duration-300">
+  
+   <a
+  href="https://play.google.com/store/apps/details?id=com.transev.evcharging"
+  className="inline-block text-white font-semibold text-lg lg:text-xl px-6 py-3 rounded-md bg-black hover:bg-green-900 transition duration-300"
+>
   Explore the App
 </a>
 
@@ -370,7 +371,7 @@ Facilitating fairer,more  <br />
   <div className="project-card group text-center bg-white p-6 rounded-lg shadow-xl hover:scale-105 transform transition duration-300 ease-in-out hover:shadow-2xl hover:bg-blue-50">
   <Link to="/charger" className="block"> 
       <div className="text-6xl mb-4 text-gray-700">
-        <span role="img" aria-label="CMS">📄</span>
+        <span role="img" aria-label="CMS">⚡</span>
       </div>
       <h3 className="text-xl font-semibold text-gray-800 group-hover:text-blue-600">Charger Management</h3>
       <p className="text-gray-500 mt-2">Charging Management System</p>
