@@ -68,7 +68,7 @@ const Workplace = () => {
     {
       question: " What is the process for installing EV charging stations at my business?",
       answer:
-        "Customers can reach out to us through our 'Contact Us' porrtal with the required details, which would then be forwarded to the relevant team members. Our team will promptly reach out to discuss and propose suitable solutions based on your specific requirements. ",
+        "Customers can reach out to us through our 'Contact Us' portal with the required details, which would then be forwarded to the relevant team members. Our team will promptly reach out to discuss and propose suitable solutions based on your specific requirements. ",
     },
     {
       question: "How long does the installation process take?",

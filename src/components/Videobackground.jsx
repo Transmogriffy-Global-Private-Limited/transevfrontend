@@ -2,16 +2,17 @@
 import React, { useEffect, useState } from 'react';
 
 // Import videos directly from the src folder
-import carVideo from '../assets/car.mov';
-import car2Video from '../assets/car2.mp4';
-import car3Video from '../assets/car3.mp4';
+// import carVideo from '../assets/car.mov';
+// import car2Video from '../assets/car2.mp4';
+// import car3Video from '../assets/car3.mp4';
+import websitevideo from '../assets/web.mp4';
 //  import background from '../assets/background.mp4';
 
 function VideoBackground() {
   const [videoIndex, setVideoIndex] = useState(0);
 
-  const videos = [ car3Video,car2Video,carVideo];
-  // const videos =[background];
+  // const videos = [ car3Video,car2Video,carVideo];
+  const videos =[websitevideo];
 
   // Cycle through the videos every 8 seconds
   useEffect(() => {
@@ -34,7 +35,7 @@ function VideoBackground() {
           {/* Video sources for both MP4 and MOV */}
           <source src={video} type="video/mp4" />
           {/* Add alternative source for .mov format */}
-          {video === carVideo && <source src={carVideo} type="video/quicktime" />}
+          {/* {video === carVideo && <source src={carVideo} type="video/quicktime" />} */}
         </video>
       ))}
     </div>
