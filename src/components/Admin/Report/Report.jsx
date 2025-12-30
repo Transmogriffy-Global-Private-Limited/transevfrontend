@@ -14,7 +14,7 @@ import AdminNavbar from '../Admin_navbar';
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 const API_KEY = 'mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf';
-const BASE_URL = 'https://api.static.ev.transev.site';
+const BASE_URL = 'http://192.168.0.103:3000';
 
 const AdminDashboard = () => {
   const [contacts, setContacts] = useState([]);

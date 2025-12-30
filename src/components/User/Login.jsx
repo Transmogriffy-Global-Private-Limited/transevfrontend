@@ -5,7 +5,8 @@ import loginImage from "../../assets/new3.jpg";
 import { HiEye, HiEyeOff } from "react-icons/hi"; // Importing eye icons from react-icons
 // ✅ Correct
 
-const BASE_URL = "https://api.static.ev.transev.site";
+// const BASE_URL = "https://api.static.ev.transev.site";
+const BASE_URL = "http://192.168.0.103:3000";
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
 
 const LoginPage = () => {

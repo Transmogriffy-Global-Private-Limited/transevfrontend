@@ -7,7 +7,7 @@ import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Toolti
 // Register Chart.js components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-const BASE_URL_AND_PORT = 'https://api.static.ev.transev.site';
+const BASE_URL_AND_PORT = 'http://192.168.0.103:3000';
 const API_KEY = 'mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf';
 
 const Dashboard = () => {

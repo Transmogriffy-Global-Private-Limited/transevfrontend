@@ -7,7 +7,7 @@ import { ShoppingCartIcon } from '@heroicons/react/solid';
 import { useNavigate } from 'react-router-dom';
 
 
-const BASE_URL_AND_PORT = "https://api.static.ev.transev.site";
+const BASE_URL_AND_PORT = "http://192.168.0.103:3000";
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
 const token = localStorage.getItem('auth_token');
 

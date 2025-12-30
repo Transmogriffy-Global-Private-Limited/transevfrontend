@@ -556,7 +556,7 @@ import AdminNavbar from '../Admin_navbar';
 import AdminSidebar from "../Admin_sidebar";
 import backgroundImage from '../../../assets/workplace.jpg';
 
-const BASE_URL_AND_PORT = 'https://api.static.ev.transev.site';
+const BASE_URL_AND_PORT = 'http://192.168.0.103:3000';
 const API_KEY = 'mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf';
 
 const ProductEditPage = () => {

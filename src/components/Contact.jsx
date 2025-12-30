@@ -4,7 +4,8 @@ import logo from '../assets/transev logo.png';
 import contactImage from '../assets/office.png';
  import { useEffect } from 'react';
  import logos from '../assets/up.png'
-const BASE_URL_AND_PORT = "https://api.static.ev.transev.site";
+// const BASE_URL_AND_PORT = "https://api.static.ev.transev.site";
+const BASE_URL_AND_PORT = "http://192.168.0.103:3000";
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
 import { FaTwitter, FaInstagram, FaFacebook } from 'react-icons/fa';
 import logo1 from '../assets/tv.png';
@@ -112,7 +113,14 @@ useEffect(() => {
               </p>
               <p className="text-gray-600 mb-2">LANDMARK: OPPOSITE ECOSPACE BUSINESS PARK</p>
               <p className="text-bold-900 mb-2">Tel: 033-4601 5366 / +91 79080 03488</p>
-              <p className="text-bold-900">Email: <a href="mailto:tgwbin@gmail.com" className="underline">tgwbin@gmail.com</a></p>
+              <p className="text-bold-900">Email: <a href="mailto:tgwbin@gmail.com" className="underline">tgwbin@gmail.com </a></p>
+              {/* <p className="font-bold-900">
+  Email: 
+  <a href="mailto:tgwbin@gmail.com" className="underline ml-1">tgwbin@gmail.com</a>
+  <span> / </span>
+  <a href="mailto:chakrapanimondal@tgplin.com" className="underline">chakrapanimondal@tgplin.com</a>
+</p> */}
+
             </div>
 
             <img src={contactImage} alt="Contact" className="rounded-lg shadow-md w-full h-auto mt-4" />
