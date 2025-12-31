@@ -13,7 +13,7 @@ import {
 } from "react-icons/fa";
 import logo from "../../assets/log.png";
 
-const BASE_URL_AND_PORT = "http://192.168.0.103:3000";
+const BASE_URL_AND_PORT = "https://api.static.ev.transev.site";
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
 
 const Sidebar = ({ isVisible = false, onClose = () => {} }) => {

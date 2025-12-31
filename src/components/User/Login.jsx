@@ -6,7 +6,7 @@ import { HiEye, HiEyeOff } from "react-icons/hi"; // Importing eye icons from re
 // ✅ Correct
 
 // const BASE_URL = "https://api.static.ev.transev.site";
-const BASE_URL = "http://192.168.0.103:3000";
+const BASE_URL = "https://api.static.ev.transev.site";
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
 
 const LoginPage = () => {

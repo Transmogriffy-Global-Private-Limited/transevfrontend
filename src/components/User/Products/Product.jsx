@@ -1,556 +1,1003 @@
+// import React, { useState, useEffect } from 'react';
+// import axios from 'axios';
+// import { FaShoppingCart } from 'react-icons/fa'; // Import the Cart Icon
+// import UserSidebar from '../User_sidebar';
+// import UserNavbar from '../User_Navbar';
+// import background from "../../../assets/new3.jpg";
+// const BASE_URL_AND_PORT = "https://api.static.ev.transev.site"; // Define the base URL and port
+// const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf"; // Your API key
+// const token = localStorage.getItem('auth_token'); // Retrieve the token
+
+// const ProductPage = () => {
+//   const [products, setProducts] = useState([]); // Products to display initially
+//   const [allProducts, setAllProducts] = useState([]); // All products fetched from API
+//   const [popupOpen, setPopupOpen] = useState(false);
+//   const [popupContent, setPopupContent] = useState({});
+//   const [hovered, setHovered] = useState(null);
+//   const [displayedProducts, setDisplayedProducts] = useState([]); // To manage products shown
+//   const [sidebarOpen, setSidebarOpen] = useState(true); // Manage sidebar visibility
+//   const [cart, setCart] = useState([]); // Track products added to the cart
+//   const [loading, setLoading] = useState(true); // Manage loading state
+// const [imageIndex, setImageIndex] = useState({});
+//   const toggleSidebar = () => {
+//     setSidebarOpen(!sidebarOpen); // Toggle sidebar visibility
+//   };
+
+//   useEffect(() => {
+//     // Fetch all products from API
+//     const fetchProducts = async () => {
+//       try {
+//         const response = await axios.get(`${BASE_URL_AND_PORT}/products/all`, {
+//           headers: {
+//             Authorization: `Bearer ${token}`,
+//             'API-KEY': API_KEY,
+//           },
+//         });
+//         setAllProducts(response.data); // Store all products
+//         setDisplayedProducts(response.data.slice(0, 12)); // Initially show 12 products
+//         setProducts(response.data.slice(0, 12)); // Initially show 12 products
+//         setLoading(false); // Set loading to false after fetching products
+//       } catch (error) {
+//         console.error('Error fetching products:', error);
+//         setLoading(false); // Set loading to false in case of an error
+//       }
+//     };
+//     fetchProducts();
+//   }, []);
+
+//   // Handle popup open
+//   const handlePopupOpen = async (productId) => {
+//     try {
+//       const response = await axios.get(`${BASE_URL_AND_PORT}/products/get_by_id/${productId}`, {
+//         headers: {
+//           Authorization: `Bearer ${token}`,
+//           'API-KEY': API_KEY,
+//         },
+//       });
+//       setPopupContent(response.data); // Set the popup content
+    
+//       setPopupOpen(true); // Open the popup
+    
+//     } catch (error) {
+//       console.error('Error fetching product details:', error);
+//     }
+//   };
+
+//   // Handle popup close
+//   const handlePopupClose = () => {
+//     setPopupOpen(false);
+//     setPopupContent({});
+//   };
+
+//   // Function to handle See All Products click
+//   const handleSeeAll = () => {
+//     setDisplayedProducts(allProducts); // Display all products when clicked
+//   };
+
+//   // Function to convert base64 string to Blob and create an object URL for it
+
+//   const goToNextImage = (productId) => {
+//     setImageIndex((prev) => {
+//       const currentIndex = prev[productId] || 0;
+//       const product = products.find((product) => product.id === productId);
+//       const nextIndex = (currentIndex + 1) % product.image_paths.length;
+//       return { ...prev, [productId]: nextIndex };
+//     });
+//   };
+
+//   const goToPrevImage = (productId) => {
+//     setImageIndex((prev) => {
+//       const currentIndex = prev[productId] || 0;
+//       const product = products.find((product) => product.id === productId);
+//       const prevIndex = (currentIndex - 1 + product.image_paths.length) % product.image_paths.length;
+//       return { ...prev, [productId]: prevIndex };
+//     });
+//   };
+//   const [popupImageIndex, setPopupImageIndex] = useState(0);
+
+//   const goToNextImageInPopup = () => {
+//     setPopupImageIndex((prevIndex) => (prevIndex + 1) % popupContent.image_paths.length);
+//   };
+  
+//   const goToPrevImageInPopup = () => {
+//     setPopupImageIndex((prevIndex) => (prevIndex - 1 + popupContent.image_paths.length) % popupContent.image_paths.length);
+//   };
+  
+//   const toggleImagePopup = () => {
+//     goToNextImageInPopup();
+//   };
+
+//   // Function to handle Add to Cart
+//   const handleAddToCart = async (productId, price) => {
+//     const userId = localStorage.getItem('user_id'); // Get user ID from local storage
+//     if (!userId) {
+//       alert('Please login first');
+//       return;
+//     }
+
+//     const data = {
+//       user_id: userId, // Use user ID from local storage
+//       productid: productId,
+//       price: price.toString(), // Convert price to string before sending
+//     };
+
+//     try {
+//       // Add the product to the cart if it's not already there
+//       if (!cart.includes(productId)) {
+//         setCart([...cart, productId]); // Add product to cart state
+//         await axios.post(`${BASE_URL_AND_PORT}/cart/addtocart`, data, {
+//           headers: {
+//             Authorization: `Bearer ${token}`,
+//             'API-KEY': API_KEY,
+//           },
+//         });
+//         alert('Product added to cart!');
+//       }
+//     } catch (error) {
+//       console.error('Error adding to cart:', error);
+//     }
+//   };
+ 
+//   return (
+   
+//     <div
+//   className="min-h-screen bg-white-to-r from-white-200 via-green-200 to-white-200 bg-cover bg-center bg-fixed"
+//   style={{
+//     backgroundColor: "#FFFFFF", // Set a solid background color
+//   }}
+// >
+//       {/* User Navbar */}
+//       <UserNavbar onToggleSidebar={toggleSidebar} />
+
+//       {/* Main Container */}
+//       <div className="flex flex-1">
+//         {/* Sidebar */}
+//         <UserSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
+//         {/* <div className="bg-white rounded-lg shadow-lg p-6 ml-50 mt-6 w-400"> */}
+//         <div className="bg-white rounded-lg shadow-lg p-6 mt-6 w-full sm:w-96 lg:w-400 ml-0 sm:ml-4 lg:ml-60">
+//         <h2 className="text-3xl font-bold text-center mb-6">See Our Products</h2>
+//         {displayedProducts.length < allProducts.length && (
+//           <div className="justify-center mt-6 ">
+//             <button
+//               onClick={handleSeeAll}
+//               className="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 transition duration-300"
+//             >
+//               See All Products
+//             </button>
+//           </div>
+//         )}
+       
+//                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 p-8 ml-5">
+//   {loading ? (
+//     <div className="flex justify-center items-center col-span-full h-96">
+//       <div className="animate-spin rounded-full border-t-4 border-blue-500 w-16 h-16"></div>
+//     </div>
+//   ) : (
+//     displayedProducts.map((product, index) => (
+//       <div key={index} className="flex flex-col items-center">
+//         <div
+//           className="box bg-gray-200 p-4 rounded-lg relative cursor-pointer hover:scale-105 transform transition-all duration-300 w-[300px] h-[400px] "
+//           onMouseEnter={() => setHovered(index)}
+//           onMouseLeave={() => setHovered(null)}
+//         >
+      
+ 
+
+//           <div className="flex justify-center items-center w-full h-3/4">
+//             {/* Display product image */}
+//             {product.image_paths?.length > 0 ? (
+//               <img
+//                 src={product.image_paths[imageIndex[product.id] || 0]}  // Use the current image index
+//                 alt={product.name}
+//                 className="w-full h-full object-cover rounded-lg"
+//                 onClick={() => handlePopupOpen(product.id)}  // Opens the popup on click
+//               />
+//             ) : (
+//               <img
+//                 src="https://via.placeholder.com/150"
+//                 alt={product.name}
+//                 className="w-full h-full object-cover rounded-lg"
+//                 onClick={() => handlePopupOpen(product.id)}  // Opens the popup on click
+//               />
+//             )}
+//           </div>
+
+//           {/* Navigation buttons for next and previous image */}
+//           {product.image_paths?.length > 1 && (
+//             <>
+//               <button
+//                 className="absolute top-1/2 left-2 transform -translate-y-1/2 text-white bg-gray-800 bg-opacity-50 p-2 rounded-full"
+//                 onClick={() => goToPrevImage(product.id)}  // Go to the previous image
+//               >
+//                 &#10094;  {/* Left arrow */}
+//               </button>
+//               <button
+//                 className="absolute top-1/2 right-2 transform -translate-y-1/2 text-white bg-gray-800 bg-opacity-50 p-2 rounded-full"
+//                 onClick={() => goToNextImage(product.id)}  // Go to the next image
+//               >
+//                 &#10095;  {/* Right arrow */}
+//               </button>
+//             </>
+//           )}
+
+//           {/* Hover effect for a popup icon */}
+//           <div
+//             className={`absolute top-4 right-4 bg-yellow-300 w-10 h-10 rounded-full flex justify-center items-center transition-all duration-300 ${hovered === index ? 'opacity-100' : 'opacity-0'}`}
+//           >
+//             <svg
+//               xmlns="http://www.w3.org/2000/svg"
+//               className="w-6 h-6 text-black transition-transform duration-300"
+//               fill="none"
+//               viewBox="0 0 24 24"
+//               stroke="currentColor"
+//               onClick={() => handlePopupOpen(product.id)}  // Opens the popup when the icon is clicked
+//             >
+//               <path
+//                 strokeLinecap="round"
+//                 strokeLinejoin="round"
+//                 strokeWidth={2}
+//                 d="M13 7l5 5m0 0l-5 5m5-5H6"
+//               />
+//             </svg>
+//           </div>
+//         </div>
+     
+  
+
+//                 <div className="text-center mt-4">
+//                   <h2 className="text-xl font-bold">{product.name}</h2>
+//                   <p className="text-gray-600 mt-2">{product.model}</p>
+                
+                 
+//                   {product.quantity > 0 ? (
+//   <button
+//     onClick={() => handleAddToCart(product.id, product.price)}
+//     className={`mt-4 flex items-center justify-center px-4 py-2 rounded-md ${
+//       cart.includes(product.id) ? 'bg-green-500' : 'bg-[#faa122]'
+//     } text-white hover:${
+//       cart.includes(product.id) ? 'bg-green-600' : 'bg-blue-600'
+//     }`}
+//   >
+//     <FaShoppingCart className="mr-2" />
+//     {cart.includes(product.id) ? 'Added to Cart' : 'Add to Cart'}
+//   </button>
+// ) : (
+//   <div className="mt-4 text-red-600 font-semibold">No Stock Available</div>
+// )}
+
+//                 </div>
+//               </div>
+//             ))
+//           )}
+//         </div>
+
+//         {/* "See All Products" Button */}
+//         {displayedProducts.length < allProducts.length && (
+//           <div className="justify-center mt-6 ">
+//             <button
+//               onClick={handleSeeAll}
+//               className="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 transition duration-300"
+//             >
+//               See All Products
+//             </button>
+//           </div>
+//         )}
+
+
+//  {/* {popupOpen && (
+//   <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+
+//     <div className="bg-white p-4 sm:p-8 rounded-lg w-full sm:max-w-6xl max-w-full h-auto flex relative shadow-lg overflow-auto">
+   
+//       <button
+//         className="absolute top-4 right-4 text-3xl font-bold text-gray-600 hover:text-gray-900"
+//         onClick={handlePopupClose}
+//       >
+//         &times;
+//       </button>
+
+//       <div className="flex flex-wrap sm:flex-nowrap max-w-full overflow-hidden">
+       
+//         <div className="w-full sm:w-1/2 p-4 relative">
+//           {popupContent.image_paths?.length > 0 ? (
+//             <div className="relative">
+//               <img
+//                 src={popupContent.image_paths[popupImageIndex]}
+//                 alt={popupContent.name}
+//                 className="w-full h-auto object-contain rounded-lg shadow-md cursor-pointer"
+//                 onClick={toggleImagePopup}
+//               />
+//               {popupContent.image_paths.length > 1 && (
+//                 <>
+//                   <button
+//                     onClick={goToPrevImageInPopup}
+//                     className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full"
+//                   >
+//                     &#60;
+//                   </button>
+//                   <button
+//                     onClick={goToNextImageInPopup}
+//                     className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full"
+//                   >
+//                     &#62;
+//                   </button>
+//                 </>
+//               )}
+//             </div>
+//           ) : (
+//             <img
+//               src="https://via.placeholder.com/150"
+//               alt={popupContent.name}
+//               className="w-full h-auto object-contain rounded-lg shadow-md"
+//             />
+//           )}
+
+         
+//           {popupContent.quantity > 0 ? (
+//             <button
+//               onClick={() => handleAddToCart(popupContent.id, popupContent.price)}
+//               className={`mt-4 flex items-center justify-center px-4 py-2 rounded-md ${
+//                 cart.includes(popupContent.id) ? 'bg-green-500' : 'bg-[#faa122]'
+//               } text-white hover:${cart.includes(popupContent.id) ? 'bg-green-600' : 'bg-blue-600'}`}
+//             >
+//               <FaShoppingCart className="mr-2" />
+//               {cart.includes(popupContent.id) ? 'Added to Cart' : 'Add to Cart'}
+//             </button>
+//           ) : (
+//             <div className="mt-4 text-red-600 font-semibold">No Stock Available</div>
+//           )}
+//         </div>
+
+      
+//         <div className="w-full sm:w-1/2 p-4">
+//           <h3 className="text-3xl font-semibold mb-4 text-blue-600">Product Name: {popupContent.name}</h3>
+//           <h4 className="text-3xl font-semibold mb-4 text-green-600">Model: {popupContent.model}</h4>
+//           <h4 className="text-3xl font-semibold mb-4 text-red-600">Price: {popupContent.price}</h4>
+        
+//           <h4 className="text-2xl font-semibold text-teal-600">
+//     Product Color: {popupContent.product_color}
+//   </h4>
+//   <div
+//     className={`w-6 h-6 rounded border border-gray-300`}
+//     style={{ backgroundColor: popupContent.product_color.toLowerCase() }}
+//   ></div>
+//           {popupContent.details?.additional_details && (
+//             <p className="text-lg mb-4">Features: {popupContent.details.additional_details}</p>
+//           )}
+
+          
+//           <div className="overflow-x-auto bg-white rounded-lg shadow-md p-6 max-h-[400px] overflow-y-auto">
+//             <table className="min-w-full table-auto">
+//               <thead>
+//                 <tr className="bg-gray-100">
+//                   <th className="px-4 py-2 text-left text-sm font-semibold">Detail</th>
+//                   <th className="px-4 py-2 text-left text-sm font-semibold">Value</th>
+//                 </tr>
+//               </thead>
+//               <tbody>
+//                 {[
+//                   ['phase', 'Phase'],
+//                   ['cooling', 'Cooling'],
+//                   ['rated_power', 'Rated Power'],
+//                   ['ingress_protection', 'Ingress Protection'],
+//                   ['current', 'Current'],
+//                   ['display', 'Display'],
+//                   ['gun_type', 'Gun Type'],
+//                   ['gun_details', 'Gun Details'],
+//                   ['material', 'Material'],
+//                   ['frequency', 'Frequency'],
+//                   ['dimensions', 'Dimensions'],
+//                   ['protection', 'Protection'],
+//                   ['fast_charger', 'Fast Charger'],
+//                   ['communication', 'Communication'],
+//                   ['cable_length', 'Cable Length'],
+//                   ['mountingtype', 'Mounting Type'],
+//                   ['input_voltage', 'Input Voltage'],
+//                   ['ouput_voltage', 'Output Voltage'],
+//                   ['operatingtemps', 'Operating Temperature'],
+//                   ['safetyregulation', 'Safety Regulation'],
+//                   ['push_button', 'Push Button'],
+//                   ['chargingoperation', 'Charging Operation'],
+//                 ].map(([key, label], index) => {
+//                   const value = popupContent.details?.[key];
+//                   if (!value || value === 'N/A') return null;
+//                   return (
+//                     <tr key={key} className={index % 2 === 0 ? 'bg-gray-50' : ''}>
+//                       <td className="px-4 py-2 text-sm font-medium">{label}</td>
+//                       <td className="px-4 py-2 text-sm">{value}</td>
+//                     </tr>
+//                   );
+//                 })}
+//               </tbody>
+//             </table>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   </div>
+// )}  */}
+// {popupOpen && (
+//   <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+//     <div className="bg-white p-4 sm:p-8 rounded-lg w-full sm:max-w-6xl max-w-full h-auto flex relative shadow-lg overflow-auto">
+   
+//       <button
+//         className="absolute top-4 right-4 text-3xl font-bold text-gray-600 hover:text-gray-900"
+//         onClick={handlePopupClose}
+//       >
+//         &times;
+//       </button>
+
+//       <div className="flex flex-wrap sm:flex-nowrap max-w-full overflow-hidden">
+       
+//         <div className="w-full sm:w-1/2 p-4 relative">
+//           {popupContent.image_paths?.length > 0 ? (
+//             <div className="relative">
+//               <img
+//                 src={popupContent.image_paths[popupImageIndex]}
+//                 alt={popupContent.name}
+//                 className="w-full h-auto object-contain rounded-lg shadow-md cursor-pointer"
+//                 onClick={toggleImagePopup}
+//               />
+//               {popupContent.image_paths.length > 1 && (
+//                 <>
+//                   <button
+//                     onClick={goToPrevImageInPopup}
+//                     className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full"
+//                   >
+//                     &#60;
+//                   </button>
+//                   <button
+//                     onClick={goToNextImageInPopup}
+//                     className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full"
+//                   >
+//                     &#62;
+//                   </button>
+//                 </>
+//               )}
+//             </div>
+//           ) : (
+//             <img
+//               src="https://via.placeholder.com/150"
+//               alt={popupContent.name}
+//               className="w-full h-auto object-contain rounded-lg shadow-md"
+//             />
+//           )}
+
+//           {popupContent.quantity > 0 ? (
+//             <button
+//               onClick={() => handleAddToCart(popupContent.id, popupContent.price)}
+//               className={`mt-4 flex items-center justify-center px-4 py-2 rounded-md ${
+//                 cart.includes(popupContent.id) ? 'bg-green-500' : 'bg-[#faa122]'
+//               } text-white hover:${cart.includes(popupContent.id) ? 'bg-green-600' : 'bg-blue-600'}`}
+//             >
+//               <FaShoppingCart className="mr-2" />
+//               {cart.includes(popupContent.id) ? 'Added to Cart' : 'Add to Cart'}
+//             </button>
+//           ) : (
+//             <div className="mt-4 text-red-600 font-semibold">No Stock Available</div>
+//           )}
+//         </div>
+
+//         <div className="w-full sm:w-1/2 p-4">
+//           <h3 className="text-3xl font-semibold mb-4 text-blue-600">Product Name: {popupContent.name}</h3>
+//           <h4 className="text-3xl font-semibold mb-4 text-green-600">Model: {popupContent.model}</h4>
+//           <h4 className="text-3xl font-semibold mb-4 text-red-600">Price: {popupContent.price}</h4>
+        
+//           <h4 className="text-2xl font-semibold text-teal-600">
+//             Product Color: {popupContent.product_color}
+//           </h4>
+//           <div
+//             className={`w-6 h-6 rounded border border-gray-300`}
+//             style={{ backgroundColor: popupContent.product_color.toLowerCase() }}
+//           ></div>
+
+//           {popupContent.details?.additional_details && (
+//             <p className="text-lg mb-4">Features: {popupContent.details.additional_details}</p>
+//           )}
+
+//           <div className="overflow-x-auto bg-white rounded-lg shadow-md p-6 max-h-[400px] overflow-y-auto">
+//             <table className="min-w-full table-auto">
+//               <thead>
+//                 <tr className="bg-gray-100">
+//                   <th className="px-4 py-2 text-left text-sm font-semibold">Detail</th>
+//                   <th className="px-4 py-2 text-left text-sm font-semibold">Value</th>
+//                 </tr>
+//               </thead>
+//               <tbody>
+//                 {[ 
+//                   ['phase', 'Phase'],
+//                   ['cooling', 'Cooling'],
+//                   ['rated_power', 'Rated Power'],
+//                   ['ingress_protection', 'Ingress Protection'],
+//                   ['current', 'Current'],
+//                   ['display', 'Display'],
+//                   ['gun_type', 'Gun Type'],
+//                   ['gun_details', 'Gun Details'],
+//                   ['material', 'Material'],
+//                   ['frequency', 'Frequency'],
+//                   ['dimensions', 'Dimensions'],
+//                   ['protection', 'Protection'],
+//                   ['fast_charger', 'Fast Charger'],
+//                   ['communication', 'Communication'],
+//                   ['cable_length', 'Cable Length'],
+//                   ['mountingtype', 'Mounting Type'],
+//                   ['input_voltage', 'Input Voltage'],
+//                   ['ouput_voltage', 'Output Voltage'],
+//                   ['operatingtemps', 'Operating Temperature'],
+//                   ['safetyregulation', 'Safety Regulation'],
+//                   ['push_button', 'Push Button'],
+//                   ['chargingoperation', 'Charging Operation'],
+//                 ].map(([key, label], index) => {
+//                   const value = popupContent.details?.[key];
+//                   if (!value || value === 'N/A') return null;
+//                   return (
+//                     <tr key={key} className={index % 2 === 0 ? 'bg-gray-50' : ''}>
+//                       <td className="px-4 py-2 text-sm font-medium">{label}</td>
+//                       <td className="px-4 py-2 text-sm">{value}</td>
+//                     </tr>
+//                   );
+//                 })}
+//               </tbody>
+//             </table>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   </div>
+// )}
+
+//  </div>
+//     </div>
+//     </div>
+//   );
+// };
+
+// export default ProductPage;
+
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { FaShoppingCart } from 'react-icons/fa'; // Import the Cart Icon
+import { FaShoppingCart } from 'react-icons/fa';
 import UserSidebar from '../User_sidebar';
 import UserNavbar from '../User_Navbar';
-import background from "../../../assets/new3.jpg";
-const BASE_URL_AND_PORT = "http://192.168.0.103:3000"; // Define the base URL and port
-const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf"; // Your API key
-const token = localStorage.getItem('auth_token'); // Retrieve the token
+
+const BASE_URL_AND_PORT = "https://api.static.ev.transev.site";
+const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
+const token = localStorage.getItem('auth_token');
 
 const ProductPage = () => {
-  const [products, setProducts] = useState([]); // Products to display initially
-  const [allProducts, setAllProducts] = useState([]); // All products fetched from API
+  const [allProducts, setAllProducts] = useState([]);
+  const [displayedProducts, setDisplayedProducts] = useState([]);
+  const [filterType, setFilterType] = useState("ALL");
+
   const [popupOpen, setPopupOpen] = useState(false);
   const [popupContent, setPopupContent] = useState({});
+  const [popupImageIndex, setPopupImageIndex] = useState(0);
+
+  const [contactPopup, setContactPopup] = useState(false);
+
   const [hovered, setHovered] = useState(null);
-  const [displayedProducts, setDisplayedProducts] = useState([]); // To manage products shown
-  const [sidebarOpen, setSidebarOpen] = useState(true); // Manage sidebar visibility
-  const [cart, setCart] = useState([]); // Track products added to the cart
-  const [loading, setLoading] = useState(true); // Manage loading state
-const [imageIndex, setImageIndex] = useState({});
-  const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen); // Toggle sidebar visibility
-  };
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [cart, setCart] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [imageIndex, setImageIndex] = useState({});
+
+  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
   useEffect(() => {
-    // Fetch all products from API
     const fetchProducts = async () => {
-      try {
-        const response = await axios.get(`${BASE_URL_AND_PORT}/products/all`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'API-KEY': API_KEY,
-          },
-        });
-        setAllProducts(response.data); // Store all products
-        setDisplayedProducts(response.data.slice(0, 12)); // Initially show 12 products
-        setProducts(response.data.slice(0, 12)); // Initially show 12 products
-        setLoading(false); // Set loading to false after fetching products
-      } catch (error) {
-        console.error('Error fetching products:', error);
-        setLoading(false); // Set loading to false in case of an error
-      }
-    };
-    fetchProducts();
-  }, []);
-
-  // Handle popup open
-  const handlePopupOpen = async (productId) => {
-    try {
-      const response = await axios.get(`${BASE_URL_AND_PORT}/products/get_by_id/${productId}`, {
+      const res = await axios.get(`${BASE_URL_AND_PORT}/products/all`, {
         headers: {
           Authorization: `Bearer ${token}`,
           'API-KEY': API_KEY,
         },
       });
-      setPopupContent(response.data); // Set the popup content
-    
-      setPopupOpen(true); // Open the popup
-    
-    } catch (error) {
-      console.error('Error fetching product details:', error);
-    }
-  };
-
-  // Handle popup close
-  const handlePopupClose = () => {
-    setPopupOpen(false);
-    setPopupContent({});
-  };
-
-  // Function to handle See All Products click
-  const handleSeeAll = () => {
-    setDisplayedProducts(allProducts); // Display all products when clicked
-  };
-
-  // Function to convert base64 string to Blob and create an object URL for it
-
-  const goToNextImage = (productId) => {
-    setImageIndex((prev) => {
-      const currentIndex = prev[productId] || 0;
-      const product = products.find((product) => product.id === productId);
-      const nextIndex = (currentIndex + 1) % product.image_paths.length;
-      return { ...prev, [productId]: nextIndex };
-    });
-  };
-
-  const goToPrevImage = (productId) => {
-    setImageIndex((prev) => {
-      const currentIndex = prev[productId] || 0;
-      const product = products.find((product) => product.id === productId);
-      const prevIndex = (currentIndex - 1 + product.image_paths.length) % product.image_paths.length;
-      return { ...prev, [productId]: prevIndex };
-    });
-  };
-  const [popupImageIndex, setPopupImageIndex] = useState(0);
-
-  const goToNextImageInPopup = () => {
-    setPopupImageIndex((prevIndex) => (prevIndex + 1) % popupContent.image_paths.length);
-  };
-  
-  const goToPrevImageInPopup = () => {
-    setPopupImageIndex((prevIndex) => (prevIndex - 1 + popupContent.image_paths.length) % popupContent.image_paths.length);
-  };
-  
-  const toggleImagePopup = () => {
-    goToNextImageInPopup();
-  };
-
-  // Function to handle Add to Cart
-  const handleAddToCart = async (productId, price) => {
-    const userId = localStorage.getItem('user_id'); // Get user ID from local storage
-    if (!userId) {
-      alert('Please login first');
-      return;
-    }
-
-    const data = {
-      user_id: userId, // Use user ID from local storage
-      productid: productId,
-      price: price.toString(), // Convert price to string before sending
+      setAllProducts(res.data);
+      setDisplayedProducts(res.data);
+      setLoading(false);
     };
+    fetchProducts();
+  }, []);
 
-    try {
-      // Add the product to the cart if it's not already there
-      if (!cart.includes(productId)) {
-        setCart([...cart, productId]); // Add product to cart state
-        await axios.post(`${BASE_URL_AND_PORT}/cart/addtocart`, data, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'API-KEY': API_KEY,
-          },
-        });
-        alert('Product added to cart!');
-      }
-    } catch (error) {
-      console.error('Error adding to cart:', error);
+  /* 🔹 FILTER */
+  useEffect(() => {
+    if (filterType === "ALL") {
+      setDisplayedProducts(allProducts);
+    } else {
+      setDisplayedProducts(
+        allProducts.filter(p =>
+          p.name?.toUpperCase().includes(filterType) ||
+          p.model?.toUpperCase().includes(filterType)
+        )
+      );
+    }
+  }, [filterType, allProducts]);
+
+  const isAC = (product) =>
+    product.name?.toUpperCase().includes("AC") ||
+    product.model?.toUpperCase().includes("AC");
+
+  const handlePopupOpen = async (id) => {
+    const res = await axios.get(`${BASE_URL_AND_PORT}/products/get_by_id/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'API-KEY': API_KEY,
+      },
+    });
+    setPopupContent(res.data);
+    setPopupImageIndex(0);
+    setPopupOpen(true);
+  };
+
+  const goToNextImage = (id) => {
+    setImageIndex(prev => {
+      const current = prev[id] || 0;
+      const product = allProducts.find(p => p.id === id);
+      return { ...prev, [id]: (current + 1) % product.image_paths.length };
+    });
+  };
+
+  const goToPrevImage = (id) => {
+    setImageIndex(prev => {
+      const current = prev[id] || 0;
+      const product = allProducts.find(p => p.id === id);
+      return { ...prev, [id]: (current - 1 + product.image_paths.length) % product.image_paths.length };
+    });
+  };
+
+  const handleAddToCart = async (id, price) => {
+    const userId = localStorage.getItem('user_id');
+    if (!userId) return alert("Please login first");
+
+    if (!cart.includes(id)) {
+      setCart([...cart, id]);
+      await axios.post(`${BASE_URL_AND_PORT}/cart/addtocart`, {
+        user_id: userId,
+        productid: id,
+        price: price.toString(),
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'API-KEY': API_KEY,
+        },
+      });
+      alert("Product added to cart");
     }
   };
- 
+
   return (
-   
-    <div
-  className="min-h-screen bg-white-to-r from-white-200 via-green-200 to-white-200 bg-cover bg-center bg-fixed"
-  style={{
-    backgroundColor: "#FFFFFF", // Set a solid background color
-  }}
->
-      {/* User Navbar */}
+    <div className="min-h-screen bg-gray-100">
       <UserNavbar onToggleSidebar={toggleSidebar} />
 
-      {/* Main Container */}
-      <div className="flex flex-1">
-        {/* Sidebar */}
+      <div className="flex">
         <UserSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
-        {/* <div className="bg-white rounded-lg shadow-lg p-6 ml-50 mt-6 w-400"> */}
-        <div className="bg-white rounded-lg shadow-lg p-6 mt-6 w-full sm:w-96 lg:w-400 ml-0 sm:ml-4 lg:ml-60">
-        <h2 className="text-3xl font-bold text-center mb-6">See Our Products</h2>
-        {displayedProducts.length < allProducts.length && (
-          <div className="justify-center mt-6 ">
-            <button
-              onClick={handleSeeAll}
-              className="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 transition duration-300"
-            >
-              See All Products
-            </button>
-          </div>
-        )}
-       
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 p-8 ml-5">
-  {loading ? (
-    <div className="flex justify-center items-center col-span-full h-96">
-      <div className="animate-spin rounded-full border-t-4 border-blue-500 w-16 h-16"></div>
-    </div>
-  ) : (
-    displayedProducts.map((product, index) => (
-      <div key={index} className="flex flex-col items-center">
-        <div
-          className="box bg-gray-200 p-4 rounded-lg relative cursor-pointer hover:scale-105 transform transition-all duration-300 w-[300px] h-[400px] "
-          onMouseEnter={() => setHovered(index)}
-          onMouseLeave={() => setHovered(null)}
-        >
-      
- 
 
-          <div className="flex justify-center items-center w-full h-3/4">
-            {/* Display product image */}
-            {product.image_paths?.length > 0 ? (
-              <img
-                src={product.image_paths[imageIndex[product.id] || 0]}  // Use the current image index
-                alt={product.name}
-                className="w-full h-full object-cover rounded-lg"
-                onClick={() => handlePopupOpen(product.id)}  // Opens the popup on click
-              />
+        <div className="bg-white rounded-lg shadow-lg p-6 mt-6 w-full lg:ml-60">
+
+          {/* 🔹 HEADER */}
+          <div className="flex items-center justify-between mb-8 bg-gradient-to-r from-green-500 to-blue-500 p-6 rounded-lg shadow">
+            <h2 className="text-3xl font-bold text-white text-center flex-1">
+              See Our Products
+            </h2>
+
+            <select
+              value={filterType}
+              onChange={(e) => setFilterType(e.target.value)}
+              className="bg-white px-4 py-2 rounded-md shadow font-semibold"
+            >
+              <option value="ALL">All Chargers</option>
+              <option value="AC">AC Charger</option>
+              <option value="DC">DC Charger</option>
+            </select>
+          </div>
+
+          {/* 🔹 PRODUCTS */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {loading ? (
+              <div className="col-span-full flex justify-center">
+                <div className="animate-spin w-16 h-16 border-t-4 border-green-500 rounded-full"></div>
+              </div>
             ) : (
-              <img
-                src="https://via.placeholder.com/150"
-                alt={product.name}
-                className="w-full h-full object-cover rounded-lg"
-                onClick={() => handlePopupOpen(product.id)}  // Opens the popup on click
-              />
-            )}
-          </div>
+              displayedProducts.map((product, index) => (
+                <div key={product.id} className="flex flex-col items-center">
 
-          {/* Navigation buttons for next and previous image */}
-          {product.image_paths?.length > 1 && (
-            <>
-              <button
-                className="absolute top-1/2 left-2 transform -translate-y-1/2 text-white bg-gray-800 bg-opacity-50 p-2 rounded-full"
-                onClick={() => goToPrevImage(product.id)}  // Go to the previous image
-              >
-                &#10094;  {/* Left arrow */}
-              </button>
-              <button
-                className="absolute top-1/2 right-2 transform -translate-y-1/2 text-white bg-gray-800 bg-opacity-50 p-2 rounded-full"
-                onClick={() => goToNextImage(product.id)}  // Go to the next image
-              >
-                &#10095;  {/* Right arrow */}
-              </button>
-            </>
-          )}
+                  <div
+                    className="relative bg-gray-200 p-4 rounded-lg w-[300px] h-[400px] hover:scale-105 transition"
+                    onMouseEnter={() => setHovered(index)}
+                    onMouseLeave={() => setHovered(null)}
+                  >
+                    <img
+                      src={product.image_paths?.[imageIndex[product.id] || 0]}
+                      className="w-full h-full object-cover rounded-lg cursor-pointer"
+                      onClick={() => handlePopupOpen(product.id)}
+                    />
 
-          {/* Hover effect for a popup icon */}
-          <div
-            className={`absolute top-4 right-4 bg-yellow-300 w-10 h-10 rounded-full flex justify-center items-center transition-all duration-300 ${hovered === index ? 'opacity-100' : 'opacity-0'}`}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-6 h-6 text-black transition-transform duration-300"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              onClick={() => handlePopupOpen(product.id)}  // Opens the popup when the icon is clicked
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M13 7l5 5m0 0l-5 5m5-5H6"
-              />
-            </svg>
-          </div>
-        </div>
-     
-  
+                    {product.image_paths?.length > 1 && (
+                      <>
+                        <button onClick={() => goToPrevImage(product.id)}
+                          className="absolute left-2 top-1/2 -translate-y-1/2 bg-black bg-opacity-60 text-white p-2 rounded-full">
+                          &#10094;
+                        </button>
+                        <button onClick={() => goToNextImage(product.id)}
+                          className="absolute right-2 top-1/2 -translate-y-1/2 bg-black bg-opacity-60 text-white p-2 rounded-full">
+                          &#10095;
+                        </button>
+                      </>
+                    )}
 
-                <div className="text-center mt-4">
-                  <h2 className="text-xl font-bold">{product.name}</h2>
-                  <p className="text-gray-600 mt-2">{product.model}</p>
-                
-                 
-                  {product.quantity > 0 ? (
-  <button
-    onClick={() => handleAddToCart(product.id, product.price)}
-    className={`mt-4 flex items-center justify-center px-4 py-2 rounded-md ${
-      cart.includes(product.id) ? 'bg-green-500' : 'bg-[#faa122]'
-    } text-white hover:${
-      cart.includes(product.id) ? 'bg-green-600' : 'bg-blue-600'
-    }`}
-  >
-    <FaShoppingCart className="mr-2" />
-    {cart.includes(product.id) ? 'Added to Cart' : 'Add to Cart'}
-  </button>
-) : (
-  <div className="mt-4 text-red-600 font-semibold">No Stock Available</div>
-)}
+                    <div
+                      onClick={() => handlePopupOpen(product.id)}
+                      className={`absolute top-4 right-4 w-10 h-10 rounded-full bg-yellow-400 flex items-center justify-center cursor-pointer
+                        ${hovered === index ? 'opacity-100' : 'opacity-0'}`}
+                    >
+                      ➜
+                    </div>
+                  </div>
+
+                  <h3 className="mt-3 font-bold">{product.name}</h3>
+                  <p className="text-gray-600">{product.model}</p>
+
+                  {/* <div className="mt-4 w-full text-center">
+                    {isAC(product) ? (
+                      product.quantity > 0 ? (
+                        <button
+                          onClick={() => handleAddToCart(product.id, product.price)}
+                          className={`flex items-center justify-center px-4 py-2 rounded-md w-full ${
+                            cart.includes(product.id) ? 'bg-green-500' : 'bg-[#faa122]'
+                          } text-white hover:${
+                            cart.includes(product.id) ? 'bg-green-600' : 'bg-blue-600'
+                          }`}
+                        >
+                          <FaShoppingCart className="mr-2" />
+                          {cart.includes(product.id) ? 'Added to Cart' : 'Add to Cart'}
+                        </button>
+                      ) : (
+                        <div className="text-red-600 font-semibold">No Stock Available</div>
+                      )
+                    ) : (
+                      <button
+                        onClick={() => setContactPopup(true)}
+                        className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md w-full"
+                      >
+                        Contact Us
+                      </button>
+                    )}
+                  </div> */}
+                  <div className="mt-4 text-center">
+  {isAC(product) ? (
+    product.quantity > 0 ? (
+      <button
+        onClick={() => handleAddToCart(product.id, product.price)}
+        className={`flex items-center justify-center px-4 py-2 rounded-md ${
+          cart.includes(product.id) ? 'bg-green-500' : 'bg-[#faa122]'
+        } text-white hover:${
+          cart.includes(product.id) ? 'bg-green-600' : 'bg-blue-600'
+        }`}
+      >
+        <FaShoppingCart className="mr-2" />
+        {cart.includes(product.id) ? 'Added to Cart' : 'Add to Cart'}
+      </button>
+    ) : (
+      <div className="text-red-600 font-semibold">No Stock Available</div>
+    )
+  ) : (
+    <button
+      onClick={() => setContactPopup(true)}
+      className="bg-yellow-400 hover:bg-blue-700 text-white px-6 py-2 rounded-md"
+    >
+      Contact Us
+    </button>
+  )}
+</div>
 
                 </div>
+              ))
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* 🔹 CONTACT POPUP */}
+      {contactPopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg text-center w-[400px]">
+            <h3 className="text-xl font-bold mb-2">Contact Us</h3>
+            <p className="text-gray-600">For DC Chargers please email:</p>
+            <p className="mt-2 font-semibold text-blue-600">sales@yourcompany.com</p>
+            <button
+              onClick={() => setContactPopup(false)}
+              className="mt-4 bg-red-500 text-white px-4 py-2 rounded"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* 🔹 PRODUCT DETAILS POPUP */}
+      {popupOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white p-4 sm:p-8 rounded-lg w-full sm:max-w-6xl max-w-full h-auto flex relative shadow-lg overflow-auto">
+
+            <button
+              className="absolute top-4 right-4 text-3xl font-bold text-gray-600 hover:text-gray-900"
+              onClick={() => setPopupOpen(false)}
+            >
+              &times;
+            </button>
+
+            <div className="flex flex-wrap sm:flex-nowrap max-w-full overflow-hidden">
+              {/* LEFT: IMAGES + BUTTON */}
+              <div className="w-full sm:w-1/2 p-4 relative">
+                {popupContent.image_paths?.length > 0 ? (
+                  <div className="relative">
+                    <img
+                      src={popupContent.image_paths[popupImageIndex]}
+                      alt={popupContent.name}
+                      className="w-full h-auto object-contain rounded-lg shadow-md cursor-pointer"
+                      onClick={() => setPopupImageIndex((popupImageIndex + 1) % popupContent.image_paths.length)}
+                    />
+                    {popupContent.image_paths.length > 1 && (
+                      <>
+                        <button
+                          onClick={() => setPopupImageIndex((popupImageIndex - 1 + popupContent.image_paths.length) % popupContent.image_paths.length)}
+                          className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full"
+                        >&#60;</button>
+                        <button
+                          onClick={() => setPopupImageIndex((popupImageIndex + 1) % popupContent.image_paths.length)}
+                          className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full"
+                        >&#62;</button>
+                      </>
+                    )}
+                  </div>
+                ) : (
+                  <img
+                    src="https://via.placeholder.com/150"
+                    alt={popupContent.name}
+                    className="w-full h-auto object-contain rounded-lg shadow-md"
+                  />
+                )}
+
+                {/* 🔹 AC / DC BUTTON */}
+                <div className="mt-4">
+                  {isAC(popupContent) ? (
+                    popupContent.quantity > 0 ? (
+                      <button
+                        onClick={() => handleAddToCart(popupContent.id, popupContent.price)}
+                        className={`flex items-center justify-center px-4 py-2 rounded-md w-full ${
+                          cart.includes(popupContent.id) ? 'bg-green-500' : 'bg-[#faa122]'
+                        } text-white hover:${
+                          cart.includes(popupContent.id) ? 'bg-green-600' : 'bg-blue-600'
+                        }`}
+                      >
+                        <FaShoppingCart className="mr-2" />
+                        {cart.includes(popupContent.id) ? 'Added to Cart' : 'Add to Cart'}
+                      </button>
+                    ) : (
+                      <div className="text-red-600 font-semibold">No Stock Available</div>
+                    )
+                  ) : (
+                    <button
+                      onClick={() => setContactPopup(true)}
+                      className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md w-full"
+                    >
+                      Contact Us
+                    </button>
+                  )}
+                </div>
               </div>
-            ))
-          )}
-        </div>
 
-        {/* "See All Products" Button */}
-        {displayedProducts.length < allProducts.length && (
-          <div className="justify-center mt-6 ">
-            <button
-              onClick={handleSeeAll}
-              className="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 transition duration-300"
-            >
-              See All Products
-            </button>
-          </div>
-        )}
+              {/* RIGHT: Product Info */}
+              {/* <div className="w-full sm:w-1/2 p-4">
+                <h3 className="text-3xl font-semibold mb-4 text-blue-600">Product Name: {popupContent.name}</h3>
+                <h4 className="text-3xl font-semibold mb-4 text-green-600">Model: {popupContent.model}</h4>
+                <h4 className="text-3xl font-semibold mb-4 text-red-600">Price: {popupContent.price}</h4>
+                <h4 className="text-2xl font-semibold text-teal-600">Product Color: {popupContent.product_color}</h4>
+                <div className={`w-6 h-6 rounded border border-gray-300`} style={{ backgroundColor: popupContent.product_color?.toLowerCase() }}></div> */}
+                <div className="w-full sm:w-1/2 p-4">
+  <h3 className="text-3xl font-semibold mb-4 text-blue-600">
+    Product Name: {popupContent.name}
+  </h3>
 
-
- {/* {popupOpen && (
-  <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-
-    <div className="bg-white p-4 sm:p-8 rounded-lg w-full sm:max-w-6xl max-w-full h-auto flex relative shadow-lg overflow-auto">
-   
-      <button
-        className="absolute top-4 right-4 text-3xl font-bold text-gray-600 hover:text-gray-900"
-        onClick={handlePopupClose}
-      >
-        &times;
-      </button>
-
-      <div className="flex flex-wrap sm:flex-nowrap max-w-full overflow-hidden">
-       
-        <div className="w-full sm:w-1/2 p-4 relative">
-          {popupContent.image_paths?.length > 0 ? (
-            <div className="relative">
-              <img
-                src={popupContent.image_paths[popupImageIndex]}
-                alt={popupContent.name}
-                className="w-full h-auto object-contain rounded-lg shadow-md cursor-pointer"
-                onClick={toggleImagePopup}
-              />
-              {popupContent.image_paths.length > 1 && (
-                <>
-                  <button
-                    onClick={goToPrevImageInPopup}
-                    className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full"
-                  >
-                    &#60;
-                  </button>
-                  <button
-                    onClick={goToNextImageInPopup}
-                    className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full"
-                  >
-                    &#62;
-                  </button>
-                </>
-              )}
-            </div>
-          ) : (
-            <img
-              src="https://via.placeholder.com/150"
-              alt={popupContent.name}
-              className="w-full h-auto object-contain rounded-lg shadow-md"
-            />
-          )}
-
-         
-          {popupContent.quantity > 0 ? (
-            <button
-              onClick={() => handleAddToCart(popupContent.id, popupContent.price)}
-              className={`mt-4 flex items-center justify-center px-4 py-2 rounded-md ${
-                cart.includes(popupContent.id) ? 'bg-green-500' : 'bg-[#faa122]'
-              } text-white hover:${cart.includes(popupContent.id) ? 'bg-green-600' : 'bg-blue-600'}`}
-            >
-              <FaShoppingCart className="mr-2" />
-              {cart.includes(popupContent.id) ? 'Added to Cart' : 'Add to Cart'}
-            </button>
-          ) : (
-            <div className="mt-4 text-red-600 font-semibold">No Stock Available</div>
-          )}
-        </div>
-
-      
-        <div className="w-full sm:w-1/2 p-4">
-          <h3 className="text-3xl font-semibold mb-4 text-blue-600">Product Name: {popupContent.name}</h3>
-          <h4 className="text-3xl font-semibold mb-4 text-green-600">Model: {popupContent.model}</h4>
-          <h4 className="text-3xl font-semibold mb-4 text-red-600">Price: {popupContent.price}</h4>
-        
-          <h4 className="text-2xl font-semibold text-teal-600">
-    Product Color: {popupContent.product_color}
+  <h4 className="text-2xl font-semibold mb-4 text-green-600">
+    Model: {popupContent.model}
   </h4>
-  <div
-    className={`w-6 h-6 rounded border border-gray-300`}
-    style={{ backgroundColor: popupContent.product_color.toLowerCase() }}
-  ></div>
-          {popupContent.details?.additional_details && (
-            <p className="text-lg mb-4">Features: {popupContent.details.additional_details}</p>
-          )}
 
-          
-          <div className="overflow-x-auto bg-white rounded-lg shadow-md p-6 max-h-[400px] overflow-y-auto">
-            <table className="min-w-full table-auto">
-              <thead>
-                <tr className="bg-gray-100">
-                  <th className="px-4 py-2 text-left text-sm font-semibold">Detail</th>
-                  <th className="px-4 py-2 text-left text-sm font-semibold">Value</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  ['phase', 'Phase'],
-                  ['cooling', 'Cooling'],
-                  ['rated_power', 'Rated Power'],
-                  ['ingress_protection', 'Ingress Protection'],
-                  ['current', 'Current'],
-                  ['display', 'Display'],
-                  ['gun_type', 'Gun Type'],
-                  ['gun_details', 'Gun Details'],
-                  ['material', 'Material'],
-                  ['frequency', 'Frequency'],
-                  ['dimensions', 'Dimensions'],
-                  ['protection', 'Protection'],
-                  ['fast_charger', 'Fast Charger'],
-                  ['communication', 'Communication'],
-                  ['cable_length', 'Cable Length'],
-                  ['mountingtype', 'Mounting Type'],
-                  ['input_voltage', 'Input Voltage'],
-                  ['ouput_voltage', 'Output Voltage'],
-                  ['operatingtemps', 'Operating Temperature'],
-                  ['safetyregulation', 'Safety Regulation'],
-                  ['push_button', 'Push Button'],
-                  ['chargingoperation', 'Charging Operation'],
-                ].map(([key, label], index) => {
-                  const value = popupContent.details?.[key];
-                  if (!value || value === 'N/A') return null;
-                  return (
-                    <tr key={key} className={index % 2 === 0 ? 'bg-gray-50' : ''}>
-                      <td className="px-4 py-2 text-sm font-medium">{label}</td>
-                      <td className="px-4 py-2 text-sm">{value}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-)}  */}
-{popupOpen && (
-  <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-    <div className="bg-white p-4 sm:p-8 rounded-lg w-full sm:max-w-6xl max-w-full h-auto flex relative shadow-lg overflow-auto">
-   
-      <button
-        className="absolute top-4 right-4 text-3xl font-bold text-gray-600 hover:text-gray-900"
-        onClick={handlePopupClose}
-      >
-        &times;
-      </button>
 
-      <div className="flex flex-wrap sm:flex-nowrap max-w-full overflow-hidden">
-       
-        <div className="w-full sm:w-1/2 p-4 relative">
-          {popupContent.image_paths?.length > 0 ? (
-            <div className="relative">
-              <img
-                src={popupContent.image_paths[popupImageIndex]}
-                alt={popupContent.name}
-                className="w-full h-auto object-contain rounded-lg shadow-md cursor-pointer"
-                onClick={toggleImagePopup}
-              />
-              {popupContent.image_paths.length > 1 && (
-                <>
-                  <button
-                    onClick={goToPrevImageInPopup}
-                    className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full"
-                  >
-                    &#60;
-                  </button>
-                  <button
-                    onClick={goToNextImageInPopup}
-                    className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full"
-                  >
-                    &#62;
-                  </button>
-                </>
-              )}
+<div className="mb-4 flex items-end gap-4 flex-wrap">
+  <span className="text-lg font-semibold text-gray-700">
+    Price:
+  </span>
+
+  
+  {popupContent.mrp && popupContent.mrp > popupContent.price && (
+    <span className="text-2xl sm:text-3xl font-semibold text-gray-400 line-through">
+      ₹{popupContent.mrp}
+    </span>
+  )}
+
+
+  <span className="text-3xl sm:text-4xl font-bold text-red-600">
+    ₹{popupContent.price}
+  </span>
+</div>
+
+
+
+  <div className="flex items-center gap-3 mt-2">
+    <h4 className="text-xl font-semibold text-teal-600">
+      Product Color:
+    </h4>
+
+    <span className="text-lg font-medium capitalize">
+      {popupContent.product_color}
+    </span>
+
+    <div
+      className="w-6 h-6 rounded border border-gray-300"
+      style={{ backgroundColor: popupContent.product_color?.toLowerCase() }}
+    />
+  </div> 
+
+
+                {popupContent.details?.additional_details && (
+                  <p className="text-lg mb-4">Features: {popupContent.details.additional_details}</p>
+                )}
+                <div className="overflow-x-auto bg-white rounded-lg shadow-md p-6 max-h-[400px] overflow-y-auto">
+                  <table className="min-w-full table-auto">
+                    <thead>
+                      <tr className="bg-gray-100">
+                        <th className="px-4 py-2 text-left text-sm font-semibold">Detail</th>
+                        <th className="px-4 py-2 text-left text-sm font-semibold">Value</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {[
+                        ['phase', 'Phase'],
+                        ['cooling', 'Cooling'],
+                        ['rated_power', 'Rated Power'],
+                        ['ingress_protection', 'Ingress Protection'],
+                        ['current', 'Current'],
+                        ['display', 'Display'],
+                        ['gun_type', 'Gun Type'],
+                        ['gun_details', 'Gun Details'],
+                        ['material', 'Material'],
+                        ['frequency', 'Frequency'],
+                        ['dimensions', 'Dimensions'],
+                        ['protection', 'Protection'],
+                        ['fast_charger', 'Fast Charger'],
+                        ['communication', 'Communication'],
+                        ['cable_length', 'Cable Length'],
+                        ['mountingtype', 'Mounting Type'],
+                        ['input_voltage', 'Input Voltage'],
+                        ['ouput_voltage', 'Output Voltage'],
+                        ['operatingtemps', 'Operating Temperature'],
+                        ['ocpp_present','OCPP Present'],
+                        ['safetyregulation', 'Safety Regulation'],
+                        ['push_button', 'Push Button'],
+                        ['chargingoperation', 'Charging Operation'],
+                      ].map(([key, label], index) => {
+                        const value = popupContent.details?.[key];
+                        if (!value || value === 'N/A') return null;
+                        return (
+                          <tr key={key} className={index % 2 === 0 ? 'bg-gray-50' : ''}>
+                            <td className="px-4 py-2 text-sm font-medium">{label}</td>
+                            <td className="px-4 py-2 text-sm">{value}</td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
             </div>
-          ) : (
-            <img
-              src="https://via.placeholder.com/150"
-              alt={popupContent.name}
-              className="w-full h-auto object-contain rounded-lg shadow-md"
-            />
-          )}
-
-          {popupContent.quantity > 0 ? (
-            <button
-              onClick={() => handleAddToCart(popupContent.id, popupContent.price)}
-              className={`mt-4 flex items-center justify-center px-4 py-2 rounded-md ${
-                cart.includes(popupContent.id) ? 'bg-green-500' : 'bg-[#faa122]'
-              } text-white hover:${cart.includes(popupContent.id) ? 'bg-green-600' : 'bg-blue-600'}`}
-            >
-              <FaShoppingCart className="mr-2" />
-              {cart.includes(popupContent.id) ? 'Added to Cart' : 'Add to Cart'}
-            </button>
-          ) : (
-            <div className="mt-4 text-red-600 font-semibold">No Stock Available</div>
-          )}
-        </div>
-
-        <div className="w-full sm:w-1/2 p-4">
-          <h3 className="text-3xl font-semibold mb-4 text-blue-600">Product Name: {popupContent.name}</h3>
-          <h4 className="text-3xl font-semibold mb-4 text-green-600">Model: {popupContent.model}</h4>
-          <h4 className="text-3xl font-semibold mb-4 text-red-600">Price: {popupContent.price}</h4>
-        
-          <h4 className="text-2xl font-semibold text-teal-600">
-            Product Color: {popupContent.product_color}
-          </h4>
-          <div
-            className={`w-6 h-6 rounded border border-gray-300`}
-            style={{ backgroundColor: popupContent.product_color.toLowerCase() }}
-          ></div>
-
-          {popupContent.details?.additional_details && (
-            <p className="text-lg mb-4">Features: {popupContent.details.additional_details}</p>
-          )}
-
-          <div className="overflow-x-auto bg-white rounded-lg shadow-md p-6 max-h-[400px] overflow-y-auto">
-            <table className="min-w-full table-auto">
-              <thead>
-                <tr className="bg-gray-100">
-                  <th className="px-4 py-2 text-left text-sm font-semibold">Detail</th>
-                  <th className="px-4 py-2 text-left text-sm font-semibold">Value</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[ 
-                  ['phase', 'Phase'],
-                  ['cooling', 'Cooling'],
-                  ['rated_power', 'Rated Power'],
-                  ['ingress_protection', 'Ingress Protection'],
-                  ['current', 'Current'],
-                  ['display', 'Display'],
-                  ['gun_type', 'Gun Type'],
-                  ['gun_details', 'Gun Details'],
-                  ['material', 'Material'],
-                  ['frequency', 'Frequency'],
-                  ['dimensions', 'Dimensions'],
-                  ['protection', 'Protection'],
-                  ['fast_charger', 'Fast Charger'],
-                  ['communication', 'Communication'],
-                  ['cable_length', 'Cable Length'],
-                  ['mountingtype', 'Mounting Type'],
-                  ['input_voltage', 'Input Voltage'],
-                  ['ouput_voltage', 'Output Voltage'],
-                  ['operatingtemps', 'Operating Temperature'],
-                  ['safetyregulation', 'Safety Regulation'],
-                  ['push_button', 'Push Button'],
-                  ['chargingoperation', 'Charging Operation'],
-                ].map(([key, label], index) => {
-                  const value = popupContent.details?.[key];
-                  if (!value || value === 'N/A') return null;
-                  return (
-                    <tr key={key} className={index % 2 === 0 ? 'bg-gray-50' : ''}>
-                      <td className="px-4 py-2 text-sm font-medium">{label}</td>
-                      <td className="px-4 py-2 text-sm">{value}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-)}
+      )}
 
- </div>
-    </div>
     </div>
   );
 };
 
 export default ProductPage;
-

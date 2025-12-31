@@ -5,7 +5,7 @@ import contactImage from '../assets/office.png';
  import { useEffect } from 'react';
  import logos from '../assets/up.png'
 // const BASE_URL_AND_PORT = "https://api.static.ev.transev.site";
-const BASE_URL_AND_PORT = "http://192.168.0.103:3000";
+const BASE_URL_AND_PORT = "https://api.static.ev.transev.site";
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
 import { FaTwitter, FaInstagram, FaFacebook } from 'react-icons/fa';
 import logo1 from '../assets/tv.png';

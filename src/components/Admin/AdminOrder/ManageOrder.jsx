@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import AdminSidebar from "../Admin_sidebar";
 import AdminNavbar from "../Admin_navbar";
 import { flushSync } from 'react-dom';
-const BASE_URL_AND_PORT = "http://192.168.0.103:3000";
+const BASE_URL_AND_PORT = "https://api.static.ev.transev.site";
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
 
 const ORDER_STATUS_OPTIONS = [

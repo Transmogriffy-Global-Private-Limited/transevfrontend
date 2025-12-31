@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import AdminSidebar from "../Admin/Admin_sidebar"; // 🔁 Make sure this is your admin sidebar component
 import logo from "../../assets/log.png";
 
-const BASE_URL_AND_PORT = "http://192.168.0.103:3000";
+const BASE_URL_AND_PORT = "https://api.static.ev.transev.site";
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
 
 const AdminNavbar = () => {

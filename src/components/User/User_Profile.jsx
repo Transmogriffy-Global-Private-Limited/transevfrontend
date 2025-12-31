@@ -6,7 +6,7 @@ import background from "../../assets/ev_charger.jpg";
  // adjust path as needed
 
 const Profile = () => {
-  const BASE_URL_AND_PORT = "http://192.168.0.103:3000"; // Define the base URL and port
+  const BASE_URL_AND_PORT = "https://api.static.ev.transev.site"; // Define the base URL and port
   const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf"; // API Key (for demonstration purposes)
   const [user, setUser] = useState(null);
   const [newImage, setNewImage] = useState(null); // Store the new uploaded image

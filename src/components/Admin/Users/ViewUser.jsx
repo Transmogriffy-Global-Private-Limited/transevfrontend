@@ -150,7 +150,7 @@ const UserList = () => {
   const [sortOrder, setSortOrder] = useState('asc');
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
-  const BASE_URL = "http://192.168.0.103:3000/admin/view-users";
+  const BASE_URL = "https://api.static.ev.transev.site/admin/view-users";
   const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
   const authToken = localStorage.getItem('auth_token');
   const limit = 100;

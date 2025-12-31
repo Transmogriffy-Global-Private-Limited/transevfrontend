@@ -3,7 +3,7 @@ import UserSidebar from '../User/User_sidebar';
 import UserNavbar from '../User/User_Navbar';
 import background from "../../assets/new3.jpg";
 import { useNavigate } from "react-router-dom";
-const BASE_URL_AND_PORT = "http://192.168.0.103:3000"; // Define the base URL and port
+const BASE_URL_AND_PORT = "https://api.static.ev.transev.site"; // Define the base URL and port
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf"; // Your API key
 const token = localStorage.getItem("auth_token"); // Retrieve the token
 

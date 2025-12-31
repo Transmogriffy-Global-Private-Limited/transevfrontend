@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate to redirec
 // Import image for the background
 import ForgetPassword from "../../assets/hotels.jpg"; // Ensure the correct path to your image
 
-const BASE_URL_AND_PORT = "http://192.168.0.103:3000"; // Define the base URL and port
+const BASE_URL_AND_PORT = "https://api.static.ev.transev.site"; // Define the base URL and port
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf"; // Define the API key
 
 const ForgotPasswordPage = () => {
