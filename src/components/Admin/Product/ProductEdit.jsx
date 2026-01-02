@@ -33,9 +33,9 @@ const ProductEditPage = () => {
           }
         );
 
-        // ✅ ensure ocpp_present always exists
         setUpdatedProductData({
           ...res.data,
+          mrp: res.data.mrp ?? 0, // ✅ ensure mrp even if 0
           details: {
             ...res.data.details,
             ocpp_present: res.data.details?.ocpp_present || 'No',
@@ -72,12 +72,11 @@ const ProductEditPage = () => {
     }));
   };
 
-  /* ================= UPDATE (FORMDATA) ================= */
+  /* ================= UPDATE PRODUCT ================= */
   const handleProductUpdate = async (e) => {
     e.preventDefault();
     const authToken = localStorage.getItem('auth_token');
 
-    // ✅ Final payload with ocpp_present
     const payload = {
       ...updatedProductData,
       details: {
@@ -125,22 +124,32 @@ const ProductEditPage = () => {
           </button>
 
           <form onSubmit={handleProductUpdate}>
-            {/* BASIC INFO */}
-            {['name', 'model', 'price', 'quantity', 'product_color'].map((field) => (
+            {/* ================= BASIC INFO ================= */}
+            {['name', 'model', 'mrp', 'price', 'quantity', 'product_color'].map((field) => (
               <div className="mb-4" key={field}>
                 <label className="block font-medium">
                   {field.replace('_', ' ').toUpperCase()}
                 </label>
                 <input
-                  type={field === 'price' || field === 'quantity' ? 'number' : 'text'}
+                  type={
+                    field === 'price' || field === 'mrp' || field === 'quantity'
+                      ? 'number'
+                      : 'text'
+                  }
                   name={field}
-                  value={updatedProductData[field] || ''}
+                  value={
+                    updatedProductData[field] !== undefined &&
+                    updatedProductData[field] !== null
+                      ? updatedProductData[field]
+                      : ''
+                  }
                   onChange={handleInputChange}
                   className="border p-2 w-full"
                 />
               </div>
             ))}
 
+            {/* ================= DETAILS ================= */}
             <h3 className="text-xl font-semibold mt-6 mb-2">Product Details</h3>
 
             {Object.entries({

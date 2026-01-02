@@ -127,7 +127,24 @@ const ProductViewPage = () => {
                 <div className="mb-6 text-center sm:text-left">
                   <h1 className="text-3xl font-bold mb-2">{product.name}</h1>
                   <p className="text-xl text-gray-600 mb-1">Model: {product.model}</p>
-                  <p className="text-lg text-gray-700 mb-1">Price: ₹{product.price}</p>
+                  {/* <p className="text-lg text-gray-700 mb-1">Price: ₹{product.price}</p> */}
+                  <div className="flex items-center gap-2 mb-1">
+  <span className="text-lg text-gray-600 font-medium">
+    Price:
+  </span>
+
+  {product.mrp > product.price && (
+    <span className="text-sm text-gray-500 line-through">
+      ₹{product.mrp}
+    </span>
+  )}
+
+  <span className="text-xl font-bold text-gray-800">
+    ₹{product.price}
+  </span>
+</div>
+
+
                   <p className="text-lg text-gray-700">Quantity: {product.quantity}</p>
                 </div>
 
