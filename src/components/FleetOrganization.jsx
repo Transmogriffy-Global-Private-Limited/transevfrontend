@@ -345,7 +345,7 @@ const handleBuyNowClick = () => {
     onScroll={handleScroll}
   >
     {[ 
-       { name: 'DC04W', description: '30 kW', features: 'Model No:TE-DC-04W-30,Rating:30 kW,Single Gun,Ethernet | Wi-fi|4G', image: DC04W,details: {
+       { name: 'DC 30 KW', description: '30 kW', features: 'Model No:TE-DC-04W-30,Rating:30 kW,Single Gun,Ethernet | Wi-fi|4G', image: DC04W,details: {
          'Dimensions':'WxDxH (459 mm x 346 mm x 734 mm)',
           'Rated Power': '30 kW',
           'Input Voltage': '304-456V AC',
@@ -358,7 +358,7 @@ const handleBuyNowClick = () => {
           'Mechanical Protection':'IP54',
           'Safety':'CE',
          'Mounting': 'Wall Mount,Stand column,Portable wheeled',}}, 
-            { name: 'DC04G', description: ' 60 kW ', features: 'Model No:TE-DC-04G-60,Rating:60 kW,High Speed Charging,OCPP1.6J Or Latest | RFID', image: DC04G60 ,details: {
+            { name: 'DC 60 KW', description: ' 60 kW ', features: 'Model No:TE-DC-04G-60,Rating:60 kW,High Speed Charging,OCPP1.6J Or Latest | RFID', image: DC04G60 ,details: {
           'Dimensions':'WxDxH (730 mm x 500 mm x 1500 mm)',
           'Rated Power': '60 kW',
           'Input Voltage': '304V - 456V AC',
@@ -371,7 +371,7 @@ const handleBuyNowClick = () => {
           'Mechanical Protection':'IP54',
           'Safety':'CE',
          'Mounting': 'Ground/Floor Mounting',}},
-            { name: 'DC04G', description: '150 kW', features: 'Model No:TE-DC-04G-150,Rating:150 kW,High Speed Charging,OCPP1.6J Or Latest | RFID', image: DC04G150,details: {
+            { name: 'DC 150 KW', description: '150 kW', features: 'Model No:TE-DC-04G-150,Rating:150 kW,High Speed Charging,OCPP1.6J Or Latest | RFID', image: DC04G150,details: {
            'Dimensions':'WxDxH (1150 mm x 625 mm x 2000 mm)',
           'Rated Power': '150 kW',
           'Input Voltage': '304V - 456V AC',

@@ -196,7 +196,7 @@ useEffect(() => {
         <div className="w-full md:w-auto">
           <h5 className="text-lg font-semibold text-color-black mb-5">Navigation</h5>
           <ul className="space-y-2">
-            <li><a href="/solutions" className="text-gray hover:underline text-lg">Solutions</a></li>
+            <li><a href="/solution" className="text-gray hover:underline text-lg">Solutions</a></li>
             <li><a href="/contact" className="text-gray hover:underline text-lg">Contact</a></li>
             <li><a href="/about" className="text-gray hover:underline text-lg">About</a></li>
            
