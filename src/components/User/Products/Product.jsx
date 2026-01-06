@@ -194,6 +194,7 @@ const ProductPage = () => {
       >
         <FaShoppingCart className="mr-2" />
         {cart.includes(product.id) ? 'Added to Cart' : 'Add to Cart'}
+       
       </button>
     ) : (
       <div className="text-red-600 font-semibold">No Stock Available</div>
@@ -322,12 +323,7 @@ const ProductPage = () => {
               </div>
 
               {/* RIGHT: Product Info */}
-              {/* <div className="w-full sm:w-1/2 p-4">
-                <h3 className="text-3xl font-semibold mb-4 text-blue-600">Product Name: {popupContent.name}</h3>
-                <h4 className="text-3xl font-semibold mb-4 text-green-600">Model: {popupContent.model}</h4>
-                <h4 className="text-3xl font-semibold mb-4 text-red-600">Price: {popupContent.price}</h4>
-                <h4 className="text-2xl font-semibold text-teal-600">Product Color: {popupContent.product_color}</h4>
-                <div className={`w-6 h-6 rounded border border-gray-300`} style={{ backgroundColor: popupContent.product_color?.toLowerCase() }}></div> */}
+             
                 <div className="w-full sm:w-1/2 p-4">
   <h3 className="text-3xl font-semibold mb-4 text-blue-600">
     Product Name: {popupContent.name}

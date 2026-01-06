@@ -341,65 +341,7 @@ useEffect(() => {
                             alert("❌ Something went wrong while placing the order.");
                         }
                     };
-                    // const handlePayment = async (orderId, totalAmount, pricedProducts, orderPayload) => {
-                    //     const options = {
-                    //         key: 'rzp_live_kaJZ4jkMErixqW',
-                    //         amount: totalAmount * 100,
-                    //         currency: 'INR',
-                    //         name: 'Transmogrify Global Pvt Ltd',
-                    //         description: 'Order Payment',
-                    //         order_id: orderId,
-                    //         handler: async function (response) {
-                    //             try {
-                    //                 const verifyResponse = await axios.post(
-                    //                     `${BASE_URL_AND_PORT}/payments/verifypayment`,
-                    //                     {
-                    //                         razorpaypaymentid: response.razorpay_payment_id,
-                    //                         user_id: userId,
-                    //                         products: pricedProducts // Must include price here
-                    //                     },
-                    //                     {
-                    //                         headers: { 'API-KEY': API_KEY },
-                    //                     }
-                    //                 );
-                    
-                    //                 if (verifyResponse.data) {
-                    //                     // Order gets placed after successful verification
-                    //                     const orderRes = await axios.post(
-                    //                         `${BASE_URL_AND_PORT}/order/addorder`,
-                    //                         orderPayload,
-                    //                         {
-                    //                             headers: { 'API-KEY': API_KEY },
-                    //                         }
-                    //                     );
-                    
-                    //                     if (orderRes.data) {
-                    //                         alert("✅ Payment successful and order placed!");
-                    //                         navigate("/order");
-                    //                     } else {
-                    //                         alert("❌ Order failed after payment.");
-                    //                     }
-                    //                 } else {
-                    //                     alert("❌ Payment verification failed.");
-                    //                 }
-                    //             } catch (err) {
-                    //                 console.error("❌ Error during payment verification:", err);
-                    //                 alert("❌ Error placing order after payment.");
-                    //             }
-                    //         },
-                    //         prefill: {
-                    //             name: "Customer",
-                    //             email: "customer@example.com",
-                    //             contact: "9999999999",
-                    //         },
-                    //         theme: {
-                    //             color: "#F37254",
-                    //         },
-                    //     };
-                    
-                    //     const rzp = new window.Razorpay(options);
-                    //     rzp.open();
-                    // };
+                   
                             const handlePayment = async (orderId, totalAmount, pricedProducts, orderPayload) => {
   const options = {
     key: 'rzp_live_kaJZ4jkMErixqW',
