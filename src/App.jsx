@@ -51,6 +51,7 @@ import Privacy from './components/PrivacyStatement';
 import Terms from './components/TermsandConditions';
 import IndustrialSupport from './components/IndustriesSupport';
 import { Image } from 'lucide-react';
+import VerifyEmail from './components/User/VerifyEmail';
 
 
 
@@ -107,6 +108,7 @@ function App() {
         <Route path="/privacy-policy" element={<Privacy/>} /> 
         <Route path="/terms-conditions" element={<Terms/>} /> 
          <Route path="/industrialsupport" element={<IndustrialSupport/>} />
+           <Route path="/verify-email" element={<VerifyEmail/>} />
            
 
          </Routes>
