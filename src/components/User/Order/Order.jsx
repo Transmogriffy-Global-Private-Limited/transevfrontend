@@ -5,7 +5,7 @@ import UserNavbar from "../User_Navbar";
 import UserSidebar from "../User_sidebar";
 import background from "../../../assets/new3.jpg";
 
-const BASE_URL_AND_PORT = "hhttps://api.static.ev.transev.site";
+const BASE_URL_AND_PORT = "https://api.static.ev.transev.site";
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
 
 function OrderHistoryPage() {
