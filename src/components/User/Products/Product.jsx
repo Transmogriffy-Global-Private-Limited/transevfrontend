@@ -24,6 +24,7 @@ const ProductPage = () => {
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
   const [imageIndex, setImageIndex] = useState({});
+const [showDisclaimer, setShowDisclaimer] = useState(false);
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
@@ -322,12 +323,45 @@ const ProductPage = () => {
                     </button>
                   )}
                   {/* ✅ DISCLAIMER LINE */}
-           <div className="mt-2 text-center">
-  <p className="text-xs sm:text-sm border border-yellow-300 rounded-md px-3 py-2 bg-yellow-50 text-yellow-700 italic">
-    <span className="font-bold">Disclaimer:</span>{' '}
-    No return policy available once the product is sold.
-  </p>
+           {/* 🔹 WARRANTY & DISCLAIMER */}
+<div className="mt-4 space-y-3 text-center">
+
+  {/* ✅ WARRANTY BOX */}
+  <div className="border border-green-300 rounded-lg px-4 py-3 bg-green-50">
+    <p className="text-sm sm:text-base text-green-700 font-semibold">
+      🛡️ Warranty:
+      <span className="ml-2 font-bold">12 Months</span>
+    </p>
+  </div>
+
+  {/* ⚠️ DISCLAIMER BOX */}
+  <div className="border border-red-300 rounded-lg px-4 py-3 bg-red-50">
+    <p className="text-sm sm:text-base text-red-700 font-semibold">
+      ⚠️ Disclaimer:
+      <span className="ml-2">No Return & No Cancellation Policy</span>
+    </p>
+
+    {/* Read More Button */}
+    <button
+      onClick={() => setShowDisclaimer(!showDisclaimer)}
+      className="mt-2 text-sm text-red-600 underline hover:text-red-800 transition"
+    >
+      {showDisclaimer ? 'Read less' : 'Read more'}
+    </button>
+
+    {/* Expandable Content */}
+    {showDisclaimer && (
+      <p className="mt-3 text-sm sm:text-base text-red-700 leading-relaxed transition-all duration-300">
+        Once an order is placed and accepted by us, it cannot be cancelled or
+        returned. Please ensure all product details are reviewed carefully
+        before placing your order. By confirming the order, you agree to this
+        policy.
+      </p>
+    )}
+  </div>
+
 </div>
+
 
                 </div>
               </div>

@@ -22,6 +22,9 @@ function CartPage() {
     const [showPaymentOptions, setShowPaymentOptions] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [globalPaymentOption, setGlobalPaymentOption] = useState("Cash");
+    const [isAccepted, setIsAccepted] = useState(false);
+const [showPaymentModal, setShowPaymentModal] = useState(false);
+
     const [userProfile, setUserProfile] = useState({
   name: "",
   email: "",
@@ -518,101 +521,121 @@ useEffect(() => {
 
         </div>
       
-   
+  {isModalOpen && (
+  <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-40">
+    <div className="bg-white p-6 rounded-xl shadow-2xl w-full max-w-md mx-4">
 
+      {/* 🔴 DISCLAIMER */}
+      <div className="border border-red-300 bg-red-50 rounded-lg p-4 mb-4">
+        <h3 className="text-red-700 font-bold text-lg mb-2">⚠️ Disclaimer</h3>
+        <p className="text-sm text-red-700 leading-relaxed">
+          No Return & No Cancellation Policy.
+          <br /><br />
+          Once an order is placed and accepted by us, it cannot be cancelled or
+          returned. Please ensure all product details are reviewed carefully
+          before placing your order. By confirming the order, you agree to this
+          policy.
+        </p>
+      </div>
 
+      {/* ✅ ACCEPT CHECKBOX */}
+      <div className="flex items-start gap-2 mb-4">
+        <input
+          type="checkbox"
+          checked={isAccepted}
+          onChange={(e) => setIsAccepted(e.target.checked)}
+          className="mt-1 h-4 w-4 accent-red-600"
+        />
+        <p className="text-sm text-gray-700">
+          I accept the <span className="font-semibold">No Return & No Cancellation Policy</span>
+        </p>
+      </div>
 
-        {isModalOpen && (
-  <div
-  className="fixed inset-0 flex items-center justify-center z-50 bg-white bg-opacity-40"
-  style={{
-    backgroundImage: `url(${background})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-  }}
->
-
- <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-      {/* <h2 className="text-lg font-bold mb-4">Select Payment Method</h2>
-      
-      <select
-        className="w-full border px-4 py-2 rounded mb-4"
-        value={globalPaymentOption}
-        onChange={(e) => setGlobalPaymentOption(e.target.value)}
-      >
-        <option value="Cash">POD (Pay On Delivery)</option>
-        <option value="UPI">UPI</option>
-        <option value="Card">Card</option>
-      </select>
-
-      <div className="flex justify-end gap-4">
+      <div className="flex justify-end gap-3">
         <button
-          className="bg-gray-300 hover:bg-gray-400 text-black font-bold py-2 px-4 rounded"
-          onClick={() => setIsModalOpen(false)}
+          className="bg-gray-300 hover:bg-gray-400 px-4 py-2 rounded"
+          onClick={() => {
+            setIsModalOpen(false);
+            setIsAccepted(false);
+          }}
         >
           Cancel
         </button>
 
-     
-        {globalPaymentOption === "Cash" ? (
+        <button
+          disabled={!isAccepted}
+          className={`px-4 py-2 rounded text-white font-semibold ${
+            isAccepted
+              ? 'bg-green-600 hover:bg-green-700'
+              : 'bg-gray-400 cursor-not-allowed'
+          }`}
+          onClick={() => {
+            setIsModalOpen(false);
+            setShowPaymentModal(true);
+          }}
+        >
+          Continue
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+{showPaymentModal && (
+  <div
+    className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-40"
+    style={{
+      backgroundImage: `url(${background})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    }}
+  >
+    <div className="bg-white p-6 rounded-xl shadow-2xl w-full max-w-md mx-4">
+
+      <h2 className="text-lg font-bold mb-4 text-gray-800">
+        Select Payment Method
+      </h2>
+
+      <select
+        className="w-full border px-4 py-2 rounded mb-4 focus:ring-2 focus:ring-green-500"
+        value={globalPaymentOption}
+        onChange={(e) => setGlobalPaymentOption(e.target.value)}
+      >
+        <option value="">Select Payment Option</option>
+        <option value="UPI">UPI</option>
+        <option value="Card">Card</option>
+      </select>
+
+      <div className="flex justify-end gap-3">
+        <button
+          className="bg-gray-300 hover:bg-gray-400 px-4 py-2 rounded"
+          onClick={() => setShowPaymentModal(false)}
+        >
+          Cancel
+        </button>
+
+        {(globalPaymentOption === "UPI" ||
+          globalPaymentOption === "Card") && (
           <button
-            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded font-bold"
             onClick={() => {
-              setIsModalOpen(false);
-              placeOrder(); 
-            }}
-          >
-            Confirm Order
-          </button>
-        ) : (
-          <button
-            className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-            onClick={() => {
-              setIsModalOpen(false);
-              placeOrder(); 
+              setShowPaymentModal(false);
+              setIsAccepted(false);
+              placeOrder();
             }}
           >
             Confirm & Pay
           </button>
-        )} */}
-        <h2 className="text-lg font-bold mb-4">Select Payment Method</h2>
-  
- 
- <select
-    className="w-full border px-4 py-2 rounded mb-4"
-    value={globalPaymentOption}
-    onChange={(e) => setGlobalPaymentOption(e.target.value)}
-  >
-    <option value="">Select Payment Option</option>
-    <option value="UPI">UPI</option>
-    <option value="Card">Card</option>
-  </select>
-  <div className="flex justify-end gap-4">
-    <button
-      className="bg-gray-300 hover:bg-gray-400 text-black font-bold py-2 px-4 rounded"
-      onClick={() => setIsModalOpen(false)}
-    >
-      Cancel
-    </button>
-
-    {/* Show Confirm button with label based on payment option */}
-    {globalPaymentOption === "UPI" || globalPaymentOption === "Card" ? (
-      <button
-        className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-        onClick={() => {
-          setIsModalOpen(false);
-          placeOrder(); // Razorpay for UPI / Card
-        }}
-      >
-        Confirm & Pay
-      </button>
-    ) : null}
-  </div>
-</div>
+        )}
       </div>
-  //   </div>
-  // </div>
+    </div>
+  </div>
 )}
+
+
+
+
+
+       
 
 
 
