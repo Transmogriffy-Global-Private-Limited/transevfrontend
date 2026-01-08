@@ -626,7 +626,7 @@ const handleEditInputChange = (e) => {
 
             )}
           </div>
-          {/* <div className="flex flex-col sm:flex-row items-center">
+          <div className="flex flex-col sm:flex-row items-center">
           <label className="w-full sm:w-32 font-semibold text-gray-700">Address:</label>
            <div className="mt-2 sm:mt-0 w-full flex items-center">
             
@@ -637,7 +637,7 @@ const handleEditInputChange = (e) => {
               Create Address
             </button>
           </div>
-        </div> */}
+        </div>
           {/* Addresses Section */}
           <div>
             {Object.keys(groupedAddresses).map((addressType) => (

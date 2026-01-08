@@ -7,11 +7,14 @@ const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
 
 const ORDER_STATUS_OPTIONS = [
   { value: "", label: "All Orders" },
+    { value: "null", label: "OrderPlaced" },
+     { value: "Accepted", label: "Accepted" },
   { value: "Processing", label: "Processing" },
   { value: "Shipped", label: "Shipped" },
-  { value: "Delivered", label: "Delivered" },
-  { value: "Accepted", label: "Accepted" },
-   { value: "null", label: "OrderPlaced" },
+  { value: "Delivered", label: "Delivered" }
+ 
+ 
+
 ];
 
 const ManageOrders = () => {

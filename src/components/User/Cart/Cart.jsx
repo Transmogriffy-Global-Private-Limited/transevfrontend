@@ -344,7 +344,8 @@ useEffect(() => {
                    
                             const handlePayment = async (orderId, totalAmount, pricedProducts, orderPayload) => {
   const options = {
-    key: 'rzp_live_kaJZ4jkMErixqW',
+    // key: 'rzp_live_kaJZ4jkMErixqW',
+     key: 'rzp_test_nzmqxQYhvCH9rD',
     amount: totalAmount * 100,
     currency: 'INR',
     name: 'Transmogrify Global Pvt Ltd',

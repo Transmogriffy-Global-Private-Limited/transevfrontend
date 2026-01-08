@@ -109,7 +109,7 @@ const Sidebar = ({ isVisible = false, onClose = () => {} }) => {
             label="Products"
             showText={isExpanded}
           />
-          {/* <SidebarLink
+          <SidebarLink
             icon={<FaShoppingCart />}
             to="/cart"
             label="Shopping Cart"
@@ -120,7 +120,7 @@ const Sidebar = ({ isVisible = false, onClose = () => {} }) => {
             to="/order"
             label="My Orders"
             showText={isExpanded}
-          /> */}
+          />
           <SidebarLink
             icon={<FaUserCircle />}
             to="/profile"

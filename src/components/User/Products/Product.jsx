@@ -182,7 +182,7 @@ const ProductPage = () => {
 
                  
                   <div className="mt-4 text-center">
-  {isAC(product) ? (
+   {isAC(product) ? (
     product.quantity > 0 ? (
       <button
         onClick={() => handleAddToCart(product.id, product.price)}
@@ -206,7 +206,9 @@ const ProductPage = () => {
     >
       Contact Us
     </button>
-  )}
+  )} 
+ 
+
 </div>
 
                 </div>
@@ -319,6 +321,14 @@ const ProductPage = () => {
                       Contact Us
                     </button>
                   )}
+                  {/* ✅ DISCLAIMER LINE */}
+           <div className="mt-2 text-center">
+  <p className="text-xs sm:text-sm border border-yellow-300 rounded-md px-3 py-2 bg-yellow-50 text-yellow-700 italic">
+    <span className="font-bold">Disclaimer:</span>{' '}
+    No return policy available once the product is sold.
+  </p>
+</div>
+
                 </div>
               </div>
 
