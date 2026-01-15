@@ -345,10 +345,67 @@ useEffect(() => {
                         }
                     };
                    
-                            const handlePayment = async (orderId, totalAmount, pricedProducts, orderPayload) => {
+//                             const handlePayment = async (orderId, totalAmount, pricedProducts, orderPayload) => {
+//   const options = {
+//     // key: 'rzp_live_kaJZ4jkMErixqW',
+//      key: 'rzp_test_nzmqxQYhvCH9rD',
+//     amount: totalAmount * 100,
+//     currency: 'INR',
+//     name: 'Transmogrify Global Pvt Ltd',
+//     description: 'Order Payment',
+//     order_id: orderId,
+
+//     handler: async function (response) {
+//       try {
+//         const verifyResponse = await axios.post(
+//           `${BASE_URL_AND_PORT}/payments/verifypayment`,
+//           {
+//             razorpaypaymentid: response.razorpay_payment_id,
+//             user_id: userId,
+//             products: pricedProducts,
+//           },
+//           { headers: { 'API-KEY': API_KEY } }
+//         );
+
+//         if (verifyResponse.data) {
+//           const orderRes = await axios.post(
+//             `${BASE_URL_AND_PORT}/order/addorder`,
+            
+//             orderPayload,
+            
+//             { headers: { 'API-KEY': API_KEY } }
+//           );
+
+//           if (orderRes.data) {
+//             alert("✅ Payment successful and order placed!");
+//             navigate("/order");
+//           }
+//         }
+//       } catch (err) {
+//         alert("❌ Payment verification failed");
+//       }
+//     },
+   
+
+//     prefill: {
+//       name: userProfile.name,
+//       email: userProfile.email,
+//       contact: userProfile.phone,
+//     },
+
+//     theme: {
+//       color: "#F37254",
+//     },
+//   };
+
+//   const rzp = new window.Razorpay(options);
+//   rzp.open();
+// };
+            
+    const handlePayment = async (orderId, totalAmount, pricedProducts, orderPayload) => {
   const options = {
     // key: 'rzp_live_kaJZ4jkMErixqW',
-     key: 'rzp_test_nzmqxQYhvCH9rD',
+    key: 'rzp_test_nzmqxQYhvCH9rD',
     amount: totalAmount * 100,
     currency: 'INR',
     name: 'Transmogrify Global Pvt Ltd',
@@ -357,6 +414,7 @@ useEffect(() => {
 
     handler: async function (response) {
       try {
+        // 1️⃣ Verify payment
         const verifyResponse = await axios.post(
           `${BASE_URL_AND_PORT}/payments/verifypayment`,
           {
@@ -367,39 +425,39 @@ useEffect(() => {
           { headers: { 'API-KEY': API_KEY } }
         );
 
-        if (verifyResponse.data) {
-          const orderRes = await axios.post(
-            `${BASE_URL_AND_PORT}/order/addorder`,
-            orderPayload,
-            { headers: { 'API-KEY': API_KEY } }
-          );
+        // 2️⃣ Extract razorpay payment id safely
+        const rzpPaymentId =
+          verifyResponse?.data?.transactions?.[0]?.razorpaypaymentid;
 
-          if (orderRes.data) {
-            alert("✅ Payment successful and order placed!");
-            navigate("/order");
-          }
+        if (!rzpPaymentId) {
+          throw new Error("Razorpay payment id not found after verification");
+        }
+
+        // 3️⃣ Add order with NON-NULL rzp_payment_id
+        const orderRes = await axios.post(
+          `${BASE_URL_AND_PORT}/order/addorder`,
+          {
+            ...orderPayload,
+            rzp_payment_id: rzpPaymentId, // ✅ NEVER NULL
+          },
+          { headers: { 'API-KEY': API_KEY } }
+        );
+
+        if (orderRes.data) {
+          alert("✅ Payment successful and order placed!");
+          navigate("/order");
         }
       } catch (err) {
-        alert("❌ Payment verification failed");
+        console.error(err);
+        alert("❌ Payment verification or order creation failed");
       }
-    },
-
-    prefill: {
-      name: userProfile.name,
-      email: userProfile.email,
-      contact: userProfile.phone,
-    },
-
-    theme: {
-      color: "#F37254",
     },
   };
 
   const rzp = new window.Razorpay(options);
   rzp.open();
 };
-            
-                    
+                
     return (
         <div
             className="min-h-screen bg-gradient-to-r from-white-100 via-white-100 to-white-100 bg-cover bg-center bg-fixed"
