@@ -52,6 +52,7 @@ import Terms from './components/TermsandConditions';
 import IndustrialSupport from './components/IndustriesSupport';
 import { Image } from 'lucide-react';
 import VerifyEmail from './components/User/VerifyEmail';
+import AdminRefunds from './components/Admin/Refund/Refund';
 
 
 
@@ -109,6 +110,7 @@ function App() {
         <Route path="/terms-conditions" element={<Terms/>} /> 
          <Route path="/industrialsupport" element={<IndustrialSupport/>} />
            <Route path="/verify-email" element={<VerifyEmail/>} />
+              <Route path="/admin-refunds" element={<AdminRefunds/>} />
            
 
          </Routes>

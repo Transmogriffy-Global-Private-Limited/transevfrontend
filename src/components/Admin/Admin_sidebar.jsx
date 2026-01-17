@@ -14,6 +14,7 @@ import {
   FaUserCircle
 } from "react-icons/fa";
 import logo from "../../assets/log.png";
+import { FaMoneyBillWave } from "react-icons/fa";
 
 const BASE_URL_AND_PORT = "https://api.static.ev.transev.site";
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
@@ -107,6 +108,12 @@ const AdminSidebar = ({ isVisible = false, onClose = () => {} }) => {
             icon={<FaClipboardCheck />}
             to="/admin/orders"
             label="Manage Orders"
+            showText={isExpanded}
+          />
+          <SidebarLink
+            icon={< FaMoneyBillWave  />}
+            to="/admin-refunds"
+            label="Manage Refunds"
             showText={isExpanded}
           />
           <SidebarLink

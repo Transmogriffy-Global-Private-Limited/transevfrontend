@@ -24,6 +24,7 @@ function CartPage() {
     const [globalPaymentOption, setGlobalPaymentOption] = useState("Cash");
     const [isAccepted, setIsAccepted] = useState(false);
 const [showPaymentModal, setShowPaymentModal] = useState(false);
+const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
     const [userProfile, setUserProfile] = useState({
   name: "",
@@ -345,10 +346,12 @@ useEffect(() => {
                         }
                     };
                    
-//                             const handlePayment = async (orderId, totalAmount, pricedProducts, orderPayload) => {
+
+            
+//     const handlePayment = async (orderId, totalAmount, pricedProducts, orderPayload) => {
 //   const options = {
 //     // key: 'rzp_live_kaJZ4jkMErixqW',
-//      key: 'rzp_test_nzmqxQYhvCH9rD',
+//     key: 'rzp_test_nzmqxQYhvCH9rD',
 //     amount: totalAmount * 100,
 //     currency: 'INR',
 //     name: 'Transmogrify Global Pvt Ltd',
@@ -357,6 +360,7 @@ useEffect(() => {
 
 //     handler: async function (response) {
 //       try {
+//         // 1️⃣ Verify payment
 //         const verifyResponse = await axios.post(
 //           `${BASE_URL_AND_PORT}/payments/verifypayment`,
 //           {
@@ -367,52 +371,57 @@ useEffect(() => {
 //           { headers: { 'API-KEY': API_KEY } }
 //         );
 
-//         if (verifyResponse.data) {
-//           const orderRes = await axios.post(
-//             `${BASE_URL_AND_PORT}/order/addorder`,
-            
-//             orderPayload,
-            
-//             { headers: { 'API-KEY': API_KEY } }
-//           );
+//         // 2️⃣ Extract razorpay payment id safely
+//         const rzpPaymentId =
+//           verifyResponse?.data?.transactions?.[0]?.razorpaypaymentid;
 
-//           if (orderRes.data) {
-//             alert("✅ Payment successful and order placed!");
-//             navigate("/order");
-//           }
+//         if (!rzpPaymentId) {
+//           throw new Error("Razorpay payment id not found after verification");
+//         }
+
+//         // 3️⃣ Add order with NON-NULL rzp_payment_id
+//         const orderRes = await axios.post(
+//           `${BASE_URL_AND_PORT}/order/addorder`,
+//           {
+//             ...orderPayload,
+//             rzp_payment_id: rzpPaymentId, // ✅ NEVER NULL
+//           },
+//           { headers: { 'API-KEY': API_KEY } }
+//         );
+
+//         if (orderRes.data) {
+//           alert("✅ Payment successful and order placed!");
+//           navigate("/order");
 //         }
 //       } catch (err) {
-//         alert("❌ Payment verification failed");
+//         console.error(err);
+//         alert("❌ Payment verification or order creation failed");
 //       }
-//     },
-   
-
-//     prefill: {
-//       name: userProfile.name,
-//       email: userProfile.email,
-//       contact: userProfile.phone,
-//     },
-
-//     theme: {
-//       color: "#F37254",
 //     },
 //   };
 
 //   const rzp = new window.Razorpay(options);
 //   rzp.open();
 // };
-            
-    const handlePayment = async (orderId, totalAmount, pricedProducts, orderPayload) => {
+
+const handlePayment = async (
+  razorpayOrderId,
+  totalAmount,
+  pricedProducts,
+  orderPayload
+) => {
   const options = {
-    // key: 'rzp_live_kaJZ4jkMErixqW',
+     // key: 'rzp_live_kaJZ4jkMErixqW',
     key: 'rzp_test_nzmqxQYhvCH9rD',
     amount: totalAmount * 100,
     currency: 'INR',
     name: 'Transmogrify Global Pvt Ltd',
     description: 'Order Payment',
-    order_id: orderId,
+    order_id: razorpayOrderId,
 
     handler: async function (response) {
+      setIsProcessingPayment(true); // 🔄 START LOADER
+
       try {
         // 1️⃣ Verify payment
         const verifyResponse = await axios.post(
@@ -425,30 +434,32 @@ useEffect(() => {
           { headers: { 'API-KEY': API_KEY } }
         );
 
-        // 2️⃣ Extract razorpay payment id safely
         const rzpPaymentId =
           verifyResponse?.data?.transactions?.[0]?.razorpaypaymentid;
 
         if (!rzpPaymentId) {
-          throw new Error("Razorpay payment id not found after verification");
+          throw new Error("Razorpay payment id not found");
         }
 
-        // 3️⃣ Add order with NON-NULL rzp_payment_id
+        // 2️⃣ Add order
         const orderRes = await axios.post(
           `${BASE_URL_AND_PORT}/order/addorder`,
           {
             ...orderPayload,
-            rzp_payment_id: rzpPaymentId, // ✅ NEVER NULL
+            rzp_payment_id: rzpPaymentId,
+            rzp_order_id: razorpayOrderId,
           },
           { headers: { 'API-KEY': API_KEY } }
         );
 
         if (orderRes.data) {
+          setIsProcessingPayment(false); // ✅ STOP LOADER
           alert("✅ Payment successful and order placed!");
           navigate("/order");
         }
-      } catch (err) {
-        console.error(err);
+      } catch (error) {
+        console.error(error);
+        setIsProcessingPayment(false); // ❌ STOP LOADER
         alert("❌ Payment verification or order creation failed");
       }
     },
@@ -457,7 +468,8 @@ useEffect(() => {
   const rzp = new window.Razorpay(options);
   rzp.open();
 };
-                
+
+             
     return (
         <div
             className="min-h-screen bg-gradient-to-r from-white-100 via-white-100 to-white-100 bg-cover bg-center bg-fixed"
@@ -575,6 +587,38 @@ useEffect(() => {
     >
          Place Order
     </button>
+)}
+{isProcessingPayment && (
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
+    <div className="bg-white p-6 rounded-xl shadow-2xl flex flex-col items-center">
+      
+      {/* 🔄 Spinner */}
+      <svg
+        className="animate-spin h-12 w-12 text-green-600 mb-4"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <circle
+          className="opacity-25"
+          cx="12"
+          cy="12"
+          r="10"
+          stroke="currentColor"
+          strokeWidth="4"
+        />
+        <path
+          className="opacity-75"
+          fill="currentColor"
+          d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+        />
+      </svg>
+
+      <p className="text-gray-700 font-semibold text-sm">
+        Processing your payment, please wait...
+      </p>
+    </div>
+  </div>
 )}
 
         </div>

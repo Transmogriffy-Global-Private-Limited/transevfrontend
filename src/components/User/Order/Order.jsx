@@ -57,9 +57,18 @@ const [customReason, setCustomReason] = useState("");
           }
         );
 
+        // if (response.data && Array.isArray(response.data)) {
+        //   setOrderHistory(response.data);
+        // } 
         if (response.data && Array.isArray(response.data)) {
-          setOrderHistory(response.data);
-        } else {
+  const sortedOrders = [...response.data].sort(
+    (a, b) => new Date(b.purchase_time) - new Date(a.purchase_time)
+  );
+
+  setOrderHistory(sortedOrders);
+}
+
+        else {
           console.warn("Unexpected response format:", response.data);
           setOrderHistory([]);
         }
