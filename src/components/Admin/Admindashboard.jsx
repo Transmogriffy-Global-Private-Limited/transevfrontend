@@ -17,6 +17,7 @@ const Dashboard = () => {
   const [totalSales, setTotalSales] = useState(0);
   const [orderHistory, setOrderHistory] = useState([]);
   const [totalChargers, setTotalChargers] = useState(131); // Hardcoded as per your provided value
+const [stockLoading, setStockLoading] = useState(true);
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -43,8 +44,12 @@ const Dashboard = () => {
             'API-Key': API_KEY,
           },
         });
+        // const productStockAnalysisData = await productStockAnalysisResponse.json();
+        // setProductStockAnalysis(productStockAnalysisData.product_stock_analysis);
         const productStockAnalysisData = await productStockAnalysisResponse.json();
-        setProductStockAnalysis(productStockAnalysisData.product_stock_analysis);
+setProductStockAnalysis(productStockAnalysisData.product_stock_analysis || []);
+setStockLoading(false); // ✅ stop loading once data arrives
+
 
         // Fetch total sales
         const totalSalesResponse = await fetch(`${BASE_URL_AND_PORT}/analytics/total_sales`, {
@@ -100,40 +105,50 @@ const Dashboard = () => {
     ],
   };
 
-  const chartOptions = {
-    responsive: true,
-    scales: {
-      y: {
-        beginAtZero: true,
-        ticks: {
-          font: {
-            size: 14,
-          },
-        },
-      },
-      x: {
-        ticks: {
-          font: {
-            size: 14,
-          },
-        },
-      },
-    },
-    plugins: {
-      title: {
-        display: true,
-        text: 'Performance Overview of Total Orders per Product',
+const chartOptions = {
+  responsive: true,
+  maintainAspectRatio: false, // ✅ REQUIRED for custom height
+  scales: {
+    y: {
+      beginAtZero: true,
+      ticks: {
         font: {
-          size: 20,
-        },
-      },
-      tooltip: {
-        callbacks: {
-          label: (tooltipItem) => `Orders: ${tooltipItem.raw}`,
+          size: window.innerWidth < 640 ? 12 : 14,
         },
       },
     },
-  };
+    x: {
+      ticks: {
+        font: {
+          size: window.innerWidth < 640 ? 11 : 14,
+          maxRotation: 45,
+          minRotation: 0,
+        },
+      },
+    },
+  },
+  plugins: {
+    legend: {
+      display: false, // cleaner on mobile
+    },
+    title: {
+      display: true,
+      text: 'Total Orders per Product',
+      font: {
+        size: window.innerWidth < 640 ? 14 : 18,
+      },
+      padding: {
+        top: 10,
+        bottom: 20,
+      },
+    },
+    tooltip: {
+      bodyFont: {
+        size: window.innerWidth < 640 ? 12 : 14,
+      },
+    },
+  },
+};
 
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-r from-green-50 to-green-100 text-gray-800">
@@ -167,40 +182,84 @@ const Dashboard = () => {
                 </div>
               </div>
 
-              {/* Charger Status Table */}
-              <div className="bg-white p-6 rounded-lg shadow mb-8">
-                <h5 className="text-2xl font-semibold text-gray-700 mb-6">Charger Status Overview</h5>
-                <div className="overflow-x-auto">
-                  <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-gradient-to-r from-teal-500 to-teal-700 text-white">
-                      <tr>
-                        <th className="px-6 py-3 text-left text-lg font-medium text-white-500 uppercase">Product Name</th>
-                        <th className="px-6 py-3 text-left text-lg font-medium text-white-500 uppercase">Initial Stock</th>
-                        <th className="px-6 py-3 text-left text-lg font-medium text-white--500 uppercase">Remaining Stock</th>
-                        <th className="px-6 py-3 text-left text-lg font-medium text-white--500 uppercase">Total Ordered</th>
-                      </tr>
-                    </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
-                      {productStockAnalysis.map((product, index) => (
-                        <tr key={index} className="hover:bg-teal-50">
-                          <td className="px-6 py-4 text-m font-medium text-gray-900">{product.product_name}</td>
-                          <td className="px-6 py-4 text-m text-white-700">{product.initial_stock}</td>
-                          <td className="px-6 py-4 text-m text-white-700">{product.remaining_stock}</td>
-                          <td className="px-6 py-4 text-m text--700">{product.total_ordered}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
+            
+          <div className="bg-white p-6 rounded-lg shadow mb-8">
+  <h5 className="text-2xl font-semibold text-gray-700 mb-6">
+    Charger Status Overview
+  </h5>
+
+  <div className="overflow-x-auto">
+    <table className="min-w-full divide-y divide-gray-200">
+      {/* ✅ TABLE HEAD — ALWAYS VISIBLE */}
+      <thead className="bg-gradient-to-r from-teal-500 to-teal-700 text-white">
+        <tr>
+          <th className="px-6 py-3 text-left text-lg font-medium uppercase">
+            Product Name
+          </th>
+          <th className="px-6 py-3 text-left text-lg font-medium uppercase">
+            Initial Stock
+          </th>
+          <th className="px-6 py-3 text-left text-lg font-medium uppercase">
+            Remaining Stock
+          </th>
+          <th className="px-6 py-3 text-left text-lg font-medium uppercase">
+            Total Ordered
+          </th>
+        </tr>
+      </thead>
+
+      {/* 🔄 TABLE BODY */}
+      <tbody className="bg-white divide-y divide-gray-200">
+        {stockLoading ? (
+          <tr>
+            <td colSpan="4" className="py-16">
+              <div className="flex justify-center items-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-teal-600"></div>
               </div>
+            </td>
+          </tr>
+        ) : productStockAnalysis.length > 0 ? (
+          productStockAnalysis.map((product, index) => (
+            <tr key={index} className="hover:bg-teal-50">
+              <td className="px-6 py-4 text-m font-medium text-gray-900">
+                {product.product_name}
+              </td>
+              <td className="px-6 py-4 text-m">
+                {product.initial_stock}
+              </td>
+              <td className="px-6 py-4 text-m">
+                {product.remaining_stock}
+              </td>
+              <td className="px-6 py-4 text-m">
+                {product.total_ordered}
+              </td>
+            </tr>
+          ))
+        ) : (
+          <tr>
+            <td colSpan="4" className="text-center text-gray-500 py-10">
+              No charger stock data available.
+            </td>
+          </tr>
+        )}
+      </tbody>
+    </table>
+  </div>
+</div>
+
 
               {/* Performance Overview (Bar Chart) */}
-              <div className="bg-white p-6 rounded-xl shadow mb-8">
-                <h5 className="text-2xl font-semibold text-gray-700 mb-6">Performance Overview</h5>
-                <div className="h-100 flex items-center justify-center">
-                  <Bar data={chartData} options={chartOptions} />
-                </div>
-              </div>
+<div className="bg-white p-4 sm:p-6 rounded-xl shadow mb-8">
+  <h5 className="text-xl sm:text-2xl font-semibold text-gray-700 mb-4 sm:mb-6 text-center sm:text-left">
+    Performance Overview
+  </h5>
+
+  {/* Responsive Chart Container */}
+  <div className="relative w-full h-[320px] sm:h-[420px] md:h-[520px]">
+    <Bar data={chartData} options={chartOptions} />
+  </div>
+</div>
+
             </section>
           </div>
         </main>
