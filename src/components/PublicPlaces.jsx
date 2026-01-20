@@ -792,7 +792,8 @@ const Hotels = () => {
                      <ul className="space-y-2">
                        <li><a href="/terms-conditions" className="text-gray hover:underline text-lg">Terms & Conditions</a></li>
                        <li><a href="/privacy-policy" className="text-gray hover:underline text-lg">Privacy Policy</a></li>
-                       
+                           <li><a href="/shipping-policy" className="text-gray hover:underline text-lg">Shipping Policy</a></li>
+                        <li><a href="/cancellation-policy" className="text-gray hover:underline text-lg">Cancellations and Refunds</a></li>
                      </ul>
                    </div>
                  </div>

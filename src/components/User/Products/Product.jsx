@@ -3,7 +3,7 @@ import axios from 'axios';
 import { FaShoppingCart } from 'react-icons/fa';
 import UserSidebar from '../User_sidebar';
 import UserNavbar from '../User_Navbar';
-
+import { Link } from "react-router-dom";
 const BASE_URL_AND_PORT = "https://api.static.ev.transev.site";
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
 const token = localStorage.getItem('auth_token');
@@ -334,31 +334,21 @@ const [showDisclaimer, setShowDisclaimer] = useState(false);
     </p>
   </div>
 
-  {/* ⚠️ DISCLAIMER BOX */}
-  <div className="border border-red-300 rounded-lg px-4 py-3 bg-red-50">
-    <p className="text-sm sm:text-base text-red-700 font-semibold">
-      ⚠️ Disclaimer:
-      <span className="ml-2">No Return & No Cancellation Policy</span>
-    </p>
-
-    {/* Read More Button */}
-    <button
-      onClick={() => setShowDisclaimer(!showDisclaimer)}
-      className="mt-2 text-sm text-red-600 underline hover:text-red-800 transition"
-    >
-      {showDisclaimer ? 'Read less' : 'Read more'}
-    </button>
-
-    {/* Expandable Content */}
-    {showDisclaimer && (
-      <p className="mt-3 text-sm sm:text-base text-red-700 leading-relaxed transition-all duration-300">
-        Once an order is placed and accepted by us, it cannot be cancelled or
-        returned. Please ensure all product details are reviewed carefully
-        before placing your order. By confirming the order, you agree to this
-        policy.
+  
+    <div className="rounded-lg border border-red-300 bg-red-50 px-4 py-3">
+      <p className="text-sm font-semibold text-red-700 sm:text-base">
+        ⚠️ Disclaimer:
+         <span className="ml-2">Cancellations & Refunds Policy</span>
       </p>
-    )}
-  </div>
+
+      {/* Read More Button (Direct Link) */}
+      <Link
+        to="/cancellation-policy"
+        className="mt-2 inline-block text-sm text-red-600 underline transition hover:text-red-800"
+      >
+        Read more
+      </Link>
+    </div>
 
 </div>
 

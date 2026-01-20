@@ -327,7 +327,8 @@ useEffect(() => {
             <ul className="space-y-2 text-sm sm:text-base">
               <li><a href="/terms-conditions" className="hover:underline">Terms & Conditions</a></li>
               <li><a href="/privacy-policy" className="hover:underline">Privacy Policy</a></li>
-             
+                 <li><a href="/shipping-policy" className="text-gray hover:underline text-lg">Shipping Policy</a></li>
+                        <li><a href="/cancellation-policy" className="text-gray hover:underline text-lg">Cancellations and Refunds</a></li>
 
             </ul>
           </div>

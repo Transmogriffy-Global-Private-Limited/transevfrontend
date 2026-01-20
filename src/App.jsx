@@ -53,7 +53,8 @@ import IndustrialSupport from './components/IndustriesSupport';
 import { Image } from 'lucide-react';
 import VerifyEmail from './components/User/VerifyEmail';
 import AdminRefunds from './components/Admin/Refund/Refund';
-
+import CancellationPolicy from './components/CancellationandRefundPolicy';
+import ShippingPolicy from './components/ShippingPolicy'
 
 
 function App() {
@@ -111,7 +112,8 @@ function App() {
          <Route path="/industrialsupport" element={<IndustrialSupport/>} />
            <Route path="/verify-email" element={<VerifyEmail/>} />
               <Route path="/admin-refunds" element={<AdminRefunds/>} />
-           
+                <Route path="/cancellation-policy" element={<CancellationPolicy/>} />
+              <Route path="/shipping-policy" element={<ShippingPolicy/>} />
 
          </Routes>
     </Router>
