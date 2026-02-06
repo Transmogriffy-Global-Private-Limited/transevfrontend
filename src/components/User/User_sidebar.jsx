@@ -127,7 +127,14 @@ const Sidebar = ({ isVisible = false, onClose = () => {} }) => {
             label="My Profile"
             showText={isExpanded}
           />
-          <li>
+         
+          <SidebarLink
+            icon={<FaCog />}
+            to="/setting"
+            label="Settings"
+            showText={isExpanded}
+          />
+           <li>
             <button
               onClick={handleLogout}
               className="flex items-center w-full px-3 py-2 rounded-md text-sm text-red-400 hover:bg-[#2d3748] transition-colors"
@@ -136,12 +143,6 @@ const Sidebar = ({ isVisible = false, onClose = () => {} }) => {
               {isExpanded && <span className="text-lg">Logout</span>}
             </button>
           </li>
-          <SidebarLink
-            icon={<FaCog />}
-            to="/setting"
-            label="Settings"
-            showText={isExpanded}
-          />
            <SidebarLink
             icon={<FaHome />}
             to="/"
