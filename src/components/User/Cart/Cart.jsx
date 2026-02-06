@@ -648,9 +648,21 @@ const handlePayment = async (
           onChange={(e) => setIsAccepted(e.target.checked)}
           className="mt-1 h-4 w-4 accent-red-600"
         />
-        <p className="text-sm text-gray-700">
+        {/* <p className="text-sm text-gray-700">
           I accept the <span className="font-semibold">No Return & No Cancellation Policy</span>
-        </p>
+        </p> */}
+        <p className="text-sm text-gray-700">
+  I accept the{" "}
+  <span className="font-semibold">
+    <a
+      href="/cancellation-policy"
+      className="text-blue-600 underline hover:text-blue-800"
+    >
+      Refunds and Cancellations Policy
+    </a>
+  </span>
+</p>
+
       </div>
 
       <div className="flex justify-end gap-3">
