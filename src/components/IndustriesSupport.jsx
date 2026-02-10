@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import logo from '../assets/transev logo.png';
 import { useNavigate } from 'react-router-dom';
 import logos from '../assets/up.png'
+import { Helmet } from 'react-helmet';
 const IndustrialSupport = () => {
     const navigate = useNavigate();
   const [activeIndex, setActiveIndex] = useState(null);
@@ -14,7 +15,38 @@ const IndustrialSupport = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-     
+      {/* SEO Meta Tags */}
+      <Helmet>
+        <title>Industrial Support Services | 24/7 Assistance for Your Business</title>
+        <meta
+          name="description"
+          content="Get round-the-clock industrial support services to keep your operations running smoothly. Rapid response, expert guidance, and scalable solutions for all industries."
+        />
+        <link rel="canonical" href="https://transev.site/industrial-support" />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:title" content="Industrial Support Services | 24/7 Assistance for Your Business" />
+        <meta name="robots" content="index, follow" />
+        <meta
+          property="og:description"
+          content="Our dedicated industrial support team provides 24/7 assistance for critical systems, rapid response, and scalable solutions for all industries."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://transev.site/industrial-support" />
+        <meta property="og:image" content="https://transev.site/images/industrial-support-og.jpg" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Industrial Support Services | 24/7 Assistance for Your Business" />
+        <meta
+          name="twitter:description"
+          content="Keep your operations running smoothly with our expert industrial support services. Available 24/7 for rapid response and guidance."
+        />
+        <meta name="twitter:image" content="https://transev.site/images/industrial-support-og.jpg" />
+
+        {/* Optional Robots */}
+        <meta name="robots" content="index, follow" />
+      </Helmet>
       {/* Navbar Section */}
       <Navbar />
       <div className="absolute top-0 w-full border-b-6 border-yellow-300 z-10"></div>

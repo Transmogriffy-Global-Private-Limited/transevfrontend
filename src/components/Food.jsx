@@ -2,6 +2,7 @@ import React from 'react';
 import { FaHamburger, FaPizzaSlice, FaConciergeBell, FaUtensils, FaUsers, FaMapMarkedAlt, FaSearch, FaRegClock, FaCreditCard, FaRegComment, FaChartBar, FaTag, FaCommentDots } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { Helmet } from "react-helmet";
 const FoodDeliveryPage = () => {
   const navigate = useNavigate();
 
@@ -13,6 +14,24 @@ useEffect(() => {
    }, []);
   return (
     <div className="bg-gray-50">
+         <Helmet>
+        <title>Create Your Own Food Delivery Website | Custom Web Development</title>
+        <meta name="description" content="We build fully customizable food delivery websites and applications to help restaurants and businesses scale. Contact us to start your project today!" />
+        <link rel="canonical" href="https://www.yourwebsite.com/food-delivery" />
+        
+        {/* Open Graph / Facebook */}
+        <meta property="og:title" content="Custom Food Delivery Website Development" />
+        <meta property="og:description" content="Build your own food delivery platform with dynamic menus, real-time tracking, payment gateways, and more." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.yourwebsite.com/food-delivery" />
+        <meta property="og:image" content="https://www.yourwebsite.com/images/food-delivery-og.jpg" />
+<meta name="robots" content="index, follow" />
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Custom Food Delivery Website Development" />
+        <meta name="twitter:description" content="We create fully customizable food delivery apps to grow your business. Contact us today!" />
+        <meta name="twitter:image" content="https://www.yourwebsite.com/images/food-delivery-og.jpg" />
+      </Helmet>
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-indigo-600 to-orange-500 text-white text-center py-20">
         <h1 className="text-4xl sm:text-5xl font-bold mb-4">Create Your Own Food Delivery Website</h1>

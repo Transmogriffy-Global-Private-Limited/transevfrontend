@@ -1,70 +1,81 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import Navbar from './Navbar'; // Import Navbar component
-import about1 from '../assets/aboutbg.jpg'; // Replace with actual image paths
+
+
+import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import Navbar from './Navbar';
+import { FaArrowDown, FaBolt, FaCheckCircle, FaLeaf, FaHandHoldingHeart, FaTwitter, FaInstagram, FaFacebook } from 'react-icons/fa';
+import { Helmet } from 'react-helmet';
+
+// Import images
+import about1 from '../assets/aboutbg.jpg';
 import about2 from '../assets/slide1.jpg';
 import logo from '../assets/transev logo.png';
-import { FaArrowDown } from 'react-icons/fa';
 import holiday from '../assets/holiday.jpg';
 import hero from '../assets/heroabout.jpg';
 import mission from '../assets/mission.png';
 import vision from '../assets/vission.png';
 import value from '../assets/value.png';
-import { FaBolt, FaCheckCircle, FaLeaf, FaHandHoldingHeart } from 'react-icons/fa';
 import mission1 from '../assets/mission1.png';
- import { useEffect } from 'react';
- import logos from '../assets/up.png';
- import { FaTwitter, FaInstagram, FaFacebook } from 'react-icons/fa';
- import transevImage from '../assets/transev.jpg';
- import logo1 from '../assets/tv.png';
+import logos from '../assets/up.png';
+import transevImage from '../assets/transev.jpg';
+import logo1 from '../assets/tv.png';
+
 function AboutUs() {
   const navigate = useNavigate();
-  const handleButtonClick = () => {
-    // Get the button element by id
-    const button = document.getElementById('contact-btn');
-    
-    // Add background color change on button click
-    button.classList.add('bg-yellow-500'); // Add a background color
 
-    // After a small delay (for animation), navigate to the contact page
-    setTimeout(() => {
-      navigate('/contact');  // Navigate to the Contact page
-    }, 500); // Delay to allow animation to complete
-  };
-   const handleContactClick = () => {
-    // Get the button element by id
+  const handleContactClick = () => {
     const button = document.getElementById('contact-btn');
-    
-    // Add background color change on button click
-    button.classList.add('bg-yellow-500'); // Add a background color
+    button.classList.add('bg-yellow-500');
 
-    // After a small delay (for animation), navigate to the contact page
     setTimeout(() => {
-      navigate('/contact');  // Navigate to the Contact page
-    }, 500); // Delay to allow animation to complete
+      navigate('/contact');
+    }, 500);
   };
-   useEffect(() => {
-        window.scrollTo(0, 0); // Ensures the page scrolls to the top whenever the page is loaded
-      }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-   <>
-      {/* Include Navbar here */}
+    <>
+      {/* SEO Meta Tags */}
+      <Helmet>
+        <title>About Us | TransEV – Accessible EV Charging Solutions</title>
+        <meta name="description" content="Learn about TransEV's mission, vision, and values. We provide accessible and sustainable EV charging solutions for everyone." />
+        <meta name="keywords" content="EV charging, electric vehicles, sustainable energy, green technology, TransEV, EV solutions" />
+        <meta name="robots" content="index, follow" />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:title" content="About Us | TransEV – Accessible EV Charging Solutions" />
+        <meta property="og:description" content="Learn about TransEV's mission, vision, and values. We provide accessible and sustainable EV charging solutions for everyone." />
+        <meta property="og:image" content={hero} />
+        <meta property="og:url" content="https://www.transev.site/about" />
+        <meta property="og:type" content="website" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="About Us | TransEV – Accessible EV Charging Solutions" />
+        <meta name="twitter:description" content="Learn about TransEV's mission, vision, and values. We provide accessible and sustainable EV charging solutions for everyone." />
+        <meta name="twitter:image" content={hero} />
+      </Helmet>
+
+      {/* Navbar */}
       <Navbar />
+
       <div className="absolute top-0 w-full border-b-6 border-yellow-300 z-10"></div> 
       <section className="text-center mt-[100px] sm:mt-[80px] md:mt-[100px] lg:mt-[160px] px-6 sm:px-8 md:px-12 lg:px-[50px]">
    
     
-{/* <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-9xl font-aeonik text-black-800 mt-10 sm:mt-16 lg:mt-20 px-4 sm:px-10 lg:px-32 xl:px-40 text-center lg:text-left  "> */}
-<h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-9xl font-aeonik text-black-800 mt-10 sm:mt-16 lg:mt-20 px-4 sm:px-10 lg:px-32 xl:px-10 text-left">
+ {/* <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-9xl font-aeonik text-black-800 mt-10 sm:mt-16 lg:mt-20 px-4 sm:px-10 lg:px-32 xl:px-40 text-center lg:text-left  "> */}
+ <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-9xl font-aeonik text-black-800 mt-10 sm:mt-16 lg:mt-20 px-4 sm:px-10 lg:px-32 xl:px-10 text-left">
 
-Facilitating fairer,more  <br />
-<span className="inline-block">accessible</span>
-<span className="hidden sm:inline-block sm:ml-2 md:ml-4">EV charging</span>
+ Facilitating fairer,more  <br />
+ <span className="inline-block">accessible</span>
+ <span className="hidden sm:inline-block sm:ml-2 md:ml-4">EV charging</span>
 
 
 </h1>
-<h4 
+ <h4 
   className="text-[30px] sm:text-[35px] md:text-[40px] lg:text-[50px] font-aeonik mt-[40px] sm:mt-[60px] md:mt-[80px] lg:mt-[120px] leading-tight text-center sm:text-left lg:ml-11"
 >
   <span className="inline-block sm:mr-2 lg:mr-4">Striving to make</span><br />
@@ -602,4 +613,3 @@ Facilitating fairer,more  <br />
 }
 
 export default AboutUs;
-

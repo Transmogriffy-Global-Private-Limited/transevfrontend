@@ -2,6 +2,9 @@ import React from "react";
 import { FaUsers, FaChartLine, FaDatabase, FaPhoneAlt, FaFileInvoice, FaTasks, FaComments, FaUserCog } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
+import { Helmet } from "react-helmet";
+
+
 const CRMPage = () => {
   const navigate = useNavigate();
 
@@ -12,7 +15,72 @@ useEffect(() => {
      window.scrollTo(0, 0); // Ensures the page scrolls to the top whenever the page is loaded
    }, []);
   return (
-    <div className="bg-gray-50">
+  <div className="bg-gray-50">
+
+    {/* 🔍 SEO META TAGS */}
+    <Helmet>
+      <title>Custom CRM Development | Build Your Own CRM System – TransEV</title>
+
+      <meta
+        name="description"
+        content="Build your own custom CRM system with TransEV. Manage customers, leads, sales analytics, billing, and support with a scalable CRM solution."
+      />
+<meta name="robots" content="index, follow" />
+      <meta
+        name="keywords"
+        content="Custom CRM Development, CRM Software India, Build CRM System, Customer Relationship Management Software"
+      />
+
+      {/* Canonical */}
+      <link
+        rel="canonical"
+        href="https://transev.site/crm"
+      />
+
+      {/* Open Graph */}
+      <meta property="og:title" content="Custom CRM Development – TransEV" />
+      <meta
+        property="og:description"
+        content="Fully customizable CRM system to manage customers, leads, analytics, billing, and workflows."
+      />
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content="https://transev.site/crm" />
+      <meta
+        property="og:image"
+        content="https://transev.site/images/crm-og.png"
+      />
+
+      {/* Twitter */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="Build Your Own CRM System – TransEV" />
+      <meta
+        name="twitter:description"
+        content="Custom CRM solutions designed to scale your business and improve customer relationships."
+      />
+      <meta
+        name="twitter:image"
+        content="https://transev.site/images/crm-og.png"
+      />
+
+      {/* Software Structured Data */}
+      <script type="application/ld+json">
+        {`
+        {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "name": "Custom CRM System",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Web",
+          "description": "Custom-built CRM software for customer management, sales tracking, analytics, billing, and support.",
+          "provider": {
+            "@type": "Organization",
+            "name": "TransEV",
+            "url": "https://transev.site"
+          }
+        }
+        `}
+      </script>
+    </Helmet>
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-teal-500 to-blue-600 text-white text-center py-20">
         <h1 className="text-4xl sm:text-5xl font-bold mb-4">Build Your Own CRM System</h1>

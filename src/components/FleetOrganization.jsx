@@ -30,6 +30,8 @@ import { useNavigate } from 'react-router-dom';
 import logos from '../assets/up.png';
 import logo1 from '../assets/tv.png';
 import { FaTwitter, FaInstagram, FaFacebook } from 'react-icons/fa';
+import { Helmet } from "react-helmet";
+
 const Fleet = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [hovered, setHovered] = useState(null);
@@ -159,6 +161,29 @@ const handleBuyNowClick = () => {
 };
 
   return (
+    <>
+      <Helmet>
+      <title>Fleet EV Charging Solutions | TransEV</title>
+      <meta name="description" content="Reliable and fast EV charging solutions for fleets. Optimize your fleet operations with scalable, smart, and sustainable charging infrastructure." />
+      <meta name="keywords" content="EV charging, fleet charging, electric vehicles, fast charging, EV infrastructure, sustainable fleet solutions" />
+      <meta name="robots" content="index, follow" />
+      <link rel="canonical" href="https://transev.site/fleet" />
+      
+      {/* Open Graph / Social Media */}
+      <meta property="og:title" content="Fleet EV Charging Solutions | TransEV" />
+      <meta property="og:description" content="Reliable and fast EV charging solutions for fleets. Optimize your fleet operations with scalable, smart, and sustainable charging infrastructure." />
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content="https://transev.site/fleet" />
+      <meta property="og:image" content="https://transev.site/images/fleet-og.png" />
+      
+      {/* Twitter Card */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="Fleet EV Charging Solutions | TransEV" />
+      <meta name="twitter:description" content="Reliable and fast EV charging solutions for fleets. Optimize your fleet operations with scalable, smart, and sustainable charging infrastructure." />
+      <meta name="twitter:image" content="https://transev.site/images/fleet-twitter.png" />
+      <meta name="robots" content="index, follow" />
+    </Helmet>
+
     <div className="min-h-screen bg-white-50">
       {/* Navbar Section */}
       <Navbar />
@@ -781,7 +806,7 @@ const handleBuyNowClick = () => {
                 </div>
               )}
               </div>
-          
+           </>
             );
           };
           

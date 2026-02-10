@@ -1,6 +1,8 @@
 import { FaShoppingCart, FaGift, FaTruck, FaUsers, FaClipboardList, FaStore } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";  // Import useNavigate hook
 import { useEffect } from 'react';
+import { Helmet } from "react-helmet";
+
 const EcommercePage = () => {
   const navigate = useNavigate();  // Initialize the navigate function
 
@@ -11,9 +13,73 @@ const EcommercePage = () => {
 useEffect(() => {
      window.scrollTo(0, 0); // Ensures the page scrolls to the top whenever the page is loaded
    }, []);
-  return (
-    <div className="bg-gray-50">
+ return (
+  <div className="bg-gray-50">
 
+    {/* 🔍 SEO META TAGS */}
+    <Helmet>
+      <title>Custom E-commerce Solutions | Build Your Online Store – TransEV</title>
+
+      <meta
+        name="description"
+        content="TransEV offers custom e-commerce solutions to build scalable online stores. Manage products, orders, shipping, and promotions effortlessly."
+      />
+<meta name="robots" content="index, follow" />
+      <meta
+        name="keywords"
+        content="Custom E-commerce Development, Online Store Solutions, E-commerce Platform India, Sell Online, Bulk Orders"
+      />
+
+      {/* Canonical */}
+      <link
+        rel="canonical"
+        href="https://transev.site/ecommerce"
+      />
+
+      {/* Open Graph */}
+      <meta property="og:title" content="Custom E-commerce Solutions – TransEV" />
+      <meta
+        property="og:description"
+        content="Build your own e-commerce platform with features like product management, bulk orders, promotions, and shipping tracking."
+      />
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content="https://transev.site/ecommerce" />
+      <meta
+        property="og:image"
+        content="https://transev.site/images/ecommerce-og.png"
+      />
+
+      {/* Twitter */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="Custom E-commerce Solutions – TransEV" />
+      <meta
+        name="twitter:description"
+        content="Create a scalable online store with our custom e-commerce solutions. Manage products, orders, customers, and shipping efficiently."
+      />
+      <meta
+        name="twitter:image"
+        content="https://transev.site/images/ecommerce-og.png"
+      />
+
+      {/* Structured Data for SoftwareApplication */}
+      <script type="application/ld+json">
+        {`
+        {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "name": "Custom E-commerce Platform",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Web",
+          "description": "Custom-built e-commerce platform to manage products, orders, customers, shipping, and promotions.",
+          "provider": {
+            "@type": "Organization",
+            "name": "TransEV",
+            "url": "https://transev.site"
+          }
+        }
+        `}
+      </script>
+    </Helmet>
       {/* Hero Section */}
       <section className="bg-blue-600 text-white text-center py-20">
         <h1 className="text-4xl sm:text-5xl font-bold mb-4">E-commerce Solutions Tailored for Your Business</h1>

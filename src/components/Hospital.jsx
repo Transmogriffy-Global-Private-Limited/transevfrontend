@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 const HospitalLandingPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -16,6 +17,41 @@ useEffect(() => {
    }, []);
   return (
     <div className="bg-gray-50 text-gray-900 font-sans">
+        <Helmet>
+        {/* Page Title */}
+        <title>Hospital Management Software | Streamline Patient Care & Operations</title>
+
+        {/* Meta Description */}
+        <meta
+          name="description"
+          content="Elevate patient care and streamline hospital operations with our integrated hospital management system. Manage patients, staff, billing, and more."
+        />
+<meta name="robots" content="index, follow" />
+        {/* Canonical URL */}
+        <link rel="canonical" href="https://transev.site/" />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:title" content="Hospital Management Software | Streamline Care & Operations" />
+        <meta
+          property="og:description"
+          content="Comprehensive hospital management system for patient records, staff scheduling, billing, telemedicine, and analytics."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://transev.site/" />
+        <meta property="og:image" content="https://transev.site/images/hospital-og-image.jpg" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Hospital Management Software | Streamline Care & Operations" />
+        <meta
+          name="twitter:description"
+          content="Manage patients, staff, billing, and telemedicine with our comprehensive hospital management system."
+        />
+        <meta name="twitter:image" content="https://transev.site/images/hospital-og-image.jpg" />
+
+        {/* Optional Robots Tag */}
+        <meta name="robots" content="index, follow" />
+      </Helmet>
       {/* Hero Section */}
       <section className="bg-teal-600 text-white text-center py-20 px-4">
         <h2 className="text-4xl sm:text-5xl font-bold mb-4">Elevating Patient Care with Integrated Hospital Management</h2>

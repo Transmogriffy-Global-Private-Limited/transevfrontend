@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
+import { Helmet } from "react-helmet";
+
+
 const SchoolManagementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -14,8 +17,72 @@ useEffect(() => {
      window.scrollTo(0, 0); // Ensures the page scrolls to the top whenever the page is loaded
    }, []);
   return (
-    <div className="bg-gray-50 text-gray-900">
-     
+  <div className="bg-gray-50 text-gray-900">
+
+    {/* 🔍 SEO META TAGS */}
+    <Helmet>
+      <title>School Management Software | Streamline Your School Operations – TransEV</title>
+
+      <meta
+        name="description"
+        content="TransEV provides smart school management software to handle student data, teachers, exams, fees, timetables, and parent communication efficiently."
+      />
+
+      <meta
+        name="keywords"
+        content="School Management Software, Student Management, Teacher Dashboard, Online Exams, School Timetable, Parent Portal, School ERP"
+      />
+
+      {/* Canonical */}
+      <link
+        rel="canonical"
+        href="https://transev.site/school-management"
+      />
+
+      {/* Open Graph */}
+      <meta property="og:title" content="School Management Software – TransEV" />
+      <meta
+        property="og:description"
+        content="Manage your school smartly with our complete digital solution for administrators, teachers, and students."
+      />
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content="https://transev.site/school-management" />
+      <meta
+        property="og:image"
+        content="https://transev.site/images/school-management-og.png"
+      />
+<meta name="robots" content="index, follow" />
+      {/* Twitter */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="School Management Software – TransEV" />
+      <meta
+        name="twitter:description"
+        content="Streamline school operations, track students, manage teachers, exams, fees, and parent communication with our smart school management software."
+      />
+      <meta
+        name="twitter:image"
+        content="https://transev.site/images/school-management-og.png"
+      />
+
+      {/* Structured Data for SoftwareApplication */}
+      <script type="application/ld+json">
+        {`
+        {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "name": "School Management Software",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Web",
+          "description": "A complete school management solution for student tracking, teacher dashboards, exams, fees, and parent communication.",
+          "provider": {
+            "@type": "Organization",
+            "name": "TransEV",
+            "url": "https://transev.site"
+          }
+        }
+        `}
+      </script>
+    </Helmet>
      
 
       {/* Hero Section */}

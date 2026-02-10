@@ -28,6 +28,8 @@ import logos from '../assets/up.png';
 import tr from '../assets/tr.png';
 import { FaTwitter, FaInstagram, FaFacebook } from 'react-icons/fa';
 import logo1 from '../assets/tv.png';
+import { Helmet } from "react-helmet";
+
 const Work = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [hovered, setHovered] = useState(null);
@@ -132,6 +134,30 @@ useEffect(() => {
    
   return (
     <div className="min-h-screen bg-white-50">
+      <Helmet>
+  <title>TransEV | Smart EV Charging Solutions</title>
+  <meta
+    name="description"
+    content="TransEV provides end-to-end EV charging solutions including installation, management, and maintenance of charge points. Future-proof your EV infrastructure with us."
+  />
+  <meta name="keywords" content="EV charging solutions, smart EV chargers, EV infrastructure, TransEV, electric vehicle charging, EV management" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://transev.site/" />
+
+  {/* Open Graph / Facebook */}
+  <meta property="og:title" content="TransEV | Smart EV Charging Solutions" />
+  <meta property="og:description" content="TransEV provides end-to-end EV charging solutions including installation, management, and maintenance of charge points." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://transev.site/" />
+  <meta property="og:image" content="https://transev.site/images/homepage-og.jpg" />
+
+  {/* Twitter Card */}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="TransEV | Smart EV Charging Solutions" />
+  <meta name="twitter:description" content="Future-proof your EV infrastructure with TransEV's smart EV charging solutions and services." />
+  <meta name="twitter:image" content="https://transev.site/images/homepage-og.jpg" />
+</Helmet>
+
       {/* Navbar Section */}
       <Navbar />
       <div className="absolute top-0 w-full border-b-6 border-yellow-300 z-10"></div> 

@@ -55,6 +55,7 @@ import c5 from '../assets/cc1.png';
 import mob from '../assets/transev.jpg';
 import x from '../assets/x.png';
 import { FaTwitter, FaInstagram, FaFacebook } from 'react-icons/fa';
+import { Helmet } from "react-helmet";
 function HomePage() {
   const navigate = useNavigate();
   const [hovered, setHovered] = useState(null);
@@ -222,6 +223,42 @@ const handleBuyNowClick = () => {
 };// total animation cycle
  return (
   <div className="relative w-full overflow-x-hidden">
+    <Helmet>
+  {/* Page Title */}
+  <title>TransEV | Smart EV Charging Solutions for Homes, Businesses & Fleets</title>
+
+  {/* Meta Description */}
+  <meta
+    name="description"
+    content="TransEV provides smart, scalable, and reliable EV charging solutions for residential, commercial, and public spaces. Explore our range of charging stations and services today."
+  />
+
+  {/* Canonical URL */}
+  <link rel="canonical" href="https://transev.site/" />
+
+  {/* Open Graph / Facebook */}
+  <meta property="og:title" content="TransEV | Smart EV Charging Solutions" />
+  <meta
+    property="og:description"
+    content="Scalable and reliable EV charging solutions for homes, businesses, and public places. Future-ready infrastructure and expert support."
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://transev.site/" />
+  <meta property="og:image" content="https://transev.site/images/ev-og-image.jpg" />
+<meta name="robots" content="index, follow" />
+  {/* Twitter Card */}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="TransEV | Smart EV Charging Solutions" />
+  <meta
+    name="twitter:description"
+    content="Future-ready EV charging solutions for homes, businesses, and public spaces. Discover TransEV today!"
+  />
+  <meta name="twitter:image" content="https://transev.site/images/ev-og-image.jpg" />
+
+  {/* Optional: Robots Meta Tag */}
+  <meta name="robots" content="index, follow" />
+</Helmet>
+
     <div className="relative w-full h-screen">
       <VideoBackground />
       <div className="absolute top-0 w-full border-b-6 border-yellow-300 z-10"></div>

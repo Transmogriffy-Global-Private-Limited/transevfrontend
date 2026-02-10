@@ -41,6 +41,7 @@ import { useNavigate } from 'react-router-dom';
  import red from '../assets/red.png';
  import { FaTwitter, FaInstagram, FaFacebook } from 'react-icons/fa';
 import logo1 from '../assets/tv.png';
+import { Helmet } from "react-helmet";
 const Workplace = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [hovered, setHovered] = useState(null);
@@ -148,6 +149,21 @@ const Workplace = () => {
     };
   return (
     <div className="min-h-screen bg-white-50">
+      <Helmet>
+        <title>Workplace EV Charging Solutions | TransEv</title>
+        <meta
+          name="description"
+          content="Discover workplace electric vehicle (EV) charging solutions. Install AC & DC chargers, support employees, and future-proof your organization."
+        />
+        <meta name="keywords" content="EV charging, workplace charging, electric vehicle, AC chargers, DC chargers, employee benefits" />
+        <meta property="og:title" content="Workplace EV Charging Solutions | YourCompany" />
+        <meta property="og:description" content="Support employees with convenient EV charge point access. Install the best AC and DC charging solutions." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://transev.site/workplace-charging" />
+        <meta property="og:image" content="https://transev.site/images/workplace-og.jpg" />
+        <meta name="robots" content="index, follow" />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
       {/* Navbar Section */}
       <Navbar />
       <div className="absolute top-0 w-full border-b-6 border-yellow-300 z-10"></div> 

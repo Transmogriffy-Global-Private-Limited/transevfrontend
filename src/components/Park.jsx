@@ -1,13 +1,37 @@
 import React from 'react';
 import { FaCar, FaCalendarCheck, FaMapMarkerAlt, FaDollarSign, FaClipboardCheck } from 'react-icons/fa';
 import { useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 const ParkingManagementPage = () => {
   useEffect(() => {
      window.scrollTo(0, 0); // Ensures the page scrolls to the top whenever the page is loaded
    }, []);
   return (
     <div className="bg-gray-50">
+   {/* SEO Meta Tags */}
+      <Helmet>
+        <title>Parking Management System | Efficient Parking Solutions</title>
+        <meta
+          name="description"
+          content="Manage parking spaces efficiently with our Parking Management System. Real-time availability, reservations, payments, and analytics for hassle-free parking."
+        />
+        <link rel="canonical" href="https://transev.site/parking-management" />
 
+        {/* Open Graph / Facebook */}
+        <meta property="og:title" content="Parking Management System | Efficient Parking Solutions" />
+        <meta property="og:description" content="Manage parking spaces efficiently with our Parking Management System. Real-time availability, reservations, payments, and analytics." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://transev.site/parking-management" />
+        <meta property="og:image" content="https://transev.site/images/parking-management-og.jpg" />
+<meta name="robots" content="index, follow" />
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Parking Management System | Efficient Parking Solutions" />
+        <meta name="twitter:description" content="Manage parking spaces efficiently with our Parking Management System. Real-time availability, reservations, payments, and analytics." />
+        <meta name="twitter:image" content="https://transev.site/images/parking-management-og.jpg" />
+
+        <meta name="robots" content="index, follow" />
+      </Helmet>
       {/* Hero Section */}
       <section className="bg-green-600 text-white text-center py-20">
         <h1 className="text-4xl sm:text-5xl font-bold mb-4">Parking Management System</h1>

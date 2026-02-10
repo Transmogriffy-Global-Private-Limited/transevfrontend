@@ -38,6 +38,7 @@ import AC03w from '../assets/AC03w.png';
  import logos from '../assets/up.png';
  import { FaTwitter, FaInstagram, FaFacebook } from 'react-icons/fa';
  import logo1 from '../assets/tv.png';
+ import { Helmet } from 'react-helmet';
 const Hotels = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [hovered, setHovered] = useState(null);
@@ -153,6 +154,28 @@ const Hotels = () => {
     };
   return (
     <div className="min-h-screen bg-white-50">
+       <Helmet>
+      <title>EV Charging Solutions for Public Places | TransEV</title>
+      <meta
+        name="description"
+        content="TransEV provides smart, convenient, and reliable EV charging solutions for public places such as malls, airports, hotels, and city centers. Tailored for growing EV demand."
+      />
+      <meta name="keywords" content="EV charging, public EV charging, electric vehicle stations, public spaces EV charger, smart EV charging solutions" />
+      <link rel="canonical" href="https://transev.site/public-places" />
+<meta name="robots" content="index, follow" />
+      {/* Open Graph / Facebook */}
+      <meta property="og:title" content="EV Charging Solutions for Public Places | TransEV" />
+      <meta property="og:description" content="TransEV provides smart, convenient, and reliable EV charging solutions for public places such as malls, airports, hotels, and city centers." />
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content="https://transev.site/public-places" />
+      <meta property="og:image" content="https://transev.site/images/public-places-og.jpg" />
+
+      {/* Twitter Card */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="EV Charging Solutions for Public Places | TransEV" />
+      <meta name="twitter:description" content="TransEV provides smart, convenient, and reliable EV charging solutions for public spaces." />
+      <meta name="twitter:image" content="https://transev.site/images/public-places-og.jpg" />
+    </Helmet>
       {/* Navbar Section */}
       <Navbar />
       <div className="absolute top-0 w-full border-b-6 border-yellow-300 z-10"></div> 

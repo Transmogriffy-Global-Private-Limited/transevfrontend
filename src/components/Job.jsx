@@ -4,6 +4,7 @@ import React from "react";
 import { FaBriefcase, FaBullhorn, FaUsers, FaSearch, FaCogs } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
+import { Helmet } from "react-helmet";
 const JobPortalServicesPage = () => {
   const navigate = useNavigate();
 
@@ -15,7 +16,37 @@ useEffect(() => {
    }, []);
   return (
     <div className="bg-gray-100">
+ {/* SEO Meta Tags */}
+      <Helmet>
+        <title>Custom Job Portal Services | Tailored Recruitment Solutions</title>
+        <meta
+          name="description"
+          content="Build your custom job portal with us. Tailored, scalable, and efficient recruitment solutions to streamline your hiring process."
+        />
+        <link rel="canonical" href="https://transev.site/job-portal-services" />
 
+        {/* Open Graph / Facebook */}
+        <meta property="og:title" content="Custom Job Portal Services | Tailored Recruitment Solutions" />
+        <meta
+          property="og:description"
+          content="Empower your recruitment process with a personalized job portal. Scalable solutions with custom design, integrations, and analytics."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://transev.site/job-portal-services" />
+        <meta property="og:image" content="https://transev.site/images/job-portal-og.jpg" />
+<meta name="robots" content="index, follow" />
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Custom Job Portal Services | Tailored Recruitment Solutions" />
+        <meta
+          name="twitter:description"
+          content="Build a custom job portal for your organization with seamless design, integrations, and analytics."
+        />
+        <meta name="twitter:image" content="https://transev.site/images/job-portal-og.jpg" />
+
+        {/* Robots */}
+        <meta name="robots" content="index, follow" />
+      </Helmet>
       {/* Hero Section */}
       <section className="bg-teal-500 text-white text-center py-20">
         <h1 className="text-4xl sm:text-5xl font-bold mb-4">Build Your Custom Job Portal with Us</h1>

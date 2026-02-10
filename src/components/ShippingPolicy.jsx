@@ -2,10 +2,35 @@ import React from "react";
 import Navbar from "../components/Navbar"; // Navbar import
 import logo1 from "../assets/tv.png";
 import { FaTwitter, FaInstagram, FaFacebook } from "react-icons/fa";
+import { Helmet } from "react-helmet";
 
 const ShippingPolicy = () => {
   return (
     <div className="bg-white text-gray-900 min-h-screen">
+      <Helmet>
+  <title>Shipping Policy | TransEV</title>
+  <meta
+    name="description"
+    content="Read TransEV's Shipping Policy to understand delivery timelines, shipping methods, charges, and tracking information for all orders across India."
+  />
+  <meta name="keywords" content="Shipping Policy, EV charging products shipping, delivery timeline, shipping charges, tracking orders India" />
+  <link rel="canonical" href="https://transev.site/shipping-policy" />
+
+  {/* Open Graph / Facebook */}
+  <meta property="og:title" content="Shipping Policy | TransEV" />
+  <meta property="og:description" content="Learn about TransEV's shipping methods, delivery timelines, and order tracking for all EV charging products across India." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://transev.site/shipping-policy" />
+  <meta property="og:image" content="https://transev.site/images/shipping-policy-og.jpg" />
+
+  {/* Twitter Card */}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Shipping Policy | TransEV" />
+  <meta name="twitter:description" content="Understand TransEV's shipping process, delivery time, and tracking for all orders across India." />
+  <meta name="twitter:image" content="https://transev.site/images/shipping-policy-og.jpg" />
+  <meta name="robots" content="index, follow" />
+</Helmet>
+
       {/* Navbar */}
       <Navbar />
 

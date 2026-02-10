@@ -4,9 +4,35 @@ import logo from '../assets/transev logo.png';
 import logos from '../assets/up.png';
 import { FaTwitter, FaInstagram, FaFacebook } from 'react-icons/fa';
 import logo1 from '../assets/tv.png';
+import { Helmet } from "react-helmet";
+
 const TermsConditions = () => {
   return (
     <div className="bg-white text-gray-900">
+      <Helmet>
+  <title>Terms & Conditions | TransEV</title>
+  <meta
+    name="description"
+    content="Read TransEV's Terms & Conditions for using our EV charging solutions app. Learn about your rights, obligations, and legal agreements with TransEV."
+  />
+  <meta name="keywords" content="TransEV terms and conditions, EV charging app legal, user agreement, privacy, intellectual property" />
+  <link rel="canonical" href="https://transev.site/terms-conditions" />
+
+  {/* Open Graph / Facebook */}
+  <meta property="og:title" content="Terms & Conditions | TransEV" />
+  <meta property="og:description" content="Understand the terms and legal agreements for using TransEV's smart EV charging solutions app." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://transev.site/terms-conditions" />
+  <meta property="og:image" content="https://transev.site/images/terms-conditions-og.jpg" />
+
+  {/* Twitter Card */}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Terms & Conditions | TransEV" />
+  <meta name="twitter:description" content="Review TransEV's Terms & Conditions to understand user rights and legal obligations." />
+  <meta name="twitter:image" content="https://transev.site/images/terms-conditions-og.jpg" />
+  <meta name="robots" content="index, follow" />
+</Helmet>
+
       {/* Navbar */}
     <Navbar/>
 

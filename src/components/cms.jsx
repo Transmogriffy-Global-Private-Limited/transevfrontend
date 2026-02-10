@@ -2,7 +2,7 @@ import React from "react";
 import { FaCog, FaChartLine, FaDollarSign, FaSyncAlt, FaUserShield,FaUsers, FaPlug,FaCreditCard } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
-
+import { Helmet } from "react-helmet";
 const ChargingManagementPage = () => {
   const navigate = useNavigate();
 
@@ -14,7 +14,59 @@ const ChargingManagementPage = () => {
    }, []);
   return (
     <div className="bg-gray-50">
+ <Helmet>
+         <title>Advanced Charging Management System | Smart EV Billing & Payments</title>
 
+         <meta
+          name="description"
+          content="Advanced Charging Management System for EV businesses. Automate billing, manage chargers, optimize revenue, and integrate seamless payment solutions."
+        />
+
+        <meta
+          name="keywords"
+          content="Charging Management System, EV Charging Software, EV Billing System, Charger Management, EV Payment Platform"
+        />
+<meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://yourdomain.com/charging-management" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="Advanced Charging Management System" />
+        <meta
+          property="og:description"
+          content="Automated EV charging, billing, analytics, and payment management platform."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://yourdomain.com/charging-management" />
+        <meta property="og:image" content="https://yourdomain.com/images/charging-management.png" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Advanced Charging Management System" />
+        <meta
+          name="twitter:description"
+          content="Smart EV charging management with real-time analytics and automated billing."
+        />
+        <meta name="twitter:image" content="https://yourdomain.com/images/charging-management.png" />
+
+        {/* JSON-LD Structured Data */}
+        <script type="application/ld+json">
+          {`
+          {
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "Charging Management System",
+            "applicationCategory": "BusinessApplication",
+            "operatingSystem": "Web",
+            "description": "EV Charging Management System with automated billing, real-time analytics, and payment integration.",
+            "offers": {
+              "@type": "Offer",
+              "price": "Contact for pricing",
+              "priceCurrency": "INR"
+            }
+          }
+          `}
+        </script>
+      </Helmet>
       {/* Hero Section */}
       <section className="bg-teal-500 text-white text-center py-20">
         <h1 className="text-4xl sm:text-5xl font-bold mb-4">Advanced Charging Management System</h1>

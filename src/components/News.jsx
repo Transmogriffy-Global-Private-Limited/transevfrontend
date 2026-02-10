@@ -14,6 +14,7 @@ import newsImage9 from '../assets/image.png';
 import logos from '../assets/up.png';
 import logo1 from '../assets/tv.png';
 import { FaTwitter, FaInstagram, FaFacebook } from 'react-icons/fa';
+import { Helmet } from 'react-helmet';
 const newsArticles = [
   {
     id: 1,
@@ -95,6 +96,29 @@ function NewsPage() {
       }, []);
   return (
     <div className="min-h-screen bg-white">
+       <Helmet>
+        <title>Latest EV News | TransEV Updates & Insights</title>
+        <meta
+          name="description"
+          content="Stay updated with the latest electric vehicle news, trends, and innovations in India and globally. Read articles on EV sales, charging hubs, and industry insights."
+        />
+        <link rel="canonical" href="https://transev.site/news" />
+<meta name="robots" content="index, follow" />
+        {/* Open Graph / Facebook */}
+        <meta property="og:title" content="Latest EV News | TransEV Updates & Insights" />
+        <meta property="og:description" content="Stay updated with the latest electric vehicle news, trends, and innovations in India and globally." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://transev.site/news" />
+        <meta property="og:image" content="https://transev.site/images/news-og.jpg" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Latest EV News | TransEV Updates & Insights" />
+        <meta name="twitter:description" content="Stay updated with the latest electric vehicle news, trends, and innovations in India and globally." />
+        <meta name="twitter:image" content="https://transev.site/images/news-og.jpg" />
+
+        <meta name="robots" content="index, follow" />
+      </Helmet>
       {/* Navbar Section */}
       <Navbar />
       <div className="absolute top-0 w-full border-b-6 border-yellow-300 z-10"></div>

@@ -3,10 +3,42 @@ import React from "react";
 import Navbar from "../components/Navbar"; // Navbar import
 import logo1 from "../assets/tv.png";
 import { FaInstagram, FaFacebook } from "react-icons/fa";
-
+import { Helmet } from "react-helmet";
 const CancellationRefundPolicy = () => {
-  return (
+ return (
     <div className="bg-white text-gray-900 min-h-screen">
+      {/* SEO Meta Tags */}
+      <Helmet>
+        <title>Cancellations & Refunds Policy | TransEV</title>
+        <meta
+          name="description"
+          content="Read TransEV's detailed cancellation and refund policy. Understand the terms, conditions, and process for order cancellations and refunds."
+        />
+        <meta
+          name="keywords"
+          content="TransEV, cancellations, refunds, EV charging, order policy, electric vehicles"
+        />
+        <meta name="robots" content="index, follow" />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:title" content="Cancellations & Refunds Policy | TransEV" />
+        <meta
+          property="og:description"
+          content="Read TransEV's detailed cancellation and refund policy. Understand the terms, conditions, and process for order cancellations and refunds."
+        />
+        <meta property="og:image" content={logo1} />
+        <meta property="og:url" content="https://www.transev.site/cancellation-refund-policy" />
+        <meta property="og:type" content="website" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Cancellations & Refunds Policy | TransEV" />
+        <meta
+          name="twitter:description"
+          content="Read TransEV's detailed cancellation and refund policy. Understand the terms, conditions, and process for order cancellations and refunds."
+        />
+        <meta name="twitter:image" content={logo1} />
+      </Helmet>
       {/* Navbar */}
       <Navbar />
 

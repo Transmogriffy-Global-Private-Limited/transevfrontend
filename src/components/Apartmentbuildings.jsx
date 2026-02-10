@@ -32,6 +32,7 @@ import logos from '../assets/up.png';
 import { FaTwitter, FaInstagram, FaFacebook } from 'react-icons/fa';
 import tr from '../assets/tr.png' ;
 import logo1 from '../assets/tv.png';
+import { Helmet } from 'react-helmet';
 const ApartmentBuildingPage = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [hovered, setHovered] = useState(null);
@@ -155,9 +156,51 @@ const ApartmentBuildingPage = () => {
     }
   };
   return (
-    <div className="min-h-screen bg-white-50">
-      {/* Navbar Section */}
-      <Navbar />
+     <>
+          {/* SEO Meta Tags */}
+            <Helmet>
+    {/* <div className="min-h-screen bg-white-50"> */}
+  
+  <title>Home & Housing EV Solutions | TransEV – Customizable Charging Solutions</title>
+  <meta
+    name="description"
+    content="TransEV provides future-proof, hassle-free EV charging solutions for homes and housing societies. Customize and manage EV chargers to meet growing tenant demand."
+  />
+  <meta
+    name="keywords"
+    content="EV charging, housing societies, home charging, electric vehicle solutions, sustainable energy, TransEV"
+  />
+  <meta name="robots" content="index, follow" />
+
+  {/* Open Graph / Facebook */}
+  <meta
+    property="og:title"
+    content="Home & Housing EV Solutions | TransEV – Customizable Charging Solutions"
+  />
+  <meta
+    property="og:description"
+    content="TransEV provides future-proof, hassle-free EV charging solutions for homes and housing societies. Customize and manage EV chargers to meet growing tenant demand."
+  />
+  <meta property="og:image" content={yourImage} />
+  <meta property="og:url" content="https://www.transev.site/home-and-housing" />
+  <meta property="og:type" content="website" />
+
+  {/* Twitter */}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta
+    name="twitter:title"
+    content="Home & Housing EV Solutions | TransEV – Customizable Charging Solutions"
+  />
+  <meta
+    name="twitter:description"
+    content="TransEV provides future-proof, hassle-free EV charging solutions for homes and housing societies. Customize and manage EV chargers to meet growing tenant demand."
+  />
+  <meta name="twitter:image" content={yourImage} />
+</Helmet>
+
+{/* Navbar */}
+<Navbar />
+
       <div className="absolute top-0 w-full border-b-6 border-yellow-300 z-10"></div>
 
 {/* Funded Solutions Section */}
@@ -247,7 +290,7 @@ solutions.
         Ease all around
       </h3>
       <p className="text-base sm:text-lg lg:text-xl font-semibold mt-4">
-       We facilitate EV infrastructure investments for residential landlords by offering a customizable, effortlessly maintaiable, and managed EV charging solution.
+       We facilitate EV infrastructure investments for residential landlords by offering a customizable, effortlessly maintainable, and managed EV charging solution.
       </p>
 
       <p className="text-base sm:text-lg lg:text-xl font-semibold mt-6">
@@ -948,7 +991,7 @@ solutions.
 )}
 
     </div>
-    </div>
+    </>
   );
 };
 

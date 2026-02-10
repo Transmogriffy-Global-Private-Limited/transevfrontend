@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaPhoneAlt, FaEnvelope, FaUserShield, FaRegLightbulb } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 const HRMSPage = () => {
   const navigate = useNavigate();
   const [showDemoForm, setShowDemoForm] = useState(false);
@@ -29,6 +30,37 @@ useEffect(() => {
    }, []);
   return (
     <div className="bg-gray-100">
+      <Helmet>
+        <title>HRMS Software | Streamline HR, Payroll & Employee Management</title>
+        <meta
+          name="description"
+          content="Manage your HR processes efficiently with our HRMS software. Employee management, payroll, attendance, recruitment, and more."
+        />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://transev.site/" />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:title" content="HRMS Software | Streamline HR, Payroll & Employee Management" />
+        <meta
+          property="og:description"
+          content="Empower your organization with a complete HRMS solution for employee management, payroll, attendance tracking, and recruitment."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://transev.site/" />
+        <meta property="og:image" content="https://transev.site/images/hrms-og-image.jpg" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="HRMS Software | Streamline HR, Payroll & Employee Management" />
+        <meta
+          name="twitter:description"
+          content="Simplify HR management with our complete HRMS software. Manage employees, payroll, attendance, and recruitment easily."
+        />
+        <meta name="twitter:image" content="https://transev.site/images/hrms-og-image.jpg" />
+
+        {/* Optional Robots */}
+        <meta name="robots" content="index, follow" />
+      </Helmet>
       {/* Hero Section */}
       <section className="bg-teal-500 text-white text-center py-20">
         <h1 className="text-4xl sm:text-5xl font-bold mb-4">Welcome to Our HRMS Solutions</h1>

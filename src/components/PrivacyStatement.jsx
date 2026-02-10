@@ -5,9 +5,34 @@ import logo from '../assets/transev logo.png';
 import logos from '../assets/up.png';
 import { FaTwitter, FaInstagram, FaFacebook } from 'react-icons/fa';
 import logo1 from '../assets/tv.png';
+import { Helmet } from 'react-helmet';
 const PrivacyPolicy = () => {
   return (
     <div className="bg-gray-50 min-h-screen flex flex-col">
+       <Helmet>
+        <title>Privacy Policy | TransEV</title>
+        <meta
+          name="description"
+          content="Read TransEV's Privacy Policy to understand how we collect, use, and protect your personal information while using our website or mobile application."
+        />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://transev.site/privacy-policy" />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:title" content="Privacy Policy | TransEV" />
+        <meta property="og:description" content="Learn how TransEV collects, uses, and safeguards your personal data through our website and mobile application." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://transev.site/privacy-policy" />
+        <meta property="og:image" content="https://transev.site/images/privacy-policy-og.jpg" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Privacy Policy | TransEV" />
+        <meta name="twitter:description" content="Learn how TransEV collects, uses, and safeguards your personal data through our website and mobile application." />
+        <meta name="twitter:image" content="https://transev.site/images/privacy-policy-og.jpg" />
+
+        <meta name="robots" content="index, follow" />
+      </Helmet>
       <Navbar /> {/* Add Navbar */}
 
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-4xl mx-auto my-6">

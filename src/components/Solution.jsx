@@ -9,6 +9,8 @@ import logo from '../assets/transev logo.png'; // Assuming you have a logo image
 import logos from '../assets/up.png';
 import { FaTwitter, FaInstagram, FaFacebook } from 'react-icons/fa';
 import logo1 from '../assets/tv.png';
+import { Helmet } from "react-helmet";
+
 function SolutionsPage() {
   const navigate = useNavigate();
   const [hovered, setHovered] = useState(null); // Track which image is hovered
@@ -42,7 +44,30 @@ useEffect(() => {
       }, []);
   return (
     <>
-    
+    <Helmet>
+  <title>Charging Solutions | TransEV</title>
+  <meta
+    name="description"
+    content="Explore TransEV's smart EV charging solutions for homes, workplaces, public places, and fleet organizations. Find the perfect solution for your use case."
+  />
+  <meta name="keywords" content="EV charging solutions, home charging, workplace charging, public charging stations, fleet EV charging, TransEV" />
+  <link rel="canonical" href="https://transev.site/solutions" />
+
+  {/* Open Graph / Facebook */}
+  <meta property="og:title" content="Charging Solutions | TransEV" />
+  <meta property="og:description" content="Discover smart EV charging solutions for every use case: home, workplace, public places, and fleet organizations." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://transev.site/solutions" />
+  <meta property="og:image" content="https://transev.site/images/solutions-og.jpg" />
+
+  {/* Twitter Card */}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Charging Solutions | TransEV" />
+  <meta name="twitter:description" content="Find the ideal EV charging solution for homes, offices, public places, and fleets with TransEV." />
+  <meta name="twitter:image" content="https://transev.site/images/solutions-og.jpg" />
+  <meta name="robots" content="index, follow" />
+</Helmet>
+
       {/* Navbar Component */}
       <Navbar />
       <div className="absolute top-0 w-full border-b-6 border-yellow-300 z-10"></div> 

@@ -381,9 +381,19 @@ const [showDisclaimer, setShowDisclaimer] = useState(false);
   )}
 
 
-  <span className="text-3xl sm:text-4xl font-bold text-red-600">
+  {/* <span className="text-3xl sm:text-4xl font-bold text-red-600">
     ₹{popupContent.price}
+  </span> */}
+  <span className="text-3xl sm:text-4xl font-bold text-red-600">
+  ₹{popupContent.price}
+</span>
+
+{!isAC(popupContent) && (
+  <span className="text-sm sm:text-base text-gray-600 font-semibold ml-2">
+    + Extra GST
   </span>
+)}
+
 </div>
 
 

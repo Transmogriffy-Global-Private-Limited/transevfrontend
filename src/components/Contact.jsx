@@ -9,6 +9,8 @@ const BASE_URL_AND_PORT = "https://api.static.ev.transev.site";
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
 import { FaTwitter, FaInstagram, FaFacebook } from 'react-icons/fa';
 import logo1 from '../assets/tv.png';
+import { Helmet } from "react-helmet";
+
 const ContactPage = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [formErrors, setFormErrors] = useState({});
@@ -87,6 +89,81 @@ useEffect(() => {
    }, []);
   return (
     <div className="min-h-screen bg-white">
+   
+
+    {/* 🔍 SEO META TAGS */}
+    <Helmet>
+      <title>Contact Us | TransEV – Smart EV Charging Solutions</title>
+
+      <meta
+        name="description"
+        content="Contact TransEV for smart EV charging solutions, charging management systems, and EV infrastructure support. Get in touch with our expert team today."
+      />
+
+      <meta
+        name="keywords"
+        content="Contact TransEV, EV Charging Solutions Contact, EV Charging Company India, TransEV Support"
+      />
+<meta name="robots" content="index, follow" />
+      {/* Canonical */}
+      <link
+        rel="canonical"
+        href="https://transev.site/contact"
+      />
+
+      {/* Open Graph */}
+      <meta property="og:title" content="Contact TransEV – EV Charging Solutions" />
+      <meta
+        property="og:description"
+        content="Reach out to TransEV for EV charging software, charging management systems, and smart EV infrastructure."
+      />
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content="https://transev.site/contact" />
+      <meta
+        property="og:image"
+        content="https://transev.site/images/contact-og.png"
+      />
+
+      {/* Twitter */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="Contact TransEV – Smart EV Charging" />
+      <meta
+        name="twitter:description"
+        content="Get in touch with TransEV for EV charging management and infrastructure solutions."
+      />
+      <meta
+        name="twitter:image"
+        content="https://transev.site/images/contact-og.png"
+      />
+
+      {/* Local Business Structured Data */}
+      <script type="application/ld+json">
+        {`
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "TransEV",
+          "url": "https://transev.site",
+          "logo": "https://transev.site/logo.png",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+91-7908003488",
+            "contactType": "customer support",
+            "areaServed": "IN",
+            "availableLanguage": ["English"]
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "MANI CASADONA, UNIT 10ES6, Action Area IIF",
+            "addressLocality": "Kolkata",
+            "postalCode": "700156",
+            "addressCountry": "IN"
+          }
+        }
+        `}
+      </script>
+    </Helmet>
+
       <Navbar />
       <div className="border-b-4 border-yellow-400 w-full"></div>
 
