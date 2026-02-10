@@ -450,7 +450,7 @@ solutions.
   {
     number: "02",
     title: "Fast, efficient charging",
-    desc: " With charging up to 22kW, residents can relax knowing that their vehicle will charge quickly and efficiently.",
+    desc: " With charging up to 60kW, residents can relax knowing that their vehicle will charge quickly and efficiently.",
     img: image7,
   },
   {

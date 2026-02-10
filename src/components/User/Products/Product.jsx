@@ -3,7 +3,8 @@ import axios from 'axios';
 import { FaShoppingCart } from 'react-icons/fa';
 import UserSidebar from '../User_sidebar';
 import UserNavbar from '../User_Navbar';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 const BASE_URL_AND_PORT = "https://api.static.ev.transev.site";
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
 const token = localStorage.getItem('auth_token');
@@ -25,6 +26,7 @@ const ProductPage = () => {
   const [loading, setLoading] = useState(true);
   const [imageIndex, setImageIndex] = useState({});
 const [showDisclaimer, setShowDisclaimer] = useState(false);
+const navigate = useNavigate();
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
@@ -108,7 +110,9 @@ const [showDisclaimer, setShowDisclaimer] = useState(false);
       alert("Product added to cart");
     }
   };
-
+ useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, []);
   return (
     <div className="min-h-screen bg-gray-100">
       <UserNavbar onToggleSidebar={toggleSidebar} />
@@ -236,9 +240,16 @@ const [showDisclaimer, setShowDisclaimer] = useState(false);
 
       <div className="mt-4 bg-gray-100 py-3 px-4 rounded-lg">
         <p className="text-sm text-gray-500">Email us at</p>
-        <p className="text-lg font-semibold text-blue-600">
+        {/* <p className="text-lg font-semibold text-blue-600">
          tgwbin@gmail.com
-        </p>
+        </p> */}
+        <a
+  href="mailto:tgwbin@gmail.com"
+  className="text-lg font-semibold text-blue-600 hover:underline"
+>
+  tgwbin@gmail.com
+</a>
+
       </div>
 
       <button
@@ -342,12 +353,22 @@ const [showDisclaimer, setShowDisclaimer] = useState(false);
       </p>
 
       {/* Read More Button (Direct Link) */}
-      <Link
+      {/* <Link
         to="/cancellation-policy"
         className="mt-2 inline-block text-sm text-red-600 underline transition hover:text-red-800"
       >
         Read more
-      </Link>
+      </Link> */}
+      <button
+  onClick={() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    navigate("/cancellation-policy");
+  }}
+  className="mt-2 inline-block text-sm text-red-600 underline hover:text-red-800"
+>
+  Read more
+</button>
+
     </div>
 
 </div>
