@@ -4,7 +4,7 @@ import { FaShoppingCart } from 'react-icons/fa';
 import UserSidebar from '../User_sidebar';
 import UserNavbar from '../User_Navbar';
 import { Link, useNavigate } from "react-router-dom";
-
+import { FiSearch } from "react-icons/fi"; // Search icon
 const BASE_URL_AND_PORT = "https://api.static.ev.transev.site";
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
 const token = localStorage.getItem('auth_token');
@@ -19,7 +19,7 @@ const ProductPage = () => {
   const [popupImageIndex, setPopupImageIndex] = useState(0);
 
   const [contactPopup, setContactPopup] = useState(false);
-
+  const [searchQuery, setSearchQuery] = useState("");
   const [hovered, setHovered] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [cart, setCart] = useState([]);
@@ -113,6 +113,32 @@ const navigate = useNavigate();
  useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, []);
+  /* ================= SEARCH ================= */
+
+const handleSearch = (e) => {
+  e.preventDefault();
+
+  if (!searchQuery.trim()) {
+    // If search input is empty, show all or filtered products
+    setDisplayedProducts(
+      filterType === "ALL"
+        ? allProducts
+        : allProducts.filter(
+            (p) =>
+              p.name?.toUpperCase().includes(filterType) ||
+              p.model?.toUpperCase().includes(filterType)
+          )
+    );
+    return;
+  }
+
+  const filtered = allProducts.filter((p) =>
+    p.name?.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  setDisplayedProducts(filtered);
+};
+
   return (
     <div className="min-h-screen bg-gray-100">
       <UserNavbar onToggleSidebar={toggleSidebar} />
@@ -138,22 +164,44 @@ const navigate = useNavigate();
               <option value="DC">DC Charger</option>
             </select>
           </div>
+   {/* SEARCH */}
+         {/* SEARCH */}
+<div className="flex justify-center mb-4">
+  <form className="relative w-80" onSubmit={handleSearch}>
+    <input
+      type="text"
+      className="w-full pl-10 pr-10 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+      placeholder="Search by product name"
+      value={searchQuery}
+      onChange={(e) => setSearchQuery(e.target.value)}
+    />
+    <button
+      type="submit"
+      className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+    >
+      <FiSearch size={20} />
+    </button>
+  </form>
+</div>
 
-          {/* 🔹 PRODUCTS */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            {loading ? (
-              <div className="col-span-full flex justify-center">
-                <div className="animate-spin w-16 h-16 border-t-4 border-green-500 rounded-full"></div>
-              </div>
-            ) : (
-              displayedProducts.map((product, index) => (
-                <div key={product.id} className="flex flex-col items-center">
-
-                  <div
-                    className="relative bg-gray-200 p-4 rounded-lg w-[300px] h-[400px] hover:scale-105 transition"
-                    onMouseEnter={() => setHovered(index)}
-                    onMouseLeave={() => setHovered(null)}
-                  >
+{/* PRODUCTS GRID */}
+<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+  {loading ? (
+    <div className="col-span-full flex justify-center">
+      <div className="animate-spin w-16 h-16 border-t-4 border-green-500 rounded-full"></div>
+    </div>
+  ) : displayedProducts.length === 0 ? (
+    <div className="col-span-full text-center text-gray-500 py-20 text-lg font-semibold">
+      No products found
+    </div>
+  ) : (
+    displayedProducts.map((product, index) => (
+      <div key={product.id} className="flex flex-col items-center">
+        <div
+          className="relative bg-gray-200 p-4 rounded-lg w-[300px] h-[400px] hover:scale-105 transition"
+          onMouseEnter={() => setHovered(index)}
+          onMouseLeave={() => setHovered(null)}
+        >
                     <img
                       src={product.image_paths?.[imageIndex[product.id] || 0]}
                       className="w-full h-full object-cover rounded-lg cursor-pointer"
