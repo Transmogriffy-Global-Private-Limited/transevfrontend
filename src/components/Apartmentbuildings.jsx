@@ -567,7 +567,7 @@ solutions.
           'Connectivity':'Wi-Fi, GSM,Bluetooth,LED Indication',
           'Charging Operation':'QR code based/Scan code / App based authentication',
           'Mechanical Protection':'IP54',
-          'Safety':'CE',
+          'Safety':'IEC 61851-1:2017, IEC 61851-21-2',
          'Mounting': 'Wall Mounted',}},  
         
           { name: 'AC 7.4 KW Portable', description: '7.4 kW ', features: 'Model No:TE-AC-02P- 7.4,Rating: 3.7 kW,Portable Charger,Plug and Play', image: AC02P7,details: {
@@ -581,7 +581,7 @@ solutions.
           'Connectivity':'Plug In',
           'Charging Operation':'Plug and Play',
           'Mechanical Protection':'IP66',
-          'Safety':'CE,UkCA',
+          'Safety':'IEC 62752, IEC 61851-21-2',
          'Mounting': 'Portable',}},
           { name: 'AC 7.4 KW', description: ' 7.4kW ', features: 'Model No:TE-AC-02W-7.4 H,Rating: 7.4 kW,Single Connector,GSM/Wi-Fi/BLE/4G/Ethernet or Optional', image: AC02WCH ,details: {
          'Dimensions':'WxDxH (278 mm x 152 mm x 360 mm)',
@@ -594,7 +594,7 @@ solutions.
           'Connectivity':'Wi-Fi, 4 G, Bluetooth,DLB,Ethernet',
           'Charging Operation':'Plug and Play',
           'Mechanical Protection':'IP65',
-          'Safety':'CE,UKCA,CB,RCM',
+          'Safety':'EN IEC 61851-1, IEC 61851-21-2',
          'Mounting': 'Wall / Pole Mount',}},
     ].map((box, index) => (
       <div key={index} className="flex flex-col items-center flex-shrink-0">

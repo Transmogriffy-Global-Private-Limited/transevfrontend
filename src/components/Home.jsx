@@ -742,7 +742,7 @@ We provide effortless management and maintainance, so you can focus on what matt
           'Connectivity':'Plug In',
           'Charging Operation':'Plug and Play',
           'Mechanical Protection':'IP66',
-          'Safety':'CE,UkCA',
+          'Safety':'IEC 62752, IEC 61851-21-2',
          'Mounting': 'Portable',}},
       { name: 'AC 7.4 KW Portable Charger', description: '7.4 kW ', features: 'Model No:TE-AC-02P- 7.4,Rating: 3.7 kW,Portable Charger,Plug and Play', image: AC02P7,details: {
           'Dimensions':'WxDxH (120 mm x 110 mm x 320 mm)',
@@ -755,7 +755,7 @@ We provide effortless management and maintainance, so you can focus on what matt
           'Connectivity':'Plug In, Wireless DLB/Solar compatible',
           'Charging Operation':'Plug and Play',
           'Mechanical Protection':'IP65',
-          'Safety':'CE,UKCA',
+          'Safety':'IEC 62752, IEC 61851-21-2',
          'Mounting': 'Wall Mounted & Portable',}},
       { name: 'AC 7.4 KW', description: ' 7.4kW ', features: 'Model No:TE-AC-02W-7.4C & H,Rating: 7.4 kW,Single Connector,GSM/Wi-Fi/BLE/4G/Ethernet or Optional', 
        image: AC02WCH , details: {
@@ -769,7 +769,7 @@ We provide effortless management and maintainance, so you can focus on what matt
           'Connectivity':'Wi-Fi, 4 G, Bluetooth,DLB,Ethernet',
           'Charging Operation':'RFID authentication,App based authentication,Plug and Play',
           'Mechanical Protection':'IP65',
-          'Safety':'CE,UKCA,CB,RCM',
+          'Safety':'EN IEC 61851-1, IEC 61851-21-2',
          'Mounting': 'Wall / Pole Mount',}},
       { name: 'AC 7.4 KW', description: '7.4 kW', features: 'Model No:TE-AC-03W-7.4,Rating: 7.4 kW,Single Connector,GSM/Wi-Fi/BLE/4G', image: AC03W7,details: {
          'Dimensions':'WxDxH (195 mm x 110 mm x 320 mm)',
@@ -782,7 +782,7 @@ We provide effortless management and maintainance, so you can focus on what matt
           'Connectivity':'Wi-Fi, Ethernet(RJ45),Bluetooth,RS485,4G',
           'Charging Operation':'RFID authentication,QR code based,App based authentication',
           'Mechanical Protection':'IP54',
-          'Safety':'CE,Eichrecht,MID,SGS',
+          'Safety':'EN IEC 61851-1, IEC 61851-21-2',
          'Mounting': 'Wall or floor using a pedestal',}},
       { name: 'AC 22 KW', description: ' 22 kW', features: 'Model No:TE-AC-03W-22,Rating: 22 kW,Single Connector,GSM/Wi-Fi/BLE/4G', image: AC03W22,details: {
          'Dimensions':'WxDxH (195 mm x 110 mm x 320 mm)',
@@ -795,7 +795,7 @@ We provide effortless management and maintainance, so you can focus on what matt
           'Connectivity':'Wi-Fi, Ethernet(RJ45),Bluetooth,RS485,4G',
           'Charging Operation':'RFID authentication,QR code based,App based authentication',
           'Mechanical Protection':'IP54',
-          'Safety':'CE,Eichrecht,MID,SGS',
+          'Safety':'IEC/EN 61851-1, EN 62311, EN 62479, IEC/EN 62955',
          'Mounting': 'Wall or floor using a pedestal',}},
       { name: 'DC 30 KW', description: '30 kW', features: 'Model No:TE-DC-04W-30,Rating:30 kW,Single Gun,Ethernet | Wi-fi|4G', image: DC04W,details: {
          'Dimensions':'WxDxH (459 mm x 346 mm x 734 mm)',

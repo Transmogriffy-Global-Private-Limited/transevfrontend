@@ -396,9 +396,9 @@ const handleBuyNowClick = () => {
           'Mechanical Protection':'IP54',
           'Safety':'CE',
          'Mounting': 'Ground/Floor Mounting',}},
-            { name: 'DC 120 KW', description: '120 kW', features: 'Model No:TE-DC-04G-150,Rating:120 kW,High Speed Charging,OCPP1.6J Or Latest | RFID', image: DC04G150,details: {
+            { name: 'DC 120 KW', description: '120 kW', features: 'Model No:TE-DC-04G-120,Rating:120 kW,High Speed Charging,OCPP1.6J Or Latest | RFID', image: DC04G150,details: {
            'Dimensions':'WxDxH (1150 mm x 625 mm x 2000 mm)',
-          'Rated Power': '150 kW',
+          'Rated Power': '120 kW',
           'Input Voltage': '304V - 456V AC',
           'Number of Output':'2 or 3',
           'Output Current':'250 A',

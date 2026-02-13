@@ -354,7 +354,7 @@ const Workplace = () => {
           'Mechanical Protection':'IP54',
           'Safety':'IEC EN61851, EN62196, DIN70121, ISO15118',
          'Mounting': 'Ground/Floor Mounting',}},
-         { name: 'DC 120 KW', description: '120 kW', features: 'Model No:TE-DC-04G-150,Rating:150 kW,High Speed Charging,OCPP1.6J Or Latest | RFID', image: DC04G150,details: {
+         { name: 'DC 120 KW', description: '120 kW', features: 'Model No:TE-DC-04G-120,Rating:120 kW,High Speed Charging,OCPP1.6J Or Latest | RFID', image: DC04G150,details: {
            'Dimensions':'WxDxH (1150 mm x 625 mm x 2000 mm)',
           'Rated Power': '120 kW',
           'Input Voltage': '304V - 456V AC',
@@ -379,7 +379,7 @@ const Workplace = () => {
           'Connectivity':'Wi-Fi, Ethernet(RJ45),Bluetooth,RS485,4G',
           'Charging Operation':'RFID authentication,QR code based,App based authentication',
           'Mechanical Protection':'IP54',
-          'Safety':'CE,Eichrecht,MID,SGS',
+          'Safety':'IEC/EN 61851-1, EN 62311, EN 62479, IEC/EN 62955',
          'Mounting': 'Wall or floor using a pedestal',}},
                { name: 'AC 22 KW', description: ' 22 kW', features: 'Model No:TE-AC-03W-22,Rating: 22 kW,Single Connector,GSM/Wi-Fi/BLE/4G', image: AC03W22 ,details: {
          'Dimensions':'WxDxH (195 mm x 110 mm x 320 mm)',
@@ -392,7 +392,7 @@ const Workplace = () => {
           'Connectivity':'Wi-Fi, Ethernet(RJ45),Bluetooth,RS485,4G',
           'Charging Operation':'RFID authentication,QR code based,App based authentication',
           'Mechanical Protection':'IP54',
-          'Safety':'CE,Eichrecht,MID,SGS',
+          'Safety':'IEC/EN 61851-1, EN 62311, EN 62479, IEC/EN 62955',
          'Mounting': 'Wall or floor using a pedestal',}},
     ].map((box, index) => (
       <div key={index} className="flex flex-col items-center">
