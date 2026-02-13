@@ -381,8 +381,8 @@ const handleBuyNowClick = () => {
           'Connectivity':'Ethernet,4G,Wireless Network',
           'Charging Operation':'RFID card,Scan QR code,Mobile App',
           'Mechanical Protection':'IP54',
-          'Safety':'CE',
-         'Mounting': 'Wall Mount,Stand column,Portable wheeled',}}, 
+          'Safety':'IEC EN61851, EN62196, DIN70121, ISO15118',
+         'Mounting': 'Wall Mount,Stand column',}}, 
             { name: 'DC 60 KW', description: ' 60 kW ', features: 'Model No:TE-DC-04G-60,Rating:60 kW,High Speed Charging,OCPP1.6J Or Latest | RFID', image: DC04G60 ,details: {
           'Dimensions':'WxDxH (730 mm x 500 mm x 1500 mm)',
           'Rated Power': '60 kW',
@@ -396,7 +396,7 @@ const handleBuyNowClick = () => {
           'Mechanical Protection':'IP54',
           'Safety':'CE',
          'Mounting': 'Ground/Floor Mounting',}},
-            { name: 'DC 150 KW', description: '150 kW', features: 'Model No:TE-DC-04G-150,Rating:150 kW,High Speed Charging,OCPP1.6J Or Latest | RFID', image: DC04G150,details: {
+            { name: 'DC 120 KW', description: '120 kW', features: 'Model No:TE-DC-04G-150,Rating:120 kW,High Speed Charging,OCPP1.6J Or Latest | RFID', image: DC04G150,details: {
            'Dimensions':'WxDxH (1150 mm x 625 mm x 2000 mm)',
           'Rated Power': '150 kW',
           'Input Voltage': '304V - 456V AC',
@@ -407,8 +407,8 @@ const handleBuyNowClick = () => {
           'Connectivity':'Wi-Fi, GSM,Bluetooth,LED Indication',
           'Charging Operation':'QR code based/Scan code / App based authentication',
           'Mechanical Protection':'IP54',
-          'Safety':'CE',
-         'Mounting': 'Wall Mounted',}},
+          'Safety':'IEC EN61851, EN62196, DIN70121, ISO15118',
+         'Mounting': 'Ground/Floor Mounting',}},
     ].map((box, index) => (
       <div key={index} className="flex flex-col items-center">
         <div
