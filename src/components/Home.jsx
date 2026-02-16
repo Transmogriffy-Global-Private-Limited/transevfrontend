@@ -731,7 +731,7 @@ We provide effortless management and maintainance, so you can focus on what matt
       //     'Safety':'CE',
       //    'Mounting': 'Wall Mounted',}},
          
-      { name: 'AC 3.7 KW Portable Charger', description: '3.7 kW ', features: 'Model No:Model No:TE-AC-02P-3.7,Rating: 3.7 kW,Portable Charger,Plug and Play', image:AC02P,details: {
+      { name: 'AC 3.7 KW Portable Charger', description: '3.7 kW ', features: 'Model No:TE-AC-02P-3.7,Rating: 3.7 kW,Portable Charger,Plug and Play', image:AC02P,details: {
          'Dimensions':'WxDxH (85 mm x 55 mm x 200 mm)',
           'Rated Power': '3.7 kW',
           'Input Voltage': '230V AC(100-265V)',
