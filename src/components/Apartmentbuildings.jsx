@@ -556,7 +556,7 @@ solutions.
     onScroll={handleScroll}
   >
     {[
-      { name: 'AC 3.3 KW', description: '3.3 kW', features: 'Model No:TE-AC-01W-3.3,Rating: 3.3 kW,Single Connector,GSM/Wi-Fi/BLE', image: AC01W,details: {
+      { name: 'AC 3.3 kW', description: '3.3 kW', features: 'Model No:TE-AC-01W-3.3,Rating: 3.3 kW,Single Connector,GSM/Wi-Fi/BLE', image: AC01W,details: {
           'Dimensions':'WxDxH (310 mm x 220 mm x 90 mm)',
           'Rated Power': '3.3 kW',
           'Input Voltage': '200V - 265V AC',
@@ -570,7 +570,7 @@ solutions.
           'Safety':'IEC 61851-1:2017, IEC 61851-21-2',
          'Mounting': 'Wall Mounted',}},  
         
-          { name: 'AC 7.4 KW Portable', description: '7.4 kW ', features: 'Model No:TE-AC-02P- 7.4,Rating: 3.7 kW,Portable Charger,Plug and Play', image: AC02P7,details: {
+          { name: 'AC 7.4 kW Portable', description: '7.4 kW ', features: 'Model No:TE-AC-02P- 7.4,Rating: 3.7 kW,Portable Charger,Plug and Play', image: AC02P7,details: {
          'Dimensions':'WxDxH (85 mm x 55 mm x 200 mm)',
           'Rated Power': '3.7 kW',
           'Input Voltage': '230V AC(100-265V)',
@@ -583,7 +583,7 @@ solutions.
           'Mechanical Protection':'IP66',
           'Safety':'IEC 62752, IEC 61851-21-2',
          'Mounting': 'Portable',}},
-          { name: 'AC 7.4 KW', description: ' 7.4kW ', features: 'Model No:TE-AC-02W-7.4 H,Rating: 7.4 kW,Single Connector,GSM/Wi-Fi/BLE/4G/Ethernet or Optional', image: AC02WCH ,details: {
+          { name: 'AC 7.4 kW', description: ' 7.4kW ', features: 'Model No:TE-AC-02W-7.4 H,Rating: 7.4 kW,Single Connector,GSM/Wi-Fi/BLE/4G/Ethernet or Optional', image: AC02WCH ,details: {
          'Dimensions':'WxDxH (278 mm x 152 mm x 360 mm)',
           'Rated Power': '7.4 kW',
           'Input Voltage': '230V AC',

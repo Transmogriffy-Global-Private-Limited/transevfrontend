@@ -351,7 +351,7 @@ const Hotels = () => {
     onScroll={handleScroll}
   >
     {[ 
-      { name: 'AC 7.4 Kw', description: '7.4 kW', features: 'Model No:TE-AC-03W-7.4,Rating: 7.4 kW,Single Connector,GSM/Wi-Fi/BLE/4G', image: AC03W7,  details: {
+      { name: 'AC 7.4 kW', description: '7.4 kW', features: 'Model No:TE-AC-03W-7.4,Rating: 7.4 kW,Single Connector,GSM/Wi-Fi/BLE/4G', image: AC03W7,  details: {
          'Dimensions':'WxDxH (195 mm x 110 mm x 320 mm)',
           'Rated Power': '7.4 kW',
           'Input Voltage': '184V - 276V AC',
@@ -364,7 +364,7 @@ const Hotels = () => {
           'Mechanical Protection':'IP54',
           'Safety':'IEC/EN 61851-1, EN 62311, EN 62479, IEC/EN 62955',
          'Mounting': 'Wall or floor using a pedestal',}}, 
-           { name: 'AC 22 KW', description: ' 22 kW', features: 'Model No:TE-AC-03W-22,Rating: 22 kW,Single Connector,GSM/Wi-Fi/BLE/4G', image: AC03w,  details: {
+           { name: 'AC 22 kW', description: ' 22 kW', features: 'Model No:TE-AC-03W-22,Rating: 22 kW,Single Connector,GSM/Wi-Fi/BLE/4G', image: AC03w,  details: {
          'Dimensions':'WxDxH (195 mm x 110 mm x 320 mm)',
           'Rated Power': '22 kW',
           'Input Voltage': '320V - 480V AC',
@@ -377,7 +377,7 @@ const Hotels = () => {
           'Mechanical Protection':'IP54',
           'Safety':'IEC/EN 61851-1, EN 62311, EN 62479, IEC/EN 62955',
          'Mounting': 'Wall or floor using a pedestal',}},
-           { name: 'DC 30 KW', description: '30 kW', features: 'Model No:TE-DC-04W-30,Rating:30 kW,Single Gun,Ethernet | Wi-fi|4G', image: DC04W,  details: {
+           { name: 'DC 30 kW', description: '30 kW', features: 'Model No:TE-DC-04W-30,Rating:30 kW,Single Gun,Ethernet | Wi-fi|4G', image: DC04W,  details: {
          'Dimensions':'WxDxH (459 mm x 346 mm x 734 mm)',
           'Rated Power': '30 kW',
           'Input Voltage': '304-456V AC',
@@ -390,7 +390,7 @@ const Hotels = () => {
           'Mechanical Protection':'IP54',
           'Safety':'IEC EN61851, EN62196, DIN70121, ISO15118',
          'Mounting': 'Wall Mount,Stand column'}},
-           { name: 'DC 60 KW', description: ' 60 kW ', features: 'Model No:TE-DC-04G-60,Rating:60 kW,High Speed Charging,OCPP1.6J Or Latest | RFID', image: DC04G60,  details: {
+           { name: 'DC 60 kW', description: ' 60 kW ', features: 'Model No:TE-DC-04G-60,Rating:60 kW,High Speed Charging,OCPP1.6J Or Latest | RFID', image: DC04G60,  details: {
           'Dimensions':'WxDxH (730 mm x 500 mm x 1500 mm)',
           'Rated Power': '60 kW',
           'Input Voltage': '304V - 456V AC',
@@ -403,7 +403,7 @@ const Hotels = () => {
           'Mechanical Protection':'IP54',
           'Safety':'IEC EN61851, EN62196, DIN70121, ISO15118',
          'Mounting': 'Ground/Floor Mounting',}},
-           { name: 'DC 120 KW', description: '120 kW', features: 'Model No:TE-DC-04G-120,Rating:120 kW,High Speed Charging,OCPP1.6J Or Latest | RFID', image: DC04G150,  details: {
+           { name: 'DC 120 kW', description: '120 kW', features: 'Model No:TE-DC-04G-120,Rating:120 kW,High Speed Charging,OCPP1.6J Or Latest | RFID', image: DC04G150,  details: {
            'Dimensions':'WxDxH (1150 mm x 625 mm x 2000 mm)',
           'Rated Power': '10 kW',
           'Input Voltage': '304V - 456V AC',

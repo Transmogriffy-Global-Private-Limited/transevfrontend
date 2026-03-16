@@ -731,7 +731,7 @@ We provide effortless management and maintainance, so you can focus on what matt
       //     'Safety':'CE',
       //    'Mounting': 'Wall Mounted',}},
          
-      { name: 'AC 3.7 KW Portable Charger', description: '3.7 kW ', features: 'Model No:TE-AC-02P-3.7,Rating: 3.7 kW,Portable Charger,Plug and Play', image:AC02P,details: {
+      { name: 'AC 3.7 kW Portable Charger', description: '3.7 kW ', features: 'Model No:TE-AC-02P-3.7,Rating: 3.7 kW,Portable Charger,Plug and Play', image:AC02P,details: {
          'Dimensions':'WxDxH (85 mm x 55 mm x 200 mm)',
           'Rated Power': '3.7 kW',
           'Input Voltage': '230V AC(100-265V)',
@@ -744,7 +744,7 @@ We provide effortless management and maintainance, so you can focus on what matt
           'Mechanical Protection':'IP66',
           'Safety':'IEC 62752, IEC 61851-21-2',
          'Mounting': 'Portable',}},
-      { name: 'AC 7.4 KW Portable Charger', description: '7.4 kW ', features: 'Model No:TE-AC-02P- 7.4,Rating: 3.7 kW,Portable Charger,Plug and Play', image: AC02P7,details: {
+      { name: 'AC 7.4 kW Portable Charger', description: '7.4 kW ', features: 'Model No:TE-AC-02P- 7.4,Rating: 3.7 kW,Portable Charger,Plug and Play', image: AC02P7,details: {
           'Dimensions':'WxDxH (120 mm x 110 mm x 320 mm)',
           'Rated Power': '7.4 kW',
           'Input Voltage': '230V AC(100-265V)',
@@ -757,7 +757,7 @@ We provide effortless management and maintainance, so you can focus on what matt
           'Mechanical Protection':'IP65',
           'Safety':'IEC 62752, IEC 61851-21-2',
          'Mounting': 'Wall Mounted & Portable',}},
-      { name: 'AC 7.4 KW', description: ' 7.4kW ', features: 'Model No:TE-AC-02W-7.4C & H,Rating: 7.4 kW,Single Connector,GSM/Wi-Fi/BLE/4G/Ethernet or Optional', 
+      { name: 'AC 7.4 kW', description: ' 7.4kW ', features: 'Model No:TE-AC-02W-7.4C & H,Rating: 7.4 kW,Single Connector,GSM/Wi-Fi/BLE/4G/Ethernet or Optional', 
        image: AC02WCH , details: {
          'Dimensions':'WxDxH (278 mm x 152 mm x 360 mm)',
           'Rated Power': '7.4 kW',
@@ -771,7 +771,7 @@ We provide effortless management and maintainance, so you can focus on what matt
           'Mechanical Protection':'IP65',
           'Safety':'EN IEC 61851-1, IEC 61851-21-2',
          'Mounting': 'Wall / Pole Mount',}},
-      { name: 'AC 7.4 KW', description: '7.4 kW', features: 'Model No:TE-AC-03W-7.4,Rating: 7.4 kW,Single Connector,GSM/Wi-Fi/BLE/4G', image: AC03W7,details: {
+      { name: 'AC 7.4 kW', description: '7.4 kW', features: 'Model No:TE-AC-03W-7.4,Rating: 7.4 kW,Single Connector,GSM/Wi-Fi/BLE/4G', image: AC03W7,details: {
          'Dimensions':'WxDxH (195 mm x 110 mm x 320 mm)',
           'Rated Power': '7.4 kW',
           'Input Voltage': '184V - 276V AC',
@@ -784,7 +784,7 @@ We provide effortless management and maintainance, so you can focus on what matt
           'Mechanical Protection':'IP54',
           'Safety':'EN IEC 61851-1, IEC 61851-21-2',
          'Mounting': 'Wall or floor using a pedestal',}},
-      { name: 'AC 22 KW', description: ' 22 kW', features: 'Model No:TE-AC-03W-22,Rating: 22 kW,Single Connector,GSM/Wi-Fi/BLE/4G', image: AC03W22,details: {
+      { name: 'AC 22 kW', description: ' 22 kW', features: 'Model No:TE-AC-03W-22,Rating: 22 kW,Single Connector,GSM/Wi-Fi/BLE/4G', image: AC03W22,details: {
          'Dimensions':'WxDxH (195 mm x 110 mm x 320 mm)',
           'Rated Power': '22 kW',
           'Input Voltage': '320V - 480V AC',
@@ -797,7 +797,7 @@ We provide effortless management and maintainance, so you can focus on what matt
           'Mechanical Protection':'IP54',
           'Safety':'IEC/EN 61851-1, EN 62311, EN 62479, IEC/EN 62955',
          'Mounting': 'Wall or floor using a pedestal',}},
-      { name: 'DC 30 KW', description: '30 kW', features: 'Model No:TE-DC-04W-30,Rating:30 kW,Single Gun,Ethernet | Wi-fi|4G', image: DC04W,details: {
+      { name: 'DC 30 kW', description: '30 kW', features: 'Model No:TE-DC-04W-30,Rating:30 kW,Single Gun,Ethernet | Wi-fi|4G', image: DC04W,details: {
          'Dimensions':'WxDxH (459 mm x 346 mm x 734 mm)',
           'Rated Power': '30 kW',
           'Input Voltage': '304-456V AC',
@@ -810,7 +810,7 @@ We provide effortless management and maintainance, so you can focus on what matt
           'Mechanical Protection':'IP54',
           'Safety':'IEC EN61851, EN62196, DIN70121, ISO15118',
          'Mounting': 'Wall Mount,Stand column',}},
-      { name: 'DC 60 KW', description: ' 60 kW ', features: 'Model No:TE-DC-04G-60,Rating:60 kW,High Speed Charging,OCPP1.6J Or Latest | RFID', image: DC04G60,details: {
+      { name: 'DC 60 kW', description: ' 60 kW ', features: 'Model No:TE-DC-04G-60,Rating:60 kW,High Speed Charging,OCPP1.6J Or Latest | RFID', image: DC04G60,details: {
           'Dimensions':'WxDxH (730 mm x 500 mm x 1500 mm)',
           'Rated Power': '60 kW',
           'Input Voltage': '304V - 456V AC',
@@ -823,7 +823,7 @@ We provide effortless management and maintainance, so you can focus on what matt
           'Mechanical Protection':'IP54',
           'Safety':'IEC EN61851, EN62196, DIN70121, ISO15118',
          'Mounting': 'Ground/Floor Mounting',}},
-      { name: 'DC 120 KW', description: '120 kW', features: 'Model No:TE-DC-04G-150,Rating:150 kW,High Speed Charging,OCPP1.6J Or Latest | RFID', image: DC04G150, details: {
+      { name: 'DC 120 kW', description: '120 kW', features: 'Model No:TE-DC-04G-150,Rating:150 kW,High Speed Charging,OCPP1.6J Or Latest | RFID', image: DC04G150, details: {
            'Dimensions':'WxDxH (1150 mm x 625 mm x 2000 mm)',
           'Rated Power': '120 kW',
           'Input Voltage': '304V - 456V AC',
