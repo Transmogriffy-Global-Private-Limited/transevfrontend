@@ -1,11 +1,10 @@
-import React, { useState,useEffect} from "react";
+
+import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import { HiEye, HiEyeOff, HiMail, HiLockClosed, HiShieldCheck } from "react-icons/hi";
 import loginImage from "../../assets/new3.jpg";
-import { HiEye, HiEyeOff } from "react-icons/hi"; // Importing eye icons from react-icons
-// ✅ Correct
 
-// const BASE_URL = "https://api.static.ev.transev.site";
 const BASE_URL = "https://api.static.ev.transev.site";
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
 
@@ -18,7 +17,7 @@ const LoginPage = () => {
   const [authToken, setAuthToken] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
-  const [passwordVisible, setPasswordVisible] = useState(false); // State for password visibility toggle
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const navigate = useNavigate();
 
@@ -35,17 +34,17 @@ const LoginPage = () => {
       console.error("Error decoding token:", err);
     }
   };
- useEffect(() => {
+
+  useEffect(() => {
     const token = localStorage.getItem("auth_token");
     const loginTimestamp = parseInt(localStorage.getItem("login_timestamp"), 10);
     const currentTime = Date.now();
 
-    if (token && loginTimestamp && (currentTime - loginTimestamp) < 365 * 24 * 60 * 60 * 1000 ) {
+    if (token && loginTimestamp && (currentTime - loginTimestamp) < 365 * 24 * 60 * 60 * 1000) {
       navigate("/dashboard");
     }
   }, [navigate]);
 
- 
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "otp_code") {
@@ -75,8 +74,7 @@ const LoginPage = () => {
       if (authorizationHeader?.startsWith("Bearer ")) {
         const token = authorizationHeader.substring(7);
         localStorage.setItem("auth_token", token);
-        
-      localStorage.setItem("login_timestamp", Date.now()); // ✅ Store login time
+        localStorage.setItem("login_timestamp", Date.now());
         setAuthToken(token);
         decodeAndStoreUser(token);
       }
@@ -89,14 +87,11 @@ const LoginPage = () => {
         setTimeout(() => navigate("/dashboard"), 1500);
       } else {
         const data = await response.json();
-        // setError(data.message || "Login failed.");
-         // ✅ Specific handling for invalid credentials
-      if (response.status === 401 || response.status === 400 ) {
-        setError("Invalid credentials. Please check your email and password.");
-      } else {
-        setError(data.message || "Login failed.");
-      }
-    
+        if (response.status === 401 || response.status === 400) {
+          setError("Invalid credentials. Please check your email and password.");
+        } else {
+          setError(data.message || "Login failed.");
+        }
       }
     } catch (err) {
       console.error("Login error:", err);
@@ -153,113 +148,189 @@ const LoginPage = () => {
 
   return (
     <div
-      className="flex justify-center items-center min-h-screen bg-cover bg-center"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: `url(${loginImage})` }}
     >
-      <div className="bg-white p-8 rounded-lg shadow-lg max-w-lg w-full relative">
-        <div className="bg-teal-600 text-white py-4 mb-6 rounded-t-lg">
-          <h2 className="text-3xl font-bold text-center">Login</h2>
-          {showSuccessPopup && (
-            <div className="bg-white p-2 rounded-lg shadow-md text-center">
-              <h2 className="text-2xl font-bold text-green-600">Login Successful!</h2>
-            </div>
-          )}
-        </div>
+      {/* Dark overlay for better readability */}
+      <div className="absolute inset-0 bg-black/50"></div>
 
-        {!showOtpForm ? (
-          <form onSubmit={handleSubmit}>
-            <div className="mb-4">
-              <label className="block text-gray-700">Email</label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Email"
-                className="w-full p-3 border border-gray-300 rounded"
-                required
-              />
+      <div className="relative z-10 w-full max-w-md px-4">
+        {/* Glass morphism card */}
+        <div className="bg-white/10 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 overflow-hidden">
+          {/* Gradient header */}
+          <div className="relative bg-gradient-to-r from-emerald-600 to-teal-600 py-8 px-6 text-center">
+            <div className="absolute inset-0 bg-black/10"></div>
+            <div className="relative">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-2xl mb-4 backdrop-blur-sm">
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </div>
+              <h2 className="text-3xl font-bold text-white tracking-tight">Welcome Back</h2>
+              <p className="text-emerald-100 mt-2 text-sm">Sign in to continue to your account</p>
             </div>
-            <div className="mb-4 relative">
-              <label className="block text-gray-700">Password</label>
-              <input
-                type={passwordVisible ? "text" : "password"} // Toggle between text and password
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                placeholder="Password"
-                className="w-full p-3 border border-gray-300 rounded"
-                required
-              />
-              <div
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer mt-3"
-                onClick={() => setPasswordVisible(!passwordVisible)} // Toggle password visibility
-              >
-                {passwordVisible ? <HiEyeOff size={24} /> : <HiEye size={24} />} {/* Eye icon */}
+          </div>
+
+          {/* Success Popup */}
+          {showSuccessPopup && (
+            <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-50 animate-bounce">
+              <div className="bg-green-500 text-white px-6 py-3 rounded-full shadow-lg flex items-center space-x-2">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span className="font-medium">Login Successful!</span>
               </div>
             </div>
-            {error && <div className="text-red-500 mb-4">{error}</div>}
-            <button
-              type="submit"
-              className="bg-teal-600 text-white py-3 px-5 rounded-md hover:bg-teal-700 w-full flex items-center justify-center"
-              disabled={isLoading}
-            >
-              {isLoading ? (
-                <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-                </svg>
-              ) : (
-                "Login"
-              )}
-            </button>
-            <div className="text-center mt-4">
-              <p>
-                Don’t have an account?{" "}
-                <Link to="/signup" className="text-teal-600">
-                  Sign Up
-                </Link>
-              </p>
-              <p className="mt-2">
-                <Link to="/forgot-password" className="text-teal-600">
-                  Forgot Password?
-                </Link>
-              </p>
-            </div>
-          </form>
-        ) : (
-          <form onSubmit={handleOtpSubmit}>
-            <h3 className="text-xl font-semibold mb-4 text-center">Enter OTP</h3>
-            <div className="mb-4">
-              <label className="block text-gray-700">OTP</label>
-              <input
-                type="text"
-                name="otp_code"
-                value={otpData.otp_code}
-                onChange={handleChange}
-                placeholder="Enter 6-digit OTP"
-                className="w-full p-3 border border-gray-300 rounded"
-                maxLength={6}
-                required
-              />
-            </div>
-            {error && <div className="text-red-500 mb-4">{error}</div>}
-            <button
-              type="submit"
-              className="bg-teal-600 text-white py-3 px-5 rounded-md hover:bg-teal-700 w-full flex items-center justify-center"
-              disabled={isLoading}
-            >
-              {isLoading ? (
-                <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-                </svg>
-              ) : (
-                "Verify OTP"
-              )}
-            </button>
-          </form>
-        )}
+          )}
+
+          <div className="p-8">
+            {!showOtpForm ? (
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div>
+                  <label className="block text-sm font-medium text-gray-200 mb-2">
+                    <HiMail className="inline mr-2 mb-0.5" /> Email Address
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="you@example.com"
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent transition-all duration-200"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-200 mb-2">
+                    <HiLockClosed className="inline mr-2 mb-0.5" /> Password
+                  </label>
+                  <div className="relative">
+                    <input
+                      type={passwordVisible ? "text" : "password"}
+                      name="password"
+                      value={formData.password}
+                      onChange={handleChange}
+                      placeholder="••••••••"
+                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent transition-all duration-200 pr-12"
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setPasswordVisible(!passwordVisible)}
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+                    >
+                      {passwordVisible ? <HiEyeOff size={20} /> : <HiEye size={20} />}
+                    </button>
+                  </div>
+                </div>
+
+                {error && (
+                  <div className="bg-red-500/20 border border-red-400/50 text-red-200 px-4 py-2 rounded-xl text-sm">
+                    {error}
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-400 disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
+                >
+                  {isLoading ? (
+                    <div className="flex items-center justify-center space-x-2">
+                      <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                      </svg>
+                      <span>Signing in...</span>
+                    </div>
+                  ) : (
+                    "Sign In"
+                  )}
+                </button>
+
+                <div className="text-center space-y-2 pt-2">
+                  <p className="text-gray-300 text-sm">
+                    Don't have an account?{" "}
+                    <Link to="/signup" className="text-emerald-300 hover:text-emerald-200 font-medium transition-colors">
+                      Create Account
+                    </Link>
+                  </p>
+                  <p>
+                    <Link to="/forgot-password" className="text-emerald-300 hover:text-emerald-200 text-sm transition-colors">
+                      Forgot Password?
+                    </Link>
+                  </p>
+                </div>
+              </form>
+            ) : (
+              <form onSubmit={handleOtpSubmit} className="space-y-5">
+                <div className="text-center mb-4">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-emerald-500/20 rounded-full mb-3">
+                    <HiShieldCheck className="w-6 h-6 text-emerald-300" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-white">Two-Factor Authentication</h3>
+                  <p className="text-gray-300 text-sm mt-1">
+                    Enter the verification code sent to <span className="text-emerald-300 font-medium">{userEmail}</span>
+                  </p>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-200 mb-2">OTP Code</label>
+                  <input
+                    type="text"
+                    name="otp_code"
+                    value={otpData.otp_code}
+                    onChange={handleChange}
+                    placeholder="000000"
+                    maxLength={6}
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent text-center text-2xl tracking-widest font-mono"
+                    required
+                  />
+                </div>
+
+                {error && (
+                  <div className="bg-red-500/20 border border-red-400/50 text-red-200 px-4 py-2 rounded-xl text-sm">
+                    {error}
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-200 transform hover:scale-[1.02] disabled:opacity-70 disabled:cursor-not-allowed"
+                >
+                  {isLoading ? (
+                    <div className="flex items-center justify-center space-x-2">
+                      <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                      </svg>
+                      <span>Verifying...</span>
+                    </div>
+                  ) : (
+                    "Verify OTP"
+                  )}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setShowOtpForm(false)}
+                  className="w-full text-gray-400 hover:text-gray-300 text-sm mt-2 transition-colors"
+                >
+                  ← Back to Login
+                </button>
+              </form>
+            )}
+          </div>
+
+          {/* Footer note */}
+          <div className="bg-white/5 px-8 py-4 text-center border-t border-white/10">
+            <p className="text-gray-400 text-xs">
+              Secure login powered by AES-256 encryption
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
