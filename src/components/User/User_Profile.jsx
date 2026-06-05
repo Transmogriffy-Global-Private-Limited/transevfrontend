@@ -874,7 +874,7 @@ const Profile = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [isPageLoading, setIsPageLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('profile');
-  
+   const [isMobile, setIsMobile] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     about: '',
@@ -1317,13 +1317,21 @@ const Profile = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+ <div className="flex flex-col min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       <UserNavbar onToggleSidebar={toggleSidebar} />
-
-      <div className="flex">
+      
+      <div className="flex flex-1 relative">
+        {/* Sidebar */}
         <UserSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
 
-        <main className={`flex-1 transition-all duration-300 ${sidebarOpen ? 'lg:ml-64' : 'lg:ml-20'} w-full`}>
+        {/* Main Content - Dynamic margin based on sidebar state */}
+        <main 
+          className={`
+            flex-1 transition-all duration-300 ease-in-out w-full
+            ${sidebarOpen ? 'lg:ml-72' : 'lg:ml-24'}
+            ${isMobile && sidebarOpen ? 'overflow-hidden' : ''}
+          `}
+        >
           <div className="p-4 md:p-6 lg:p-8">
             {/* Header with Breadcrumb */}
             <div className="mb-8">

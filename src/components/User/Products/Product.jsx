@@ -1245,7 +1245,7 @@ import { MdElectricBolt, MdSpeed, MdSecurity, MdVerified, MdFlashOn } from 'reac
 import UserSidebar from '../User_sidebar';
 import UserNavbar from '../User_Navbar';
 import { useNavigate } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 const BASE_URL_AND_PORT = "https://api.static.ev.transev.site";
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
 
@@ -1268,9 +1268,10 @@ const ProductPage = () => {
   const [powerRange, setPowerRange] = useState([0, 200]);
   const [hoveredProduct, setHoveredProduct] = useState(null);
   const [toastMessage, setToastMessage] = useState(null);
+    const [isMobile, setIsMobile] = useState(false);
   const navigate = useNavigate();
 
-  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
+  // const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
   const showToast = (message, type = 'success') => {
     setToastMessage({ message, type });
@@ -1593,16 +1594,41 @@ const ProductPage = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, []);
-
-  return (
+const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
+ // Handle responsive sidebar state
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      if (window.innerWidth >= 1024) {
+        setSidebarOpen(true);
+      } else if (window.innerWidth < 1024 && window.innerWidth >= 768) {
+        setSidebarOpen(false);
+      } else {
+        setSidebarOpen(false);
+      }
+    };
     
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  return (
+     <div className="flex flex-col min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       <UserNavbar onToggleSidebar={toggleSidebar} />
-
-      <div className="flex relative">
+      
+      <div className="flex flex-1 relative">
+        {/* Sidebar */}
         <UserSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
 
-        <main className={`flex-1 transition-all duration-300 ${sidebarOpen ? 'lg:ml-64' : 'lg:ml-20'} w-full`}>
+        {/* Main Content - Dynamic margin based on sidebar state */}
+        <main 
+          className={`
+            flex-1 transition-all duration-300 ease-in-out w-full
+            ${sidebarOpen ? 'lg:ml-72' : 'lg:ml-24'}
+            ${isMobile && sidebarOpen ? 'overflow-hidden' : ''}
+          `}
+        >
           <div className="p-4 md:p-6 lg:p-8">
             {/* Toast Notification */}
             {toastMessage && (
@@ -1625,7 +1651,11 @@ const ProductPage = () => {
                   </p>
                   <div className="flex gap-3 md:gap-4 flex-wrap">
                     <button className="bg-white text-blue-600 px-4 md:px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition text-sm md:text-base">Shop Now</button>
-                    <button className="border-2 border-white text-white px-4 md:px-6 py-2 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition text-sm md:text-base">Learn More</button>
+<Link to="/about">
+  <button className="border-2 border-white text-white px-4 md:px-6 py-2 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition text-sm md:text-base">
+    Learn More
+  </button>
+</Link>
                   </div>
                 </div>
               </div>

@@ -1004,15 +1004,42 @@ function OrderHistoryPage() {
     cancelled: orderHistory.filter(o => o.order_status === "canceled").length,
     totalSpent: orderHistory.reduce((sum, o) => sum + (parseFloat(o.total_amount) || 0), 0)
   };
+  const [isMobile, setIsMobile] = useState(false);
 
+ // Handle responsive sidebar state
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      if (window.innerWidth >= 1024) {
+        setSidebarOpen(true);
+      } else if (window.innerWidth < 1024 && window.innerWidth >= 768) {
+        setSidebarOpen(false);
+      } else {
+        setSidebarOpen(false);
+      }
+    };
+    
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+   <div className="flex flex-col min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       <UserNavbar onToggleSidebar={toggleSidebar} />
-
-      <div className="flex">
+      
+      <div className="flex flex-1 relative">
+        {/* Sidebar */}
         <UserSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
 
-        <main className={`flex-1 transition-all duration-300 ${sidebarOpen ? 'lg:ml-64' : 'lg:ml-20'} w-full`}>
+        {/* Main Content - Dynamic margin based on sidebar state */}
+        <main 
+          className={`
+            flex-1 transition-all duration-300 ease-in-out w-full
+            ${sidebarOpen ? 'lg:ml-72' : 'lg:ml-24'}
+            ${isMobile && sidebarOpen ? 'overflow-hidden' : ''}
+          `}
+        >
           <div className="p-4 md:p-6 lg:p-8">
             {/* Header Section */}
             <div className="mb-8">
