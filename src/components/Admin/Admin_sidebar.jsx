@@ -1,9 +1,9 @@
-
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   FaBars,
   FaAngleDoubleLeft,
+  FaAngleDoubleRight,
   FaTachometerAlt,
   FaUsers,
   FaBoxOpen,
@@ -11,17 +11,42 @@ import {
   FaChartLine,
   FaCog,
   FaSignOutAlt,
-  FaUserCircle
+  FaUserCircle,
+  FaMoneyBillWave,
+  FaStore,
+  FaShoppingCart,
+  FaHeadset,
+  FaPalette,
 } from "react-icons/fa";
+import { MdSpaceDashboard, MdOutlineProductionQuantityLimits } from "react-icons/md";
+import { HiUsers } from "react-icons/hi";
+import { IoSettingsSharp } from "react-icons/io5";
 import logo from "../../assets/log.png";
-import { FaMoneyBillWave } from "react-icons/fa";
 
 const BASE_URL_AND_PORT = "https://api.static.ev.transev.site";
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
 
 const AdminSidebar = ({ isVisible = false, onClose = () => {} }) => {
+  const location = useLocation();
   const navigate = useNavigate();
   const [isExpanded, setIsExpanded] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      if (mobile) {
+        setIsExpanded(false);
+      } else {
+        setIsExpanded(true);
+      }
+    };
+    
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
 
   const handleLogout = async () => {
     const token = localStorage.getItem("auth_token");
@@ -48,116 +73,256 @@ const AdminSidebar = ({ isVisible = false, onClose = () => {} }) => {
     }
   };
 
+  const menuItems = [
+    { icon: <MdSpaceDashboard />, to: "/admin/dashboard", label: "Dashboard", color: "from-blue-500 to-cyan-500" },
+    { icon: <HiUsers />, to: "/admin/users", label: "Manage Users", color: "from-green-500 to-emerald-500" },
+    { icon: <MdOutlineProductionQuantityLimits />, to: "/manage/products", label: "Manage Products", color: "from-purple-500 to-pink-500" },
+    { icon: <FaShoppingCart />, to: "/admin/orders", label: "Manage Orders", color: "from-orange-500 to-red-500" },
+    { icon: <FaMoneyBillWave />, to: "/admin-refunds", label: "Manage Refunds", color: "from-yellow-500 to-amber-500" },
+    { icon: <FaChartLine />, to: "/admin/report", label: "Analytics", color: "from-indigo-500 to-blue-500" },
+    { icon: <FaHeadset />, to: "/admin/contacts", label: "Support", color: "from-teal-500 to-green-500" },
+    { icon: <FaUserCircle />, to: "/admin/profile", label: "My Profile", color: "from-cyan-500 to-blue-500" },
+    { icon: <IoSettingsSharp />, to: "/admin/settings", label: "Settings", color: "from-gray-500 to-gray-700" },
+  ];
+
   return (
     <>
-      {isVisible && (
+      {/* Mobile Overlay */}
+      {isMobile && isVisible && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-40 z-40 md:hidden"
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 animate-fadeIn"
           onClick={onClose}
         />
       )}
 
-      <div
-        className={`fixed top-0 left-0 h-full bg-[#75833F] text-white z-50 shadow-md
-        transform transition-transform duration-300 ease-in-out
-        ${isVisible ? "translate-x-0" : "-translate-x-full"}
-        ${isExpanded ? "md:w-64" : "md:w-20"} 
-        w-64 md:translate-x-0`}
+      {/* Sidebar */}
+      <aside
+        className={`
+          fixed top-0 left-0 h-full bg-gradient-to-b from-[#1a2f3e] to-[#0d1c26] text-white z-50 
+          shadow-2xl transition-all duration-300 ease-in-out overflow-y-auto overflow-x-hidden
+          flex flex-col
+          ${isMobile 
+            ? `${isVisible ? 'translate-x-0' : '-translate-x-full'} w-72` 
+            : `${isExpanded ? 'w-72' : 'w-20'} translate-x-0`
+          }
+        `}
       >
-        <div className="flex justify-between items-center px-4 py-4">
-          <img
-            src={logo}
-            alt="Admin Logo"
-            className={`h-10 w-auto transition-all duration-200 ${
-              isExpanded ? "block" : "hidden"
-            }`}
-          />
+        {/* Custom Scrollbar Styles */}
+        <style jsx>{`
+          .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+          }
+          .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+          }
+          .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+          }
+          .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
+          }
+          @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+          }
+          .animate-fadeIn {
+            animation: fadeIn 0.2s ease-out;
+          }
+        `}</style>
 
-          <button
-            onClick={() => setIsExpanded((prev) => !prev)}
-            className="hidden md:block text-white"
+        {/* Logo Section */}
+        <div className={`flex items-center justify-between px-5 py-5 border-b border-white/10 ${!isExpanded && !isMobile ? 'justify-center' : ''}`}>
+          <Link 
+            to="/admin/dashboard" 
+            onClick={() => {
+              if (isMobile && onClose) onClose();
+            }} 
+            className="flex items-center gap-3 group"
           >
-            {isExpanded ? <FaAngleDoubleLeft size={20} /> : <FaBars size={20} />}
-          </button>
+            <div className="relative">
+              <img
+                src={logo}
+                alt="Admin Logo"
+                className={`h-10 w-auto transition-all duration-200 ${
+                  (isExpanded || isMobile) ? "block" : "hidden"
+                }`}
+              />
+              {(!isExpanded && !isMobile) && (
+                <div className="w-10 h-10 bg-gradient-to-br from-white to-gray-100 rounded-xl flex items-center justify-center shadow-lg">
+                  <MdSpaceDashboard className="text-[#1a2f3e] text-2xl" />
+                </div>
+              )}
+              <div className="absolute -inset-1 bg-gradient-to-r from-[#ffd700] to-[#ffed4a] rounded-full blur opacity-0 group-hover:opacity-30 transition-opacity duration-300 -z-10"></div>
+            </div>
+           
+          </Link>
 
-          <button onClick={onClose} className="md:hidden text-white">
-            <FaSignOutAlt size={20} />
-          </button>
+          {/* Desktop Toggle Button */}
+          {!isMobile && (
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="flex items-center justify-center w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 transition-all duration-200 group"
+            >
+              {isExpanded ? (
+                <FaAngleDoubleLeft className="text-white/70 group-hover:text-white text-sm" />
+              ) : (
+                <FaAngleDoubleRight className="text-white/70 group-hover:text-white text-sm" />
+              )}
+            </button>
+          )}
+
+          {/* Mobile Close Button */}
+          {isMobile && (
+            <button 
+              onClick={onClose} 
+              className="text-white/70 hover:text-white p-2 rounded-lg hover:bg-white/10 transition-all"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          )}
         </div>
 
-        <ul className="mt-4 space-y-1 px-2">
-          <SidebarLink
-            icon={<FaTachometerAlt />}
-            to="/admin/dashboard"
-            label="Dashboard"
-            showText={isExpanded}
-          />
-          <SidebarLink
-            icon={<FaUsers />}
-            to="/admin/users"
-            label="Manage Users"
-            showText={isExpanded}
-          />
-          <SidebarLink
-            icon={<FaBoxOpen />}
-            to="/manage/products"
-            label="Manage Products"
-            showText={isExpanded}
-          />
-          <SidebarLink
-            icon={<FaClipboardCheck />}
-            to="/admin/orders"
-            label="Manage Orders"
-            showText={isExpanded}
-          />
-          <SidebarLink
-            icon={< FaMoneyBillWave  />}
-            to="/admin-refunds"
-            label="Manage Refunds"
-            showText={isExpanded}
-          />
-          <SidebarLink
-            icon={<FaChartLine />}
-            to="/admin/report"
-            label="Analytics & Contacts"
-            showText={isExpanded}
-          />
-            <SidebarLink
-                      icon={<FaUserCircle />}
-                      to="/admin/profile"
-                      label="My Profile"
-                      showText={isExpanded}
-                    />
-          <SidebarLink
-            icon={<FaCog />}
-            to="/admin/settings"
-            label="Settings"
-            showText={isExpanded}
-          />
-          <li>
+       {/* User Profile Summary */}
+{(isExpanded || isMobile) && (
+  <div className="mx-4 mt-6 p-4 rounded-2xl bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm border border-white/10">
+    <div className="flex items-center gap-3 mb-3">
+      <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 flex items-center justify-center shadow-lg">
+        <FaUserCircle className="text-white text-xl" />
+      </div>
+      <div className="flex-1">
+        <p className="text-sm font-semibold text-white">Admin Portal</p>
+        <p className="text-xs text-blue-300">Manage your platform</p>
+      </div>
+    </div>
+    <div className="flex items-center justify-between pt-2 border-t border-white/10">
+      <div className="text-center flex-1">
+        <p className="text-white font-bold text-lg">9</p>
+        <p className="text-[10px] text-white/50">Modules</p>
+      </div>
+      <div className="text-center flex-1">
+        <p className="text-white font-bold text-lg">24/7</p>
+        <p className="text-[10px] text-white/50">Support</p>
+      </div>
+      <div className="text-center flex-1">
+        <p className="text-white font-bold text-lg">100%</p>
+        <p className="text-[10px] text-white/50">Secure</p>
+      </div>
+    </div>
+  </div>
+)}
+
+        {/* Collapsed User Icon for Desktop */}
+        {(!isExpanded && !isMobile) && (
+          <div className="flex justify-center mt-6">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#ffd700] to-[#ffed4a] flex items-center justify-center shadow-lg">
+              <FaUserCircle className="text-[#1a2f3e] text-xl" />
+            </div>
+          </div>
+        )}
+
+        {/* Navigation Menu */}
+        <nav className="flex-1 overflow-y-auto overflow-x-hidden mt-6 px-3 custom-scrollbar">
+          <div className="space-y-1">
+            {menuItems.map((item, index) => (
+              <SidebarLink
+                key={index}
+                icon={item.icon}
+                to={item.to}
+                label={item.label}
+                showText={isExpanded || isMobile}
+                isActive={location.pathname === item.to}
+                color={item.color}
+                isMobile={isMobile}
+                onClose={onClose}
+              />
+            ))}
+          </div>
+        </nav>
+
+        {/* Footer Section */}
+        <div className="border-t border-white/10 mt-auto">
+          {/* Logout Button */}
+          <div className="p-3">
             <button
               onClick={handleLogout}
-              className="flex items-center w-full px-3 py-2 rounded-md text-sm text-red-400 hover:bg-[#34495e] transition-colors"
+              className={`group relative w-full flex items-center gap-3 px-3 py-2.5 rounded-xl 
+              transition-all duration-200 overflow-hidden
+              ${(isExpanded || isMobile) ? 'justify-start' : 'justify-center'}
+              hover:bg-red-500/10 text-red-400 hover:text-red-300`}
             >
-              <FaSignOutAlt className="mr-3 text-2xl text-red-400" />
-              {isExpanded && <span className="text-lg">Logout</span>}
+              <div className="absolute inset-0 bg-gradient-to-r from-red-500/0 via-red-500/0 to-red-500/0 group-hover:from-red-500/5 transition-all duration-300"></div>
+              <FaSignOutAlt className="text-lg relative z-10" />
+              {(isExpanded || isMobile) && (
+                <span className="text-sm font-medium relative z-10">Logout</span>
+              )}
+              {/* Tooltip for collapsed desktop */}
+              {(!isExpanded && !isMobile) && (
+                <div className="absolute left-full ml-2 px-2 py-1 bg-gray-900 text-white text-xs rounded-md opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 whitespace-nowrap z-20">
+                  Logout
+                </div>
+              )}
             </button>
-          </li>
-        </ul>
-      </div>
+          </div>
+
+          {/* Version Info */}
+          {(isExpanded || isMobile) && (
+            <div className="px-4 pb-4">
+              <p className="text-[10px] text-white/30 text-center">Version 2.0.0 | © 2024 Transev</p>
+            </div>
+          )}
+        </div>
+      </aside>
     </>
   );
 };
 
-// SidebarLink component
-const SidebarLink = ({ icon, to, label, showText }) => (
+// Enhanced SidebarLink Component
+const SidebarLink = ({ icon, to, label, showText, isActive, color, isMobile, onClose }) => (
   <li>
     <Link
       to={to}
-      className="flex items-center px-3 py-2 rounded-md text-lg hover:bg-[#34495e] transition-colors"
+      onClick={() => {
+        if (isMobile && onClose) onClose();
+      }}
+      className={`group relative flex items-center gap-3 px-3 py-2.5 rounded-xl 
+      transition-all duration-200 overflow-hidden
+      ${showText ? 'justify-start' : 'justify-center'}
+      ${isActive 
+        ? `bg-gradient-to-r ${color} text-white shadow-lg` 
+        : 'text-white/70 hover:text-white hover:bg-white/10'
+      }`}
     >
-      <span className="text-2xl mr-3">{icon}</span>
-      {showText && <span>{label}</span>}
+      {/* Active Indicator */}
+      {isActive && (
+        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-white rounded-r-full"></div>
+      )}
+      
+      {/* Icon with hover effect */}
+      <span className={`text-xl relative z-10 transition-transform duration-200 group-hover:scale-110 ${
+        isActive ? 'text-white' : 'text-white/70 group-hover:text-white'
+      }`}>
+        {icon}
+      </span>
+      
+      {/* Label - Always visible on mobile, visible on desktop when expanded */}
+      {showText && (
+        <span className={`text-sm font-medium relative z-10 transition-all duration-200 ${
+          isActive ? 'text-white' : 'text-white/80 group-hover:text-white'
+        }`}>
+          {label}
+        </span>
+      )}
+      
+      {/* Tooltip for collapsed desktop state */}
+      {!showText && (
+        <div className="absolute left-full ml-2 px-2 py-1 bg-gray-900 text-white text-xs rounded-md opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 whitespace-nowrap z-20 shadow-lg border border-white/10">
+          {label}
+        </div>
+      )}
     </Link>
   </li>
 );
