@@ -55,7 +55,7 @@ import VerifyEmail from './components/User/VerifyEmail';
 import AdminRefunds from './components/Admin/Refund/Refund';
 import CancellationPolicy from './components/CancellationandRefundPolicy';
 import ShippingPolicy from './components/ShippingPolicy'
-
+import AdminSupport from './components/Admin/Support'
 
 function App() {
   return (
@@ -114,6 +114,7 @@ function App() {
               <Route path="/admin-refunds" element={<AdminRefunds/>} />
                 <Route path="/cancellation-policy" element={<CancellationPolicy/>} />
               <Route path="/shipping-policy" element={<ShippingPolicy/>} />
+                <Route path="/admin/support" element={<AdminSupport/>} />
 
          </Routes>
     </Router>

@@ -925,66 +925,198 @@ solutions.
           </div>
         </footer>
       </div>
-
-     
-     
-      {popupOpen && (
-  <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4">
-    {/* <div className="bg-white p-4 sm:p-8 rounded-lg max-w-6xl w-full flex flex-col sm:flex-row relative h-auto max-h-[90vh] overflow-y-auto"> */}
-      <div className="bg-white p-4 sm:p-8 rounded-lg max-w-6xl w-full flex flex-col sm:flex-row relative h-auto max-h-[90vh] lg:max-h-[95vh] overflow-y-auto">
-
-      {/* Close Button */}
+{popupOpen && (
+  <div className="fixed inset-0 bg-black/60 backdrop-blur-md flex justify-center items-center z-50 p-4 animate-fadeIn">
+    <div className="bg-white rounded-3xl shadow-2xl max-w-6xl w-full relative h-auto max-h-[90vh] lg:max-h-[95vh] overflow-y-auto animate-slideUp">
+      
+      {/* Close Button - Elegant Circle Style */}
       <button
-        className="absolute top-4 right-4 text-3xl font-bold text-gray-600 hover:text-gray-900"
+        className="absolute top-4 right-4 z-20 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-500 hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-600 hover:text-white hover:rotate-90 transition-all duration-300"
         onClick={handlePopupClose}
       >
-        &times;
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+        </svg>
       </button>
 
-      {/* Image Section */}
-      <div className="w-full sm:w-1/2 p-2 sm:p-4">
-        <img
-          src={popupContent.image}
-          alt="Popup"
-          className="w-full h-auto object-contain rounded-lg"
-        />
-      </div>
-
-      {/* Content Section */}
-      <div className="w-full sm:w-1/2 p-2 sm:p-4">
-        <h3 className="text-2xl font-semibold mb-4 mt-4 sm:mt-6">Features</h3>
-        <div className="flex flex-col space-y-2">
-          {popupContent.features.split(',').map((feature, index) => (
-            <div key={index} className="text-md text-gray-700">
-              {feature.trim()}
+      {/* Main Content Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8 md:p-10">
+        
+        {/* Left Side - Image Section */}
+        <div className="space-y-5">
+          <div className="relative group">
+            <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition duration-500"></div>
+            <div className="relative overflow-hidden rounded-2xl bg-white shadow-xl">
+              <img
+                src={popupContent.image}
+                alt="Product"
+                className="w-full h-auto object-cover transform group-hover:scale-110 transition duration-700"
+              />
+              {/* Premium Badge */}
+              <div className="absolute top-4 left-4">
+                <span className="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-lg flex items-center gap-1">
+                  <span className="text-yellow-300">★</span> PREMIUM
+                </span>
+              </div>
+              {/* Discount Badge */}
+              <div className="absolute bottom-4 right-4">
+                <span className="bg-gradient-to-r from-red-500 to-pink-600 text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg">
+                  🔥 HOT DEAL
+                </span>
+              </div>
             </div>
-          ))}
+          </div>
+
+          {/* Features Quick Cards */}
+          <div className="grid grid-cols-3 gap-3">
+            <div className="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-xl p-3 text-center hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer group">
+              <div className="text-3xl mb-1 group-hover:scale-110 transition-transform">⚡</div>
+              <div className="text-xs font-semibold text-gray-700">Fast Charging</div>
+            </div>
+            <div className="bg-gradient-to-br from-purple-50 to-pink-100 rounded-xl p-3 text-center hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer group">
+              <div className="text-3xl mb-1 group-hover:scale-110 transition-transform">🔋</div>
+              <div className="text-xs font-semibold text-gray-700">Long Battery</div>
+            </div>
+            <div className="bg-gradient-to-br from-green-50 to-emerald-100 rounded-xl p-3 text-center hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer group">
+              <div className="text-3xl mb-1 group-hover:scale-110 transition-transform">🌿</div>
+              <div className="text-xs font-semibold text-gray-700">Eco Friendly</div>
+            </div>
+          </div>
         </div>
 
-        {/* Technical Specifications Table */}
-        <h3 className="text-2xl font-semibold mt-6 mb-4">Technical Specifications</h3>
-        {popupContent.details && (
-          <div className="w-full overflow-x-auto mx-auto">
-            <table className="min-w-[300px] text-sm sm:text-base text-left text-gray-800 border border-gray-300 mx-auto">
-              <tbody>
-                {Object.entries(popupContent.details).map(([key, value], index) => (
-                  <tr key={index} className="border-b border-gray-200">
-                    <td className="py-2 px-4 font-medium bg-gray-100 whitespace-nowrap">{key}</td>
-                    <td className="py-2 px-4">{value}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+        {/* Right Side - Content */}
+        <div className="space-y-6">
+          {/* Title */}
+          <div>
+            <div className="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold mb-3">
+              🎯 NEW ARRIVAL
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent leading-tight">
+              {popupContent.title || "Premium EV Charger"}
+            </h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full mt-3"></div>
           </div>
-        )}
 
-        {/* Buy Now Button */}
-        <button
-          className="mt-6 bg-blue-500 text-white px-6 py-2 rounded-full"
-          onClick={handleBuyNowClick}
-        >
-          Buy Now
-        </button>
+          {/* Features */}
+          <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-5 border border-gray-100">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-md">
+                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-bold text-gray-800">Key Features</h3>
+            </div>
+            <div className="grid grid-cols-1 gap-3">
+              {popupContent.features.split(',').map((feature, index) => (
+                <div key={index} className="flex items-center gap-3 group cursor-pointer">
+                  <div className="w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center group-hover:scale-125 transition">
+                    <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-gray-700 group-hover:text-gray-900 font-medium">{feature.trim()}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Technical Specifications */}
+          <div>
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl flex items-center justify-center shadow-md">
+                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-bold text-gray-800">Technical Specs</h3>
+            </div>
+            
+            {popupContent.details && (
+              <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl overflow-hidden border border-gray-100">
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <tbody>
+                      {Object.entries(popupContent.details).map(([key, value], index) => (
+                        <tr key={index} className={`${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'} hover:bg-blue-50 transition-colors duration-200`}>
+                          <td className="py-3 px-4 font-semibold text-gray-700 border-r border-gray-100 w-2/5">
+                            <div className="flex items-center gap-2">
+                              <div className="w-1.5 h-1.5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></div>
+                              {key}
+                            </div>
+                          </td>
+                          <td className="py-3 px-4 text-gray-600">{value}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Pricing & CTA */}
+          <div className="pt-4 border-t-2 border-gray-100">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-5">
+              <div>
+                {popupContent.price && (
+                  <>
+                    <div className="text-sm text-gray-500 mb-1">Special Price</div>
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-4xl font-bold text-gray-900">₹{popupContent.price}</span>
+                      <span className="text-sm text-gray-500 line-through">₹{Math.round(popupContent.price * 1.3)}</span>
+                      <span className="text-xs text-green-600 font-semibold bg-green-50 px-2 py-0.5 rounded-full">Save 30%</span>
+                    </div>
+                    <div className="text-xs text-green-600 mt-1 flex items-center gap-1">
+                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      In Stock • Free Shipping
+                    </div>
+                  </>
+                )}
+              </div>
+              
+              <button
+                className="group relative bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white px-8 py-3.5 rounded-xl font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 overflow-hidden"
+                onClick={handleBuyNowClick}
+              >
+                <span className="relative z-10 flex items-center gap-2">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-1.5 6M18 13l1.5 6M9 21h6M12 18v3" />
+                  </svg>
+                  <span>Buy Now</span>
+                  <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </button>
+            </div>
+
+            {/* Trust Badges */}
+            <div className="flex flex-wrap justify-center sm:justify-start gap-4 mt-5 pt-2">
+              <div className="flex items-center gap-1.5 text-xs text-gray-500 group cursor-pointer">
+                <svg className="w-4 h-4 text-yellow-500 group-hover:scale-110 transition" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                <span className="group-hover:text-gray-700">4.9/5 (2.1k reviews)</span>
+              </div>
+              <div className="flex items-center gap-1.5 text-xs text-gray-500 group cursor-pointer">
+                <svg className="w-4 h-4 text-blue-500 group-hover:scale-110 transition" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
+                </svg>
+                <span className="group-hover:text-gray-700">24/7 Support</span>
+              </div>
+              <div className="flex items-center gap-1.5 text-xs text-gray-500 group cursor-pointer">
+                <svg className="w-4 h-4 text-green-500 group-hover:scale-110 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span className="group-hover:text-gray-700">2 Year Warranty</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
