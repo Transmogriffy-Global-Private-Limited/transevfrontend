@@ -1601,13 +1601,31 @@ function CartPage() {
                                         </div>
 
                                         {/* Place Order Button - Responsive */}
-                                        <button
+                                        {/* <button
                                             onClick={() => setIsModalOpen(true)}
                                             className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2.5 md:py-3 rounded-lg font-semibold transition duration-200 flex items-center justify-center gap-2 text-sm md:text-base"
                                         >
                                             <ShoppingCartIcon className="h-4 w-4 md:h-5 md:w-5" />
                                             Proceed to Checkout
-                                        </button>
+                                        </button> */}
+                                        <button
+    onClick={() => setIsModalOpen(true)}
+    className="w-full bg-gray-400 cursor-not-allowed py-2.5 md:py-3 rounded-lg font-semibold flex items-center justify-center gap-2 text-sm md:text-base opacity-70"
+    disabled
+>
+    <ShoppingCartIcon className="h-4 w-4 md:h-5 md:w-5" />
+    Technical Issue - Try Again Later
+</button>
+
+<div className="mt-3 text-center">
+    <p className="text-xs md:text-sm text-gray-500 mb-2">Having trouble placing order?</p>
+    <button
+        onClick={() => window.location.href = 'mailto:support@transev.site?subject=Order%20Placement%20Issue&body=Hello%20Team,%0A%0AI%20am%20facing%20issues%20while%20placing%20my%20order.%20Please%20assist%20me.%0A%0AOrder%20Details:%0A-%20Product:%20%0A-%20Quantity:%20%0A-%20Issue%20Description:%20%0A%0AThank%20you.'}
+        className="text-blue-600 hover:text-blue-700 text-xs md:text-sm font-medium underline transition"
+    >
+        Contact Sales Team →
+    </button>
+</div>
 
                                         {/* Secure Payment Badge - Responsive */}
                                         <div className="flex items-center justify-center gap-2 mt-3 md:mt-4 text-xs text-gray-500">
