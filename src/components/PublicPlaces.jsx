@@ -96,11 +96,12 @@ const Hotels = () => {
        image: '',
        description: '',
        details: {},
-       features: ''
+       features: '',
+       name:''
      });
      
-     const handlePopupOpen = (image, description, features, details) => {
-       setPopupContent({ image, description, details, features });
+     const handlePopupOpen = (image, description, features, details,name) => {
+       setPopupContent({ image, description, details, features,name });
        setPopupOpen(true);
      };
      
@@ -428,7 +429,7 @@ const Hotels = () => {
               src={box.image}
               alt={box.name}
               className="w-3/4 h-4/4 object-cover rounded-lg mt-20 cursor-pointer"
-              onClick={() => handlePopupOpen(box.image, box.description, box.features,box.details)}
+              onClick={() => handlePopupOpen(box.image, box.description, box.features,box.details,box.name)}
             />
           </div>
 
@@ -443,7 +444,7 @@ const Hotels = () => {
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              onClick={() => handlePopupOpen(box.image, box.description, box.features,box.details)}
+              onClick={() => handlePopupOpen(box.image, box.description, box.features,box.details,box.name)}
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
@@ -898,9 +899,12 @@ const Hotels = () => {
             <div className="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold mb-3">
               ✨ PREMIUM PRODUCT
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent leading-tight">
+            {/* <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent leading-tight">
               Premium Product
-            </h2>
+            </h2> */}
+             <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent leading-tight">
+                    {popupContent?.name || popupContent?.title || popupContent?.product_name || "Premium EV Charger"}
+                  </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full mt-3"></div>
             <p className="text-sm text-gray-500 mt-3">High-quality premium product with amazing features</p>
           </div>

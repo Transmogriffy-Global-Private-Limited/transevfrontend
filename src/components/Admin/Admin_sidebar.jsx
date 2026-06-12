@@ -328,8 +328,6 @@
 // );
 
 // export default AdminSidebar;
-
-
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
@@ -353,7 +351,8 @@ import {
   FaChevronUp,
   FaPlus,
   FaList,
-  FaTrashAlt
+  FaTrashAlt,
+  FaHome
 } from "react-icons/fa";
 import { MdSpaceDashboard, MdOutlineProductionQuantityLimits } from "react-icons/md";
 import { HiUsers } from "react-icons/hi";
@@ -386,7 +385,7 @@ const AdminSidebar = ({ isVisible = false, onClose = () => {} }) => {
         break;
       }
     }
-  }, [location.pathname]); // Re-run when route changes
+  }, [location.pathname]);
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -409,7 +408,7 @@ const AdminSidebar = ({ isVisible = false, onClose = () => {} }) => {
     if (!token) return;
 
     try {
-      const response = await fetch(`${BASE_URL_AND_PORT}/users/logout`, {
+      const response = await fetch(`${BASE_URL_AND_PORT}/admin/logout`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -420,6 +419,8 @@ const AdminSidebar = ({ isVisible = false, onClose = () => {} }) => {
 
       if (response.ok) {
         localStorage.removeItem("auth_token");
+        localStorage.removeItem("user_role");
+        localStorage.removeItem("login_timestamp");
         navigate("/");
       } else {
         console.error("Logout failed");
@@ -429,9 +430,12 @@ const AdminSidebar = ({ isVisible = false, onClose = () => {} }) => {
     }
   };
 
+  const handleReturnToHome = () => {
+    navigate("/");
+    if (isMobile && onClose) onClose();
+  };
+
   const toggleDropdown = (dropdownName) => {
-    // If clicking on the same dropdown, close it
-    // If clicking on a different dropdown, open that one
     setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);
   };
 
@@ -652,8 +656,6 @@ const AdminSidebar = ({ isVisible = false, onClose = () => {} }) => {
                             to={subItem.to}
                             onClick={() => {
                               if (isMobile && onClose) onClose();
-                              // Don't close the dropdown when clicking on a child item
-                              // Keep it open so users can see which section they're in
                             }}
                             className={`
                               flex items-center gap-3 px-3 py-2 rounded-lg
@@ -700,8 +702,32 @@ const AdminSidebar = ({ isVisible = false, onClose = () => {} }) => {
 
         {/* Footer Section */}
         <div className="border-t border-white/10 mt-auto">
-          {/* Logout Button */}
+          
+          {/* ⭐ NEW: Return to Home Button ⭐ */}
           <div className="p-3">
+            <button
+              onClick={handleReturnToHome}
+              className={`group relative w-full flex items-center gap-3 px-3 py-2.5 rounded-xl 
+              transition-all duration-200 overflow-hidden
+              ${(isExpanded || isMobile) ? 'justify-start' : 'justify-center'}
+              hover:bg-blue-500/10 text-blue-400 hover:text-blue-300`}
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/0 to-blue-500/0 group-hover:from-blue-500/5 transition-all duration-300"></div>
+              <FaHome className="text-lg relative z-10" />
+              {(isExpanded || isMobile) && (
+                <span className="text-sm font-medium relative z-10">Return to Home</span>
+              )}
+              {/* Tooltip for collapsed desktop */}
+              {(!isExpanded && !isMobile) && (
+                <div className="absolute left-full ml-2 px-2 py-1 bg-gray-900 text-white text-xs rounded-md opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 whitespace-nowrap z-20 shadow-lg border border-white/10">
+                  Return to Home
+                </div>
+              )}
+            </button>
+          </div>
+
+          {/* Logout Button */}
+          <div className="p-3 pt-0">
             <button
               onClick={handleLogout}
               className={`group relative w-full flex items-center gap-3 px-3 py-2.5 rounded-xl 
@@ -716,7 +742,7 @@ const AdminSidebar = ({ isVisible = false, onClose = () => {} }) => {
               )}
               {/* Tooltip for collapsed desktop */}
               {(!isExpanded && !isMobile) && (
-                <div className="absolute left-full ml-2 px-2 py-1 bg-gray-900 text-white text-xs rounded-md opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 whitespace-nowrap z-20">
+                <div className="absolute left-full ml-2 px-2 py-1 bg-gray-900 text-white text-xs rounded-md opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 whitespace-nowrap z-20 shadow-lg border border-white/10">
                   Logout
                 </div>
               )}

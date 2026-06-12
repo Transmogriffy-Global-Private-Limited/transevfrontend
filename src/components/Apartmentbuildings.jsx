@@ -99,11 +99,12 @@ const ApartmentBuildingPage = () => {
     image: '',
     description: '',
     details: {},
-    features: ''
+    features: '',
+    name :''
   });
   
-  const handlePopupOpen = (image, description, features, details) => {
-    setPopupContent({ image, description, details, features });
+  const handlePopupOpen = (image, description, features, details,name) => {
+    setPopupContent({ image, description, details, features,name });
     setPopupOpen(true);
   };
   
@@ -610,7 +611,7 @@ solutions.
               src={box.image}
               alt={box.name}
               className="w-3/4 h-4/4 object-cover rounded-lg mt-10 cursor-pointer"
-              onClick={() => handlePopupOpen(box.image, box.description, box.features,box.details)}
+              onClick={() => handlePopupOpen(box.image, box.description, box.features,box.details,box.name)}
             />
           </div>
 
@@ -625,7 +626,7 @@ solutions.
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              onClick={() => handlePopupOpen(box.image, box.description, box.features,box.details)}
+              onClick={() => handlePopupOpen(box.image, box.description, box.features,box.details,box.name)}
             >
               <path
                 strokeLinecap="round"
@@ -991,9 +992,12 @@ solutions.
             <div className="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold mb-3">
               🎯 NEW ARRIVAL
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent leading-tight">
+            {/* <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent leading-tight">
               {popupContent.title || "Premium EV Charger"}
-            </h2>
+            </h2> */}
+             <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent leading-tight">
+                    {popupContent?.name || popupContent?.title || popupContent?.product_name || "Premium EV Charger"}
+                  </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full mt-3"></div>
           </div>
 
