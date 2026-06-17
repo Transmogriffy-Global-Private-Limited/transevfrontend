@@ -796,7 +796,6 @@
 
 // export default CartPage;
 
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import UserSidebar from '../User_sidebar';
@@ -834,6 +833,8 @@ function CartPage() {
     const [showRemoveConfirm, setShowRemoveConfirm] = useState(null);
     const [toast, setToast] = useState(null);
     const [isMobile, setIsMobile] = useState(false);
+    const [razorpayOrderId, setRazorpayOrderId] = useState(null);
+    const [pricedProducts, setPricedProducts] = useState([]);
 
     // Handle responsive sidebar state
     useEffect(() => {
@@ -960,7 +961,6 @@ function CartPage() {
                     { headers: { 'Authorization': `Bearer ${token}`, 'API-KEY': API_KEY } }
                 );
                 details[item.productid] = response.data;
-                // FIXED: Calculate total correctly - price * quantity
                 total += response.data.price * item.quantity;
             } catch (error) {
                 console.error('Error fetching product details:', error);
@@ -1009,7 +1009,6 @@ function CartPage() {
         }
     }, [userAddresses]);
 
-    // FIXED: Recalculate total whenever cartItems or productDetails change
     useEffect(() => {
         let newTotal = 0;
         cartItems.forEach(item => {
@@ -1136,6 +1135,7 @@ function CartPage() {
         }
     };
 
+    // Updated placeOrder function with proper payment flow
     const placeOrder = async () => {
         try {
             if (!cartItems.length) {
@@ -1151,27 +1151,41 @@ function CartPage() {
 
             const deliveryAddress = `House: ${defaultAddr.house_building}, Street: ${defaultAddr.locality_street}, City: ${defaultAddr.city}, Landmark: ${defaultAddr.landmark}, State: ${defaultAddr.state}, Pin: ${defaultAddr.pin}`;
 
-            const pricedProducts = cartItems.map(item => {
+            // Prepare products array for payment
+            const productsForPayment = cartItems.map(item => ({
+                productid: item.productid,
+                quantity: item.quantity
+            }));
+
+            // Store priced products for order creation
+            const pricedProductsData = cartItems.map(item => {
                 const product = productDetails[item.productid];
-                return { productid: item.productid, quantity: item.quantity, price: product.price };
+                return { 
+                    productid: item.productid, 
+                    quantity: item.quantity, 
+                    price: product.price 
+                };
             });
+            setPricedProducts(pricedProductsData);
 
             const finalAmount = totalAmount - discount;
 
-            const orderPayload = {
-                user_id: userId,
-                paymentoption: globalPaymentOption,
-                orderstatus: "pending",
-                deliveryaddress: deliveryAddress,
-                products: pricedProducts,
-                total_amount: finalAmount,
-                shipping_charge: 0
-            };
-
+            // Cash on Delivery flow
             if (globalPaymentOption === "Cash") {
+                const orderPayload = {
+                    user_id: userId,
+                    paymentoption: globalPaymentOption,
+                    orderstatus: "pending",
+                    deliveryaddress: deliveryAddress,
+                    products: pricedProductsData,
+                    total_amount: finalAmount,
+                    shipping_charge: 0
+                };
+
                 const response = await axios.post(`${BASE_URL_AND_PORT}/order/addorder`, orderPayload, {
                     headers: { 'API-KEY': API_KEY },
                 });
+                
                 if (response.data) {
                     showToast("✅ Order placed successfully via Cash!", 'success');
                     refreshCartCount();
@@ -1180,9 +1194,14 @@ function CartPage() {
                 return;
             }
 
+            // Online Payment Flow (UPI or Card)
+            // Step 1: Create Razorpay Order
             const createPaymentRes = await axios.post(
                 `${BASE_URL_AND_PORT}/payments/createpayment`,
-                { user_id: userId, products: cartItems.map(item => ({ productid: item.productid, quantity: item.quantity })) },
+                { 
+                    user_id: userId, 
+                    products: productsForPayment 
+                },
                 { headers: { 'API-KEY': API_KEY } }
             );
 
@@ -1192,49 +1211,115 @@ function CartPage() {
                 return;
             }
 
+            setRazorpayOrderId(razorpayOrderId);
+
+            // Step 2: Load Razorpay script and initialize payment
             const script = document.createElement('script');
             script.src = 'https://checkout.razorpay.com/v1/checkout.js';
             script.async = true;
             script.onload = () => {
-                handlePayment(razorpayOrderId, finalAmount, pricedProducts, orderPayload);
+                handlePayment(razorpayOrderId, finalAmount, productsForPayment, pricedProductsData, deliveryAddress);
             };
             document.body.appendChild(script);
+
         } catch (error) {
             console.error("Error placing orders:", error);
             showToast("Something went wrong while placing the order.", 'error');
         }
     };
 
-    const handlePayment = async (razorpayOrderId, finalAmount, pricedProducts, orderPayload) => {
+    // Updated handlePayment function with proper verification
+    const handlePayment = async (razorpayOrderId, finalAmount, productsForPayment, pricedProductsData, deliveryAddress) => {
         const options = {
-            key: 'rzp_test_nzmqxQYhvCH9rD',
-            amount: finalAmount * 100,
+            key: 'rzp_test_nzmqxQYhvCH9rD', // Replace with your actual key
+            amount: finalAmount * 100, // Amount in paise
             currency: 'INR',
             name: 'Transmogrify Global Pvt Ltd',
             description: 'Order Payment',
             order_id: razorpayOrderId,
+            prefill: {
+                name: userProfile.name,
+                email: userProfile.email,
+                contact: userProfile.phone_number
+            },
+            theme: {
+                color: '#2563eb'
+            },
             handler: async function (response) {
                 setIsProcessingPayment(true);
+                
                 try {
+                    // IMPORTANT: Send complete verification data matching backend schema
+                    const verificationData = {
+                        razorpay_payment_id: response.razorpay_payment_id,
+                        razorpay_order_id: response.razorpay_order_id,
+                        razorpay_signature: response.razorpay_signature,
+                        user_id: userId,
+                        products: productsForPayment // Send products array for verification
+                    };
+
+                    console.log("🔐 Verification Data:", verificationData);
+
+                    // Step 1: Verify payment with Razorpay
                     const verifyResponse = await axios.post(
                         `${BASE_URL_AND_PORT}/payments/verifypayment`,
-                        { razorpaypaymentid: response.razorpay_payment_id, user_id: userId, products: pricedProducts },
+                        verificationData,
                         { headers: { 'API-KEY': API_KEY } }
                     );
-                    const rzpPaymentId = verifyResponse?.data?.transactions?.[0]?.razorpaypaymentid;
-                    if (!rzpPaymentId) throw new Error("Razorpay payment id not found");
-                    await axios.post(`${BASE_URL_AND_PORT}/order/addorder`, { ...orderPayload, rzp_payment_id: rzpPaymentId, rzp_order_id: razorpayOrderId }, { headers: { 'API-KEY': API_KEY } });
+
+                    console.log("✅ Verification Response:", verifyResponse.data);
+
+                    if (!verifyResponse.data.transactions || verifyResponse.data.transactions.length === 0) {
+                        throw new Error("Payment verification failed - No transactions found");
+                    }
+
+                    // Step 2: Create order after successful verification
+                    const orderPayload = {
+                        user_id: userId,
+                        paymentoption: globalPaymentOption,
+                        orderstatus: "pending",
+                        deliveryaddress: deliveryAddress,
+                        products: pricedProductsData,
+                        total_amount: finalAmount,
+                        shipping_charge: 0,
+                        rzp_payment_id: response.razorpay_payment_id,
+                        rzp_order_id: response.razorpay_order_id
+                    };
+
+                    const orderResponse = await axios.post(
+                        `${BASE_URL_AND_PORT}/order/addorder`,
+                        orderPayload,
+                        { headers: { 'API-KEY': API_KEY } }
+                    );
+
                     setIsProcessingPayment(false);
                     showToast("✅ Payment successful and order placed!", 'success');
                     refreshCartCount();
-                    setTimeout(() => navigate("/order"), 1500);
+                    
+                    // Clear cart and navigate to orders
+                    setTimeout(() => {
+                        navigate("/order");
+                    }, 1500);
+
                 } catch (error) {
-                    console.error(error);
+                    console.error("❌ Payment Verification Error:", error);
                     setIsProcessingPayment(false);
-                    showToast("❌ Payment verification or order creation failed", 'error');
+                    
+                    if (error.response?.data?.detail) {
+                        showToast(`❌ ${error.response.data.detail}`, 'error');
+                    } else {
+                        showToast("❌ Payment verification or order creation failed", 'error');
+                    }
                 }
             },
+            modal: {
+                ondismiss: function() {
+                    setIsProcessingPayment(false);
+                    showToast("Payment cancelled", 'error');
+                }
+            }
         };
+
         const rzp = new window.Razorpay(options);
         rzp.open();
     };
@@ -1456,9 +1541,6 @@ function CartPage() {
                                                                             )}
                                                                         </button>
                                                                     </div>
-                                                                    {/* {item.quantity === 1 && (
-                                                                        <p className="text-xs text-orange-500 text-center mt-1">Click - to remove item</p>
-                                                                    )} */}
                                                                 </td>
                                                                 <td className="px-6 py-4 text-right">
                                                                     <span className="font-bold text-blue-600 text-lg">₹{itemTotal.toLocaleString()}</span>
@@ -1620,12 +1702,12 @@ function CartPage() {
 <div className="mt-3 text-center">
     <p className="text-xs md:text-sm text-gray-500 mb-2">Having trouble placing order?</p>
     <button
-        onClick={() => window.location.href = 'mailto:support@transev.site?subject=Order%20Placement%20Issue&body=Hello%20Team,%0A%0AI%20am%20facing%20issues%20while%20placing%20my%20order.%20Please%20assist%20me.%0A%0AOrder%20Details:%0A-%20Product:%20%0A-%20Quantity:%20%0A-%20Issue%20Description:%20%0A%0AThank%20you.'}
+        onClick={() => window.location.href = 'mailto:tgwbin@gmail.com?subject=Order%20Placement%20Issue&body=Hello%20Team,%0A%0AI%20am%20facing%20issues%20while%20placing%20my%20order.%20Please%20assist%20me.%0A%0AOrder%20Details:%0A-%20Product:%20%0A-%20Quantity:%20%0A-%20Issue%20Description:%20%0A%0AThank%20you.'}
         className="text-blue-600 hover:text-blue-700 text-xs md:text-sm font-medium underline transition"
     >
         Contact Sales Team →
     </button>
-</div>
+</div> 
 
                                         {/* Secure Payment Badge - Responsive */}
                                         <div className="flex items-center justify-center gap-2 mt-3 md:mt-4 text-xs text-gray-500">
@@ -1792,24 +1874,6 @@ function CartPage() {
                                         {globalPaymentOption === "Card" && <FaCheckCircle className="h-4 w-4 md:h-5 md:w-5 text-purple-500" />}
                                     </div>
                                 </label>
-
-                                {/* <label className={`flex items-center p-3 md:p-4 border-2 rounded-xl cursor-pointer transition-all duration-200 ${
-                                    globalPaymentOption === "Cash" ? 'border-green-500 bg-green-50 shadow-md' : 'border-gray-200 hover:border-green-300 hover:bg-gray-50'
-                                }`}>
-                                    <input type="radio" name="payment" value="Cash" checked={globalPaymentOption === "Cash"} onChange={(e) => setGlobalPaymentOption(e.target.value)} className="mr-3 h-3 w-3 md:h-4 md:w-4 text-green-600 focus:ring-green-500" />
-                                    <div className="flex items-center justify-between flex-1">
-                                        <div className="flex items-center gap-2 md:gap-3">
-                                            <div className="w-8 h-8 md:w-10 md:h-10 bg-green-100 rounded-full flex items-center justify-center">
-                                                <CashIcon className="h-4 w-4 md:h-5 md:w-5 text-green-600" />
-                                            </div>
-                                            <div>
-                                                <p className="font-semibold text-gray-800 text-sm md:text-base">Cash on Delivery</p>
-                                                <p className="text-xs text-gray-500 hidden sm:block">Pay when you receive</p>
-                                            </div>
-                                        </div>
-                                        {globalPaymentOption === "Cash" && <FaCheckCircle className="h-4 w-4 md:h-5 md:w-5 text-green-500" />}
-                                    </div>
-                                </label> */}
                             </div>
 
                             <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl p-3 md:p-4 mb-4 md:mb-6">
