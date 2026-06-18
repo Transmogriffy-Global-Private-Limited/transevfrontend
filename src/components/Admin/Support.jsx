@@ -5,7 +5,7 @@ import {
   FaEnvelope, 
   FaPhoneAlt, 
   FaUser, 
-  FaComment,  // Changed from FaMessage
+  FaComment,
   FaSearch, 
   FaFilter,
   FaEye,
@@ -80,6 +80,89 @@ const AdminSupport = () => {
     setTimeout(() => setToast(null), 3000);
   };
 
+  // Format date function
+  const formatDate = (dateString) => {
+    if (!dateString) return 'N/A';
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffInDays = Math.floor((now - date) / (1000 * 60 * 60 * 24));
+    const diffInHours = Math.floor((now - date) / (1000 * 60 * 60));
+    const diffInMinutes = Math.floor((now - date) / (1000 * 60));
+
+    // If today
+    if (date.toDateString() === now.toDateString()) {
+      return `Today at ${date.toLocaleTimeString('en-US', { 
+        hour: '2-digit', 
+        minute: '2-digit',
+        hour12: true 
+      })}`;
+    }
+    
+    // If yesterday
+    const yesterday = new Date(now);
+    yesterday.setDate(yesterday.getDate() - 1);
+    if (date.toDateString() === yesterday.toDateString()) {
+      return `Yesterday at ${date.toLocaleTimeString('en-US', { 
+        hour: '2-digit', 
+        minute: '2-digit',
+        hour12: true 
+      })}`;
+    }
+
+    // If within last 7 days
+    if (diffInDays < 7) {
+      return `${diffInDays} day${diffInDays > 1 ? 's' : ''} ago at ${date.toLocaleTimeString('en-US', { 
+        hour: '2-digit', 
+        minute: '2-digit',
+        hour12: true 
+      })}`;
+    }
+
+    // If within same year
+    if (date.getFullYear() === now.getFullYear()) {
+      return date.toLocaleDateString('en-US', { 
+        month: 'short', 
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true
+      });
+    }
+
+    // Full date for older messages
+    return date.toLocaleDateString('en-US', { 
+      month: 'short', 
+      day: 'numeric', 
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true
+    });
+  };
+
+  // Get relative time string
+  const getRelativeTime = (dateString) => {
+    if (!dateString) return 'N/A';
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffInSeconds = Math.floor((now - date) / 1000);
+    const diffInMinutes = Math.floor(diffInSeconds / 60);
+    const diffInHours = Math.floor(diffInMinutes / 60);
+    const diffInDays = Math.floor(diffInHours / 24);
+
+    if (diffInSeconds < 60) {
+      return 'Just now';
+    } else if (diffInMinutes < 60) {
+      return `${diffInMinutes}m ago`;
+    } else if (diffInHours < 24) {
+      return `${diffInHours}h ago`;
+    } else if (diffInDays < 7) {
+      return `${diffInDays}d ago`;
+    } else {
+      return formatDate(dateString);
+    }
+  };
+
   // Fetch data
   useEffect(() => {
     fetchData();
@@ -143,20 +226,20 @@ const AdminSupport = () => {
     // Date range filter
     if (dateRange.start) {
       filtered = filtered.filter(contact => 
-        new Date(contact.created_at || contact.submitted_at) >= new Date(dateRange.start)
+        new Date(contact.contacted_at || contact.created_at || contact.submitted_at) >= new Date(dateRange.start)
       );
     }
     if (dateRange.end) {
       filtered = filtered.filter(contact => 
-        new Date(contact.created_at || contact.submitted_at) <= new Date(dateRange.end)
+        new Date(contact.contacted_at || contact.created_at || contact.submitted_at) <= new Date(dateRange.end)
       );
     }
 
     // Sort
     if (sortBy === 'newest') {
-      filtered.sort((a, b) => new Date(b.created_at || b.submitted_at) - new Date(a.created_at || a.submitted_at));
+      filtered.sort((a, b) => new Date(b.contacted_at || b.created_at || b.submitted_at) - new Date(a.contacted_at || a.created_at || a.submitted_at));
     } else if (sortBy === 'oldest') {
-      filtered.sort((a, b) => new Date(a.created_at || a.submitted_at) - new Date(b.created_at || b.submitted_at));
+      filtered.sort((a, b) => new Date(a.contacted_at || a.created_at || a.submitted_at) - new Date(b.contacted_at || b.created_at || b.submitted_at));
     } else if (sortBy === 'name') {
       filtered.sort((a, b) => (a.firstname || '').localeCompare(b.firstname || ''));
     }
@@ -211,7 +294,7 @@ const AdminSupport = () => {
       contact.telephone || '',
       contact.message || '',
       contact.status || 'unknown',
-      new Date(contact.created_at || contact.submitted_at || Date.now()).toLocaleString()
+      new Date(contact.contacted_at || contact.created_at || contact.submitted_at || Date.now()).toLocaleString()
     ]);
     
     const csvContent = [headers, ...csvData].map(row => row.join(',')).join('\n');
@@ -448,8 +531,9 @@ const AdminSupport = () => {
                     {paginatedContacts.map((contact, index) => {
                       const status = getStatusBadge(contact.status);
                       const fullName = `${contact.firstname || ''} ${contact.lastname || ''}`.trim();
-                      const submittedDate = new Date(contact.created_at || contact.submitted_at || Date.now());
-                      const isToday = submittedDate.toDateString() === new Date().toDateString();
+                      const contactDate = contact.contacted_at || contact.created_at || contact.submitted_at;
+                      const formattedDate = formatDate(contactDate);
+                      const relativeTime = getRelativeTime(contactDate);
                       
                       return (
                         <div
@@ -463,39 +547,44 @@ const AdminSupport = () => {
                               <div className="flex-1">
                                 <div className="flex items-center gap-3 flex-wrap mb-2">
                                   <div className="flex items-center gap-2">
-                                    <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center">
+                                    <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center flex-shrink-0">
                                       <FaUserCircle className="text-white" size={20} />
                                     </div>
                                     <div>
                                       <h3 className="font-semibold text-gray-800">{fullName || 'Anonymous'}</h3>
-                                      <div className="flex items-center gap-2 text-xs text-gray-500">
+                                      <div className="flex items-center gap-2 text-xs text-gray-500 flex-wrap">
                                         <FaEnvelope size={10} />
                                         <span>{contact.email || 'No email'}</span>
-                                        <FaPhoneAlt size={10} className="ml-1" />
+                                        <span className="hidden sm:inline">|</span>
+                                        <FaPhoneAlt size={10} className="sm:ml-0" />
                                         <span>{contact.telephone || 'No phone'}</span>
                                       </div>
                                     </div>
                                   </div>
-                                  <div className="flex items-center gap-2">
+                                  <div className="flex items-center gap-2 flex-wrap">
                                     <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${status.bg} ${status.text}`}>
                                       {status.icon}
                                       {status.label}
                                     </span>
-                                    <span className="text-xs text-gray-400 flex items-center gap-1">
-                                      <FaCalendarAlt size={10} />
-                                      {isToday 
-                                        ? `Today at ${submittedDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`
-                                        : submittedDate.toLocaleDateString()}
-                                    </span>
+                                    <div className="flex items-center gap-1 text-xs text-gray-400 bg-gray-50 px-2 py-1 rounded-full">
+                                      <FaCalendarAlt size={10} className="text-gray-400" />
+                                      <span className="font-medium text-gray-600">{relativeTime}</span>
+                                    </div>
                                   </div>
                                 </div>
                                 
                                 <p className="text-gray-600 text-sm mt-2 line-clamp-2">
                                   {contact.message || 'No message content'}
                                 </p>
+                                
+                                {/* Full date tooltip on hover */}
+                                <div className="text-xs text-gray-400 mt-1 flex items-center gap-1">
+                                  <span>📅</span>
+                                  <span>{formattedDate}</span>
+                                </div>
                               </div>
                               
-                              <div className="flex items-center gap-2">
+                              <div className="flex items-center gap-2 self-end sm:self-start">
                                 <button
                                   onClick={() => {
                                     setSelectedContact(contact);
@@ -631,15 +720,18 @@ const AdminSupport = () => {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <p className="text-xs text-gray-500">Submitted Date</p>
-                    <p className="text-sm">
-                      {new Date(selectedContact.created_at || selectedContact.submitted_at || Date.now()).toLocaleString()}
+                    <p className="text-xs text-gray-500">Contacted Date</p>
+                    <p className="text-sm font-medium text-gray-700">
+                      {formatDate(selectedContact.contacted_at || selectedContact.created_at || selectedContact.submitted_at)}
+                    </p>
+                    <p className="text-xs text-gray-400 mt-0.5">
+                      {getRelativeTime(selectedContact.contacted_at || selectedContact.created_at || selectedContact.submitted_at)}
                     </p>
                   </div>
                   {selectedContact.readAt && (
                     <div>
                       <p className="text-xs text-gray-500">Read Date</p>
-                      <p className="text-sm">{new Date(selectedContact.readAt).toLocaleString()}</p>
+                      <p className="text-sm">{formatDate(selectedContact.readAt)}</p>
                     </div>
                   )}
                 </div>
@@ -647,7 +739,7 @@ const AdminSupport = () => {
                 {selectedContact.respondedAt && (
                   <div>
                     <p className="text-xs text-gray-500">Responded Date</p>
-                    <p className="text-sm">{new Date(selectedContact.respondedAt).toLocaleString()}</p>
+                    <p className="text-sm">{formatDate(selectedContact.respondedAt)}</p>
                   </div>
                 )}
               </div>
@@ -701,4 +793,3 @@ const AdminSupport = () => {
 };
 
 export default AdminSupport;
-
