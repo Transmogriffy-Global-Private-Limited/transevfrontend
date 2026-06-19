@@ -99,7 +99,7 @@ const Profile = () => {
       const userId = localStorage.getItem('user_id');
 
       if (!token || !userId) {
-        navigate('/login');
+        navigate('/admin/login');
         return;
       }
 

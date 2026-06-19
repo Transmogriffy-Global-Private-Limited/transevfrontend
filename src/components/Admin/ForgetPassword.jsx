@@ -672,7 +672,7 @@ const ForgotPasswordPage = () => {
           {/* Help Text */}
           <div className="mt-6 pt-4 border-t border-gray-100 text-center">
             <p className="text-xs text-gray-400">
-              Need assistance? <Link to="/admin/support" className="text-purple-600 hover:underline">Contact Support</Link>
+              Need assistance? <Link to="/contact" className="text-purple-600 hover:underline">Contact Support</Link>
             </p>
           </div>
         </div>
