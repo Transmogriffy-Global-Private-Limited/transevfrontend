@@ -37,7 +37,7 @@ import { HiOutlineRefresh } from "react-icons/hi";
 
 const BASE_URL_AND_PORT = "https://api.static.ev.transev.site";
 const API_KEY = "mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf";
-
+  const authToken = localStorage.getItem('auth_token');
 const ORDER_STATUS_OPTIONS = [
   { value: "", label: "All Orders", icon: "📊", color: "gray" },
   { value: "Order Placed", label: "Order Placed", icon: "📦", color: "purple" },
@@ -149,10 +149,14 @@ const ManageOrders = () => {
     fetchOrders();
   }, []);
 
-  const fetchOrders = () => {
+  
+const fetchOrders = () => {
     setLoading(true);
     fetch(`${BASE_URL_AND_PORT}/order/allorderdata`, {
-      headers: { "API-Key": API_KEY },
+      headers: { 
+        "API-Key": API_KEY, 
+        'Authorization': `Bearer ${authToken}`
+      },
     })
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch orders");
@@ -198,7 +202,6 @@ const ManageOrders = () => {
       })
       .finally(() => setLoading(false));
   };
-
   // Apply filters
   useEffect(() => {
     let filtered = [...orders];

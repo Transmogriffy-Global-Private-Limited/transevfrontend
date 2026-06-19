@@ -304,7 +304,7 @@ ChartJS.register(
 
 const BASE_URL_AND_PORT = 'https://api.static.ev.transev.site';
 const API_KEY = 'mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf';
-
+ const authToken = localStorage.getItem('auth_token');
 const Dashboard = () => {
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -348,16 +348,24 @@ const Dashboard = () => {
         // Fetch product analytics
         const productAnalyticsResponse = await fetch(`${BASE_URL_AND_PORT}/analytics/product_analytics`, {
           method: 'GET',
-          headers: { 'API-Key': API_KEY },
-        });
+        //   headers: { 'API-Key': API_KEY },
+        // });
+         headers: { 
+        "API-Key": API_KEY, 
+        'Authorization': `Bearer ${authToken}`
+      },
+    })
         const productAnalyticsData = await productAnalyticsResponse.json();
         setProductAnalytics(productAnalyticsData.product_analytics || []);
 
         // Fetch product stock analysis
         const productStockAnalysisResponse = await fetch(`${BASE_URL_AND_PORT}/analytics/product_stock_analysis`, {
           method: 'GET',
-          headers: { 'API-Key': API_KEY },
-        });
+          headers: { 
+        "API-Key": API_KEY, 
+        'Authorization': `Bearer ${authToken}`
+      },
+    })
         const productStockAnalysisData = await productStockAnalysisResponse.json();
         setProductStockAnalysis(productStockAnalysisData.product_stock_analysis || []);
         setStockLoading(false);
@@ -365,20 +373,24 @@ const Dashboard = () => {
         // Fetch total sales
         const totalSalesResponse = await fetch(`${BASE_URL_AND_PORT}/analytics/total_sales`, {
           method: 'GET',
-          headers: { 'API-Key': API_KEY },
-        });
+          headers: { 
+        "API-Key": API_KEY, 
+        'Authorization': `Bearer ${authToken}`
+      },
+    })
         const totalSalesData = await totalSalesResponse.json();
         setTotalSales(totalSalesData.total_sales || 0);
 
         // Fetch order history
-        const userId = "d6e4eff7-0ae9-4deb-8220-cd04be74f013";
+       const adminId = adminProfile.id;;
         const orderHistoryResponse = await fetch(`${BASE_URL_AND_PORT}/order/orderhistory`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'API-Key': API_KEY,
+               'Authorization': `Bearer ${authToken}`
           },
-          body: JSON.stringify({ user_id: userId }),
+          body: JSON.stringify({ user_id: adminId }),
         });
         const orderHistoryData = await orderHistoryResponse.json();
         const orders = orderHistoryData.orders || [];
@@ -778,3 +790,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+

@@ -31,7 +31,7 @@ import { MdMarkEmailRead } from 'react-icons/md';
 
 const API_KEY = 'mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf';
 const BASE_URL = 'https://api.static.ev.transev.site';
-
+const authToken = localStorage.getItem('auth_token');
 const AdminSupport = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
@@ -172,7 +172,9 @@ const AdminSupport = () => {
     setLoading(true);
     try {
       const contactRes = await fetch(`${BASE_URL}/contact/getallcontacts`, {
-        headers: { 'API-KEY': API_KEY },
+        headers: { 'API-KEY': API_KEY,
+            'Authorization': `Bearer ${authToken}`
+         },
       });
       const contactData = await contactRes.json();
       const contactsList = contactData?.contacts || contactData?.data || [];

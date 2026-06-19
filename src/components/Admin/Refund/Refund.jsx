@@ -246,7 +246,7 @@ const AdminRefunds = () => {
   const [toast, setToast] = useState(null);
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
-
+ const authToken = localStorage.getItem('auth_token');
   // Handle responsive sidebar state
   useEffect(() => {
     const handleResize = () => {
@@ -283,7 +283,9 @@ const AdminRefunds = () => {
     const fetchOrdersAndRefunds = async () => {
       try {
         const res = await fetch(`${BASE_URL_AND_PORT}/order/allorderdata`, {
-          headers: { "API-Key": API_KEY },
+          headers: { "API-Key": API_KEY ,
+              'Authorization': `Bearer ${authToken}`
+          },
         });
         const data = await res.json();
 
@@ -358,6 +360,7 @@ const AdminRefunds = () => {
       headers: {
         "Content-Type": "application/json",
         "API-Key": API_KEY,
+          'Authorization': `Bearer ${authToken}`
       },
       body: JSON.stringify({ order_ids: [orderId] }),
     });
@@ -370,6 +373,7 @@ const AdminRefunds = () => {
       headers: {
         "Content-Type": "application/json",
         "API-Key": API_KEY,
+          'Authorization': `Bearer ${authToken}`
       },
       body: JSON.stringify({ razorpay_refund_id: rzpRefundId }),
     });

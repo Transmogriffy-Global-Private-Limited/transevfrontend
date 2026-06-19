@@ -73,7 +73,7 @@ const AdminReport = () => {
   const [selectedProduct, setSelectedProduct] = useState('all');
   const [dateRange, setDateRange] = useState({ start: '', end: '' });
   const [chartType, setChartType] = useState('bar');
-
+const authToken = localStorage.getItem('auth_token');
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
@@ -110,13 +110,17 @@ const AdminReport = () => {
     setLoading(true);
     try {
       const stockRes = await fetch(`${BASE_URL}/analytics/product_stock_analysis`, {
-        headers: { 'API-KEY': API_KEY },
+        headers: { 'API-KEY': API_KEY,
+            'Authorization': `Bearer ${authToken}`
+         },
       });
       const stockData = await stockRes.json();
       setStockAnalysis(stockData?.product_stock_analysis || []);
 
       const productRes = await fetch(`${BASE_URL}/analytics/product_analytics`, {
-        headers: { 'API-KEY': API_KEY },
+        headers: { 'API-KEY': API_KEY,
+            'Authorization': `Bearer ${authToken}`
+         },
       });
       const productData = await productRes.json();
       setProductAnalytics(productData?.product_analytics || []);
