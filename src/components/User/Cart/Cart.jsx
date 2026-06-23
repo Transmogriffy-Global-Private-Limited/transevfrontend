@@ -917,24 +917,46 @@ function CartPage() {
         fetchUserProfile();
     }, [navigate]);
 
-    const fetchCartItems = async () => {
-        setLoading(true);
-        try {
-            const token = localStorage.getItem('auth_token');
-            const response = await axios.post(
-                `${BASE_URL_AND_PORT}/cart/getcartdetails`,
-                { user_id: userId },
-                { headers: { 'API-KEY': API_KEY, Authorization: `Bearer ${token}` } }
-            );
-            setCartItems(response.data.cart_items);
-            await fetchProductDetails(response.data.cart_items);
-        } catch (error) {
-            console.error('Error fetching cart items:', error);
-        } finally {
-            setLoading(false);
+    
+const fetchCartItems = async () => {
+    setLoading(true);
+    try {
+        const token = localStorage.getItem('auth_token');
+        const response = await axios.post(
+            `${BASE_URL_AND_PORT}/cart/getcartdetails`,
+            { user_id: userId },
+            { headers: { 'API-KEY': API_KEY, Authorization: `Bearer ${token}` } }
+        );
+        
+        console.log('Cart API Response:', response.data); // Debug log
+        
+        // Map the response to ensure quantity field exists
+        if (response.data && response.data.cart_items) {
+            const mappedItems = response.data.cart_items.map(item => ({
+                ...item,
+                // If backend returns 'cart_quantity', map it to 'quantity'
+                quantity: item.quantity || item.cart_quantity || 1
+            }));
+            
+            console.log('Mapped Cart Items:', mappedItems); // Debug log
+            
+            setCartItems(mappedItems);
+            await fetchProductDetails(mappedItems);
+        } else {
+            setCartItems([]);
+            setProductDetails({});
         }
-    };
-
+    } catch (error) {
+        console.error('Error fetching cart items:', error);
+        if (error.response?.status === 401) {
+            localStorage.removeItem('auth_token');
+            navigate('/login');
+        }
+        showToast('❌ Failed to load cart items', 'error');
+    } finally {
+        setLoading(false);
+    }
+};
     const fetchSuggestedProducts = async () => {
         try {
             const token = localStorage.getItem('auth_token');
@@ -951,25 +973,31 @@ function CartPage() {
     };
 
     const fetchProductDetails = async (cartItems) => {
-        const details = {};
-        let total = 0;
-        const token = localStorage.getItem('auth_token');
-        for (const item of cartItems) {
-            try {
-                const response = await axios.get(
-                    `${BASE_URL_AND_PORT}/products/get_by_id/${item.productid}`,
-                    { headers: { 'Authorization': `Bearer ${token}`, 'API-KEY': API_KEY } }
-                );
-                details[item.productid] = response.data;
-                total += response.data.price * item.quantity;
-            } catch (error) {
-                console.error('Error fetching product details:', error);
-            }
+    const details = {};
+    let total = 0;
+    const token = localStorage.getItem('auth_token');
+    
+    for (const item of cartItems) {
+        try {
+            const response = await axios.get(
+                `${BASE_URL_AND_PORT}/products/get_by_id/${item.productid}`,
+                { headers: { 'Authorization': `Bearer ${token}`, 'API-KEY': API_KEY } }
+            );
+            
+            // Store product details WITH quantity
+            details[item.productid] = {
+                ...response.data,
+                quantity: item.quantity || 1 // Use the quantity from cartItems
+            };
+            total += response.data.price * (item.quantity || 1);
+        } catch (error) {
+            console.error('Error fetching product details:', error);
         }
-        setProductDetails(details);
-        setTotalAmount(total);
-        setShippingCharge(0);
-    };
+    }
+    setProductDetails(details);
+    setTotalAmount(total);
+    setShippingCharge(0);
+};
 
     const fetchUserAddresses = async () => {
         const token = localStorage.getItem('auth_token');
