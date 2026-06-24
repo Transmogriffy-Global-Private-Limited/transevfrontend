@@ -56,7 +56,7 @@ import AdminRefunds from './components/Admin/Refund/Refund';
 import CancellationPolicy from './components/CancellationandRefundPolicy';
 import ShippingPolicy from './components/ShippingPolicy'
 import AdminSupport from './components/Admin/Support'
-import Blog from './components/ChargerLocator'
+import Blog from './components/Blog'
 function App() {
   return (
     <Router>
