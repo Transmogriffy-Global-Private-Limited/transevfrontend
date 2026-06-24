@@ -632,6 +632,9 @@ function Navbar() {
             <div onMouseEnter={() => setPopupType(null)}>
               <Link to="/news" className="hover:underline">News</Link>
             </div>
+             <div onMouseEnter={() => setPopupType(null)}>
+              <Link to="/blog" className="hover:underline">Blog</Link>
+            </div>
           </div>
         </div>
 

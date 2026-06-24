@@ -56,7 +56,7 @@ import AdminRefunds from './components/Admin/Refund/Refund';
 import CancellationPolicy from './components/CancellationandRefundPolicy';
 import ShippingPolicy from './components/ShippingPolicy'
 import AdminSupport from './components/Admin/Support'
-
+import Blog from './components/ChargerLocator'
 function App() {
   return (
     <Router>
@@ -115,12 +115,13 @@ function App() {
                 <Route path="/cancellation-policy" element={<CancellationPolicy/>} />
               <Route path="/shipping-policy" element={<ShippingPolicy/>} />
                 <Route path="/admin/support" element={<AdminSupport/>} />
-
+                <Route path="/blog" element={<Blog/>} />
          </Routes>
     </Router>
   );
 }
 
 export default App;
+
 
 
