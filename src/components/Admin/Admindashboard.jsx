@@ -269,6 +269,7 @@
 // };
 
 // export default Dashboard;
+// import React, { useState, useEffect } from 'react';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AdminSidebar from './Admin_sidebar';
@@ -304,7 +305,22 @@ ChartJS.register(
 
 const BASE_URL_AND_PORT = 'https://api.static.ev.transev.site';
 const API_KEY = 'mlzuMoRFjdGhcFulLMaVtfwNAHycbBAf';
- const authToken = localStorage.getItem('auth_token');
+
+// ✅ FIX: Dynamic token and headers helper functions
+const getAuthToken = () => {
+  return localStorage.getItem('auth_token');
+};
+
+const getHeaders = (customHeaders = {}) => {
+  const token = getAuthToken();
+  return {
+    'API-Key': API_KEY,
+    'Content-Type': 'application/json',
+    ...(token && { 'Authorization': `Bearer ${token}` }),
+    ...customHeaders
+  };
+};
+
 const Dashboard = () => {
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -317,6 +333,10 @@ const Dashboard = () => {
   const [stockLoading, setStockLoading] = useState(true);
   const [selectedPeriod, setSelectedPeriod] = useState('weekly');
   const [recentOrders, setRecentOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [adminProfile, setAdminProfile] = useState({ id: '' });
+  const [retryCount, setRetryCount] = useState(0);
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -341,74 +361,223 @@ const Dashboard = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Fetch all data
+  // ✅ FIX: Check authentication on mount
+  useEffect(() => {
+    const checkAuth = () => {
+      const token = getAuthToken();
+      if (!token) {
+        console.warn('No auth token found, redirecting to login...');
+        setError('Authentication required. Please login.');
+        setLoading(false);
+        // Redirect to login after 2 seconds
+        setTimeout(() => {
+          navigate('/admin/login');
+        }, 2000);
+        return false;
+      }
+      return true;
+    };
+
+    checkAuth();
+  }, [navigate]);
+
+  // ✅ FIX: Get admin profile with proper error handling
+  useEffect(() => {
+    const getAdminProfile = async () => {
+      try {
+        const token = getAuthToken();
+        if (!token) {
+          return;
+        }
+
+        console.log('Fetching admin profile...');
+        const response = await fetch(`${BASE_URL_AND_PORT}/admin/profile`, {
+          method: 'GET',
+          headers: getHeaders()
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log('Admin profile fetched:', data);
+          setAdminProfile(data);
+          // Store admin ID for later use
+          localStorage.setItem('admin_id', data.id);
+        } else if (response.status === 401) {
+          console.error('Unauthorized - Invalid token');
+          handleUnauthorized();
+        } else {
+          console.error('Failed to fetch admin profile:', response.status);
+          setError('Failed to load admin profile');
+        }
+      } catch (error) {
+        console.error('Error fetching admin profile:', error);
+        setError('Network error. Please check your connection.');
+      }
+    };
+
+    getAdminProfile();
+  }, [navigate]);
+
+  // ✅ FIX: Main data fetching with dynamic token
   useEffect(() => {
     const fetchData = async () => {
+      // Check token first
+      const token = getAuthToken();
+      if (!token) {
+        setLoading(false);
+        setError('Authentication required. Please login again.');
+        return;
+      }
+
+      // Check if admin profile is loaded
+      const adminId = adminProfile.id || localStorage.getItem('admin_id');
+      if (!adminId) {
+        console.log('Waiting for admin profile...');
+        return;
+      }
+
+      setLoading(true);
+      setError(null);
+
       try {
-        // Fetch product analytics
-        const productAnalyticsResponse = await fetch(`${BASE_URL_AND_PORT}/analytics/product_analytics`, {
-          method: 'GET',
-        //   headers: { 'API-Key': API_KEY },
-        // });
-         headers: { 
-        "API-Key": API_KEY, 
-        'Authorization': `Bearer ${authToken}`
-      },
-    })
-        const productAnalyticsData = await productAnalyticsResponse.json();
-        setProductAnalytics(productAnalyticsData.product_analytics || []);
+        console.log('Fetching dashboard data with token:', token ? 'Token exists' : 'No token');
 
-        // Fetch product stock analysis
-        const productStockAnalysisResponse = await fetch(`${BASE_URL_AND_PORT}/analytics/product_stock_analysis`, {
-          method: 'GET',
-          headers: { 
-        "API-Key": API_KEY, 
-        'Authorization': `Bearer ${authToken}`
-      },
-    })
-        const productStockAnalysisData = await productStockAnalysisResponse.json();
-        setProductStockAnalysis(productStockAnalysisData.product_stock_analysis || []);
-        setStockLoading(false);
+        // ✅ FIX: Use Promise.allSettled to handle partial failures
+        const results = await Promise.allSettled([
+          // 1. Product Analytics
+          fetch(`${BASE_URL_AND_PORT}/analytics/product_analytics`, {
+            method: 'GET',
+            headers: getHeaders()
+          }),
+          // 2. Product Stock Analysis
+          fetch(`${BASE_URL_AND_PORT}/analytics/product_stock_analysis`, {
+            method: 'GET',
+            headers: getHeaders()
+          }),
+          // 3. Total Sales
+          fetch(`${BASE_URL_AND_PORT}/analytics/total_sales`, {
+            method: 'GET',
+            headers: getHeaders()
+          }),
+          // 4. Order History
+          fetch(`${BASE_URL_AND_PORT}/order/orderhistory`, {
+            method: 'POST',
+            headers: getHeaders(),
+            body: JSON.stringify({ user_id: adminId })
+          })
+        ]);
 
-        // Fetch total sales
-        const totalSalesResponse = await fetch(`${BASE_URL_AND_PORT}/analytics/total_sales`, {
-          method: 'GET',
-          headers: { 
-        "API-Key": API_KEY, 
-        'Authorization': `Bearer ${authToken}`
-      },
-    })
-        const totalSalesData = await totalSalesResponse.json();
-        setTotalSales(totalSalesData.total_sales || 0);
+        // Process each response
+        const [
+          productAnalyticsResult,
+          productStockAnalysisResult,
+          totalSalesResult,
+          orderHistoryResult
+        ] = results;
 
-        // Fetch order history
-       const adminId = adminProfile.id;;
-        const orderHistoryResponse = await fetch(`${BASE_URL_AND_PORT}/order/orderhistory`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'API-Key': API_KEY,
-               'Authorization': `Bearer ${authToken}`
-          },
-          body: JSON.stringify({ user_id: adminId }),
-        });
-        const orderHistoryData = await orderHistoryResponse.json();
-        const orders = orderHistoryData.orders || [];
-        setOrderHistory(orders);
-        setRecentOrders(orders.slice(0, 5));
+        // 1. Product Analytics
+        if (productAnalyticsResult.status === 'fulfilled') {
+          const response = productAnalyticsResult.value;
+          if (response.ok) {
+            const data = await response.json();
+            setProductAnalytics(data.product_analytics || []);
+          } else if (response.status === 401) {
+            handleUnauthorized();
+            return;
+          } else {
+            console.error('Product analytics error:', response.status);
+          }
+        }
+
+        // 2. Product Stock Analysis
+        if (productStockAnalysisResult.status === 'fulfilled') {
+          const response = productStockAnalysisResult.value;
+          if (response.ok) {
+            const data = await response.json();
+            setProductStockAnalysis(data.product_stock_analysis || []);
+            setStockLoading(false);
+          } else if (response.status === 401) {
+            handleUnauthorized();
+            return;
+          } else {
+            console.error('Stock analysis error:', response.status);
+          }
+        }
+
+        // 3. Total Sales
+        if (totalSalesResult.status === 'fulfilled') {
+          const response = totalSalesResult.value;
+          if (response.ok) {
+            const data = await response.json();
+            setTotalSales(data.total_sales || 0);
+          } else if (response.status === 401) {
+            handleUnauthorized();
+            return;
+          } else {
+            console.error('Total sales error:', response.status);
+          }
+        }
+
+        // 4. Order History
+        if (orderHistoryResult.status === 'fulfilled') {
+          const response = orderHistoryResult.value;
+          if (response.ok) {
+            const data = await response.json();
+            const orders = data.orders || [];
+            setOrderHistory(orders);
+            setRecentOrders(orders.slice(0, 5));
+          } else if (response.status === 401) {
+            handleUnauthorized();
+            return;
+          } else {
+            console.error('Order history error:', response.status);
+          }
+        }
+
+        // If all data failed, show error
+        if (
+          productAnalyticsResult.status === 'rejected' &&
+          productStockAnalysisResult.status === 'rejected' &&
+          totalSalesResult.status === 'rejected' &&
+          orderHistoryResult.status === 'rejected'
+        ) {
+          setError('Failed to load dashboard data. Please try again.');
+        }
+
       } catch (error) {
         console.error('Error fetching data:', error);
+        setError('Network error. Please check your connection and try again.');
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchData();
-  }, []);
+  }, [adminProfile.id, navigate, retryCount]);
+
+  // ✅ FIX: Handle unauthorized access
+  const handleUnauthorized = () => {
+    setError('Session expired. Please login again.');
+    localStorage.removeItem('auth_token');
+    localStorage.removeItem('admin_id');
+    setTimeout(() => {
+      navigate('/admin/login');
+    }, 2000);
+  };
+
+  // ✅ Refresh data function
+  const refreshData = () => {
+    setRetryCount(prev => prev + 1);
+    setError(null);
+    setLoading(true);
+  };
 
   // Navigate to orders page
   const goToOrdersPage = () => {
     navigate('/admin/orders');
   };
 
+  // Calculate functions
   const calculateTotalOrders = () => {
     return productAnalytics.reduce((total, product) => total + (product.total_orders || 0), 0);
   };
@@ -427,7 +596,7 @@ const Dashboard = () => {
     return productAnalytics.reduce((total, product) => total + (product.total_sales || 0), 0);
   };
 
-  // Bar Chart Data
+  // Chart Data
   const barChartData = {
     labels: productAnalytics.map((product) => product.product_name),
     datasets: [
@@ -441,7 +610,6 @@ const Dashboard = () => {
     ],
   };
 
-  // Doughnut Chart Data - Stock Distribution
   const totalStock = productStockAnalysis.reduce((sum, p) => sum + (p.initial_stock || 0), 0);
   const soldStock = productStockAnalysis.reduce((sum, p) => sum + (p.total_ordered || 0), 0);
   const remainingStock = totalStock - soldStock;
@@ -458,7 +626,6 @@ const Dashboard = () => {
     ],
   };
 
-  // Line Chart Data - Sales Trend (Mock data for demo)
   const lineChartData = {
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
     datasets: [
@@ -512,6 +679,62 @@ const Dashboard = () => {
     },
   };
 
+  // ✅ Loading state with better UI
+  if (loading) {
+    return (
+      <div className="flex flex-col min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+        <AdminNavbar onToggleSidebar={toggleSidebar} />
+        <div className="flex flex-1 justify-center items-center p-4">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-emerald-600 mx-auto"></div>
+            <p className="mt-4 text-gray-600 text-sm md:text-base">Loading dashboard...</p>
+            <p className="text-gray-400 text-xs mt-1">Please wait while we fetch your data</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // ✅ Error state with retry option
+  if (error) {
+    return (
+      <div className="flex flex-col min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+        <AdminNavbar onToggleSidebar={toggleSidebar} />
+        <div className="flex flex-1 justify-center items-center p-4">
+          <div className="bg-white rounded-xl p-8 max-w-md w-full shadow-lg border border-red-100">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold text-gray-800 mb-2">Something went wrong</h3>
+              <p className="text-gray-600 text-sm mb-4">{error}</p>
+              <div className="flex gap-3 justify-center flex-wrap">
+                <button 
+                  onClick={refreshData}
+                  className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors text-sm flex items-center gap-2"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                  </svg>
+                  Retry
+                </button>
+                <button 
+                  onClick={() => navigate('/admin/login')}
+                  className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors text-sm"
+                >
+                  Go to Login
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Main Dashboard Render
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       <AdminNavbar onToggleSidebar={toggleSidebar} />
@@ -523,7 +746,7 @@ const Dashboard = () => {
           onClose={() => setSidebarOpen(false)} 
         />
 
-        {/* Main Content - Dynamic margin based on sidebar state */}
+        {/* Main Content */}
         <main 
           className={`
             flex-1 transition-all duration-300 ease-in-out w-full min-h-screen
@@ -555,7 +778,11 @@ const Dashboard = () => {
                     <option value="monthly">This Month</option>
                     <option value="yearly">This Year</option>
                   </select>
-                  <button className="p-1.5 md:p-2 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                  <button 
+                    onClick={refreshData}
+                    className="p-1.5 md:p-2 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+                    title="Refresh data"
+                  >
                     <svg className="w-4 h-4 md:w-5 md:h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                     </svg>
@@ -563,7 +790,7 @@ const Dashboard = () => {
                 </div>
               </div>
 
-              {/* Stats Cards Grid - Responsive */}
+              {/* Stats Cards Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6">
                 <div className="bg-white rounded-xl md:rounded-2xl p-4 md:p-5 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
                   <div className="flex items-center justify-between">
@@ -626,9 +853,9 @@ const Dashboard = () => {
                 </div>
               </div>
 
-              {/* Charts Row - Responsive */}
+              {/* Charts Row */}
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
-                {/* Bar Chart - Performance Overview */}
+                {/* Bar Chart */}
                 <div className="lg:col-span-2 bg-white rounded-xl md:rounded-2xl p-4 md:p-6 shadow-sm border border-gray-100">
                   <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
                     <h3 className="text-base md:text-lg font-semibold text-gray-800">Performance Overview</h3>
@@ -638,11 +865,17 @@ const Dashboard = () => {
                     </div>
                   </div>
                   <div className="h-56 md:h-64 lg:h-72">
-                    <Bar data={barChartData} options={barChartOptions} />
+                    {productAnalytics.length > 0 ? (
+                      <Bar data={barChartData} options={barChartOptions} />
+                    ) : (
+                      <div className="flex items-center justify-center h-full text-gray-400 text-sm">
+                        No data available
+                      </div>
+                    )}
                   </div>
                 </div>
 
-                {/* Doughnut Chart - Stock Distribution */}
+                {/* Doughnut Chart */}
                 <div className="bg-white rounded-xl md:rounded-2xl p-4 md:p-6 shadow-sm border border-gray-100">
                   <h3 className="text-base md:text-lg font-semibold text-gray-800 mb-4">Stock Distribution</h3>
                   <div className="h-40 md:h-44 lg:h-48">
@@ -663,7 +896,7 @@ const Dashboard = () => {
 
               {/* Sales Trend & Recent Orders */}
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
-                {/* Line Chart - Sales Trend */}
+                {/* Line Chart */}
                 <div className="lg:col-span-2 bg-white rounded-xl md:rounded-2xl p-4 md:p-6 shadow-sm border border-gray-100">
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="text-base md:text-lg font-semibold text-gray-800">Sales Trend</h3>
@@ -678,7 +911,6 @@ const Dashboard = () => {
                 <div className="bg-white rounded-xl md:rounded-2xl p-4 md:p-6 shadow-sm border border-gray-100">
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="text-base md:text-lg font-semibold text-gray-800">Recent Orders</h3>
-                    {/* Updated View All button with navigation */}
                     <button 
                       onClick={goToOrdersPage}
                       className="text-[10px] md:text-xs text-emerald-600 hover:text-emerald-700 font-medium transition-colors flex items-center gap-1"
@@ -699,11 +931,13 @@ const Dashboard = () => {
                         >
                           <div className="flex-1 min-w-0">
                             <p className="text-xs md:text-sm font-medium text-gray-800 truncate">Order #{order.order_id?.slice(-6) || 'N/A'}</p>
-                            <p className="text-[10px] md:text-xs text-gray-400">{new Date().toLocaleDateString()}</p>
+                            <p className="text-[10px] md:text-xs text-gray-400">{new Date(order.created_at || Date.now()).toLocaleDateString()}</p>
                           </div>
                           <div className="text-right ml-3">
                             <p className="text-xs md:text-sm font-semibold text-gray-800">₹{order.total_amount || 0}</p>
-                            <span className="text-[8px] md:text-[10px] px-2 py-0.5 bg-green-100 text-green-700 rounded-full whitespace-nowrap">Completed</span>
+                            <span className="text-[8px] md:text-[10px] px-2 py-0.5 bg-green-100 text-green-700 rounded-full whitespace-nowrap">
+                              {order.status || 'Completed'}
+                            </span>
                           </div>
                         </div>
                       ))
@@ -714,7 +948,7 @@ const Dashboard = () => {
                 </div>
               </div>
 
-              {/* Stock Status Table - Responsive */}
+              {/* Stock Status Table */}
               <div className="bg-white rounded-xl md:rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                 <div className="p-4 md:p-6 border-b border-gray-100">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
@@ -760,7 +994,7 @@ const Dashboard = () => {
                                 <span className={`font-medium ${isLowStock ? 'text-red-600' : 'text-gray-900'}`}>
                                   {product.remaining_stock}
                                 </span>
-                               </td>
+                              </td>
                               <td className="px-3 md:px-6 py-3 md:py-4 text-xs md:text-sm text-gray-600">{product.total_ordered}</td>
                               <td className="px-3 md:px-6 py-3 md:py-4">
                                 <span className={`inline-flex px-2 py-0.5 md:py-1 text-[8px] md:text-[10px] rounded-full font-medium ${
@@ -768,8 +1002,8 @@ const Dashboard = () => {
                                 }`}>
                                   {isLowStock ? 'Low Stock' : 'In Stock'}
                                 </span>
-                               </td>
-                             </tr>
+                              </td>
+                            </tr>
                           );
                         })
                       ) : (
@@ -790,4 +1024,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
