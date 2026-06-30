@@ -1,5 +1,3 @@
-
-
 import React from "react";
 import { FaBriefcase, FaBullhorn, FaUsers, FaSearch, FaCogs } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
