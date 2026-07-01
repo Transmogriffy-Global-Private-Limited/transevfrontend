@@ -144,7 +144,7 @@ const AdminNavbar = () => {
               
               {/* Notifications */}
               <div className="relative" ref={notificationsRef}>
-                <button
+                {/* <button
                   onClick={toggleNotifications}
                   className="relative p-2 text-white hover:text-[#ffd700] transition-colors duration-200 rounded-lg hover:bg-white/10"
                   aria-label="Notifications"
@@ -155,7 +155,7 @@ const AdminNavbar = () => {
                       {unreadCount}
                     </span>
                   )}
-                </button>
+                </button> */}
 
                 {/* Notifications Dropdown */}
                 {notificationsOpen && (
