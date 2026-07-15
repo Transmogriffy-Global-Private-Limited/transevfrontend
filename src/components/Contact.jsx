@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from './Navbar';
 import logo from '../assets/transev logo.png';
-import contactImage from '../assets/office.png';
+import contactImage from '../assets/Office.png';
  import { useEffect } from 'react';
  import logos from '../assets/up.png'
 // const BASE_URL_AND_PORT = "https://api.static.ev.transev.site";

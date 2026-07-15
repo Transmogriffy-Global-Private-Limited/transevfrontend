@@ -30,7 +30,7 @@ const ROUTES = [
   "/shipping-policy",
 ];
 
-const DIST_DIR = path.resolve("dist");
+const DIST_DIR = path.resolve(process.env.PRERENDER_DIST_DIR || "dist");
 const PREVIEW_PORT = process.env.PRERENDER_PORT || "4173";
 const BASE_URL = `http://127.0.0.1:${PREVIEW_PORT}`;
 
@@ -65,11 +65,11 @@ const isWin = process.platform === "win32";
 const preview = spawn(
   isWin ? "cmd.exe" : "npx",
   isWin
-    ? ["/c", "npx", "vite", "preview", "--strictPort", "--host", "127.0.0.1", "--port", PREVIEW_PORT]
-    : ["vite", "preview", "--strictPort", "--host", "127.0.0.1", "--port", PREVIEW_PORT],
+    ? ["/c", "npx", "vite", "preview", "--outDir", DIST_DIR, "--strictPort", "--host", "127.0.0.1", "--port", PREVIEW_PORT]
+    : ["vite", "preview", "--outDir", DIST_DIR, "--strictPort", "--host", "127.0.0.1", "--port", PREVIEW_PORT],
   { stdio: "inherit" }
 );
- 
+
 
   // small boot wait
   await new Promise((r) => setTimeout(r, 1500));
@@ -100,4 +100,3 @@ main().catch((e) => {
   console.error(e);
   process.exit(1);
 });
- 

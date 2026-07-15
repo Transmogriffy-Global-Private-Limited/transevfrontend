@@ -1,7 +1,7 @@
 
 import React, { useState,useRef} from 'react';
 import Navbar from './Navbar';  
-import logo from '../assets/TransEV logo.png'; // Use appropriate path for logo image
+import logo from '../assets/transev logo.png'; // Use appropriate path for logo image
 import background from '../assets/apartmnet.jpg';
 import yourImage from '../assets/new.jpg';
 import { useInView } from 'react-intersection-observer';
@@ -17,7 +17,7 @@ import holiday from '../assets/holiday.jpg';
 import charger from '../assets/charge.jpg';
 import residental from '../assets/residental.jpg';
 import bg from '../assets/charger3.jpg';
-import AC01W from '../assets/AC01W3.png';
+import AC01W from '../assets/Ac01W3.png';
 import AC02P from '../assets/AC02P3.png';
 import AC02P7 from '../assets/AC02P7.4.png';
 import AC02WCH from '../assets/AC02WC&H.png';

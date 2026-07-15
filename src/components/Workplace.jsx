@@ -30,7 +30,7 @@ import AC02P from '../assets/AC02P3.png';
 import AC02P7 from '../assets/AC02P7.4.png';
 import AC02WCH from '../assets/AC02WC&H.png';
 import AC03W7 from '../assets/AC03W7.png';
-import AC03W22 from '../assets/Ac03W3.png';
+import AC03W22 from '../assets/Ac03w3.png';
 import DC04W from '../assets/DC04W.png';
 import DC04G60 from '../assets/DC04G60.png';
 import DC04G150 from '../assets/DC04G150.png';
@@ -1023,4 +1023,3 @@ const Workplace = () => {
    };
    
    export default Workplace;
-
